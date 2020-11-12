@@ -34,7 +34,6 @@ public class ClientCredentialsFlow {
             Response<ClientCredentialsFlowTokenResponse> response = call.execute();
 
             if (response.body() == null) {
-
                 throw new SpotifyAuthorizationFailedException("Authorizing with the given credentials has failed!");
             }
 
