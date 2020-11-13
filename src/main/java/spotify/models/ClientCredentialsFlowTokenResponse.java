@@ -1,16 +1,11 @@
 package spotify.models;
 
-import com.google.gson.annotations.SerializedName;
 
 public class ClientCredentialsFlowTokenResponse {
-    @SerializedName("access_token")
-    public String accessToken;
-    @SerializedName("token_type")
-    public String tokenType;
-    @SerializedName("expires_in")
-    public int expiresIn;
-    @SerializedName("scope")
-    public String scope;
+    private String accessToken;
+    private String tokenType;
+    private int expiresIn;
+    private String scope;
 
     public ClientCredentialsFlowTokenResponse() {
 
