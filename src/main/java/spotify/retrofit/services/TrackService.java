@@ -5,6 +5,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
+import spotify.models.audio.AudioAnalysis;
 import spotify.models.audio.AudioFeatures;
 import spotify.models.audio.AudioFeaturesList;
 import spotify.models.tracks.TrackFull;
@@ -23,5 +24,8 @@ public interface TrackService {
 
     @GET("audio-features")
     Call<AudioFeaturesList> getTracksAudioFeatures(@Header("Authorization") String accessToken, @Query("ids") String trackIds);
+
+    @GET("audio-analysis/{id}")
+    Call<AudioAnalysis> getTrackAudioAnalysis(@Header("Authorization") String accessToken, @Path("id") String trackId);
 
 }
