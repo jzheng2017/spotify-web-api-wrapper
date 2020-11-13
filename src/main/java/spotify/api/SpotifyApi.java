@@ -6,6 +6,8 @@ import retrofit2.Retrofit;
 import spotify.config.ApiUrl;
 import spotify.exceptions.HttpRequestFailedException;
 import spotify.factories.RetrofitClientFactory;
+import spotify.models.audio.AudioFeatures;
+import spotify.models.audio.AudioFeaturesList;
 import spotify.models.tracks.TrackFull;
 import spotify.models.tracks.TrackFullList;
 import spotify.retrofit.services.TrackService;
@@ -35,6 +37,7 @@ public class SpotifyApi {
 
         try {
             Response<TrackFull> response = httpCall.execute();
+
             return response.body();
         } catch (IOException e) {
             throw new HttpRequestFailedException(e.getMessage());
@@ -63,6 +66,33 @@ public class SpotifyApi {
         }
     }
 
+    public AudioFeatures getTrackAudioFeatures(String trackId) {
+        Call<AudioFeatures> httpCall = trackService.getTrackAudioFeatures("Bearer " + this.accessToken, trackId);
+
+        try {
+            Response<AudioFeatures> response = httpCall.execute();
+
+            return response.body();
+        } catch (IOException e) {
+            throw new HttpRequestFailedException(e.getMessage());
+        }
+    }
+
+    public AudioFeaturesList getTracksAudioFeatures(List<String> listOfTrackIds) {
+        String trackIds = listOfTrackIds.stream()
+                .map(String::valueOf)
+                .collect(Collectors.joining(","));
+
+        Call<AudioFeaturesList> httpCall = trackService.getTracksAudioFeatures("Bearer " + this.accessToken, trackIds);
+
+        try {
+            Response<AudioFeaturesList> response = httpCall.execute();
+
+            return response.body();
+        } catch (IOException e) {
+            throw new HttpRequestFailedException(e.getMessage());
+        }
+    }
 
     public String getAccessToken() {
         return accessToken;
