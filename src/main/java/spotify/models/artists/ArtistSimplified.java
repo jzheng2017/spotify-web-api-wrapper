@@ -1,4 +1,6 @@
-package spotify.models.albums;
+package spotify.models.artists;
+
+import spotify.models.albums.ExternalUrl;
 
 public class ArtistSimplified {
     private ExternalUrl externalUrls;
@@ -7,10 +9,6 @@ public class ArtistSimplified {
     private String name;
     private String type;
     private String uri;
-
-    public ArtistSimplified() {
-
-    }
 
     public String getHref() {
         return href;

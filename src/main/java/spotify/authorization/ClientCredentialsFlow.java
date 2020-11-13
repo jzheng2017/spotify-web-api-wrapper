@@ -8,7 +8,7 @@ import spotify.config.ApiUrl;
 import spotify.exceptions.HttpRequestFailedException;
 import spotify.exceptions.SpotifyAuthorizationFailedException;
 import spotify.factories.RetrofitClientFactory;
-import spotify.models.albums.ClientCredentialsFlowTokenResponse;
+import spotify.models.authorization.ClientCredentialsFlowTokenResponse;
 import spotify.retrofit.services.ClientCredentialsFlowService;
 
 import java.io.IOException;

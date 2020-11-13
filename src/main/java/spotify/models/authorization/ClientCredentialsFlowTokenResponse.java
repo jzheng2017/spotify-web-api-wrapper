@@ -1,4 +1,4 @@
-package spotify.models.albums;
+package spotify.models.authorization;
 
 
 public class ClientCredentialsFlowTokenResponse {
