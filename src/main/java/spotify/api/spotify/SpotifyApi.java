@@ -24,6 +24,14 @@ public class SpotifyApi {
         this.setup();
     }
 
+    public void setTrackApi(TrackApi trackApi) {
+        this.trackApi = trackApi;
+    }
+
+    public void setAlbumApi(AlbumApi albumApi) {
+        this.albumApi = albumApi;
+    }
+
     public TrackFull getTrack(String trackId, String market) {
         return trackApi.getTrack(trackId, market);
     }
