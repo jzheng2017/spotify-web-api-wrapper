@@ -5,6 +5,7 @@ import spotify.api.impl.TrackApiRetrofit;
 import spotify.api.interfaces.AlbumApi;
 import spotify.api.interfaces.TrackApi;
 import spotify.models.albums.AlbumFull;
+import spotify.models.audio.AudioAnalysis;
 import spotify.models.audio.AudioFeatures;
 import spotify.models.audio.AudioFeaturesList;
 import spotify.models.tracks.TrackFull;
@@ -41,6 +42,10 @@ public class SpotifyApi {
 
     public AlbumFull getAlbum(String albumId) {
         return albumApi.getAlbum(albumId);
+    }
+
+    public AudioAnalysis getTrackAudioAnalysis(String trackId) {
+        return trackApi.getTrackAudioAnalysis(trackId);
     }
 
     private void setup() {
