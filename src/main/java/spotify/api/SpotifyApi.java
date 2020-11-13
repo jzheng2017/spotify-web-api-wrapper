@@ -17,19 +17,16 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class SpotifyApi {
-    private final Retrofit httpClient;
     private TrackService trackService;
     private String accessToken;
 
     public SpotifyApi() {
-        httpClient = RetrofitClientFactory.getRetrofitClient(ApiUrl.API_URL_HTTPS + ApiUrl.VERSION);
+        setup();
     }
 
     public SpotifyApi(String accessToken) {
         this.accessToken = accessToken;
-
-        httpClient = RetrofitClientFactory.getRetrofitClient(ApiUrl.API_URL_HTTPS + ApiUrl.VERSION);
-        trackService = httpClient.create(TrackService.class);
+        setup();
     }
 
     public TrackFull getTrack(String trackId, String market) {
@@ -100,5 +97,11 @@ public class SpotifyApi {
 
     public void setAccessToken(String accessToken) {
         this.accessToken = accessToken;
+    }
+
+    private void setup() {
+        Retrofit httpClient = RetrofitClientFactory.getRetrofitClient(ApiUrl.API_URL_HTTPS + ApiUrl.VERSION);
+
+        trackService = httpClient.create(TrackService.class);
     }
 }
