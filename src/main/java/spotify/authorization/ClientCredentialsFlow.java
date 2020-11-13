@@ -4,10 +4,10 @@ import okhttp3.Credentials;
 import retrofit2.Call;
 import retrofit2.Response;
 import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 import spotify.config.ApiUrl;
 import spotify.exceptions.HttpRequestFailedException;
 import spotify.exceptions.SpotifyAuthorizationFailedException;
+import spotify.factories.RetrofitClientFactory;
 import spotify.models.ClientCredentialsFlowTokenResponse;
 import spotify.retrofit.services.ClientCredentialsFlowService;
 
@@ -18,10 +18,7 @@ public class ClientCredentialsFlow {
     private ClientCredentialsFlowTokenResponse clientCredentialsFlowTokenResponse;
 
     public ClientCredentialsFlow() {
-        httpClient = new Retrofit.Builder()
-                .baseUrl(ApiUrl.ACCOUNTS_URL_HTTPS)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
+        httpClient = RetrofitClientFactory.getRetrofitClient(ApiUrl.ACCOUNTS_URL_HTTPS);
     }
 
     public void doClientCredentialsFlow(String clientId, String clientSecret, String grantType) {
