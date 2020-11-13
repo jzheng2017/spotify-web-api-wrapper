@@ -1,3 +1,5 @@
+[![Build Status](https://dev.azure.com/jzheng21/jzheng/_apis/build/status/jzheng2017.spotify-web-api-wrapper?branchName=main)](https://dev.azure.com/jzheng21/jzheng/_build/latest?definitionId=1&branchName=main)
+
 # spotify-web-api-wrapper
 Spotify API wrapper for Java
 
