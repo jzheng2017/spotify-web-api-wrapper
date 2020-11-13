@@ -1,8 +1,9 @@
-package spotify.api;
+package spotify.api.impl;
 
 import retrofit2.Call;
 import retrofit2.Response;
 import retrofit2.Retrofit;
+import spotify.api.interfaces.TrackApi;
 import spotify.config.ApiUrl;
 import spotify.exceptions.HttpRequestFailedException;
 import spotify.factories.RetrofitClientFactory;
@@ -16,19 +17,22 @@ import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class SpotifyApi {
+public class TrackApiRetrofit implements TrackApi {
     private TrackService trackService;
-    private String accessToken;
+    private final String accessToken;
 
-    public SpotifyApi() {
-        setup();
-    }
-
-    public SpotifyApi(String accessToken) {
+    public TrackApiRetrofit(String accessToken) {
         this.accessToken = accessToken;
         setup();
     }
 
+    private void setup() {
+        Retrofit httpClient = RetrofitClientFactory.getRetrofitClient(ApiUrl.API_URL_HTTPS + ApiUrl.VERSION);
+
+        trackService = httpClient.create(TrackService.class);
+    }
+
+    @Override
     public TrackFull getTrack(String trackId, String market) {
         Call<TrackFull> httpCall = trackService.getTrack("Bearer " + this.accessToken, trackId, market);
 
@@ -41,6 +45,7 @@ public class SpotifyApi {
         }
     }
 
+    @Override
     public TrackFullList getTracks(List<String> listOfTrackIds, String market) {
         String trackIds = listOfTrackIds.stream()
                 .map(String::valueOf)
@@ -63,6 +68,7 @@ public class SpotifyApi {
         }
     }
 
+    @Override
     public AudioFeatures getTrackAudioFeatures(String trackId) {
         Call<AudioFeatures> httpCall = trackService.getTrackAudioFeatures("Bearer " + this.accessToken, trackId);
 
@@ -75,6 +81,7 @@ public class SpotifyApi {
         }
     }
 
+    @Override
     public AudioFeaturesList getTracksAudioFeatures(List<String> listOfTrackIds) {
         String trackIds = listOfTrackIds.stream()
                 .map(String::valueOf)
@@ -89,19 +96,5 @@ public class SpotifyApi {
         } catch (IOException e) {
             throw new HttpRequestFailedException(e.getMessage());
         }
-    }
-
-    public String getAccessToken() {
-        return accessToken;
-    }
-
-    public void setAccessToken(String accessToken) {
-        this.accessToken = accessToken;
-    }
-
-    private void setup() {
-        Retrofit httpClient = RetrofitClientFactory.getRetrofitClient(ApiUrl.API_URL_HTTPS + ApiUrl.VERSION);
-
-        trackService = httpClient.create(TrackService.class);
     }
 }
