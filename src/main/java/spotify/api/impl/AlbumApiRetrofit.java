@@ -8,9 +8,7 @@ import spotify.config.ApiUrl;
 import spotify.exceptions.HttpRequestFailedException;
 import spotify.factories.RetrofitClientFactory;
 import spotify.models.albums.AlbumFull;
-import spotify.models.audio.AudioFeatures;
 import spotify.retrofit.services.AlbumService;
-import spotify.retrofit.services.TrackService;
 
 import java.io.IOException;
 
