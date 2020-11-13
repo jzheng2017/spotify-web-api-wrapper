@@ -1,14 +1,12 @@
 package spotify.models.tracks;
 
-import spotify.models.albums.AlbumSimplified;
-import spotify.models.artists.ArtistSimplified;
+import spotify.models.artists.ArtistFull;
 import spotify.models.albums.ExternalUrl;
 
 import java.util.List;
 
-public class TrackFull {
-    private AlbumSimplified album;
-    private List<ArtistSimplified> artists;
+public class TrackSimplified {
+    private List<ArtistFull> artists;
     private List<String> availableMarkets;
     private int discNumber;
     private int durationMs;
@@ -16,31 +14,21 @@ public class TrackFull {
     private ExternalUrl externalUrls;
     private String href;
     private String id;
-    private boolean isLocal;
+    private boolean isPlayable;
+    private TrackLink linkedFrom;
+    private Restriction restriction;
     private String name;
-    private int popularity;
     private String previewUrl;
     private int trackNumber;
     private String type;
     private String uri;
+    private boolean isLocal;
 
-    public TrackFull() {
-
-    }
-
-    public AlbumSimplified getAlbum() {
-        return album;
-    }
-
-    public void setAlbum(AlbumSimplified album) {
-        this.album = album;
-    }
-
-    public List<ArtistSimplified> getArtists() {
+    public List<ArtistFull> getArtists() {
         return artists;
     }
 
-    public void setArtists(List<ArtistSimplified> artists) {
+    public void setArtists(List<ArtistFull> artists) {
         this.artists = artists;
     }
 
@@ -100,12 +88,28 @@ public class TrackFull {
         this.id = id;
     }
 
-    public boolean isLocal() {
-        return isLocal;
+    public boolean isPlayable() {
+        return isPlayable;
     }
 
-    public void setLocal(boolean local) {
-        isLocal = local;
+    public void setPlayable(boolean playable) {
+        isPlayable = playable;
+    }
+
+    public TrackLink getLinkedFrom() {
+        return linkedFrom;
+    }
+
+    public void setLinkedFrom(TrackLink linkedFrom) {
+        this.linkedFrom = linkedFrom;
+    }
+
+    public Restriction getRestriction() {
+        return restriction;
+    }
+
+    public void setRestriction(Restriction restriction) {
+        this.restriction = restriction;
     }
 
     public String getName() {
@@ -114,14 +118,6 @@ public class TrackFull {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public int getPopularity() {
-        return popularity;
-    }
-
-    public void setPopularity(int popularity) {
-        this.popularity = popularity;
     }
 
     public String getPreviewUrl() {
@@ -154,5 +150,13 @@ public class TrackFull {
 
     public void setUri(String uri) {
         this.uri = uri;
+    }
+
+    public boolean isLocal() {
+        return isLocal;
+    }
+
+    public void setLocal(boolean local) {
+        isLocal = local;
     }
 }

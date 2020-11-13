@@ -1,39 +1,36 @@
-package spotify.models.tracks;
+package spotify.models.albums;
 
-import spotify.models.albums.AlbumSimplified;
 import spotify.models.artists.ArtistSimplified;
-import spotify.models.albums.ExternalUrl;
+import spotify.models.paging.Paging;
+import spotify.models.tracks.TrackSimplified;
 
 import java.util.List;
 
-public class TrackFull {
-    private AlbumSimplified album;
+public class AlbumFull {
+    private String albumType;
     private List<ArtistSimplified> artists;
     private List<String> availableMarkets;
-    private int discNumber;
-    private int durationMs;
-    private boolean explicit;
+    private List<Copyright> copyrights;
+    private ExternalId externalIds;
     private ExternalUrl externalUrls;
+    private List<String> genres;
     private String href;
     private String id;
-    private boolean isLocal;
+    private List<Image> images;
     private String name;
     private int popularity;
-    private String previewUrl;
-    private int trackNumber;
+    private String releaseDate;
+    private String releaseDatePrecision;
+    private Paging<TrackSimplified> tracks;
     private String type;
     private String uri;
 
-    public TrackFull() {
-
+    public String getAlbumType() {
+        return albumType;
     }
 
-    public AlbumSimplified getAlbum() {
-        return album;
-    }
-
-    public void setAlbum(AlbumSimplified album) {
-        this.album = album;
+    public void setAlbumType(String albumType) {
+        this.albumType = albumType;
     }
 
     public List<ArtistSimplified> getArtists() {
@@ -52,28 +49,20 @@ public class TrackFull {
         this.availableMarkets = availableMarkets;
     }
 
-    public int getDiscNumber() {
-        return discNumber;
+    public List<Copyright> getCopyrights() {
+        return copyrights;
     }
 
-    public void setDiscNumber(int discNumber) {
-        this.discNumber = discNumber;
+    public void setCopyrights(List<Copyright> copyrights) {
+        this.copyrights = copyrights;
     }
 
-    public int getDurationMs() {
-        return durationMs;
+    public ExternalId getExternalIds() {
+        return externalIds;
     }
 
-    public void setDurationMs(int durationMs) {
-        this.durationMs = durationMs;
-    }
-
-    public boolean isExplicit() {
-        return explicit;
-    }
-
-    public void setExplicit(boolean explicit) {
-        this.explicit = explicit;
+    public void setExternalIds(ExternalId externalIds) {
+        this.externalIds = externalIds;
     }
 
     public ExternalUrl getExternalUrls() {
@@ -82,6 +71,14 @@ public class TrackFull {
 
     public void setExternalUrls(ExternalUrl externalUrls) {
         this.externalUrls = externalUrls;
+    }
+
+    public List<String> getGenres() {
+        return genres;
+    }
+
+    public void setGenres(List<String> genres) {
+        this.genres = genres;
     }
 
     public String getHref() {
@@ -100,12 +97,12 @@ public class TrackFull {
         this.id = id;
     }
 
-    public boolean isLocal() {
-        return isLocal;
+    public List<Image> getImages() {
+        return images;
     }
 
-    public void setLocal(boolean local) {
-        isLocal = local;
+    public void setImages(List<Image> images) {
+        this.images = images;
     }
 
     public String getName() {
@@ -124,20 +121,20 @@ public class TrackFull {
         this.popularity = popularity;
     }
 
-    public String getPreviewUrl() {
-        return previewUrl;
+    public String getReleaseDate() {
+        return releaseDate;
     }
 
-    public void setPreviewUrl(String previewUrl) {
-        this.previewUrl = previewUrl;
+    public void setReleaseDate(String releaseDate) {
+        this.releaseDate = releaseDate;
     }
 
-    public int getTrackNumber() {
-        return trackNumber;
+    public String getReleaseDatePrecision() {
+        return releaseDatePrecision;
     }
 
-    public void setTrackNumber(int trackNumber) {
-        this.trackNumber = trackNumber;
+    public void setReleaseDatePrecision(String releaseDatePrecision) {
+        this.releaseDatePrecision = releaseDatePrecision;
     }
 
     public String getType() {
@@ -154,5 +151,13 @@ public class TrackFull {
 
     public void setUri(String uri) {
         this.uri = uri;
+    }
+
+    public Paging<TrackSimplified> getTracks() {
+        return tracks;
+    }
+
+    public void setTracks(Paging<TrackSimplified> tracks) {
+        this.tracks = tracks;
     }
 }

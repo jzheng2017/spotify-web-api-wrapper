@@ -1,5 +1,7 @@
 package spotify.models.albums;
 
+import spotify.models.artists.ArtistSimplified;
+
 import java.util.List;
 
 public class AlbumSimplified {
