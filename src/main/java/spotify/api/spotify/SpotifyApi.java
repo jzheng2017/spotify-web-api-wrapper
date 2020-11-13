@@ -1,7 +1,10 @@
 package spotify.api.spotify;
 
+import spotify.api.impl.AlbumApiRetrofit;
 import spotify.api.impl.TrackApiRetrofit;
+import spotify.api.interfaces.AlbumApi;
 import spotify.api.interfaces.TrackApi;
+import spotify.models.albums.AlbumFull;
 import spotify.models.audio.AudioFeatures;
 import spotify.models.audio.AudioFeaturesList;
 import spotify.models.tracks.TrackFull;
@@ -11,16 +14,13 @@ import java.util.List;
 
 
 public class SpotifyApi {
-    private String accessToken;
+    private final String accessToken;
     private TrackApi trackApi;
-
-    public SpotifyApi() {
-        setup();
-    }
+    private AlbumApi albumApi;
 
     public SpotifyApi(String accessToken) {
         this.accessToken = accessToken;
-        setup();
+        this.setup();
     }
 
     public TrackFull getTrack(String trackId, String market) {
@@ -39,11 +39,16 @@ public class SpotifyApi {
         return trackApi.getTracksAudioFeatures(listOfTrackIds);
     }
 
+    public AlbumFull getAlbum(String albumId) {
+        return albumApi.getAlbum(albumId);
+    }
+
     public String getAccessToken() {
         return accessToken;
     }
 
     private void setup() {
         this.trackApi = new TrackApiRetrofit(this.accessToken);
+        this.albumApi = new AlbumApiRetrofit(this.accessToken);
     }
 }
