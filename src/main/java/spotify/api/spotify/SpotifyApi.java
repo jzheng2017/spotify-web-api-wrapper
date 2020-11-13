@@ -43,10 +43,6 @@ public class SpotifyApi {
         return albumApi.getAlbum(albumId);
     }
 
-    public String getAccessToken() {
-        return accessToken;
-    }
-
     private void setup() {
         this.trackApi = new TrackApiRetrofit(this.accessToken);
         this.albumApi = new AlbumApiRetrofit(this.accessToken);
