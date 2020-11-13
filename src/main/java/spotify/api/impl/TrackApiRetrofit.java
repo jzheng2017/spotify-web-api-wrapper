@@ -28,6 +28,8 @@ public class TrackApiRetrofit implements TrackApi {
 
     @Override
     public TrackFull getTrack(String trackId, String market) {
+        market = marketEmptyCheck(market);
+
         Call<TrackFull> httpCall = trackService.getTrack("Bearer " + this.accessToken, trackId, market);
 
         try {
@@ -45,11 +47,7 @@ public class TrackApiRetrofit implements TrackApi {
                 .map(String::valueOf)
                 .collect(Collectors.joining(","));
 
-        if (market.isEmpty()) {
-            // this is done because retrofit ignores null values
-            // when an empty market value is passed to spotify it will give an error saying the market does not exist
-            market = null;
-        }
+        market = marketEmptyCheck(market);
 
         Call<TrackFullList> httpCall = trackService.getTracks("Bearer " + this.accessToken, trackIds, market);
 
@@ -96,5 +94,11 @@ public class TrackApiRetrofit implements TrackApi {
         Retrofit httpClient = RetrofitClientFactory.getRetrofitClient(ApiUrl.API_URL_HTTPS + ApiUrl.VERSION);
 
         trackService = httpClient.create(TrackService.class);
+    }
+
+    private String marketEmptyCheck(String market) {
+        // this is done because retrofit ignores null values
+        // when an empty market value is passed to spotify it will give an error saying the market does not exist
+        return market.isEmpty() ? null : market;
     }
 }
