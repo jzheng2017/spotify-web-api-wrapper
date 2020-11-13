@@ -1,13 +1,14 @@
 package spotify.models.albums;
 
-public class Artist {
+public class ArtistSimplified {
+    private ExternalUrl externalUrls;
     private String href;
     private String id;
     private String name;
     private String type;
     private String uri;
 
-    public Artist() {
+    public ArtistSimplified() {
 
     }
 
@@ -49,5 +50,13 @@ public class Artist {
 
     public void setUri(String uri) {
         this.uri = uri;
+    }
+
+    public ExternalUrl getExternalUrls() {
+        return externalUrls;
+    }
+
+    public void setExternalUrls(ExternalUrl externalUrls) {
+        this.externalUrls = externalUrls;
     }
 }

@@ -1,14 +1,14 @@
 package spotify.models.tracks;
 
 import spotify.models.albums.AlbumSimplified;
-import spotify.models.albums.Artist;
+import spotify.models.albums.ArtistSimplified;
 import spotify.models.albums.ExternalUrl;
 
 import java.util.List;
 
 public class TrackFull {
     private AlbumSimplified album;
-    private List<Artist> artists;
+    private List<ArtistSimplified> artists;
     private List<String> availableMarkets;
     private int discNumber;
     private int durationMs;
@@ -36,11 +36,11 @@ public class TrackFull {
         this.album = album;
     }
 
-    public List<Artist> getArtists() {
+    public List<ArtistSimplified> getArtists() {
         return artists;
     }
 
-    public void setArtists(List<Artist> artists) {
+    public void setArtists(List<ArtistSimplified> artists) {
         this.artists = artists;
     }
 

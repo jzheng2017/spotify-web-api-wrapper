@@ -4,7 +4,7 @@ import java.util.List;
 
 public class AlbumSimplified {
     private String albumType;
-    private List<Artist> artists;
+    private List<ArtistSimplified> artists;
     private List<String> availableMarkets;
     private String href;
     private String id;
@@ -28,11 +28,11 @@ public class AlbumSimplified {
         this.albumType = albumType;
     }
 
-    public List<Artist> getArtists() {
+    public List<ArtistSimplified> getArtists() {
         return artists;
     }
 
-    public void setArtists(List<Artist> artists) {
+    public void setArtists(List<ArtistSimplified> artists) {
         this.artists = artists;
     }
 
