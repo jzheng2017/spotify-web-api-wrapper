@@ -26,12 +26,6 @@ public class TrackApiRetrofit implements TrackApi {
         setup();
     }
 
-    private void setup() {
-        Retrofit httpClient = RetrofitClientFactory.getRetrofitClient(ApiUrl.API_URL_HTTPS + ApiUrl.VERSION);
-
-        trackService = httpClient.create(TrackService.class);
-    }
-
     @Override
     public TrackFull getTrack(String trackId, String market) {
         Call<TrackFull> httpCall = trackService.getTrack("Bearer " + this.accessToken, trackId, market);
@@ -96,5 +90,11 @@ public class TrackApiRetrofit implements TrackApi {
         } catch (IOException e) {
             throw new HttpRequestFailedException(e.getMessage());
         }
+    }
+
+    private void setup() {
+        Retrofit httpClient = RetrofitClientFactory.getRetrofitClient(ApiUrl.API_URL_HTTPS + ApiUrl.VERSION);
+
+        trackService = httpClient.create(TrackService.class);
     }
 }
