@@ -1,5 +1,6 @@
 package spotify.api.interfaces;
 
+import spotify.models.audio.AudioAnalysis;
 import spotify.models.audio.AudioFeatures;
 import spotify.models.audio.AudioFeaturesList;
 import spotify.models.tracks.TrackFull;
@@ -15,4 +16,6 @@ public interface TrackApi {
     AudioFeatures getTrackAudioFeatures(String trackId);
 
     AudioFeaturesList getTracksAudioFeatures(List<String> listOfTrackIds);
+
+    AudioAnalysis getTrackAudioAnalysis(String trackId);
 }
