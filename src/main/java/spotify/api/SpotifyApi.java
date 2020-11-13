@@ -6,8 +6,8 @@ import retrofit2.Retrofit;
 import spotify.config.ApiUrl;
 import spotify.exceptions.HttpRequestFailedException;
 import spotify.factories.RetrofitClientFactory;
-import spotify.models.TrackFull;
-import spotify.models.TrackFullList;
+import spotify.models.tracks.TrackFull;
+import spotify.models.tracks.TrackFullList;
 import spotify.retrofit.services.TrackService;
 
 import java.io.IOException;

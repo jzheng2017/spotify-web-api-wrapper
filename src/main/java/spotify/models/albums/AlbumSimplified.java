@@ -1,4 +1,4 @@
-package spotify.models;
+package spotify.models.albums;
 
 import java.util.List;
 

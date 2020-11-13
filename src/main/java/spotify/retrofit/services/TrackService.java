@@ -5,8 +5,8 @@ import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
-import spotify.models.TrackFull;
-import spotify.models.TrackFullList;
+import spotify.models.tracks.TrackFull;
+import spotify.models.tracks.TrackFullList;
 
 public interface TrackService {
 

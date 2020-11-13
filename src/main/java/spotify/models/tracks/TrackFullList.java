@@ -1,4 +1,4 @@
-package spotify.models;
+package spotify.models.tracks;
 
 import java.util.List;
 
