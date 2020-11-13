@@ -7,6 +7,7 @@ import spotify.api.interfaces.TrackApi;
 import spotify.config.ApiUrl;
 import spotify.exceptions.HttpRequestFailedException;
 import spotify.factories.RetrofitClientFactory;
+import spotify.models.audio.AudioAnalysis;
 import spotify.models.audio.AudioFeatures;
 import spotify.models.audio.AudioFeaturesList;
 import spotify.models.tracks.TrackFull;
@@ -83,6 +84,19 @@ public class TrackApiRetrofit implements TrackApi {
 
         try {
             Response<AudioFeaturesList> response = httpCall.execute();
+
+            return response.body();
+        } catch (IOException e) {
+            throw new HttpRequestFailedException(e.getMessage());
+        }
+    }
+
+    @Override
+    public AudioAnalysis getTrackAudioAnalysis(String trackId) {
+        Call<AudioAnalysis> httpCall = trackService.getTrackAudioAnalysis("Bearer " + this.accessToken, trackId);
+
+        try {
+            Response<AudioAnalysis> response = httpCall.execute();
 
             return response.body();
         } catch (IOException e) {
