@@ -4,7 +4,7 @@ import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-public class GsonFactory {
+class GsonFactory {
 
     public static Gson getGson(FieldNamingPolicy fieldNamingPolicy) {
         GsonBuilder gsonBuilder = new GsonBuilder();
