@@ -35,7 +35,6 @@ public class ClientCredentialsFlow {
     }
 
     /**
-     *
      * Handles the Client Credentials Flow. This results in an access token.
      *
      * See the Spotify Authorization Guide for information.
@@ -63,7 +62,6 @@ public class ClientCredentialsFlow {
     }
 
     /**
-     *
      * Gets an object containing values related to the access token.
      *
      * @return an object containing values like the access token
