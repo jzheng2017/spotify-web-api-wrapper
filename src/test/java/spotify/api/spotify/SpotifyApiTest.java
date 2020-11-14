@@ -21,8 +21,8 @@ public class SpotifyApiTest {
     private AlbumApi mockedAlbumApi;
 
     private final String fakeAccessToken = "fake";
-    private String fakeMarket = "NL";
-    private String fakeTrackId = "qweqwe1231";
+    private final String fakeMarket = "NL";
+    private final String fakeTrackId = "qweqwe1231";
 
     @BeforeEach
     void setup() {
@@ -30,7 +30,6 @@ public class SpotifyApiTest {
 
         MockitoAnnotations.openMocks(this);
         when(mockedTrackApi.getTrack(fakeTrackId, fakeMarket)).thenReturn(new TrackFull());
-
     }
 
     @Test
