@@ -1,4 +1,4 @@
-package spotify.authorization;
+package spotify.api.authorization;
 
 import okhttp3.Credentials;
 import retrofit2.Call;
