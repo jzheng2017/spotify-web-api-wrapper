@@ -7,11 +7,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- *
  * This class constructs the URL needed for the first step in the Authorization Code Flow.
  * Executing this step should result in a code that can be used to retrieve an access and refresh token.
- *
- * For more information see: https://developer.spotify.com/documentation/general/guides/authorization-guide/#authorization-code-flow
+ * <p>
+ * For more information see: {@link <a href="https://developer.spotify.com/documentation/general/guides/authorization-guide/#authorization-code-flow">Authorization Code Flow</a>}
  *
  * @author Jiankai Zheng
  */
@@ -45,7 +44,9 @@ public class AuthorizationCodeFlow {
                 "&show_dialog=" + showDialog;
     }
 
-
+    /**
+     * Builder for constructing an AuthorizationCodeFlow object.
+     */
     public static class Builder {
         private String clientId;
         private String responseType;
@@ -90,6 +91,11 @@ public class AuthorizationCodeFlow {
             return this;
         }
 
+        /**
+         * Build authorization code flow.
+         *
+         * @return the authorization code flow
+         */
         public AuthorizationCodeFlow build() {
             AuthorizationCodeFlow authorizationCodeFlow = new AuthorizationCodeFlow();
             authorizationCodeFlow.clientId = this.clientId;
