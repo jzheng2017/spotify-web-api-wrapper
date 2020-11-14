@@ -6,6 +6,15 @@ import spotify.config.ApiUrl;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ *
+ * This class constructs the URL needed for the first step in the Authorization Code Flow.
+ * Executing this step should result in a code that can be used to retrieve an access and refresh token.
+ *
+ * For more information see: https://developer.spotify.com/documentation/general/guides/authorization-guide/#authorization-code-flow
+ *
+ * @author Jiankai Zheng
+ */
 public class AuthorizationCodeFlow {
     private String clientId;
     private String responseType;
@@ -17,6 +26,11 @@ public class AuthorizationCodeFlow {
     private AuthorizationCodeFlow() {
     }
 
+    /**
+     * Constructs a url for the first step in the authorization code flow
+     *
+     * @return constructed url to be used to authorize access and retrieve a code
+     */
     public String constructUrl() {
         String scopesWithSpaceDelimiter = this.scopes.stream()
                 .map(String::valueOf)
