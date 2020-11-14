@@ -15,13 +15,11 @@ import java.util.List;
 
 
 public class SpotifyApi {
-    private final String accessToken;
     private TrackApi trackApi;
     private AlbumApi albumApi;
 
     public SpotifyApi(String accessToken) {
-        this.accessToken = accessToken;
-        this.setup();
+        this.setup(accessToken);
     }
 
     public void setApis(TrackApi trackApi, AlbumApi albumApi) {
@@ -54,8 +52,8 @@ public class SpotifyApi {
         return trackApi.getTrackAudioAnalysis(trackId);
     }
 
-    private void setup() {
-        this.trackApi = new TrackApiRetrofit(this.accessToken);
-        this.albumApi = new AlbumApiRetrofit(this.accessToken);
+    private void setup(String accessToken) {
+        this.trackApi = new TrackApiRetrofit(accessToken);
+        this.albumApi = new AlbumApiRetrofit(accessToken);
     }
 }
