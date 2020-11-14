@@ -1,6 +1,6 @@
 package spotify.api.authorization;
 
-import spotify.api.enums.AuthorizationScopes;
+import spotify.api.enums.AuthorizationScope;
 import spotify.config.ApiUrl;
 
 import java.util.List;
@@ -20,7 +20,7 @@ public class AuthorizationCodeFlow {
     private String responseType;
     private String redirectUri;
     private String state;
-    private List<AuthorizationScopes> scopes;
+    private List<AuthorizationScope> scopes;
     private boolean showDialog;
 
     private AuthorizationCodeFlow() {
@@ -51,7 +51,7 @@ public class AuthorizationCodeFlow {
         private String responseType;
         private String redirectUri;
         private String state;
-        private List<AuthorizationScopes> scopes;
+        private List<AuthorizationScope> scopes;
         private boolean showDialog;
 
         public Builder setClientId(String clientId) {
@@ -78,7 +78,7 @@ public class AuthorizationCodeFlow {
             return this;
         }
 
-        public Builder setScope(List<AuthorizationScopes> scopes) {
+        public Builder setScope(List<AuthorizationScope> scopes) {
             this.scopes = scopes;
 
             return this;

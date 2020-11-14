@@ -1,6 +1,6 @@
 package spotify.api.enums;
 
-public enum AuthorizationScopes {
+public enum AuthorizationScope {
     UGC_IMAGE_UPLOAD("ugc-image-upload"),
     USER_READ_RECENTLY_PLAYED("user-read-recently-played"),
     USER_TOP_READ("user-top-read"),
@@ -23,7 +23,7 @@ public enum AuthorizationScopes {
 
     private final String value;
 
-    AuthorizationScopes(String value) {
+    AuthorizationScope(String value) {
         this.value = value;
     }
 
