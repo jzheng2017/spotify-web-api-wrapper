@@ -27,7 +27,6 @@ import java.io.IOException;
  */
 public class ClientCredentialsFlow {
     private final Retrofit httpClient;
-    private ClientCredentialsFlowTokenResponse clientCredentialsFlowTokenResponse;
 
     public ClientCredentialsFlow() {
         httpClient = RetrofitClientFactory.getRetrofitClient(ApiUrl.ACCOUNTS_URL_HTTPS);
@@ -40,8 +39,9 @@ public class ClientCredentialsFlow {
      *
      * @param clientId     id of the client
      * @param clientSecret secret of the client
+     * @return an object containing the access token
      */
-    public void doClientCredentialsFlow(String clientId, String clientSecret) {
+    public ClientCredentialsFlowTokenResponse getAccessToken(String clientId, String clientSecret) {
         final ClientCredentialsFlowService clientCredentialsFlowService = httpClient.create(ClientCredentialsFlowService.class);
         final String base64EncodedBasicAuth = Credentials.basic(clientId, clientSecret);
 
@@ -54,18 +54,9 @@ public class ClientCredentialsFlow {
                 throw new SpotifyAuthorizationFailedException("Authorizing with the given credentials has failed!");
             }
 
-            this.clientCredentialsFlowTokenResponse = response.body();
+            return response.body();
         } catch (IOException e) {
             throw new HttpRequestFailedException(e.getMessage());
         }
-    }
-
-    /**
-     * Gets an object containing values related to the access token.
-     *
-     * @return an object containing values like the access token
-     */
-    public ClientCredentialsFlowTokenResponse getClientCredentialsFlowToken() {
-        return clientCredentialsFlowTokenResponse;
     }
 }
