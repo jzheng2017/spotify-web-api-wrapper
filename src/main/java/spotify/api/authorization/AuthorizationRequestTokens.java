@@ -30,6 +30,7 @@ public class AuthorizationRequestTokens {
     }
 
     /**
+     * Makes an http call to retrieve the access and refresh tokens.
      *
      * @param clientId the id of the client
      * @param clientSecret the secret of the client
