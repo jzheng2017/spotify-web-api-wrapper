@@ -32,10 +32,10 @@ public class AuthorizationRequestTokens {
     /**
      * Makes an http call to retrieve the access and refresh tokens.
      *
-     * @param clientId the id of the client
+     * @param clientId     the id of the client
      * @param clientSecret the secret of the client
-     * @param code the authorization code returned from the initial request to the Account /authorize endpoint
-     * @param redirectUri the redirect uri supplied when requesting the authorization code
+     * @param code         the authorization code returned from the initial request to the Account /authorize endpoint
+     * @param redirectUri  the redirect uri supplied when requesting the authorization code
      * @return an object containing values like the access and refresh token
      */
     public AuthorizationCodeFlowTokenResponse getAccessAndRefreshToken(String clientId, String clientSecret, String code, String redirectUri) {
@@ -53,7 +53,7 @@ public class AuthorizationRequestTokens {
             final Response<AuthorizationCodeFlowTokenResponse> response = httpCall.execute();
 
             if (response.body() == null) {
-                throw new SpotifyAuthorizationFailedException("Authorizing with the given credentials has failed!");
+                throw new SpotifyAuthorizationFailedException("Retrieving an access token and refresh token with the given credentials has failed!");
             }
 
             return response.body();
