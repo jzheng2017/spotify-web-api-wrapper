@@ -42,13 +42,13 @@ public class ClientCredentialsFlow {
      * @param clientSecret secret of the client
      */
     public void doClientCredentialsFlow(String clientId, String clientSecret) {
-        ClientCredentialsFlowService clientCredentialsFlowService = httpClient.create(ClientCredentialsFlowService.class);
+        final ClientCredentialsFlowService clientCredentialsFlowService = httpClient.create(ClientCredentialsFlowService.class);
         final String base64EncodedBasicAuth = Credentials.basic(clientId, clientSecret);
 
-        Call<ClientCredentialsFlowTokenResponse> call = clientCredentialsFlowService.getToken(base64EncodedBasicAuth, GrantType.CLIENT_CREDENTIALS);
+        final Call<ClientCredentialsFlowTokenResponse> httpCall = clientCredentialsFlowService.getToken(base64EncodedBasicAuth, GrantType.CLIENT_CREDENTIALS);
 
         try {
-            Response<ClientCredentialsFlowTokenResponse> response = call.execute();
+            final Response<ClientCredentialsFlowTokenResponse> response = httpCall.execute();
 
             if (response.body() == null) {
                 throw new SpotifyAuthorizationFailedException("Authorizing with the given credentials has failed!");
