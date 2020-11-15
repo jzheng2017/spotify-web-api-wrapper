@@ -2,7 +2,8 @@ package spotify.api.enums;
 
 public enum GrantType {
     CLIENT_CREDENTIALS("client_credentials"),
-    AUTHORIZATION_CODE("authorization_code");
+    AUTHORIZATION_CODE("authorization_code"),
+    REFRESH_TOKEN("refresh_token");
 
     private final String value;
 
