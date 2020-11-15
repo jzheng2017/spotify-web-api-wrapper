@@ -16,4 +16,10 @@ public interface AuthorizationCodeFlowService {
                                                                       @Field("code") String code,
                                                                       @Field("redirect_uri") String uri,
                                                                       @Field("grant_type") GrantType grantType);
+
+    @POST("api/token")
+    @FormUrlEncoded
+    Call<AuthorizationCodeFlowTokenResponse> refreshAccessToken(@Header("Authorization") String basicAuth,
+                                                                @Field("refresh_token") String refreshToken,
+                                                                @Field("grant_type") GrantType grantType);
 }
