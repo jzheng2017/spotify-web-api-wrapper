@@ -6,6 +6,7 @@ import retrofit2.Retrofit;
 import spotify.api.interfaces.AlbumApi;
 import spotify.config.ApiUrl;
 import spotify.exceptions.HttpRequestFailedException;
+import spotify.exceptions.ResponseChecker;
 import spotify.factories.RetrofitClientFactory;
 import spotify.models.albums.AlbumFull;
 import spotify.retrofit.services.AlbumService;
@@ -27,6 +28,8 @@ public class AlbumApiRetrofit implements AlbumApi {
 
         try {
             Response<AlbumFull> response = httpCall.execute();
+
+            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response.errorBody());
 
             return response.body();
         } catch (IOException e) {

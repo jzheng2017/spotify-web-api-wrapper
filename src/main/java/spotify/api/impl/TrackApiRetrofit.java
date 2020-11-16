@@ -6,6 +6,7 @@ import retrofit2.Retrofit;
 import spotify.api.interfaces.TrackApi;
 import spotify.config.ApiUrl;
 import spotify.exceptions.HttpRequestFailedException;
+import spotify.exceptions.ResponseChecker;
 import spotify.factories.RetrofitClientFactory;
 import spotify.models.audio.AudioAnalysis;
 import spotify.models.audio.AudioFeatures;
@@ -36,6 +37,8 @@ public class TrackApiRetrofit implements TrackApi {
         try {
             Response<TrackFull> response = httpCall.execute();
 
+            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response.errorBody());
+
             return response.body();
         } catch (IOException e) {
             throw new HttpRequestFailedException(e.getMessage());
@@ -55,6 +58,8 @@ public class TrackApiRetrofit implements TrackApi {
         try {
             Response<TrackFullList> response = httpCall.execute();
 
+            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response.errorBody());
+
             return response.body();
         } catch (IOException e) {
             throw new HttpRequestFailedException(e.getMessage());
@@ -67,6 +72,8 @@ public class TrackApiRetrofit implements TrackApi {
 
         try {
             Response<AudioFeatures> response = httpCall.execute();
+
+            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response.errorBody());
 
             return response.body();
         } catch (IOException e) {
@@ -85,6 +92,8 @@ public class TrackApiRetrofit implements TrackApi {
         try {
             Response<AudioFeaturesList> response = httpCall.execute();
 
+            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response.errorBody());
+
             return response.body();
         } catch (IOException e) {
             throw new HttpRequestFailedException(e.getMessage());
@@ -97,6 +106,8 @@ public class TrackApiRetrofit implements TrackApi {
 
         try {
             Response<AudioAnalysis> response = httpCall.execute();
+
+            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response.errorBody());
 
             return response.body();
         } catch (IOException e) {
