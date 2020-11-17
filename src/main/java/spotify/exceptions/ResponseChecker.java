@@ -21,13 +21,15 @@ public class ResponseChecker {
         SpotifyError spotifyError = gson.fromJson(errorBody.charStream(), SpotifyError.class);
 
         final boolean hasFailed = spotifyError.getError().getStatus() > 300;
+        final int statusCode = spotifyError.getError().getStatus();
+        final String message = spotifyError.getError().getMessage();
 
         if (hasFailed) {
             logger.error(
-                    String.format("HTTP request to Spotify's server has not been fulfilled correctly. Spotify has returned status code %d",
-                            spotifyError.getError().getStatus())
+                    String.format("HTTP request to Spotify's server has not been fulfilled correctly. Spotify has returned status code %d with the message: \"%s\".",
+                            statusCode, message)
             );
-            throw new SpotifyActionFailedException(spotifyError.getError().getMessage());
+            throw new SpotifyActionFailedException(message);
         }
     }
 
