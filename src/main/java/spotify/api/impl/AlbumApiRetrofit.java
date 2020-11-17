@@ -17,8 +17,8 @@ import java.io.IOException;
 
 public class AlbumApiRetrofit implements AlbumApi {
     private final Logger logger = LoggerFactory.getLogger(AlbumApiRetrofit.class);
-    private AlbumService albumService;
     private final String accessToken;
+    private AlbumService albumService;
 
     public AlbumApiRetrofit(String accessToken) {
         this.accessToken = accessToken;

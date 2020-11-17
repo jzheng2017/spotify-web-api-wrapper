@@ -23,8 +23,8 @@ import java.util.stream.Collectors;
 
 public class TrackApiRetrofit implements TrackApi {
     private final Logger logger = LoggerFactory.getLogger(TrackApiRetrofit.class);
-    private TrackService trackService;
     private final String accessToken;
+    private TrackService trackService;
 
     public TrackApiRetrofit(String accessToken) {
         this.accessToken = accessToken;
