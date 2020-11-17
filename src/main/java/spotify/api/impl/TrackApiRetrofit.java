@@ -142,6 +142,7 @@ public class TrackApiRetrofit implements TrackApi {
     }
 
     private void setup() {
+        logger.trace("Requesting Retrofit HTTP client.");
         Retrofit httpClient = RetrofitClientFactory.getRetrofitClient(ApiUrl.API_URL_HTTPS + ApiUrl.VERSION);
 
         trackService = httpClient.create(TrackService.class);
