@@ -136,7 +136,7 @@ public class TrackApiRetrofit implements TrackApi {
 
         if (listSize > maximumAmountOfTrackIdsAllowed) {
             throw new IllegalArgumentException(String.format(
-                    "The maximum amount of track ids is %d! You have %d",
+                    "The maximum amount of track ids allowed is %d! You have %d.",
                     maximumAmountOfTrackIdsAllowed,
                     listSize));
         }
