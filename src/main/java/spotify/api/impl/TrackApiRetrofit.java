@@ -47,11 +47,13 @@ public class TrackApiRetrofit implements TrackApi {
 
     @Override
     public TrackFullList getTracks(List<String> listOfTrackIds, String market) {
+        validateTrackListSizeAndThrowIfExceeded(listOfTrackIds, 50);
+        market = marketEmptyCheck(market);
+
         String trackIds = listOfTrackIds.stream()
                 .map(String::valueOf)
                 .collect(Collectors.joining(","));
 
-        market = marketEmptyCheck(market);
 
         Call<TrackFullList> httpCall = trackService.getTracks("Bearer " + this.accessToken, trackIds, market);
 
@@ -83,6 +85,8 @@ public class TrackApiRetrofit implements TrackApi {
 
     @Override
     public AudioFeaturesList getTracksAudioFeatures(List<String> listOfTrackIds) {
+        validateTrackListSizeAndThrowIfExceeded(listOfTrackIds, 100);
+
         String trackIds = listOfTrackIds.stream()
                 .map(String::valueOf)
                 .collect(Collectors.joining(","));
@@ -125,5 +129,16 @@ public class TrackApiRetrofit implements TrackApi {
         // this is done because retrofit ignores null values
         // when an empty market value is passed to spotify it will give an error saying the market does not exist
         return market.isEmpty() ? null : market;
+    }
+
+    private void validateTrackListSizeAndThrowIfExceeded(List<String> listOfTrackIds, int maximumAmountOfTrackIdsAllowed) {
+        final int listSize = listOfTrackIds.size();
+
+        if (listSize > maximumAmountOfTrackIdsAllowed) {
+            throw new IllegalArgumentException(String.format(
+                    "The maximum amount of track ids is %d! You have %d",
+                    maximumAmountOfTrackIdsAllowed,
+                    listSize));
+        }
     }
 }
