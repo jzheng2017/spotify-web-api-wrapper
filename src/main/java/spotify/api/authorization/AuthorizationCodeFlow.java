@@ -1,5 +1,7 @@
 package spotify.api.authorization;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import spotify.api.enums.AuthorizationScope;
 import spotify.config.ApiUrl;
 
@@ -15,6 +17,7 @@ import java.util.stream.Collectors;
  * @author Jiankai Zheng
  */
 public class AuthorizationCodeFlow {
+    private final Logger logger = LoggerFactory.getLogger(AuthorizationCodeFlow.class);
     private String clientId;
     private String responseType;
     private String redirectUri;
@@ -31,23 +34,28 @@ public class AuthorizationCodeFlow {
      * @return constructed url to be used to authorize access and retrieve a code
      */
     public String constructUrl() {
-        String scopesWithSpaceDelimiter = this.scopes.stream()
+        final String scopesWithSpaceDelimiter = this.scopes.stream()
                 .map(String::valueOf)
                 .collect(Collectors.joining(" "));
 
-        return ApiUrl.ACCOUNTS_URL_HTTPS + "/authorize?" +
+        final String constructedUrl = ApiUrl.ACCOUNTS_URL_HTTPS + "/authorize?" +
                 "client_id=" + clientId +
                 "&response_type=" + responseType +
                 "&redirect_uri=" + redirectUri +
                 "&scope=" + scopesWithSpaceDelimiter +
                 "&state=" + state +
                 "&show_dialog=" + showDialog;
+
+        logger.trace("Constructing url for authorization code flow");
+        logger.debug(String.format("Constructed url: %s.", constructedUrl));
+        return constructedUrl;
     }
 
     /**
      * Builder for constructing an AuthorizationCodeFlow object.
      */
     public static class Builder {
+        private final Logger logger = LoggerFactory.getLogger(Builder.class);
         private String clientId;
         private String responseType;
         private String redirectUri;
@@ -97,6 +105,7 @@ public class AuthorizationCodeFlow {
          * @return the authorization code flow
          */
         public AuthorizationCodeFlow build() {
+            logger.trace("Constructing AuthorizationCodeFlow object.");
             AuthorizationCodeFlow authorizationCodeFlow = new AuthorizationCodeFlow();
             authorizationCodeFlow.clientId = this.clientId;
             authorizationCodeFlow.responseType = this.responseType;
@@ -105,6 +114,7 @@ public class AuthorizationCodeFlow {
             authorizationCodeFlow.scopes = this.scopes;
             authorizationCodeFlow.showDialog = this.showDialog;
 
+            logger.trace("AuthorizationCodeFlow successfully constructed.");
             return authorizationCodeFlow;
         }
     }
