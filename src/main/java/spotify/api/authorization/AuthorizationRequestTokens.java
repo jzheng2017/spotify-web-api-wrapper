@@ -1,6 +1,8 @@
 package spotify.api.authorization;
 
 import okhttp3.Credentials;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import retrofit2.Call;
 import retrofit2.Response;
 import retrofit2.Retrofit;
@@ -23,9 +25,11 @@ import java.io.IOException;
  * @author Jiankai Zheng
  */
 public class AuthorizationRequestTokens {
+    private final Logger logger = LoggerFactory.getLogger(AuthorizationRequestTokens.class);
     private final Retrofit httpClient;
 
     public AuthorizationRequestTokens() {
+        logger.trace("Requesting Retrofit HTTP client.");
         this.httpClient = RetrofitClientFactory.getRetrofitClient(ApiUrl.ACCOUNTS_URL_HTTPS);
     }
 
@@ -40,8 +44,11 @@ public class AuthorizationRequestTokens {
      */
     public AuthorizationCodeFlowTokenResponse getAccessAndRefreshToken(String clientId, String clientSecret, String code, String redirectUri) {
         final AuthorizationCodeFlowService authorizationCodeFlowService = httpClient.create(AuthorizationCodeFlowService.class);
+
+        logger.trace("Encoding client id and secret to base 64.");
         final String base64EncodedBasicAuth = Credentials.basic(clientId, clientSecret);
 
+        logger.trace("Constructing HTTP call to fetch an access and refresh token.");
         final Call<AuthorizationCodeFlowTokenResponse> httpCall = authorizationCodeFlowService
                 .getAccessAndRefreshToken(
                         base64EncodedBasicAuth,
@@ -50,14 +57,18 @@ public class AuthorizationRequestTokens {
                         GrantType.AUTHORIZATION_CODE);
 
         try {
+            logger.info("Executing HTTP call to fetch an access and refresh token.");
             final Response<AuthorizationCodeFlowTokenResponse> response = httpCall.execute();
 
             if (response.body() == null) {
+                logger.error("Spotify has returned empty response body. This may mean the given credentials are invalid.");
                 throw new SpotifyAuthorizationFailedException("Retrieving an access token and refresh token with the given credentials has failed!");
             }
 
+            logger.info("Access and refresh token have been successfully fetched.");
             return response.body();
         } catch (IOException e) {
+            logger.error("HTTP request to fetch an access and refresh token has failed.");
             throw new HttpRequestFailedException(e.getMessage());
         }
     }
