@@ -7,6 +7,7 @@ import spotify.api.impl.TrackApiRetrofit;
 import spotify.api.interfaces.AlbumApi;
 import spotify.api.interfaces.TrackApi;
 import spotify.models.albums.AlbumFull;
+import spotify.models.albums.AlbumFullList;
 import spotify.models.audio.AudioAnalysis;
 import spotify.models.audio.AudioFeatures;
 import spotify.models.audio.AudioFeaturesList;
@@ -59,6 +60,11 @@ public class SpotifyApi {
     public AlbumFull getAlbum(String albumId) {
         logger.info(String.format("Request an album with id %s.", albumId));
         return albumApi.getAlbum(albumId);
+    }
+
+    public AlbumFullList getAlbums(List<String> listOfAlbumIds, String market) {
+        logger.info("Requesting multiple albums.");
+        return albumApi.getAlbums(listOfAlbumIds, market);
     }
 
     private void setup(String accessToken) {
