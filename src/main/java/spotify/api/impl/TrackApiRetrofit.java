@@ -19,7 +19,6 @@ import spotify.retrofit.services.TrackService;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class TrackApiRetrofit implements TrackApi {
     private final Logger logger = LoggerFactory.getLogger(TrackApiRetrofit.class);
@@ -57,9 +56,7 @@ public class TrackApiRetrofit implements TrackApi {
         validateTrackListSizeAndThrowIfExceeded(listOfTrackIds, 50);
         market = marketEmptyCheck(market);
 
-        String trackIds = listOfTrackIds.stream()
-                .map(String::valueOf)
-                .collect(Collectors.joining(","));
+        String trackIds = String.join(",", listOfTrackIds);
 
         logger.trace("Constructing HTTP call to fetch multiple tracks.");
         Call<TrackFullList> httpCall = trackService.getTracks("Bearer " + this.accessToken, trackIds, market);
@@ -101,9 +98,7 @@ public class TrackApiRetrofit implements TrackApi {
     public AudioFeaturesList getTracksAudioFeatures(List<String> listOfTrackIds) {
         validateTrackListSizeAndThrowIfExceeded(listOfTrackIds, 100);
 
-        String trackIds = listOfTrackIds.stream()
-                .map(String::valueOf)
-                .collect(Collectors.joining(","));
+        String trackIds = String.join(",", listOfTrackIds);
 
         logger.trace("Constructing HTTP call to fetch audio features.");
         Call<AudioFeaturesList> httpCall = trackService.getTracksAudioFeatures("Bearer " + this.accessToken, trackIds);
