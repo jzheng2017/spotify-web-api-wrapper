@@ -4,11 +4,9 @@ Spotify API wrapper for Java
 ## Example usage
 ```java
         ClientCredentialsFlow clientCredentialsFlow = new ClientCredentialsFlow();
-        clientCredentialsFlow.doClientCredentialsFlow(
+        String accessToken = clientCredentialsFlow.getAccessToken(
                 "CLIENT ID",
                 "CLIENT SECRET");
-
-        String accessToken = clientCredentialsFlow.getClientCredentialsFlowToken().getAccessToken();
 
         SpotifyApi spotifyApi = new SpotifyApi(accessToken);
 
