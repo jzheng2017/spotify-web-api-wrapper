@@ -1,18 +1,59 @@
 # Spotify Web API Wrapper [![Build Status](https://dev.azure.com/jzheng21/jzheng/_apis/build/status/jzheng2017.spotify-web-api-wrapper?branchName=main)](https://dev.azure.com/jzheng21/jzheng/_build/latest?definitionId=1&branchName=main) [![Language grade: Java](https://img.shields.io/lgtm/grade/java/g/jzheng2017/spotify-web-api-wrapper.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/jzheng2017/spotify-web-api-wrapper/context:java)
 Spotify API wrapper for Java
 
-## Example usage
+## Example usages
+### Client Credentials Flow
+The Client Credentials flow is used in server-to-server authentication. Only endpoints that do not access user information can be accessed. 
 ```java
-        ClientCredentialsFlow clientCredentialsFlow = new ClientCredentialsFlow();
-        String accessToken = clientCredentialsFlow.getAccessToken(
-                "CLIENT ID",
-                "CLIENT SECRET")
-                .getAccessToken();
+ClientCredentialsFlow clientCredentialsFlow = new ClientCredentialsFlow();
+String accessToken = clientCredentialsFlow.getAccessToken(
+        "CLIENT ID",
+        "CLIENT SECRET")
+        .getAccessToken();
 
-        SpotifyApi spotifyApi = new SpotifyApi(accessToken);
+SpotifyApi spotifyApi = new SpotifyApi(accessToken);
 
-        AlbumFull albumFull = spotifyApi.getAlbum("ALBUM ID");
+AlbumFull albumFull = spotifyApi.getAlbum("ALBUM ID");
 ```
+### Authorization Code Flow
+This flow is suitable for long-running applications in which the user grants permission only once. It provides an access token that can be refreshed. Since the token exchange involves sending your secret key, perform this on a secure location, like a backend service, and not from a client such as a browser or from a mobile app.
+
+The first step to get an access and refresh token through the Authorization Code Flow is build an url.
+```java
+AuthorizationCodeFlow authorizationCodeFlow = new AuthorizationCodeFlow.Builder()
+        .setClientId("CLIENT ID")
+        .setRedirectUri("https://www.example.com/callback/")
+        .setResponseType("code")
+        .setScope(Arrays.asList(AuthorizationScope.APP_REMOTE_CONTROL, AuthorizationScope.PLAYLIST_MODIFY_PRIVATE))
+        .build();
+```
+The above code will result in the following url.
+```
+https://accounts.spotify.com/authorize?client_id=CLIENT ID&response_type=code&redirect_uri=https://www.example.com/callback/&scope=app-remote-control playlist-modify-private&state=null&show_dialog=false
+```
+By visiting the url it will display a prompt to authorize access within the given scopes. Authorizing access will redirect the user to the given redirect uri. An authorization code will also be returned, it can be found as a query parameter in the redirect uri. Use this authorization code for the second step. 
+
+For the second step the following values need to be provided:
+- Client ID
+- Client Secret
+- Authorization Code (the code that got returned when redirected from spotify)
+- Redirect Uri (the redirect uri that was given in the first step)
+
+```java
+   AuthorizationRequestTokens authorizationRequestTokens = new AuthorizationRequestTokens();
+   AuthorizationCodeFlowTokenResponse token = authorizationRequestTokens.getAccessAndRefreshToken("CLIENT ID", "CLIENT SECRET", "AUTHORIZATION CODE", "REDIRECT URI");
+```
+The `AuthorizationCodeFlowTokenResponse` contains the access and refresh token. The access and refresh token can be used to access api endpoints.
+```java
+SpotifyApi spotifyApi = new SpotifyApi("ACCESS TOKEN", "REFRESH TOKEN");
+AlbumFull albumFull = spotifyApi.getAlbum("ALBUM ID");
+```
+
+When the access token has expired it can be refreshed using `AuthorizationRefreshToken`
+```java
+AuthorizationCodeFlowTokenResponse token = authorizationRefreshToken.refreshAccessToken("CIENT ID", "CLIENT SECRET", "REFRESH TOKEN");
+```
+The above code example will return an `AuthorizationCodeFlowTokenResponse` which contains the new access and refresh token.
 
 ## Spotify endpoint coverage
 - [x] Albums
