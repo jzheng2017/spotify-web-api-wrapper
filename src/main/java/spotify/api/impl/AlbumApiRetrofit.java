@@ -34,6 +34,7 @@ public class AlbumApiRetrofit implements AlbumApi {
 
         try {
             logger.info("Executing HTTP call to fetch an album.");
+            logger.debug(String.format("%s / %s", httpCall.request().method(), httpCall.request().url().toString()));
             Response<AlbumFull> response = httpCall.execute();
 
             ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response.errorBody());
@@ -59,6 +60,7 @@ public class AlbumApiRetrofit implements AlbumApi {
 
         try {
             logger.info("Executing HTTP call to fetch albums.");
+            logger.debug(String.format("%s / %s", httpCall.request().method(), httpCall.request().url().toString()));
             Response<AlbumFullList> response = httpCall.execute();
 
             ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response.errorBody());

@@ -39,6 +39,7 @@ public class TrackApiRetrofit implements TrackApi {
 
         try {
             logger.info("Executing HTTP call to fetch a track.");
+            logger.debug(String.format("%s / %s", httpCall.request().method(), httpCall.request().url().toString()));
             Response<TrackFull> response = httpCall.execute();
 
             ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response.errorBody());
@@ -63,6 +64,7 @@ public class TrackApiRetrofit implements TrackApi {
 
         try {
             logger.info("Executing HTTP call to fetch multiple tracks.");
+            logger.debug(String.format("%s / %s", httpCall.request().method(), httpCall.request().url().toString()));
             Response<TrackFullList> response = httpCall.execute();
 
             ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response.errorBody());
@@ -82,6 +84,7 @@ public class TrackApiRetrofit implements TrackApi {
 
         try {
             logger.info("Executing HTTP call to fetch multiple track audio features.");
+            logger.debug(String.format("%s / %s", httpCall.request().method(), httpCall.request().url().toString()));
             Response<AudioFeatures> response = httpCall.execute();
 
             ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response.errorBody());
@@ -105,6 +108,7 @@ public class TrackApiRetrofit implements TrackApi {
 
         try {
             logger.info("Executing HTTP call to fetch track audio features.");
+            logger.debug(String.format("%s / %s", httpCall.request().method(), httpCall.request().url().toString()));
             Response<AudioFeaturesList> response = httpCall.execute();
 
             ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response.errorBody());
@@ -124,6 +128,7 @@ public class TrackApiRetrofit implements TrackApi {
 
         try {
             logger.info(String.format("Executing HTTP call to fetch audio analysis for track %s.", trackId));
+            logger.debug(String.format("%s / %s", httpCall.request().method(), httpCall.request().url().toString()));
             Response<AudioAnalysis> response = httpCall.execute();
 
             ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response.errorBody());
