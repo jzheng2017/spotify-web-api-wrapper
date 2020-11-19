@@ -40,6 +40,7 @@ public class AuthorizationRefreshToken {
 
         try {
             logger.info("Executing HTTP call to refresh the access token.");
+            logger.debug(String.format("%s / %s", httpCall.request().method(), httpCall.request().url().toString()));
             final Response<AuthorizationCodeFlowTokenResponse> response = httpCall.execute();
 
             if (response.body() == null) {

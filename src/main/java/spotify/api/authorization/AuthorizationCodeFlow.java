@@ -115,7 +115,20 @@ public class AuthorizationCodeFlow {
             authorizationCodeFlow.showDialog = this.showDialog;
 
             logger.trace("AuthorizationCodeFlow successfully constructed.");
+            logger.debug(authorizationCodeFlow.toString());
             return authorizationCodeFlow;
         }
+    }
+
+    @Override
+    public String toString() {
+        return "AuthorizationCodeFlow{" +
+                "clientId='" + clientId + '\'' +
+                ", responseType='" + responseType + '\'' +
+                ", redirectUri='" + redirectUri + '\'' +
+                ", state='" + state + '\'' +
+                ", scopes=" + scopes +
+                ", showDialog=" + showDialog +
+                '}';
     }
 }

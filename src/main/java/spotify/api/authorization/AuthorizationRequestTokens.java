@@ -58,6 +58,7 @@ public class AuthorizationRequestTokens {
 
         try {
             logger.info("Executing HTTP call to fetch an access and refresh token.");
+            logger.debug(String.format("%s / %s", httpCall.request().method(), httpCall.request().url().toString()));
             final Response<AuthorizationCodeFlowTokenResponse> response = httpCall.execute();
 
             if (response.body() == null) {

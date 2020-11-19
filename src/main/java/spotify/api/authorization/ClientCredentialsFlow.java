@@ -56,6 +56,7 @@ public class ClientCredentialsFlow {
 
         try {
             logger.info("Executing HTTP call to fetch an access token.");
+            logger.debug(String.format("%s / %s", httpCall.request().method(), httpCall.request().url().toString()));
             final Response<ClientCredentialsFlowTokenResponse> response = httpCall.execute();
 
             if (response.body() == null) {
