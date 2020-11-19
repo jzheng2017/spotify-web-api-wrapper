@@ -11,8 +11,10 @@ import spotify.models.albums.AlbumFullList;
 import spotify.models.audio.AudioAnalysis;
 import spotify.models.audio.AudioFeatures;
 import spotify.models.audio.AudioFeaturesList;
+import spotify.models.paging.Paging;
 import spotify.models.tracks.TrackFull;
 import spotify.models.tracks.TrackFullList;
+import spotify.models.tracks.TrackSimplified;
 
 import java.util.List;
 
@@ -58,13 +60,18 @@ public class SpotifyApi {
     }
 
     public AlbumFull getAlbum(String albumId) {
-        logger.info(String.format("Request an album with id %s.", albumId));
+        logger.info(String.format("Requesting an album with id %s.", albumId));
         return albumApi.getAlbum(albumId);
     }
 
     public AlbumFullList getAlbums(List<String> listOfAlbumIds, String market) {
         logger.info("Requesting multiple albums.");
         return albumApi.getAlbums(listOfAlbumIds, market);
+    }
+
+    public Paging<TrackSimplified> getAlbumTracks(String albumId, int limit, int offset, String market) {
+        logger.info(String.format("Requesting tracks of albim with id %s", albumId));
+        return albumApi.getAlbumTracks(albumId, limit, offset, market);
     }
 
     private void setup(String accessToken) {

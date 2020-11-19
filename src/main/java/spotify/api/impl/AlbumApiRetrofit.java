@@ -12,6 +12,8 @@ import spotify.exceptions.ResponseChecker;
 import spotify.factories.RetrofitClientFactory;
 import spotify.models.albums.AlbumFull;
 import spotify.models.albums.AlbumFullList;
+import spotify.models.paging.Paging;
+import spotify.models.tracks.TrackSimplified;
 import spotify.retrofit.services.AlbumService;
 
 import java.io.IOException;
@@ -72,6 +74,39 @@ public class AlbumApiRetrofit implements AlbumApi {
             throw new HttpRequestFailedException(ex.getMessage());
         }
     }
+
+    @Override
+    public Paging<TrackSimplified> getAlbumTracks(String albumId, int limit, int offset, String market) {
+        logger.trace("Validating passed in values");
+        logger.debug(String.format("Passed in values: album id = %s, limit = %d, offset = %d, market = %s", albumId, limit, offset, market));
+        if (limit <= 0) {
+            throw new IllegalArgumentException(String.format("Limit must be at least 1! Current passed in limit value: %d", limit));
+        }
+
+        if (offset < 0) {
+            throw new IllegalArgumentException(String.format("Offset must be at least 0! Current passed in offset value: %d", offset));
+        }
+
+        market = marketEmptyCheck(market);
+
+        logger.trace("Constructing HTTP call to fetch album tracks.");
+        Call<Paging<TrackSimplified>> httpCall = albumService.getAlbumTracks("Bearer " + this.accessToken, albumId, limit, offset, market);
+
+        try {
+            logger.info("Executing HTTP call to fetch album tracks.");
+            logger.debug(String.format("%s / %s", httpCall.request().method(), httpCall.request().url().toString()));
+            Response<Paging<TrackSimplified>> response = httpCall.execute();
+
+            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response.errorBody());
+
+            logger.info("Album tracks have been successfully fetched.");
+            return response.body();
+        } catch (IOException ex) {
+            logger.error("HTTP request to fetch album tracks has failed.");
+            throw new HttpRequestFailedException(ex.getMessage());
+        }
+    }
+
 
     private void setup() {
         logger.trace("Requesting Retrofit HTTP client.");
