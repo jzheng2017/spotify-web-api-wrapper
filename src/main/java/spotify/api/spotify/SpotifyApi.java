@@ -70,7 +70,7 @@ public class SpotifyApi {
     }
 
     public Paging<TrackSimplified> getAlbumTracks(String albumId, int limit, int offset, String market) {
-        logger.info(String.format("Requesting tracks of albim with id %s", albumId));
+        logger.info(String.format("Requesting tracks of album with id %s", albumId));
         return albumApi.getAlbumTracks(albumId, limit, offset, market);
     }
 
