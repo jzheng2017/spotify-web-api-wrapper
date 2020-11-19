@@ -26,8 +26,10 @@ public class ResponseChecker {
 
         if (hasFailed) {
             logger.error(
-                    String.format("HTTP request to Spotify's server has not been fulfilled correctly. Spotify has returned status code %d with the message: \"%s\".",
-                            statusCode, message)
+                    String.format(
+                            "HTTP request to Spotify's server has not been fulfilled correctly. Spotify has returned status code %d with the message: \"%s\".",
+                            statusCode,
+                            message)
             );
             throw new SpotifyActionFailedException(message);
         }
