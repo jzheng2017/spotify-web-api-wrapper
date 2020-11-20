@@ -8,6 +8,7 @@ import retrofit2.http.Query;
 import spotify.models.episodes.EpisodeSimplified;
 import spotify.models.paging.Paging;
 import spotify.models.shows.ShowFull;
+import spotify.models.shows.ShowSimplifiedCollection;
 
 public interface ShowService {
     @GET("shows/{id}")
@@ -19,4 +20,7 @@ public interface ShowService {
                                                     @Query("limit") int limit,
                                                     @Query("offset") int offset,
                                                     @Query("market") String market);
+
+    @GET("shows")
+    Call<ShowSimplifiedCollection> getShows(@Header("Authorization") String accessToken, @Query("ids") String showIds, @Query("market") String market);
 }
