@@ -124,6 +124,29 @@ public class ArtistApiRetrofit implements ArtistApi {
         }
     }
 
+    @Override
+    public ArtistFullCollection getArtists(List<String> listOfArtistIds) {
+
+        String artistIdsWithCommaDelimiter = String.join(",", listOfArtistIds);
+
+        logger.trace("Constructing HTTP call to fetch multiple artists.");
+        Call<ArtistFullCollection> httpCall = artistService.getArtists("Bearer " + this.accessToken, artistIdsWithCommaDelimiter);
+
+        try {
+            logger.info("Executing HTTP call to fetch multiple artists.");
+            logger.debug(String.format("%s / %s", httpCall.request().method(), httpCall.request().url().toString()));
+            Response<ArtistFullCollection> response = httpCall.execute();
+
+            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response.errorBody());
+
+            logger.info("Artists has been successfully fetched.");
+            return response.body();
+        } catch (IOException e) {
+            logger.error("Fetching artists has failed.");
+            throw new HttpRequestFailedException(e.getMessage());
+        }
+    }
+
     private void setup() {
         logger.trace("Requesting Retrofit HTTP client.");
         Retrofit httpClient = RetrofitClientFactory.getRetrofitClient(ApiUrl.API_URL_HTTPS + ApiUrl.VERSION);

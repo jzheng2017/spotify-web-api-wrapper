@@ -141,6 +141,10 @@ public class SpotifyApi {
         return artistApi.getRelatedArtists(artistId);
     }
 
+    public ArtistFullCollection getArtists(List<String> listOfArtistIds) {
+        logger.info("Request multiple artists");
+        return artistApi.getArtists(listOfArtistIds);
+    }
     private void setup(String accessToken) {
         logger.trace("Constructing Retrofit APIs");
         this.trackApi = new TrackApiRetrofit(accessToken);

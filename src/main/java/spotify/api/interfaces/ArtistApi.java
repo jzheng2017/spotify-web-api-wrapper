@@ -17,4 +17,6 @@ public interface ArtistApi {
     TrackFullCollection getArtistTopTracks(String artistId, String country);
 
     ArtistFullCollection getRelatedArtists(String artistId);
+
+    ArtistFullCollection getArtists(List<String> listOfArtistIds);
 }
