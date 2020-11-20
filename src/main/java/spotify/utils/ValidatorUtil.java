@@ -32,7 +32,7 @@ public class ValidatorUtil {
      * @param limit  the number of items to be returned
      * @param offset the offset, 0 means starting from the first item
      */
-    public static void validateFilters(int limit, int offset) {
+    public static void validateFiltersAndThrowIfInvalid(int limit, int offset) {
         logger.trace("Validating passed in values");
         logger.debug(String.format("Passed in values: limit = %d, offset = %d", limit, offset));
         if (limit <= 0) {

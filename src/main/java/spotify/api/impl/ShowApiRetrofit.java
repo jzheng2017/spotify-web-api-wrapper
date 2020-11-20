@@ -54,7 +54,7 @@ public class ShowApiRetrofit implements ShowApi {
 
     @Override
     public Paging<EpisodeSimplified> getShowEpisodes(String showId, int limit, int offset, String market) {
-        ValidatorUtil.validateFilters(limit, offset);
+        ValidatorUtil.validateFiltersAndThrowIfInvalid(limit, offset);
         market = ValidatorUtil.marketEmptyCheck(market);
 
         logger.trace("Constructing HTTP call to fetch show episodes.");

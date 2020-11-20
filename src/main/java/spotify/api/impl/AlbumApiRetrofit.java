@@ -80,7 +80,7 @@ public class AlbumApiRetrofit implements AlbumApi {
 
     @Override
     public Paging<TrackSimplified> getAlbumTracks(String albumId, int limit, int offset, String market) {
-        ValidatorUtil.validateFilters(limit, offset);
+        ValidatorUtil.validateFiltersAndThrowIfInvalid(limit, offset);
 
         market = ValidatorUtil.marketEmptyCheck(market);
 
