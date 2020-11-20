@@ -6,6 +6,7 @@ import spotify.api.impl.*;
 import spotify.api.interfaces.*;
 import spotify.models.albums.AlbumFull;
 import spotify.models.albums.AlbumFullCollection;
+import spotify.models.artists.ArtistFull;
 import spotify.models.audio.AudioAnalysis;
 import spotify.models.audio.AudioFeatures;
 import spotify.models.audio.AudioFeaturesCollection;
@@ -30,6 +31,7 @@ public class SpotifyApi {
     private UserApi userApi;
     private EpisodeApi episodeApi;
     private ShowApi showApi;
+    private ArtistApi artistApi;
 
     public SpotifyApi(String accessToken) {
         this.setup(accessToken);
@@ -116,6 +118,11 @@ public class SpotifyApi {
         return showApi.getShows(listOfShowIds, market);
     }
 
+    public ArtistFull getArtist(String artistId) {
+        logger.info("Requesting an artist");
+        return artistApi.getArtist(artistId);
+    }
+
     private void setup(String accessToken) {
         logger.trace("Constructing Retrofit APIs");
         this.trackApi = new TrackApiRetrofit(accessToken);
@@ -123,5 +130,6 @@ public class SpotifyApi {
         this.userApi = new UserApiRetrofit(accessToken);
         this.episodeApi = new EpisodeApiRetrofit(accessToken);
         this.showApi = new ShowApiRetrofit(accessToken);
+        this.artistApi = new ArtistApiRetrofit(accessToken);
     }
 }
