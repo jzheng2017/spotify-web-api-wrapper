@@ -16,4 +16,16 @@ public class ValidatorUtil {
 
         return market;
     }
+
+    public static void validateFilters(int limit, int offset) {
+        logger.trace("Validating passed in values");
+        logger.debug(String.format("Passed in values: limit = %d, offset = %d", limit, offset));
+        if (limit <= 0) {
+            throw new IllegalArgumentException(String.format("Limit must be at least 1! Current passed in limit value: %d", limit));
+        }
+
+        if (offset < 0) {
+            throw new IllegalArgumentException(String.format("Offset must be at least 0! Current passed in offset value: %d", offset));
+        }
+    }
 }
