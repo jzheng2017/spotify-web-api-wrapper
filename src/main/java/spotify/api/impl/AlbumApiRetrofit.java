@@ -80,15 +80,7 @@ public class AlbumApiRetrofit implements AlbumApi {
 
     @Override
     public Paging<TrackSimplified> getAlbumTracks(String albumId, int limit, int offset, String market) {
-        logger.trace("Validating passed in values");
-        logger.debug(String.format("Passed in values: album id = %s, limit = %d, offset = %d, market = \"%s\"", albumId, limit, offset, market));
-        if (limit <= 0) {
-            throw new IllegalArgumentException(String.format("Limit must be at least 1! Current passed in limit value: %d", limit));
-        }
-
-        if (offset < 0) {
-            throw new IllegalArgumentException(String.format("Offset must be at least 0! Current passed in offset value: %d", offset));
-        }
+        ValidatorUtil.validateFilters(limit, offset);
 
         market = ValidatorUtil.marketEmptyCheck(market);
 
