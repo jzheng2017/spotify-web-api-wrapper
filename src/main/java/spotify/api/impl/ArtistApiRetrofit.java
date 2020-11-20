@@ -14,6 +14,7 @@ import spotify.factories.RetrofitClientFactory;
 import spotify.models.artists.ArtistFull;
 import spotify.models.artists.ArtistSimplified;
 import spotify.models.paging.Paging;
+import spotify.models.tracks.TrackFullCollection;
 import spotify.retrofit.services.ArtistService;
 import spotify.utils.ValidatorUtil;
 
@@ -76,6 +77,28 @@ public class ArtistApiRetrofit implements ArtistApi {
             return response.body();
         } catch (IOException e) {
             logger.error("Fetching artist albums has failed.");
+            throw new HttpRequestFailedException(e.getMessage());
+        }
+    }
+
+    @Override
+    public TrackFullCollection getArtistTopTracks(String artistId, String country) {
+        country = ValidatorUtil.emptyValueCheck(country);
+
+        logger.trace("Constructing HTTP call to fetch an artist top tracks.");
+        Call<TrackFullCollection> httpCall = artistService.getArtistTopTracks("Bearer " + this.accessToken, artistId, country);
+
+        try {
+            logger.info("Executing HTTP call to fetch an artist top tracks.");
+            logger.debug(String.format("%s / %s", httpCall.request().method(), httpCall.request().url().toString()));
+            Response<TrackFullCollection> response = httpCall.execute();
+
+            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response.errorBody());
+
+            logger.info("Artist top tracks have been successfully fetched.");
+            return response.body();
+        } catch (IOException e) {
+            logger.error("Fetching artist top tracks has failed.");
             throw new HttpRequestFailedException(e.getMessage());
         }
     }

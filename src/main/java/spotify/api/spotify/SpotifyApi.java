@@ -130,6 +130,11 @@ public class SpotifyApi {
         return artistApi.getArtistAlbums(artistId, listOfAlbumTypes, country, limit, offset);
     }
 
+    public TrackFullCollection getArtistTopTracks(String artistId, String country) {
+        logger.info("Request top tracks of an artist");
+        return artistApi.getArtistTopTracks(artistId, country);
+    }
+
     private void setup(String accessToken) {
         logger.trace("Constructing Retrofit APIs");
         this.trackApi = new TrackApiRetrofit(accessToken);
