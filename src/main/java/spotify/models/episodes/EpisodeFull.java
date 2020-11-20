@@ -2,6 +2,7 @@ package spotify.models.episodes;
 
 import spotify.models.generic.ExternalUrl;
 import spotify.models.generic.Image;
+import spotify.models.shows.ShowSimplified;
 
 import java.util.List;
 
@@ -21,6 +22,9 @@ public class EpisodeFull {
     private String releaseDate;
     private String releaseDatePrecision;
     private ResumePointObject resumePoint;
+    private ShowSimplified show;
+    private String type;
+    private String uri;
 
     public String getAudioPreviewUrl() {
         return audioPreviewUrl;
@@ -140,5 +144,29 @@ public class EpisodeFull {
 
     public void setResumePoint(ResumePointObject resumePoint) {
         this.resumePoint = resumePoint;
+    }
+
+    public ShowSimplified getShow() {
+        return show;
+    }
+
+    public void setShow(ShowSimplified show) {
+        this.show = show;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getUri() {
+        return uri;
+    }
+
+    public void setUri(String uri) {
+        this.uri = uri;
     }
 }
