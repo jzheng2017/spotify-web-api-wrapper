@@ -45,6 +45,26 @@ public class UserApiRetrofit implements UserApi {
         }
     }
 
+    @Override
+    public User getUserById(String userId) {
+        logger.trace("Constructing HTTP call to fetch user.");
+        Call<User> httpCall = userService.getCurrentUser("Bearer " + this.accessToken);
+
+        try {
+            logger.info(String.format("Executing HTTP call to fetch user with id %s.", userId));
+            logger.debug(String.format("%s / %s", httpCall.request().method(), httpCall.request().url().toString()));
+            Response<User> response = httpCall.execute();
+
+            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response.errorBody());
+
+            logger.info("Requested user has been successfully fetched.");
+            return response.body();
+        } catch (IOException ex) {
+            logger.error("HTTP request to fetch requested user has failed.");
+            throw new HttpRequestFailedException(ex.getMessage());
+        }
+    }
+
     private void setup() {
         logger.trace("Requesting Retrofit HTTP client.");
         Retrofit httpClient = RetrofitClientFactory.getRetrofitClient(ApiUrl.API_URL_HTTPS + ApiUrl.VERSION);

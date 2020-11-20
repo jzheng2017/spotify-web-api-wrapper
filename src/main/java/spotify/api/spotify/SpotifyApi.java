@@ -83,6 +83,11 @@ public class SpotifyApi {
         return userApi.getCurrentUser();
     }
 
+    public User getUserById(String userId) {
+        logger.info("Request user info");
+        return userApi.getUserById(userId);
+    }
+
     private void setup(String accessToken) {
         logger.trace("Constructing Retrofit APIs");
         this.trackApi = new TrackApiRetrofit(accessToken);
