@@ -15,6 +15,7 @@ import spotify.models.albums.AlbumFullCollection;
 import spotify.models.paging.Paging;
 import spotify.models.tracks.TrackSimplified;
 import spotify.retrofit.services.AlbumService;
+import spotify.utils.ValidatorUtil;
 
 import java.io.IOException;
 import java.util.List;
@@ -52,7 +53,7 @@ public class AlbumApiRetrofit implements AlbumApi {
     @Override
     public AlbumFullCollection getAlbums(List<String> listOfAlbumIds, String market) {
         validateAlbumListSizeAndThrowIfExceeded(listOfAlbumIds, 20);
-        market = marketEmptyCheck(market);
+        market = ValidatorUtil.marketEmptyCheck(market);
 
         String albumIds = String.join(",", listOfAlbumIds);
         logger.debug(String.format("Mapped list of album ids to String: %s", albumIds));
@@ -87,7 +88,7 @@ public class AlbumApiRetrofit implements AlbumApi {
             throw new IllegalArgumentException(String.format("Offset must be at least 0! Current passed in offset value: %d", offset));
         }
 
-        market = marketEmptyCheck(market);
+        market = ValidatorUtil.marketEmptyCheck(market);
 
         logger.trace("Constructing HTTP call to fetch album tracks.");
         Call<Paging<TrackSimplified>> httpCall = albumService.getAlbumTracks("Bearer " + this.accessToken, albumId, limit, offset, market);
@@ -113,17 +114,6 @@ public class AlbumApiRetrofit implements AlbumApi {
         Retrofit httpClient = RetrofitClientFactory.getRetrofitClient(ApiUrl.API_URL_HTTPS + ApiUrl.VERSION);
 
         albumService = httpClient.create(AlbumService.class);
-    }
-
-    private String marketEmptyCheck(String market) {
-        // this is done because retrofit ignores null values
-        // when an empty market value is passed to spotify it will give an error saying the market does not exist
-        if (market.isEmpty()) {
-            logger.warn("An empty market value has been passed in! The market value has now been set to NULL.");
-            return null;
-        }
-
-        return market;
     }
 
     private void validateAlbumListSizeAndThrowIfExceeded(List<String> listOfAlbumIds, int maximumAmountOfAlbumIdsAllowed) {

@@ -16,6 +16,7 @@ import spotify.models.audio.AudioFeaturesCollection;
 import spotify.models.tracks.TrackFull;
 import spotify.models.tracks.TrackFullCollection;
 import spotify.retrofit.services.TrackService;
+import spotify.utils.ValidatorUtil;
 
 import java.io.IOException;
 import java.util.List;
@@ -32,7 +33,7 @@ public class TrackApiRetrofit implements TrackApi {
 
     @Override
     public TrackFull getTrack(String trackId, String market) {
-        market = marketEmptyCheck(market);
+        market = ValidatorUtil.marketEmptyCheck(market);
 
         logger.trace("Constructing HTTP call to fetch a track.");
         Call<TrackFull> httpCall = trackService.getTrack("Bearer " + this.accessToken, trackId, market);
@@ -55,7 +56,7 @@ public class TrackApiRetrofit implements TrackApi {
     @Override
     public TrackFullCollection getTracks(List<String> listOfTrackIds, String market) {
         validateTrackListSizeAndThrowIfExceeded(listOfTrackIds, 50);
-        market = marketEmptyCheck(market);
+        market = ValidatorUtil.marketEmptyCheck(market);
 
         String trackIds = String.join(",", listOfTrackIds);
 
@@ -146,17 +147,6 @@ public class TrackApiRetrofit implements TrackApi {
         Retrofit httpClient = RetrofitClientFactory.getRetrofitClient(ApiUrl.API_URL_HTTPS + ApiUrl.VERSION);
 
         trackService = httpClient.create(TrackService.class);
-    }
-
-    private String marketEmptyCheck(String market) {
-        // this is done because retrofit ignores null values
-        // when an empty market value is passed to spotify it will give an error saying the market does not exist
-        if (market.isEmpty()) {
-            logger.warn("An empty market value has been passed in! The market value has now been set to NULL.");
-            return null;
-        }
-
-        return market;
     }
 
     private void validateTrackListSizeAndThrowIfExceeded(List<String> listOfTrackIds, int maximumAmountOfTrackIdsAllowed) {
