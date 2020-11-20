@@ -55,20 +55,20 @@ public class ShowApiRetrofit implements ShowApi {
         ValidatorUtil.validateFilters(limit, offset);
         market = ValidatorUtil.marketEmptyCheck(market);
 
-        logger.trace("Constructing HTTP call to fetch multiple shows.");
+        logger.trace("Constructing HTTP call to fetch show episodes.");
         Call<Paging<EpisodeSimplified>> httpCall = showService.getShowEpisodes("Bearer " + this.accessToken, showId, limit, offset, market);
 
         try {
-            logger.info("Executing HTTP call to fetch multiple shows.");
+            logger.info("Executing HTTP call to fetch show episodes.");
             logger.debug(String.format("%s / %s", httpCall.request().method(), httpCall.request().url().toString()));
             Response<Paging<EpisodeSimplified>> response = httpCall.execute();
 
             ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response.errorBody());
 
-            logger.info("Shows has been successfully fetched.");
+            logger.info("Show episodes has been successfully fetched.");
             return response.body();
         } catch (IOException ex) {
-            logger.error("HTTP request to fetch shows has failed.");
+            logger.error("HTTP request to fetch show episodes has failed.");
             throw new HttpRequestFailedException(ex.getMessage());
         }
     }
