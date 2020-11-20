@@ -63,12 +63,12 @@ See the [LICENSE](https://github.com/jzheng2017/spotify-web-api-wrapper/blob/mai
 - - [x] Get an Album
 - - [x] Get Several Albums
 - - [x] Get an Album's Tracks
-- [ ] Artists
-- - [ ] Get an Artist's Albums
-- - [ ] Get an Artist's Related Artists
-- - [ ] Get an Artist's Top Tracks
-- - [ ] Get an Artist
-- - [ ] Get Several Artists
+- [x] Artists
+- - [x] Get an Artist's Albums
+- - [x] Get an Artist's Related Artists
+- - [x] Get an Artist's Top Tracks
+- - [x] Get an Artist
+- - [x] Get Several Artists
 - [ ] Browse
 - - [ ] Get Available Genre Seeds
 - - [ ] Get a List of Browse Categories
