@@ -4,8 +4,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import spotify.api.impl.AlbumApiRetrofit;
 import spotify.api.impl.TrackApiRetrofit;
+import spotify.api.impl.UserApiRetrofit;
 import spotify.api.interfaces.AlbumApi;
 import spotify.api.interfaces.TrackApi;
+import spotify.api.interfaces.UserApi;
 import spotify.models.albums.AlbumFull;
 import spotify.models.albums.AlbumFullList;
 import spotify.models.audio.AudioAnalysis;
@@ -15,6 +17,7 @@ import spotify.models.paging.Paging;
 import spotify.models.tracks.TrackFull;
 import spotify.models.tracks.TrackFullList;
 import spotify.models.tracks.TrackSimplified;
+import spotify.models.users.User;
 
 import java.util.List;
 
@@ -23,6 +26,7 @@ public class SpotifyApi {
     private final Logger logger = LoggerFactory.getLogger(SpotifyApi.class);
     private TrackApi trackApi;
     private AlbumApi albumApi;
+    private UserApi userApi;
 
     public SpotifyApi(String accessToken) {
         this.setup(accessToken);
@@ -74,9 +78,15 @@ public class SpotifyApi {
         return albumApi.getAlbumTracks(albumId, limit, offset, market);
     }
 
+    public User getCurrentUser() {
+        logger.info("Requesting current user info");
+        return userApi.getCurrentUser();
+    }
+
     private void setup(String accessToken) {
         logger.trace("Constructing Retrofit APIs");
         this.trackApi = new TrackApiRetrofit(accessToken);
         this.albumApi = new AlbumApiRetrofit(accessToken);
+        this.userApi = new UserApiRetrofit(accessToken);
     }
 }
