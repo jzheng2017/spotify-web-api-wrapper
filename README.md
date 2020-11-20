@@ -139,8 +139,8 @@ The above code example will return an `AuthorizationCodeFlowTokenResponse` which
 - - [ ] Get Several Shows
 - - [ ] Get a Show's Episodes
 - - [ ] Get a Show
-- [ ] Users Profile
-- - [ ] Get Current User's Profile
-- - [ ] Get a User's Profile
+- [x] Users Profile
+- - [x] Get Current User's Profile
+- - [x] Get a User's Profile
 
 
