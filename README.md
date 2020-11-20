@@ -74,9 +74,9 @@ The above code example will return an `AuthorizationCodeFlowTokenResponse` which
 - - [ ] Get a List of Featured Playlists
 - - [ ] Get a List of New Releases
 - - [ ] Get Recommendations Based on Seeds
-- [ ] Episodes
-- - [ ] Get an Episode
-- - [ ] Get Several Episodes
+- [x] Episodes
+- - [x] Get an Episode
+- - [x] Get Several Episodes
 - [ ] Follow
 - - [ ] Unfollow Artists or Users
 - - [ ] Unfollow a Playlist
