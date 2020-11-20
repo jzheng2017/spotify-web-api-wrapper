@@ -30,8 +30,8 @@ public class EpisodeApiRetrofit implements EpisodeApi {
 
     @Override
     public EpisodeFull getEpisode(String episodeId, String market) {
-        market = ValidatorUtil.marketEmptyCheck(market);
-        
+        market = ValidatorUtil.emptyValueCheck(market);
+
         logger.trace("Constructing HTTP call to fetch episode.");
         Call<EpisodeFull> httpCall = episodeService.getEpisode("Bearer " + this.accessToken, episodeId, market);
 
@@ -53,7 +53,7 @@ public class EpisodeApiRetrofit implements EpisodeApi {
     @Override
     public EpisodeFullCollection getEpisodes(List<String> listOfEpisodeIds, String market) {
         validateEpisodeListSizeAndThrowIfExceeded(listOfEpisodeIds, 50);
-        market = ValidatorUtil.marketEmptyCheck(market);
+        market = ValidatorUtil.emptyValueCheck(market);
 
         String episodeIds = String.join(",", listOfEpisodeIds);
 

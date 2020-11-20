@@ -33,7 +33,7 @@ public class TrackApiRetrofit implements TrackApi {
 
     @Override
     public TrackFull getTrack(String trackId, String market) {
-        market = ValidatorUtil.marketEmptyCheck(market);
+        market = ValidatorUtil.emptyValueCheck(market);
 
         logger.trace("Constructing HTTP call to fetch a track.");
         Call<TrackFull> httpCall = trackService.getTrack("Bearer " + this.accessToken, trackId, market);
@@ -56,7 +56,7 @@ public class TrackApiRetrofit implements TrackApi {
     @Override
     public TrackFullCollection getTracks(List<String> listOfTrackIds, String market) {
         validateTrackListSizeAndThrowIfExceeded(listOfTrackIds, 50);
-        market = ValidatorUtil.marketEmptyCheck(market);
+        market = ValidatorUtil.emptyValueCheck(market);
 
         String trackIds = String.join(",", listOfTrackIds);
 

@@ -32,7 +32,7 @@ public class AlbumApiRetrofit implements AlbumApi {
 
     @Override
     public AlbumFull getAlbum(String albumId, String market) {
-        market = ValidatorUtil.marketEmptyCheck(market);
+        market = ValidatorUtil.emptyValueCheck(market);
 
         logger.trace("Constructing HTTP call to fetch an album.");
         Call<AlbumFull> httpCall = albumService.getAlbum("Bearer " + this.accessToken, albumId, market);
@@ -55,7 +55,7 @@ public class AlbumApiRetrofit implements AlbumApi {
     @Override
     public AlbumFullCollection getAlbums(List<String> listOfAlbumIds, String market) {
         validateAlbumListSizeAndThrowIfExceeded(listOfAlbumIds, 20);
-        market = ValidatorUtil.marketEmptyCheck(market);
+        market = ValidatorUtil.emptyValueCheck(market);
 
         String albumIds = String.join(",", listOfAlbumIds);
         logger.debug(String.format("Mapped list of album ids to String: %s", albumIds));
@@ -82,7 +82,7 @@ public class AlbumApiRetrofit implements AlbumApi {
     public Paging<TrackSimplified> getAlbumTracks(String albumId, int limit, int offset, String market) {
         ValidatorUtil.validateFiltersAndThrowIfInvalid(limit, offset);
 
-        market = ValidatorUtil.marketEmptyCheck(market);
+        market = ValidatorUtil.emptyValueCheck(market);
 
         logger.trace("Constructing HTTP call to fetch album tracks.");
         Call<Paging<TrackSimplified>> httpCall = albumService.getAlbumTracks("Bearer " + this.accessToken, albumId, limit, offset, market);

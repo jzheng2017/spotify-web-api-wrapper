@@ -10,20 +10,20 @@ public class ValidatorUtil {
     private final static Logger logger = LoggerFactory.getLogger(ValidatorUtil.class);
 
     /**
-     * Checks if the passed in market is empty, if it is it will set it to null.
+     * Checks if the passed in value is empty, if it is it will set it to null.
      *
-     * @param market the market value
+     * @param value the spotify value
      * @return market value
      */
-    public static String marketEmptyCheck(String market) {
+    public static String emptyValueCheck(String value) {
         // this is done because retrofit ignores null values
-        // when an empty market value is passed to spotify it will give an error saying the market does not exist
-        if (market.isEmpty()) {
-            logger.warn("An empty market value has been passed in! The market value has now been set to NULL.");
+        // when an empty value is passed to spotify it will give an error saying the value does not exist
+        if (value.isEmpty()) {
+            logger.warn("An empty value has been passed in! The value will now be set to NULL.");
             return null;
         }
 
-        return market;
+        return value;
     }
 
     /**
