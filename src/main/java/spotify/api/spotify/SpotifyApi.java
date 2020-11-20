@@ -8,6 +8,7 @@ import spotify.api.interfaces.*;
 import spotify.models.albums.AlbumFull;
 import spotify.models.albums.AlbumFullCollection;
 import spotify.models.artists.ArtistFull;
+import spotify.models.artists.ArtistFullCollection;
 import spotify.models.artists.ArtistSimplified;
 import spotify.models.audio.AudioAnalysis;
 import spotify.models.audio.AudioFeatures;
@@ -133,6 +134,11 @@ public class SpotifyApi {
     public TrackFullCollection getArtistTopTracks(String artistId, String country) {
         logger.info("Request top tracks of an artist");
         return artistApi.getArtistTopTracks(artistId, country);
+    }
+
+    public ArtistFullCollection getRelatedArtists(String artistId) {
+        logger.info("Request related artists");
+        return artistApi.getRelatedArtists(artistId);
     }
 
     private void setup(String accessToken) {

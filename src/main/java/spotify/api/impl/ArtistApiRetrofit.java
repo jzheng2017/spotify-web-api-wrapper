@@ -12,6 +12,7 @@ import spotify.exceptions.HttpRequestFailedException;
 import spotify.exceptions.ResponseChecker;
 import spotify.factories.RetrofitClientFactory;
 import spotify.models.artists.ArtistFull;
+import spotify.models.artists.ArtistFullCollection;
 import spotify.models.artists.ArtistSimplified;
 import spotify.models.paging.Paging;
 import spotify.models.tracks.TrackFullCollection;
@@ -99,6 +100,26 @@ public class ArtistApiRetrofit implements ArtistApi {
             return response.body();
         } catch (IOException e) {
             logger.error("Fetching artist top tracks has failed.");
+            throw new HttpRequestFailedException(e.getMessage());
+        }
+    }
+
+    @Override
+    public ArtistFullCollection getRelatedArtists(String artistId) {
+        logger.trace("Constructing HTTP call to fetch a related artists.");
+        Call<ArtistFullCollection> httpCall = artistService.getRelatedArtists("Bearer " + this.accessToken, artistId);
+
+        try {
+            logger.info("Executing HTTP call to fetch related artists.");
+            logger.debug(String.format("%s / %s", httpCall.request().method(), httpCall.request().url().toString()));
+            Response<ArtistFullCollection> response = httpCall.execute();
+
+            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response.errorBody());
+
+            logger.info("Related artist has been successfully fetched.");
+            return response.body();
+        } catch (IOException e) {
+            logger.error("Fetching related artists has failed.");
             throw new HttpRequestFailedException(e.getMessage());
         }
     }
