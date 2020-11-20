@@ -5,15 +5,21 @@ import org.slf4j.LoggerFactory;
 import retrofit2.Call;
 import retrofit2.Response;
 import retrofit2.Retrofit;
+import spotify.api.enums.AlbumType;
 import spotify.api.interfaces.ArtistApi;
 import spotify.config.ApiUrl;
 import spotify.exceptions.HttpRequestFailedException;
 import spotify.exceptions.ResponseChecker;
 import spotify.factories.RetrofitClientFactory;
 import spotify.models.artists.ArtistFull;
+import spotify.models.artists.ArtistSimplified;
+import spotify.models.paging.Paging;
 import spotify.retrofit.services.ArtistService;
+import spotify.utils.ValidatorUtil;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class ArtistApiRetrofit implements ArtistApi {
     private final Logger logger = LoggerFactory.getLogger(ArtistApiRetrofit.class);
@@ -41,6 +47,35 @@ public class ArtistApiRetrofit implements ArtistApi {
             return response.body();
         } catch (IOException e) {
             logger.error("Fetching artist has failed.");
+            throw new HttpRequestFailedException(e.getMessage());
+        }
+    }
+
+    @Override
+    public Paging<ArtistSimplified> getArtistAlbums(String artistId, List<AlbumType> listOfAlbumTypes, String country, int limit, int offset) {
+        ValidatorUtil.validateFiltersAndThrowIfInvalid(limit, offset);
+        country = ValidatorUtil.emptyValueCheck(country);
+
+        String albumTypesWithCommaDelimiter = listOfAlbumTypes.stream()
+                .map(String::valueOf)
+                .collect(Collectors.joining(","));
+
+        albumTypesWithCommaDelimiter = albumTypesWithCommaDelimiter.isEmpty() ? null : albumTypesWithCommaDelimiter;
+
+        logger.trace("Constructing HTTP call to fetch albums of an artist.");
+        Call<Paging<ArtistSimplified>> httpCall = artistService.getArtistAlbums("Bearer " + this.accessToken, artistId, albumTypesWithCommaDelimiter, country, limit, offset);
+
+        try {
+            logger.info("Executing HTTP call to fetch albums of artist.");
+            logger.debug(String.format("%s / %s", httpCall.request().method(), httpCall.request().url().toString()));
+            Response<Paging<ArtistSimplified>> response = httpCall.execute();
+
+            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response.errorBody());
+
+            logger.info("Artist albums has been successfully fetched.");
+            return response.body();
+        } catch (IOException e) {
+            logger.error("Fetching artist albums has failed.");
             throw new HttpRequestFailedException(e.getMessage());
         }
     }

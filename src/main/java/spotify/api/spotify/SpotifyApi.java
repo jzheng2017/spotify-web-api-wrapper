@@ -2,11 +2,13 @@ package spotify.api.spotify;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import spotify.api.enums.AlbumType;
 import spotify.api.impl.*;
 import spotify.api.interfaces.*;
 import spotify.models.albums.AlbumFull;
 import spotify.models.albums.AlbumFullCollection;
 import spotify.models.artists.ArtistFull;
+import spotify.models.artists.ArtistSimplified;
 import spotify.models.audio.AudioAnalysis;
 import spotify.models.audio.AudioFeatures;
 import spotify.models.audio.AudioFeaturesCollection;
@@ -121,6 +123,11 @@ public class SpotifyApi {
     public ArtistFull getArtist(String artistId) {
         logger.info("Requesting an artist");
         return artistApi.getArtist(artistId);
+    }
+
+    public Paging<ArtistSimplified> getArtistAlbums(String artistId, List<AlbumType> listOfAlbumTypes, String country, int limit, int offset) {
+        logger.info("Request albums of an artist");
+        return artistApi.getArtistAlbums(artistId, listOfAlbumTypes, country, limit, offset);
     }
 
     private void setup(String accessToken) {
