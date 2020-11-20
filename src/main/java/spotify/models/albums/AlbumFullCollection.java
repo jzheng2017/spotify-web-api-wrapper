@@ -2,7 +2,7 @@ package spotify.models.albums;
 
 import java.util.List;
 
-public class AlbumFullList {
+public class AlbumFullCollection {
     private List<AlbumFull> albums;
 
     public List<AlbumFull> getAlbums() {

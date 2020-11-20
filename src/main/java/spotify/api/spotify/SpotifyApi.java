@@ -11,14 +11,14 @@ import spotify.api.interfaces.EpisodeApi;
 import spotify.api.interfaces.TrackApi;
 import spotify.api.interfaces.UserApi;
 import spotify.models.albums.AlbumFull;
-import spotify.models.albums.AlbumFullList;
+import spotify.models.albums.AlbumFullCollection;
 import spotify.models.audio.AudioAnalysis;
 import spotify.models.audio.AudioFeatures;
-import spotify.models.audio.AudioFeaturesList;
+import spotify.models.audio.AudioFeaturesCollection;
 import spotify.models.episodes.EpisodeFull;
 import spotify.models.paging.Paging;
 import spotify.models.tracks.TrackFull;
-import spotify.models.tracks.TrackFullList;
+import spotify.models.tracks.TrackFullCollection;
 import spotify.models.tracks.TrackSimplified;
 import spotify.models.users.User;
 
@@ -47,7 +47,7 @@ public class SpotifyApi {
         return trackApi.getTrack(trackId, market);
     }
 
-    public TrackFullList getTracks(List<String> listOfTrackIds, String market) {
+    public TrackFullCollection getTracks(List<String> listOfTrackIds, String market) {
         logger.info("Requesting a list of tracks.");
         return trackApi.getTracks(listOfTrackIds, market);
     }
@@ -57,7 +57,7 @@ public class SpotifyApi {
         return trackApi.getTrackAudioFeatures(trackId);
     }
 
-    public AudioFeaturesList getTracksAudioFeatures(List<String> listOfTrackIds) {
+    public AudioFeaturesCollection getTracksAudioFeatures(List<String> listOfTrackIds) {
         logger.info("Requesting multiple track audio features.");
         return trackApi.getTracksAudioFeatures(listOfTrackIds);
     }
@@ -72,7 +72,7 @@ public class SpotifyApi {
         return albumApi.getAlbum(albumId);
     }
 
-    public AlbumFullList getAlbums(List<String> listOfAlbumIds, String market) {
+    public AlbumFullCollection getAlbums(List<String> listOfAlbumIds, String market) {
         logger.info("Requesting multiple albums.");
         return albumApi.getAlbums(listOfAlbumIds, market);
     }

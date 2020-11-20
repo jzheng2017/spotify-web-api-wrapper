@@ -7,9 +7,9 @@ import retrofit2.http.Path;
 import retrofit2.http.Query;
 import spotify.models.audio.AudioAnalysis;
 import spotify.models.audio.AudioFeatures;
-import spotify.models.audio.AudioFeaturesList;
+import spotify.models.audio.AudioFeaturesCollection;
 import spotify.models.tracks.TrackFull;
-import spotify.models.tracks.TrackFullList;
+import spotify.models.tracks.TrackFullCollection;
 
 public interface TrackService {
 
@@ -17,13 +17,13 @@ public interface TrackService {
     Call<TrackFull> getTrack(@Header("Authorization") String accessToken, @Path("id") String trackId, @Query("market") String market);
 
     @GET("tracks")
-    Call<TrackFullList> getTracks(@Header("Authorization") String accessToken, @Query("ids") String trackIds, @Query("market") String market);
+    Call<TrackFullCollection> getTracks(@Header("Authorization") String accessToken, @Query("ids") String trackIds, @Query("market") String market);
 
     @GET("audio-features/{id}")
     Call<AudioFeatures> getTrackAudioFeatures(@Header("Authorization") String accessToken, @Path("id") String trackId);
 
     @GET("audio-features")
-    Call<AudioFeaturesList> getTracksAudioFeatures(@Header("Authorization") String accessToken, @Query("ids") String trackIds);
+    Call<AudioFeaturesCollection> getTracksAudioFeatures(@Header("Authorization") String accessToken, @Query("ids") String trackIds);
 
     @GET("audio-analysis/{id}")
     Call<AudioAnalysis> getTrackAudioAnalysis(@Header("Authorization") String accessToken, @Path("id") String trackId);

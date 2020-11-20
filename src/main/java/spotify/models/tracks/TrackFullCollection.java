@@ -2,7 +2,7 @@ package spotify.models.tracks;
 
 import java.util.List;
 
-public class TrackFullList {
+public class TrackFullCollection {
     List<TrackFull> tracks;
 
     public List<TrackFull> getTracks() {

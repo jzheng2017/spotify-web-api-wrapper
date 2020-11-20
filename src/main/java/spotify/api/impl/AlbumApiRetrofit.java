@@ -11,7 +11,7 @@ import spotify.exceptions.HttpRequestFailedException;
 import spotify.exceptions.ResponseChecker;
 import spotify.factories.RetrofitClientFactory;
 import spotify.models.albums.AlbumFull;
-import spotify.models.albums.AlbumFullList;
+import spotify.models.albums.AlbumFullCollection;
 import spotify.models.paging.Paging;
 import spotify.models.tracks.TrackSimplified;
 import spotify.retrofit.services.AlbumService;
@@ -50,7 +50,7 @@ public class AlbumApiRetrofit implements AlbumApi {
     }
 
     @Override
-    public AlbumFullList getAlbums(List<String> listOfAlbumIds, String market) {
+    public AlbumFullCollection getAlbums(List<String> listOfAlbumIds, String market) {
         validateAlbumListSizeAndThrowIfExceeded(listOfAlbumIds, 20);
         market = marketEmptyCheck(market);
 
@@ -58,12 +58,12 @@ public class AlbumApiRetrofit implements AlbumApi {
         logger.debug(String.format("Mapped list of album ids to String: %s", albumIds));
 
         logger.trace("Constructing HTTP call to fetch albums.");
-        Call<AlbumFullList> httpCall = albumService.getAlbums("Bearer " + this.accessToken, albumIds, market);
+        Call<AlbumFullCollection> httpCall = albumService.getAlbums("Bearer " + this.accessToken, albumIds, market);
 
         try {
             logger.info("Executing HTTP call to fetch albums.");
             logger.debug(String.format("%s / %s", httpCall.request().method(), httpCall.request().url().toString()));
-            Response<AlbumFullList> response = httpCall.execute();
+            Response<AlbumFullCollection> response = httpCall.execute();
 
             ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response.errorBody());
 

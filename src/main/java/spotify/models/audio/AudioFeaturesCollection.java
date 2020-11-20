@@ -2,7 +2,7 @@ package spotify.models.audio;
 
 import java.util.List;
 
-public class AudioFeaturesList {
+public class AudioFeaturesCollection {
     private List<AudioFeatures> audioFeatures;
 
     public List<AudioFeatures> getAudioFeatures() {

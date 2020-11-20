@@ -12,9 +12,9 @@ import spotify.exceptions.ResponseChecker;
 import spotify.factories.RetrofitClientFactory;
 import spotify.models.audio.AudioAnalysis;
 import spotify.models.audio.AudioFeatures;
-import spotify.models.audio.AudioFeaturesList;
+import spotify.models.audio.AudioFeaturesCollection;
 import spotify.models.tracks.TrackFull;
-import spotify.models.tracks.TrackFullList;
+import spotify.models.tracks.TrackFullCollection;
 import spotify.retrofit.services.TrackService;
 
 import java.io.IOException;
@@ -53,19 +53,19 @@ public class TrackApiRetrofit implements TrackApi {
     }
 
     @Override
-    public TrackFullList getTracks(List<String> listOfTrackIds, String market) {
+    public TrackFullCollection getTracks(List<String> listOfTrackIds, String market) {
         validateTrackListSizeAndThrowIfExceeded(listOfTrackIds, 50);
         market = marketEmptyCheck(market);
 
         String trackIds = String.join(",", listOfTrackIds);
 
         logger.trace("Constructing HTTP call to fetch multiple tracks.");
-        Call<TrackFullList> httpCall = trackService.getTracks("Bearer " + this.accessToken, trackIds, market);
+        Call<TrackFullCollection> httpCall = trackService.getTracks("Bearer " + this.accessToken, trackIds, market);
 
         try {
             logger.info("Executing HTTP call to fetch multiple tracks.");
             logger.debug(String.format("%s / %s", httpCall.request().method(), httpCall.request().url().toString()));
-            Response<TrackFullList> response = httpCall.execute();
+            Response<TrackFullCollection> response = httpCall.execute();
 
             ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response.errorBody());
 
@@ -98,18 +98,18 @@ public class TrackApiRetrofit implements TrackApi {
     }
 
     @Override
-    public AudioFeaturesList getTracksAudioFeatures(List<String> listOfTrackIds) {
+    public AudioFeaturesCollection getTracksAudioFeatures(List<String> listOfTrackIds) {
         validateTrackListSizeAndThrowIfExceeded(listOfTrackIds, 100);
 
         String trackIds = String.join(",", listOfTrackIds);
 
         logger.trace("Constructing HTTP call to fetch audio features.");
-        Call<AudioFeaturesList> httpCall = trackService.getTracksAudioFeatures("Bearer " + this.accessToken, trackIds);
+        Call<AudioFeaturesCollection> httpCall = trackService.getTracksAudioFeatures("Bearer " + this.accessToken, trackIds);
 
         try {
             logger.info("Executing HTTP call to fetch track audio features.");
             logger.debug(String.format("%s / %s", httpCall.request().method(), httpCall.request().url().toString()));
-            Response<AudioFeaturesList> response = httpCall.execute();
+            Response<AudioFeaturesCollection> response = httpCall.execute();
 
             ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response.errorBody());
 
