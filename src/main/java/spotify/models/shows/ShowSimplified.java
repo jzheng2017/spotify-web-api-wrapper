@@ -22,6 +22,7 @@ public class ShowSimplified {
     private String publisher;
     private String type;
     private String uri;
+    private int totalEpisodes;
 
     public List<String> getAvailableMarkets() {
         return availableMarkets;
@@ -141,5 +142,13 @@ public class ShowSimplified {
 
     public void setUri(String uri) {
         this.uri = uri;
+    }
+
+    public int getTotalEpisodes() {
+        return totalEpisodes;
+    }
+
+    public void setTotalEpisodes(int totalEpisodes) {
+        this.totalEpisodes = totalEpisodes;
     }
 }
