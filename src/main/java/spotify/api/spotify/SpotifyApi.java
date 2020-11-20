@@ -86,9 +86,9 @@ public class SpotifyApi {
         return userApi.getCurrentUser();
     }
 
-    public User getUserById(String userId) {
+    public User getUser(String userId) {
         logger.info("Request user info");
-        return userApi.getUserById(userId);
+        return userApi.getUser(userId);
     }
 
     public EpisodeFull getEpisode(String episodeId, String market) {
