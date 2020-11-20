@@ -10,7 +10,7 @@ import spotify.models.episodes.EpisodeFullCollection;
 
 public interface EpisodeService {
     @GET("episodes/{id}")
-    Call<EpisodeFull> getEpisode(@Header("Authorization") String accessToken, @Path("id") String episodeId);
+    Call<EpisodeFull> getEpisode(@Header("Authorization") String accessToken, @Path("id") String episodeId, @Query("market") String market);
 
     @GET("episodes")
     Call<EpisodeFullCollection> getEpisodes(@Header("Authorization") String accessToken, @Query("ids") String episodeIds, @Query("market") String market);

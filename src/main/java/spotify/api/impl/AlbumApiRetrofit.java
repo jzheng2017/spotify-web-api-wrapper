@@ -31,9 +31,11 @@ public class AlbumApiRetrofit implements AlbumApi {
     }
 
     @Override
-    public AlbumFull getAlbum(String albumId) {
+    public AlbumFull getAlbum(String albumId, String market) {
+        market = ValidatorUtil.marketEmptyCheck(market);
+
         logger.trace("Constructing HTTP call to fetch an album.");
-        Call<AlbumFull> httpCall = albumService.getAlbum("Bearer " + this.accessToken, albumId);
+        Call<AlbumFull> httpCall = albumService.getAlbum("Bearer " + this.accessToken, albumId, market);
 
         try {
             logger.info("Executing HTTP call to fetch an album.");

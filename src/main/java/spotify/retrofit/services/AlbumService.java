@@ -13,7 +13,7 @@ import spotify.models.tracks.TrackSimplified;
 public interface AlbumService {
 
     @GET("albums/{id}")
-    Call<AlbumFull> getAlbum(@Header("Authorization") String accessToken, @Path("id") String albumId);
+    Call<AlbumFull> getAlbum(@Header("Authorization") String accessToken, @Path("id") String albumId, @Query("market") String market);
 
     @GET("albums")
     Call<AlbumFullCollection> getAlbums(@Header("Authorization") String accessToken, @Query("ids") String albumIds, @Query("market") String market);

@@ -68,9 +68,9 @@ public class SpotifyApi {
         return trackApi.getTrackAudioAnalysis(trackId);
     }
 
-    public AlbumFull getAlbum(String albumId) {
+    public AlbumFull getAlbum(String albumId, String market) {
         logger.info(String.format("Requesting an album with id %s.", albumId));
-        return albumApi.getAlbum(albumId);
+        return albumApi.getAlbum(albumId, market);
     }
 
     public AlbumFullCollection getAlbums(List<String> listOfAlbumIds, String market) {
@@ -93,9 +93,9 @@ public class SpotifyApi {
         return userApi.getUserById(userId);
     }
 
-    public EpisodeFull getEpisode(String episodeId) {
+    public EpisodeFull getEpisode(String episodeId, String market) {
         logger.info("Requesting episode");
-        return episodeApi.getEpisode(episodeId);
+        return episodeApi.getEpisode(episodeId, market);
     }
 
     public EpisodeFullCollection getEpisodes(List<String> listOfEpisodeIds, String market) {

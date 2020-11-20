@@ -29,9 +29,11 @@ public class EpisodeApiRetrofit implements EpisodeApi {
     }
 
     @Override
-    public EpisodeFull getEpisode(String episodeId) {
+    public EpisodeFull getEpisode(String episodeId, String market) {
+        market = ValidatorUtil.marketEmptyCheck(market);
+        
         logger.trace("Constructing HTTP call to fetch episode.");
-        Call<EpisodeFull> httpCall = episodeService.getEpisode("Bearer " + this.accessToken, episodeId);
+        Call<EpisodeFull> httpCall = episodeService.getEpisode("Bearer " + this.accessToken, episodeId, market);
 
         try {
             logger.info("Executing HTTP call to fetch episode.");

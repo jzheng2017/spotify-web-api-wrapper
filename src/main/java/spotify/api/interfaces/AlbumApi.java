@@ -8,7 +8,7 @@ import spotify.models.tracks.TrackSimplified;
 import java.util.List;
 
 public interface AlbumApi {
-    AlbumFull getAlbum(String albumId);
+    AlbumFull getAlbum(String albumId, String market);
 
     AlbumFullCollection getAlbums(List<String> listOfAlbumIds, String market);
 
