@@ -8,5 +8,5 @@ import spotify.models.artists.ArtistFull;
 
 public interface ArtistService {
     @GET("artists/{id}")
-    Call<ArtistFull> getArtist(@Header("Authorization") String accesToken, @Path("id") String artistId);
+    Call<ArtistFull> getArtist(@Header("Authorization") String accessToken, @Path("id") String artistId);
 }
