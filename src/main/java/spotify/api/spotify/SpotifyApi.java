@@ -16,6 +16,7 @@ import spotify.models.audio.AudioAnalysis;
 import spotify.models.audio.AudioFeatures;
 import spotify.models.audio.AudioFeaturesCollection;
 import spotify.models.episodes.EpisodeFull;
+import spotify.models.episodes.EpisodeFullCollection;
 import spotify.models.paging.Paging;
 import spotify.models.tracks.TrackFull;
 import spotify.models.tracks.TrackFullCollection;
@@ -95,6 +96,11 @@ public class SpotifyApi {
     public EpisodeFull getEpisode(String episodeId) {
         logger.info("Requesting episode");
         return episodeApi.getEpisode(episodeId);
+    }
+
+    public EpisodeFullCollection getEpisodes(List<String> listOfEpisodeIds, String market) {
+        logger.info("Requesting multiple episodes");
+        return episodeApi.getEpisodes(listOfEpisodeIds, market);
     }
 
     private void setup(String accessToken) {
