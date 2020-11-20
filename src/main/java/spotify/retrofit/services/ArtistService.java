@@ -8,6 +8,7 @@ import retrofit2.http.Query;
 import spotify.models.artists.ArtistFull;
 import spotify.models.artists.ArtistSimplified;
 import spotify.models.paging.Paging;
+import spotify.models.tracks.TrackFullCollection;
 
 public interface ArtistService {
     @GET("artists/{id}")
@@ -20,4 +21,7 @@ public interface ArtistService {
                                                    @Query("country") String country,
                                                    @Query("limit") int limit,
                                                    @Query("offset") int offset);
+    @GET("artists/{id}/top-tracks")
+    Call<TrackFullCollection> getArtistTopTracks(@Header("Authorization") String accessToken, @Path("id") String artistId, @Query("country") String country);
+
 }
