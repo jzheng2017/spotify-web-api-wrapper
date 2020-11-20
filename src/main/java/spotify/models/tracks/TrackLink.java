@@ -1,6 +1,6 @@
 package spotify.models.tracks;
 
-import spotify.models.albums.ExternalUrl;
+import spotify.models.generic.ExternalUrl;
 
 public class TrackLink {
     private ExternalUrl externalUrls;

@@ -1,6 +1,9 @@
 package spotify.models.albums;
 
 import spotify.models.artists.ArtistSimplified;
+import spotify.models.generic.ExternalId;
+import spotify.models.generic.ExternalUrl;
+import spotify.models.generic.Image;
 import spotify.models.paging.Paging;
 import spotify.models.tracks.TrackSimplified;
 

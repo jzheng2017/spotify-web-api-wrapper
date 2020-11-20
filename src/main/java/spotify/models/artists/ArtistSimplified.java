@@ -1,6 +1,6 @@
 package spotify.models.artists;
 
-import spotify.models.albums.ExternalUrl;
+import spotify.models.generic.ExternalUrl;
 
 public class ArtistSimplified {
     private ExternalUrl externalUrls;

@@ -2,7 +2,7 @@ package spotify.models.tracks;
 
 import spotify.models.albums.AlbumSimplified;
 import spotify.models.artists.ArtistSimplified;
-import spotify.models.albums.ExternalUrl;
+import spotify.models.generic.ExternalUrl;
 
 import java.util.List;
 

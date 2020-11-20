@@ -1,4 +1,4 @@
-package spotify.models.albums;
+package spotify.models.generic;
 
 public class ExternalUrl {
     private String spotify;

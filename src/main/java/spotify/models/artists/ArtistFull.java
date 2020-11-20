@@ -1,7 +1,7 @@
 package spotify.models.artists;
 
-import spotify.models.albums.ExternalUrl;
-import spotify.models.albums.Image;
+import spotify.models.generic.ExternalUrl;
+import spotify.models.generic.Image;
 
 import java.util.List;
 

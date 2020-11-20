@@ -1,4 +1,4 @@
-package spotify.models.albums;
+package spotify.models.generic;
 
 public class Image {
     private String url;
