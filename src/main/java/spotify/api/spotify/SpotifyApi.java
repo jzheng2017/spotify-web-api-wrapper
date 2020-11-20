@@ -2,14 +2,8 @@ package spotify.api.spotify;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import spotify.api.impl.AlbumApiRetrofit;
-import spotify.api.impl.EpisodeApiRetrofit;
-import spotify.api.impl.TrackApiRetrofit;
-import spotify.api.impl.UserApiRetrofit;
-import spotify.api.interfaces.AlbumApi;
-import spotify.api.interfaces.EpisodeApi;
-import spotify.api.interfaces.TrackApi;
-import spotify.api.interfaces.UserApi;
+import spotify.api.impl.*;
+import spotify.api.interfaces.*;
 import spotify.models.albums.AlbumFull;
 import spotify.models.albums.AlbumFullCollection;
 import spotify.models.audio.AudioAnalysis;
@@ -18,6 +12,7 @@ import spotify.models.audio.AudioFeaturesCollection;
 import spotify.models.episodes.EpisodeFull;
 import spotify.models.episodes.EpisodeFullCollection;
 import spotify.models.paging.Paging;
+import spotify.models.shows.ShowFull;
 import spotify.models.tracks.TrackFull;
 import spotify.models.tracks.TrackFullCollection;
 import spotify.models.tracks.TrackSimplified;
@@ -32,6 +27,7 @@ public class SpotifyApi {
     private AlbumApi albumApi;
     private UserApi userApi;
     private EpisodeApi episodeApi;
+    private ShowApi showApi;
 
     public SpotifyApi(String accessToken) {
         this.setup(accessToken);
@@ -103,11 +99,17 @@ public class SpotifyApi {
         return episodeApi.getEpisodes(listOfEpisodeIds, market);
     }
 
+    public ShowFull getShow(String showId, String market) {
+        logger.info("Requesting show");
+        return showApi.getShow(showId, market);
+    }
+
     private void setup(String accessToken) {
         logger.trace("Constructing Retrofit APIs");
         this.trackApi = new TrackApiRetrofit(accessToken);
         this.albumApi = new AlbumApiRetrofit(accessToken);
         this.userApi = new UserApiRetrofit(accessToken);
         this.episodeApi = new EpisodeApiRetrofit(accessToken);
+        this.showApi = new ShowApiRetrofit(accessToken);
     }
 }
