@@ -135,10 +135,10 @@ The above code example will return an `AuthorizationCodeFlowTokenResponse` which
 - - [x] Get Audio Analysis for a Track
 - - [x] Get Audio Features for a Track
 - - [x] Get Audio Features for Several Tracks
-- [ ] Shows 
-- - [ ] Get Several Shows
-- - [ ] Get a Show's Episodes
-- - [ ] Get a Show
+- [x] Shows 
+- - [x] Get Several Shows
+- - [x] Get a Show's Episodes
+- - [x] Get a Show
 - [x] Users Profile
 - - [x] Get Current User's Profile
 - - [x] Get a User's Profile
