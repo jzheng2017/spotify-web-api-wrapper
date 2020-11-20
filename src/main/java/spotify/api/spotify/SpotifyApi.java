@@ -11,6 +11,7 @@ import spotify.models.audio.AudioFeatures;
 import spotify.models.audio.AudioFeaturesCollection;
 import spotify.models.episodes.EpisodeFull;
 import spotify.models.episodes.EpisodeFullCollection;
+import spotify.models.episodes.EpisodeSimplified;
 import spotify.models.paging.Paging;
 import spotify.models.shows.ShowFull;
 import spotify.models.tracks.TrackFull;
@@ -102,6 +103,11 @@ public class SpotifyApi {
     public ShowFull getShow(String showId, String market) {
         logger.info("Requesting show");
         return showApi.getShow(showId, market);
+    }
+
+    public Paging<EpisodeSimplified> getShowEpisodes(String showId, int limit, int offset, String market) {
+        logger.info("Requesting multiple shows");
+        return showApi.getShowEpisodes(showId, limit, offset, market);
     }
 
     private void setup(String accessToken) {
