@@ -28,4 +28,7 @@ public interface ArtistService {
     @GET("artists/{id}/related-artists")
     Call<ArtistFullCollection> getRelatedArtists(@Header("Authorization") String accessToken, @Path("id") String artistId);
 
+    @GET("artists")
+    Call<ArtistFullCollection> getArtists(@Header("Authorization") String accessToken, @Query("ids") String artistIds);
+
 }
