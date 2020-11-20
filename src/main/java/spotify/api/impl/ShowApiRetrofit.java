@@ -13,10 +13,12 @@ import spotify.factories.RetrofitClientFactory;
 import spotify.models.episodes.EpisodeSimplified;
 import spotify.models.paging.Paging;
 import spotify.models.shows.ShowFull;
+import spotify.models.shows.ShowSimplifiedCollection;
 import spotify.retrofit.services.ShowService;
 import spotify.utils.ValidatorUtil;
 
 import java.io.IOException;
+import java.util.List;
 
 public class ShowApiRetrofit implements ShowApi {
     private final Logger logger = LoggerFactory.getLogger(ShowApiRetrofit.class);
@@ -69,6 +71,29 @@ public class ShowApiRetrofit implements ShowApi {
             return response.body();
         } catch (IOException ex) {
             logger.error("HTTP request to fetch show episodes has failed.");
+            throw new HttpRequestFailedException(ex.getMessage());
+        }
+    }
+
+    @Override
+    public ShowSimplifiedCollection getShows(List<String> listOfShowIds, String market) {
+        String showIds = String.join(",", listOfShowIds);
+        market = ValidatorUtil.marketEmptyCheck(market);
+
+        logger.trace("Constructing HTTP call to fetch multiple shows.");
+        Call<ShowSimplifiedCollection> httpCall = showService.getShows("Bearer " + this.accessToken, showIds, market);
+
+        try {
+            logger.info("Executing HTTP call to fetch multiple shows.");
+            logger.debug(String.format("%s / %s", httpCall.request().method(), httpCall.request().url().toString()));
+            Response<ShowSimplifiedCollection> response = httpCall.execute();
+
+            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response.errorBody());
+
+            logger.info("Shows has been successfully fetched.");
+            return response.body();
+        } catch (IOException ex) {
+            logger.error("HTTP request to fetch shows has failed.");
             throw new HttpRequestFailedException(ex.getMessage());
         }
     }
