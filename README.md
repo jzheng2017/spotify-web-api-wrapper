@@ -55,6 +55,9 @@ AuthorizationCodeFlowTokenResponse token = authorizationRefreshToken.refreshAcce
 ```
 The above code example will return an `AuthorizationCodeFlowTokenResponse` which contains the new access and refresh token.
 
+## License
+See the [LICENSE](https://github.com/jzheng2017/spotify-web-api-wrapper/blob/main/LICENSE) file for the license rights and limitations (GNU GPLv3).
+
 ## Spotify endpoint coverage
 - [x] Albums
 - - [x] Get an Album
