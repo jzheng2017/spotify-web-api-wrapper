@@ -130,32 +130,32 @@ public class SpotifyApi {
     }
 
     public Paging<ArtistSimplified> getArtistAlbums(String artistId, List<AlbumType> listOfAlbumTypes, String country, int limit, int offset) {
-        logger.info("Request albums of an artist");
+        logger.info("Requesting albums of an artist");
         return artistApi.getArtistAlbums(artistId, listOfAlbumTypes, country, limit, offset);
     }
 
     public TrackFullCollection getArtistTopTracks(String artistId, String country) {
-        logger.info("Request top tracks of an artist");
+        logger.info("Requesting top tracks of an artist");
         return artistApi.getArtistTopTracks(artistId, country);
     }
 
     public ArtistFullCollection getRelatedArtists(String artistId) {
-        logger.info("Request related artists");
+        logger.info("Requesting related artists");
         return artistApi.getRelatedArtists(artistId);
     }
 
     public ArtistFullCollection getArtists(List<String> listOfArtistIds) {
-        logger.info("Request multiple artists");
+        logger.info("Requesting multiple artists");
         return artistApi.getArtists(listOfArtistIds);
     }
 
     public CategoryFull getCategory(String categoryId, String country, String locale) {
-        logger.info("Request category");
+        logger.info("Requesting category");
         return browseApi.getCategory(categoryId, country, locale);
     }
 
     public PlaylistSimplifiedPaging getCategoryPlaylists(String categoryId, String country, int limit, int offset) {
-        logger.info("Request category playlists");
+        logger.info("Requesting category playlists");
         return browseApi.getCategoryPlaylists(categoryId, country, limit, offset);
     }
 
