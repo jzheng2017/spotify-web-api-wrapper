@@ -34,11 +34,4 @@ public class ResponseChecker {
             throw new SpotifyActionFailedException(message);
         }
     }
-
-    private static class SpotifyActionFailedException extends RuntimeException {
-
-        public SpotifyActionFailedException(String message) {
-            super(message);
-        }
-    }
 }
