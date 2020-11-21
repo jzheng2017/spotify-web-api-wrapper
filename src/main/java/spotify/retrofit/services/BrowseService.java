@@ -1,13 +1,13 @@
 package spotify.retrofit.services;
 
 import retrofit2.Call;
-import retrofit2.http.GET;
-import retrofit2.http.Header;
-import retrofit2.http.Path;
-import retrofit2.http.Query;
+import retrofit2.http.*;
 import spotify.models.categories.CategoryFull;
 import spotify.models.categories.CategoryFullPaging;
+import spotify.models.playlists.FeaturedPlaylistCollection;
 import spotify.models.playlists.PlaylistSimplifiedPaging;
+
+import java.util.Map;
 
 public interface BrowseService {
     @GET("browse/categories/{category_id}")
@@ -29,4 +29,8 @@ public interface BrowseService {
                                            @Query("locale") String locale,
                                            @Query("limit") int limit,
                                            @Query("offset") int offset);
+
+    @GET("browse/featured-playlists")
+    Call<FeaturedPlaylistCollection> getFeaturedPlaylists(@Header("Authorization") String accessToken,
+                                                          @QueryMap Map<String, String> options);
 }
