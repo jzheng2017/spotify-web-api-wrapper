@@ -55,6 +55,9 @@ AuthorizationCodeFlowTokenResponse token = authorizationRefreshToken.refreshAcce
 ```
 The above code example will return an `AuthorizationCodeFlowTokenResponse` which contains the new access and refresh token.
 
+## Why use this library?
+Because this library is very simple and straightforward with a clear and simple interface. You only need to provide a few credential info and you're ready to access the endpoints. All other stuff is already taken care for you. When looking at other similar existing libraries, they have really complicated constructs to access an endpoint, where with this library it can be done with 1 line of code. 
+
 ## License
 See the [LICENSE](https://github.com/jzheng2017/spotify-web-api-wrapper/blob/main/LICENSE) file for the license rights and limitations (GNU GPLv3).
 
