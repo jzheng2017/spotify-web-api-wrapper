@@ -7,6 +7,7 @@ import spotify.api.impl.*;
 import spotify.api.interfaces.*;
 import spotify.models.albums.AlbumFull;
 import spotify.models.albums.AlbumFullCollection;
+import spotify.models.albums.AlbumSimplifiedPaging;
 import spotify.models.artists.ArtistFull;
 import spotify.models.artists.ArtistFullCollection;
 import spotify.models.artists.ArtistSimplified;
@@ -21,6 +22,7 @@ import spotify.models.episodes.EpisodeSimplified;
 import spotify.models.paging.Paging;
 import spotify.models.playlists.FeaturedPlaylistCollection;
 import spotify.models.playlists.PlaylistSimplifiedPaging;
+import spotify.models.recommendations.RecommendationCollection;
 import spotify.models.shows.ShowFull;
 import spotify.models.shows.ShowSimplifiedCollection;
 import spotify.models.tracks.TrackFull;
@@ -170,6 +172,16 @@ public class SpotifyApi {
     public FeaturedPlaylistCollection getFeaturedPlaylists(Map<String, String> options) {
         logger.info("Requesting featured playlists");
         return browseApi.getFeaturedPlaylists(options);
+    }
+
+    public AlbumSimplifiedPaging getNewReleases(Map<String, String> options) {
+        logger.info("Requesting new releases");
+        return browseApi.getNewReleases(options);
+    }
+
+    public RecommendationCollection getRecommendations(List<String> listOfSeedArtists, List<String> listOfSeedGenres, List<String> listOfSeedTracks, Map<String, String> options) {
+        logger.info("Requesting recommendations");
+        return browseApi.getRecommendations(listOfSeedArtists, listOfSeedGenres, listOfSeedTracks, options);
     }
 
     private void setup(String accessToken) {

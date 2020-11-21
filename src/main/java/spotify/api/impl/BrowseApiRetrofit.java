@@ -10,14 +10,17 @@ import spotify.config.ApiUrl;
 import spotify.exceptions.HttpRequestFailedException;
 import spotify.exceptions.ResponseChecker;
 import spotify.factories.RetrofitClientFactory;
+import spotify.models.albums.AlbumSimplifiedPaging;
 import spotify.models.categories.CategoryFull;
 import spotify.models.categories.CategoryFullPaging;
 import spotify.models.playlists.FeaturedPlaylistCollection;
 import spotify.models.playlists.PlaylistSimplifiedPaging;
+import spotify.models.recommendations.RecommendationCollection;
 import spotify.retrofit.services.BrowseService;
 import spotify.utils.ValidatorUtil;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 public class BrowseApiRetrofit implements BrowseApi {
@@ -119,6 +122,72 @@ public class BrowseApiRetrofit implements BrowseApi {
         } catch (IOException ex) {
             logger.error("HTTP request to fetch featured playlists has failed.");
             throw new HttpRequestFailedException(ex.getMessage());
+        }
+    }
+
+    @Override
+    public AlbumSimplifiedPaging getNewReleases(Map<String, String> options) {
+        options = ValidatorUtil.optionsValueCheck(options);
+
+        logger.trace("Constructing HTTP call to fetch new releases.");
+        Call<AlbumSimplifiedPaging> httpCall = browseService.getNewReleases("Bearer " + this.accessToken, options);
+
+        try {
+            logger.info("Executing HTTP call to fetch new releases.");
+            logger.debug(String.format("Fetching new releases with following values: %s", options));
+            logger.debug(String.format("%s / %s", httpCall.request().method(), httpCall.request().url().toString()));
+            Response<AlbumSimplifiedPaging> response = httpCall.execute();
+
+            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response.errorBody());
+
+            logger.info("New releases have been successfully fetched.");
+            return response.body();
+        } catch (IOException ex) {
+            logger.error("HTTP request to fetch new releases has failed.");
+            throw new HttpRequestFailedException(ex.getMessage());
+        }
+    }
+
+    @Override
+    public RecommendationCollection getRecommendations(List<String> listOfSeedArtists, List<String> listOfSeedGenres, List<String> listOfSeedTracks, Map<String, String> options) {
+        options = ValidatorUtil.optionsValueCheck(options);
+
+        mapSeedParameters(listOfSeedArtists, listOfSeedGenres, listOfSeedTracks, options);
+
+        logger.trace("Constructing HTTP call to fetch recommendations.");
+        Call<RecommendationCollection> httpCall = browseService.getRecommendations("Bearer " + this.accessToken, options);
+
+        try {
+            logger.info("Executing HTTP call to fetch recommendations.");
+            logger.debug(String.format("Fetching recommendations with following values: %s", options));
+            logger.debug(String.format("%s / %s", httpCall.request().method(), httpCall.request().url().toString()));
+            Response<RecommendationCollection> response = httpCall.execute();
+
+            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response.errorBody());
+
+            logger.info("Recommendations have been successfully fetched.");
+            return response.body();
+        } catch (IOException ex) {
+            logger.error("HTTP request to fetch recommendations has failed.");
+            throw new HttpRequestFailedException(ex.getMessage());
+        }
+    }
+
+    private void mapSeedParameters(List<String> listOfSeedArtists, List<String> listOfSeedGenres, List<String> listOfSeedTracks, Map<String, String> options) {
+        final String artistSeedIds = String.join(",", listOfSeedArtists);
+        final String genreSeedIds = String.join(",", listOfSeedGenres);
+        final String trackSeedIds = String.join(",", listOfSeedTracks);
+
+        if (!artistSeedIds.isEmpty()) {
+            options.put("seed_artists", artistSeedIds);
+        }
+
+        if (!genreSeedIds.isEmpty()) {
+            options.put("seed_genres", genreSeedIds);
+        }
+
+        if (!trackSeedIds.isEmpty()) {
+            options.put("seed_tracks", trackSeedIds);
         }
     }
 
