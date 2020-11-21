@@ -56,7 +56,7 @@ AuthorizationCodeFlowTokenResponse token = authorizationRefreshToken.refreshAcce
 The above code example will return an `AuthorizationCodeFlowTokenResponse` which contains the new access and refresh token.
 
 ### Optional parameters
-Many API endpoints have optional parameters. Passing in optional parameters are done with a `Map`. If you don't want to pass any optional parameters then just pass in an empty `Map`.
+Many API endpoints have optional parameters. Passing in optional parameters is done with a `Map`. If you don't want to pass any optional parameters then just pass in an empty `Map`.
 ```java
 SpotifyApi spotifyApi = new SpotifyApi("ACCESS TOKEN");
 
