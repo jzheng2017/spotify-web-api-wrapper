@@ -6,11 +6,12 @@ import spotify.models.paging.Paging;
 import spotify.models.tracks.TrackSimplified;
 
 import java.util.List;
+import java.util.Map;
 
 public interface AlbumApi {
-    AlbumFull getAlbum(String albumId, String market);
+    AlbumFull getAlbum(String albumId, Map<String, String> options);
 
-    AlbumFullCollection getAlbums(List<String> listOfAlbumIds, String market);
+    AlbumFullCollection getAlbums(List<String> listOfAlbumIds, Map<String, String> options);
 
-    Paging<TrackSimplified> getAlbumTracks(String albumId, int limit, int offset, String market);
+    Paging<TrackSimplified> getAlbumTracks(String albumId, Map<String, String> options);
 }

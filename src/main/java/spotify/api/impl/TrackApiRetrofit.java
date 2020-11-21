@@ -20,6 +20,7 @@ import spotify.utils.ValidatorUtil;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 public class TrackApiRetrofit implements TrackApi {
     private final Logger logger = LoggerFactory.getLogger(TrackApiRetrofit.class);
@@ -32,14 +33,15 @@ public class TrackApiRetrofit implements TrackApi {
     }
 
     @Override
-    public TrackFull getTrack(String trackId, String market) {
-        market = ValidatorUtil.emptyValueCheck(market);
+    public TrackFull getTrack(String trackId, Map<String, String> options) {
+        options = ValidatorUtil.optionsValueCheck(options);
 
         logger.trace("Constructing HTTP call to fetch a track.");
-        Call<TrackFull> httpCall = trackService.getTrack("Bearer " + this.accessToken, trackId, market);
+        Call<TrackFull> httpCall = trackService.getTrack("Bearer " + this.accessToken, trackId, options);
 
         try {
             logger.info("Executing HTTP call to fetch a track.");
+            logger.debug(String.format("Fetching track %s with following values: %s.", trackId, options));
             logger.debug(String.format("%s / %s", httpCall.request().method(), httpCall.request().url().toString()));
             Response<TrackFull> response = httpCall.execute();
 
@@ -54,17 +56,18 @@ public class TrackApiRetrofit implements TrackApi {
     }
 
     @Override
-    public TrackFullCollection getTracks(List<String> listOfTrackIds, String market) {
+    public TrackFullCollection getTracks(List<String> listOfTrackIds, Map<String, String> options) {
         validateTrackListSizeAndThrowIfExceeded(listOfTrackIds, 50);
-        market = ValidatorUtil.emptyValueCheck(market);
+        options = ValidatorUtil.optionsValueCheck(options);
 
         String trackIds = String.join(",", listOfTrackIds);
 
         logger.trace("Constructing HTTP call to fetch multiple tracks.");
-        Call<TrackFullCollection> httpCall = trackService.getTracks("Bearer " + this.accessToken, trackIds, market);
+        Call<TrackFullCollection> httpCall = trackService.getTracks("Bearer " + this.accessToken, trackIds, options);
 
         try {
             logger.info("Executing HTTP call to fetch multiple tracks.");
+            logger.debug(String.format("Fetching following tracks: %s with following values: %s.", trackIds, options));
             logger.debug(String.format("%s / %s", httpCall.request().method(), httpCall.request().url().toString()));
             Response<TrackFullCollection> response = httpCall.execute();
 
@@ -85,6 +88,7 @@ public class TrackApiRetrofit implements TrackApi {
 
         try {
             logger.info("Executing HTTP call to fetch multiple track audio features.");
+            logger.debug(String.format("Fetching track %s audio features.", trackId));
             logger.debug(String.format("%s / %s", httpCall.request().method(), httpCall.request().url().toString()));
             Response<AudioFeatures> response = httpCall.execute();
 
@@ -109,6 +113,7 @@ public class TrackApiRetrofit implements TrackApi {
 
         try {
             logger.info("Executing HTTP call to fetch track audio features.");
+            logger.debug(String.format("Fetching following tracks: %s audio features.", trackIds));
             logger.debug(String.format("%s / %s", httpCall.request().method(), httpCall.request().url().toString()));
             Response<AudioFeaturesCollection> response = httpCall.execute();
 

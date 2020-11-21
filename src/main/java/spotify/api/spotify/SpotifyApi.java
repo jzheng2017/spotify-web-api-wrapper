@@ -52,14 +52,14 @@ public class SpotifyApi {
     }
 
 
-    public TrackFull getTrack(String trackId, String market) {
+    public TrackFull getTrack(String trackId, Map<String, String> options) {
         logger.info(String.format("Requesting a track with id %s.", trackId));
-        return trackApi.getTrack(trackId, market);
+        return trackApi.getTrack(trackId, options);
     }
 
-    public TrackFullCollection getTracks(List<String> listOfTrackIds, String market) {
+    public TrackFullCollection getTracks(List<String> listOfTrackIds, Map<String, String> options) {
         logger.info("Requesting a list of tracks.");
-        return trackApi.getTracks(listOfTrackIds, market);
+        return trackApi.getTracks(listOfTrackIds, options);
     }
 
     public AudioFeatures getTrackAudioFeatures(String trackId) {
@@ -77,19 +77,19 @@ public class SpotifyApi {
         return trackApi.getTrackAudioAnalysis(trackId);
     }
 
-    public AlbumFull getAlbum(String albumId, String market) {
+    public AlbumFull getAlbum(String albumId, Map<String, String> options) {
         logger.info(String.format("Requesting an album with id %s.", albumId));
-        return albumApi.getAlbum(albumId, market);
+        return albumApi.getAlbum(albumId, options);
     }
 
-    public AlbumFullCollection getAlbums(List<String> listOfAlbumIds, String market) {
+    public AlbumFullCollection getAlbums(List<String> listOfAlbumIds, Map<String, String> options) {
         logger.info("Requesting multiple albums.");
-        return albumApi.getAlbums(listOfAlbumIds, market);
+        return albumApi.getAlbums(listOfAlbumIds, options);
     }
 
-    public Paging<TrackSimplified> getAlbumTracks(String albumId, int limit, int offset, String market) {
+    public Paging<TrackSimplified> getAlbumTracks(String albumId, Map<String, String> options) {
         logger.info(String.format("Requesting tracks of album with id %s", albumId));
-        return albumApi.getAlbumTracks(albumId, limit, offset, market);
+        return albumApi.getAlbumTracks(albumId, options);
     }
 
     public User getCurrentUser() {
@@ -102,29 +102,29 @@ public class SpotifyApi {
         return userApi.getUser(userId);
     }
 
-    public EpisodeFull getEpisode(String episodeId, String market) {
+    public EpisodeFull getEpisode(String episodeId, Map<String, String> options) {
         logger.info("Requesting episode");
-        return episodeApi.getEpisode(episodeId, market);
+        return episodeApi.getEpisode(episodeId, options);
     }
 
-    public EpisodeFullCollection getEpisodes(List<String> listOfEpisodeIds, String market) {
+    public EpisodeFullCollection getEpisodes(List<String> listOfEpisodeIds, Map<String, String> options) {
         logger.info("Requesting multiple episodes");
-        return episodeApi.getEpisodes(listOfEpisodeIds, market);
+        return episodeApi.getEpisodes(listOfEpisodeIds, options);
     }
 
-    public ShowFull getShow(String showId, String market) {
+    public ShowFull getShow(String showId, Map<String, String> options) {
         logger.info("Requesting show");
-        return showApi.getShow(showId, market);
+        return showApi.getShow(showId, options);
     }
 
-    public Paging<EpisodeSimplified> getShowEpisodes(String showId, int limit, int offset, String market) {
+    public Paging<EpisodeSimplified> getShowEpisodes(String showId, Map<String, String> options) {
         logger.info("Requesting show episodes");
-        return showApi.getShowEpisodes(showId, limit, offset, market);
+        return showApi.getShowEpisodes(showId, options);
     }
 
-    public ShowSimplifiedCollection getShows(List<String> listOfShowIds, String market) {
+    public ShowSimplifiedCollection getShows(List<String> listOfShowIds, Map<String, String> options) {
         logger.info("Requesting multiple shows");
-        return showApi.getShows(listOfShowIds, market);
+        return showApi.getShows(listOfShowIds, options);
     }
 
     public ArtistFull getArtist(String artistId) {
@@ -132,14 +132,14 @@ public class SpotifyApi {
         return artistApi.getArtist(artistId);
     }
 
-    public Paging<ArtistSimplified> getArtistAlbums(String artistId, List<AlbumType> listOfAlbumTypes, String country, int limit, int offset) {
+    public Paging<ArtistSimplified> getArtistAlbums(String artistId, List<AlbumType> listOfAlbumTypes, Map<String, String> options) {
         logger.info("Requesting albums of an artist");
-        return artistApi.getArtistAlbums(artistId, listOfAlbumTypes, country, limit, offset);
+        return artistApi.getArtistAlbums(artistId, listOfAlbumTypes, options);
     }
 
-    public TrackFullCollection getArtistTopTracks(String artistId, String country) {
+    public TrackFullCollection getArtistTopTracks(String artistId, Map<String, String> options) {
         logger.info("Requesting top tracks of an artist");
-        return artistApi.getArtistTopTracks(artistId, country);
+        return artistApi.getArtistTopTracks(artistId, options);
     }
 
     public ArtistFullCollection getRelatedArtists(String artistId) {
@@ -152,19 +152,19 @@ public class SpotifyApi {
         return artistApi.getArtists(listOfArtistIds);
     }
 
-    public CategoryFull getCategory(String categoryId, String country, String locale) {
+    public CategoryFull getCategory(String categoryId, Map<String, String> options) {
         logger.info("Requesting category");
-        return browseApi.getCategory(categoryId, country, locale);
+        return browseApi.getCategory(categoryId, options);
     }
 
-    public PlaylistSimplifiedPaging getCategoryPlaylists(String categoryId, String country, int limit, int offset) {
+    public PlaylistSimplifiedPaging getCategoryPlaylists(String categoryId, Map<String, String> options) {
         logger.info("Requesting category playlists");
-        return browseApi.getCategoryPlaylists(categoryId, country, limit, offset);
+        return browseApi.getCategoryPlaylists(categoryId, options);
     }
 
-    public CategoryFullPaging getCategories(String country, String locale, int limit, int offset) {
+    public CategoryFullPaging getCategories(Map<String, String> options) {
         logger.info("Requesting categories");
-        return browseApi.getCategories(country, locale, limit, offset);
+        return browseApi.getCategories(options);
     }
 
     public FeaturedPlaylistCollection getFeaturedPlaylists(Map<String, String> options) {

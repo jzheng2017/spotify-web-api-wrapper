@@ -10,6 +10,9 @@ import spotify.api.impl.TrackApiRetrofit;
 import spotify.api.interfaces.AlbumApi;
 import spotify.models.tracks.TrackFull;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import static org.mockito.Mockito.when;
 
 public class SpotifyApiTest {
@@ -21,19 +24,19 @@ public class SpotifyApiTest {
     private AlbumApi mockedAlbumApi;
 
     private final String fakeAccessToken = "fake";
-    private final String fakeMarket = "NL";
-    private final String fakeTrackId = "qweqwe1231";
+    private final String fakeTrackId = "fake";
+    private final Map<String, String> fakeMap = new HashMap<>();
 
     @BeforeEach
     void setup() {
         sut = new SpotifyApi(fakeAccessToken);
 
         MockitoAnnotations.openMocks(this);
-        when(mockedTrackApi.getTrack(fakeTrackId, fakeMarket)).thenReturn(new TrackFull());
+        when(mockedTrackApi.getTrack(fakeTrackId, fakeMap)).thenReturn(new TrackFull());
     }
 
     @Test
     void getTrackReturnsTrackFullObject() {
-        Assertions.assertTrue(sut.getTrack(fakeTrackId, fakeMarket) instanceof TrackFull);
+        Assertions.assertTrue(sut.getTrack(fakeTrackId, fakeMap) instanceof TrackFull);
     }
 }

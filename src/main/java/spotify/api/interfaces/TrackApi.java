@@ -7,11 +7,12 @@ import spotify.models.tracks.TrackFull;
 import spotify.models.tracks.TrackFullCollection;
 
 import java.util.List;
+import java.util.Map;
 
 public interface TrackApi {
-    TrackFull getTrack(String trackId, String market);
+    TrackFull getTrack(String trackId, Map<String, String> options);
 
-    TrackFullCollection getTracks(List<String> listOfTrackIds, String market);
+    TrackFullCollection getTracks(List<String> listOfTrackIds, Map<String, String> options);
 
     AudioFeatures getTrackAudioFeatures(String trackId);
 

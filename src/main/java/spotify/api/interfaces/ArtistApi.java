@@ -8,13 +8,14 @@ import spotify.models.paging.Paging;
 import spotify.models.tracks.TrackFullCollection;
 
 import java.util.List;
+import java.util.Map;
 
 public interface ArtistApi {
     ArtistFull getArtist(String artistId);
 
-    Paging<ArtistSimplified> getArtistAlbums(String artistId, List<AlbumType> listOfAlbumTypes, String country, int limit, int offset);
+    Paging<ArtistSimplified> getArtistAlbums(String artistId, List<AlbumType> listOfAlbumTypes, Map<String, String> options);
 
-    TrackFullCollection getArtistTopTracks(String artistId, String country);
+    TrackFullCollection getArtistTopTracks(String artistId, Map<String, String> options);
 
     ArtistFullCollection getRelatedArtists(String artistId);
 

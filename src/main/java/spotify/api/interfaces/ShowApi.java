@@ -6,11 +6,12 @@ import spotify.models.shows.ShowFull;
 import spotify.models.shows.ShowSimplifiedCollection;
 
 import java.util.List;
+import java.util.Map;
 
 public interface ShowApi {
-    ShowFull getShow(String showId, String market);
+    ShowFull getShow(String showId, Map<String, String> options);
 
-    Paging<EpisodeSimplified> getShowEpisodes(String showId, int limit, int offset, String market);
+    Paging<EpisodeSimplified> getShowEpisodes(String showId, Map<String, String> options);
 
-    ShowSimplifiedCollection getShows(List<String> listOfShowIds, String market);
+    ShowSimplifiedCollection getShows(List<String> listOfShowIds, Map<String, String> options);
 }

@@ -17,6 +17,7 @@ import spotify.utils.ValidatorUtil;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 public class EpisodeApiRetrofit implements EpisodeApi {
     private final Logger logger = LoggerFactory.getLogger(EpisodeApiRetrofit.class);
@@ -29,14 +30,15 @@ public class EpisodeApiRetrofit implements EpisodeApi {
     }
 
     @Override
-    public EpisodeFull getEpisode(String episodeId, String market) {
-        market = ValidatorUtil.emptyValueCheck(market);
+    public EpisodeFull getEpisode(String episodeId, Map<String, String> options) {
+        options = ValidatorUtil.optionsValueCheck(options);
 
         logger.trace("Constructing HTTP call to fetch episode.");
-        Call<EpisodeFull> httpCall = episodeService.getEpisode("Bearer " + this.accessToken, episodeId, market);
+        Call<EpisodeFull> httpCall = episodeService.getEpisode("Bearer " + this.accessToken, episodeId, options);
 
         try {
             logger.info("Executing HTTP call to fetch episode.");
+            logger.debug(String.format("Fetching episodes %s with following values: %s.", episodeId, options));
             logger.debug(String.format("%s / %s", httpCall.request().method(), httpCall.request().url().toString()));
             Response<EpisodeFull> response = httpCall.execute();
 
@@ -51,17 +53,18 @@ public class EpisodeApiRetrofit implements EpisodeApi {
     }
 
     @Override
-    public EpisodeFullCollection getEpisodes(List<String> listOfEpisodeIds, String market) {
+    public EpisodeFullCollection getEpisodes(List<String> listOfEpisodeIds, Map<String, String> options) {
         validateEpisodeListSizeAndThrowIfExceeded(listOfEpisodeIds, 50);
-        market = ValidatorUtil.emptyValueCheck(market);
+        options = ValidatorUtil.optionsValueCheck(options);
 
         String episodeIds = String.join(",", listOfEpisodeIds);
 
         logger.trace("Constructing HTTP call to fetch multiple episodes.");
-        Call<EpisodeFullCollection> httpCall = episodeService.getEpisodes("Bearer " + this.accessToken, episodeIds, market);
+        Call<EpisodeFullCollection> httpCall = episodeService.getEpisodes("Bearer " + this.accessToken, episodeIds, options);
 
         try {
             logger.info("Executing HTTP call to fetch multiple episodes.");
+            logger.debug(String.format("Fetching following episodes: %s with following values: %s.", episodeIds, options));
             logger.debug(String.format("%s / %s", httpCall.request().method(), httpCall.request().url().toString()));
             Response<EpisodeFullCollection> response = httpCall.execute();
 

@@ -18,7 +18,6 @@ import spotify.retrofit.services.BrowseService;
 import spotify.utils.ValidatorUtil;
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.Map;
 
 public class BrowseApiRetrofit implements BrowseApi {
@@ -32,16 +31,15 @@ public class BrowseApiRetrofit implements BrowseApi {
     }
 
     @Override
-    public CategoryFull getCategory(String categoryId, String country, String locale) {
-        country = ValidatorUtil.emptyValueCheck(country);
-        locale = ValidatorUtil.emptyValueCheck(locale);
+    public CategoryFull getCategory(String categoryId, Map<String, String> options) {
+        options = ValidatorUtil.optionsValueCheck(options);
 
         logger.trace("Constructing HTTP call to fetch category.");
-        Call<CategoryFull> httpCall = browseService.getCategory("Bearer " + this.accessToken, categoryId, country, locale);
+        Call<CategoryFull> httpCall = browseService.getCategory("Bearer " + this.accessToken, categoryId, options);
 
         try {
             logger.info("Executing HTTP call to fetch category.");
-            logger.debug(String.format("Fetching category %s with country code %s with locale %s", categoryId, country, locale));
+            logger.debug(String.format("Fetching category %s with following values: %s.", categoryId, options));
             logger.debug(String.format("%s / %s", httpCall.request().method(), httpCall.request().url().toString()));
             Response<CategoryFull> response = httpCall.execute();
 
@@ -56,16 +54,15 @@ public class BrowseApiRetrofit implements BrowseApi {
     }
 
     @Override
-    public PlaylistSimplifiedPaging getCategoryPlaylists(String categoryId, String country, int limit, int offset) {
-        ValidatorUtil.validateFiltersAndThrowIfInvalid(limit, offset);
-        country = ValidatorUtil.emptyValueCheck(country);
+    public PlaylistSimplifiedPaging getCategoryPlaylists(String categoryId, Map<String, String> options) {
+        options = ValidatorUtil.optionsValueCheck(options);
 
         logger.trace("Constructing HTTP call to fetch category playlists.");
-        Call<PlaylistSimplifiedPaging> httpCall = browseService.getCategoryPlaylists("Bearer " + this.accessToken, categoryId, country, limit, offset);
+        Call<PlaylistSimplifiedPaging> httpCall = browseService.getCategoryPlaylists("Bearer " + this.accessToken, categoryId, options);
 
         try {
             logger.info("Executing HTTP call to fetch category playlists.");
-            logger.debug(String.format("Fetching category %s playlists with country code %s", categoryId, country));
+            logger.debug(String.format("Fetching category %s playlists with following values: %s.", categoryId, options));
             logger.debug(String.format("%s / %s", httpCall.request().method(), httpCall.request().url().toString()));
             Response<PlaylistSimplifiedPaging> response = httpCall.execute();
 
@@ -80,17 +77,15 @@ public class BrowseApiRetrofit implements BrowseApi {
     }
 
     @Override
-    public CategoryFullPaging getCategories(String country, String locale, int limit, int offset) {
-        ValidatorUtil.validateFiltersAndThrowIfInvalid(limit, offset);
-        country = ValidatorUtil.emptyValueCheck(country);
-        locale = ValidatorUtil.emptyValueCheck(locale);
+    public CategoryFullPaging getCategories(Map<String, String> options) {
+        options = ValidatorUtil.optionsValueCheck(options);
 
         logger.trace("Constructing HTTP call to fetch categories.");
-        Call<CategoryFullPaging> httpCall = browseService.getCategories("Bearer " + this.accessToken, country, locale, limit, offset);
+        Call<CategoryFullPaging> httpCall = browseService.getCategories("Bearer " + this.accessToken, options);
 
         try {
             logger.info("Executing HTTP call to fetch categories.");
-            logger.debug(String.format("Fetching categories with country code %s", country));
+            logger.debug(String.format("Fetching categories with following values: %s.", options));
             logger.debug(String.format("%s / %s", httpCall.request().method(), httpCall.request().url().toString()));
             Response<CategoryFullPaging> response = httpCall.execute();
 
@@ -106,10 +101,7 @@ public class BrowseApiRetrofit implements BrowseApi {
 
     @Override
     public FeaturedPlaylistCollection getFeaturedPlaylists(Map<String, String> options) {
-        if (options == null) {
-            logger.warn("A null value options has been passed in! An empty hashmap has now been assigned to it.");
-            options = new HashMap<>();
-        }
+        options = ValidatorUtil.optionsValueCheck(options);
 
         logger.trace("Constructing HTTP call to fetch featured playlists.");
         Call<FeaturedPlaylistCollection> httpCall = browseService.getFeaturedPlaylists("Bearer " + this.accessToken, options);

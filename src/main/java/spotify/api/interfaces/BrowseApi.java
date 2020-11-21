@@ -8,11 +8,11 @@ import spotify.models.playlists.PlaylistSimplifiedPaging;
 import java.util.Map;
 
 public interface BrowseApi {
-    CategoryFull getCategory(String categoryId, String country, String locale);
+    CategoryFull getCategory(String categoryId, Map<String, String> options);
 
-    PlaylistSimplifiedPaging getCategoryPlaylists(String categoryId, String country, int limit, int offset);
+    PlaylistSimplifiedPaging getCategoryPlaylists(String categoryId, Map<String, String> options);
 
-    CategoryFullPaging getCategories(String country, String locale, int limit, int offset);
+    CategoryFullPaging getCategories(Map<String, String> options);
 
     FeaturedPlaylistCollection getFeaturedPlaylists(Map<String, String> options);
 }

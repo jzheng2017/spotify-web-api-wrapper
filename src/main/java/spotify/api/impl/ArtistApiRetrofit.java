@@ -21,6 +21,7 @@ import spotify.utils.ValidatorUtil;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class ArtistApiRetrofit implements ArtistApi {
@@ -54,21 +55,23 @@ public class ArtistApiRetrofit implements ArtistApi {
     }
 
     @Override
-    public Paging<ArtistSimplified> getArtistAlbums(String artistId, List<AlbumType> listOfAlbumTypes, String country, int limit, int offset) {
-        ValidatorUtil.validateFiltersAndThrowIfInvalid(limit, offset);
-        country = ValidatorUtil.emptyValueCheck(country);
+    public Paging<ArtistSimplified> getArtistAlbums(String artistId, List<AlbumType> listOfAlbumTypes, Map<String, String> options) {
+        options = ValidatorUtil.optionsValueCheck(options);
 
         String albumTypesWithCommaDelimiter = listOfAlbumTypes.stream()
                 .map(String::valueOf)
                 .collect(Collectors.joining(","));
 
-        albumTypesWithCommaDelimiter = albumTypesWithCommaDelimiter.isEmpty() ? null : albumTypesWithCommaDelimiter;
+        if (!albumTypesWithCommaDelimiter.isEmpty()) {
+            options.put("include_groups", albumTypesWithCommaDelimiter);
+        }
 
         logger.trace("Constructing HTTP call to fetch albums of an artist.");
-        Call<Paging<ArtistSimplified>> httpCall = artistService.getArtistAlbums("Bearer " + this.accessToken, artistId, albumTypesWithCommaDelimiter, country, limit, offset);
+        Call<Paging<ArtistSimplified>> httpCall = artistService.getArtistAlbums("Bearer " + this.accessToken, artistId, options);
 
         try {
             logger.info("Executing HTTP call to fetch albums of artist.");
+            logger.debug(String.format("Fetching artist %s albums with following values: %s.", artistId, options));
             logger.debug(String.format("%s / %s", httpCall.request().method(), httpCall.request().url().toString()));
             Response<Paging<ArtistSimplified>> response = httpCall.execute();
 
@@ -83,14 +86,15 @@ public class ArtistApiRetrofit implements ArtistApi {
     }
 
     @Override
-    public TrackFullCollection getArtistTopTracks(String artistId, String country) {
-        country = ValidatorUtil.emptyValueCheck(country);
+    public TrackFullCollection getArtistTopTracks(String artistId, Map<String, String> options) {
+        options = ValidatorUtil.optionsValueCheck(options);
 
         logger.trace("Constructing HTTP call to fetch an artist top tracks.");
-        Call<TrackFullCollection> httpCall = artistService.getArtistTopTracks("Bearer " + this.accessToken, artistId, country);
+        Call<TrackFullCollection> httpCall = artistService.getArtistTopTracks("Bearer " + this.accessToken, artistId, options);
 
         try {
             logger.info("Executing HTTP call to fetch an artist top tracks.");
+            logger.debug(String.format("Fetching artist %s top tracks with following values: %s.", artistId, options));
             logger.debug(String.format("%s / %s", httpCall.request().method(), httpCall.request().url().toString()));
             Response<TrackFullCollection> response = httpCall.execute();
 

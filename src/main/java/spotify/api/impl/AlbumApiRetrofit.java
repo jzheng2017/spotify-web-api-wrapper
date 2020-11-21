@@ -19,6 +19,7 @@ import spotify.utils.ValidatorUtil;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 public class AlbumApiRetrofit implements AlbumApi {
     private final Logger logger = LoggerFactory.getLogger(AlbumApiRetrofit.class);
@@ -31,14 +32,15 @@ public class AlbumApiRetrofit implements AlbumApi {
     }
 
     @Override
-    public AlbumFull getAlbum(String albumId, String market) {
-        market = ValidatorUtil.emptyValueCheck(market);
+    public AlbumFull getAlbum(String albumId, Map<String, String> options) {
+        options = ValidatorUtil.optionsValueCheck(options);
 
         logger.trace("Constructing HTTP call to fetch an album.");
-        Call<AlbumFull> httpCall = albumService.getAlbum("Bearer " + this.accessToken, albumId, market);
+        Call<AlbumFull> httpCall = albumService.getAlbum("Bearer " + this.accessToken, albumId, options);
 
         try {
             logger.info("Executing HTTP call to fetch an album.");
+            logger.debug(String.format("Fetching album %s with following values: %s.", albumId, options));
             logger.debug(String.format("%s / %s", httpCall.request().method(), httpCall.request().url().toString()));
             Response<AlbumFull> response = httpCall.execute();
 
@@ -53,18 +55,19 @@ public class AlbumApiRetrofit implements AlbumApi {
     }
 
     @Override
-    public AlbumFullCollection getAlbums(List<String> listOfAlbumIds, String market) {
+    public AlbumFullCollection getAlbums(List<String> listOfAlbumIds, Map<String, String> options) {
         validateAlbumListSizeAndThrowIfExceeded(listOfAlbumIds, 20);
-        market = ValidatorUtil.emptyValueCheck(market);
+        options = ValidatorUtil.optionsValueCheck(options);
 
         String albumIds = String.join(",", listOfAlbumIds);
         logger.debug(String.format("Mapped list of album ids to String: %s", albumIds));
 
         logger.trace("Constructing HTTP call to fetch albums.");
-        Call<AlbumFullCollection> httpCall = albumService.getAlbums("Bearer " + this.accessToken, albumIds, market);
+        Call<AlbumFullCollection> httpCall = albumService.getAlbums("Bearer " + this.accessToken, albumIds, options);
 
         try {
             logger.info("Executing HTTP call to fetch albums.");
+            logger.debug(String.format("Fetching following albums: %s with following values: %s.", albumIds, options));
             logger.debug(String.format("%s / %s", httpCall.request().method(), httpCall.request().url().toString()));
             Response<AlbumFullCollection> response = httpCall.execute();
 
@@ -79,16 +82,15 @@ public class AlbumApiRetrofit implements AlbumApi {
     }
 
     @Override
-    public Paging<TrackSimplified> getAlbumTracks(String albumId, int limit, int offset, String market) {
-        ValidatorUtil.validateFiltersAndThrowIfInvalid(limit, offset);
-
-        market = ValidatorUtil.emptyValueCheck(market);
+    public Paging<TrackSimplified> getAlbumTracks(String albumId, Map<String, String> options) {
+        options = ValidatorUtil.optionsValueCheck(options);
 
         logger.trace("Constructing HTTP call to fetch album tracks.");
-        Call<Paging<TrackSimplified>> httpCall = albumService.getAlbumTracks("Bearer " + this.accessToken, albumId, limit, offset, market);
+        Call<Paging<TrackSimplified>> httpCall = albumService.getAlbumTracks("Bearer " + this.accessToken, albumId, options);
 
         try {
             logger.info("Executing HTTP call to fetch album tracks.");
+            logger.debug(String.format("Fetching album %s tracks with following values: %s.", albumId, options));
             logger.debug(String.format("%s / %s", httpCall.request().method(), httpCall.request().url().toString()));
             Response<Paging<TrackSimplified>> response = httpCall.execute();
 

@@ -19,6 +19,7 @@ import spotify.utils.ValidatorUtil;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 public class ShowApiRetrofit implements ShowApi {
     private final Logger logger = LoggerFactory.getLogger(ShowApiRetrofit.class);
@@ -31,14 +32,15 @@ public class ShowApiRetrofit implements ShowApi {
     }
 
     @Override
-    public ShowFull getShow(String showId, String market) {
-        market = ValidatorUtil.emptyValueCheck(market);
+    public ShowFull getShow(String showId, Map<String, String> options) {
+        options = ValidatorUtil.optionsValueCheck(options);
 
         logger.trace("Constructing HTTP call to fetch show.");
-        Call<ShowFull> httpCall = showService.getShow("Bearer " + this.accessToken, showId, market);
+        Call<ShowFull> httpCall = showService.getShow("Bearer " + this.accessToken, showId, options);
 
         try {
             logger.info("Executing HTTP call to fetch show.");
+            logger.debug(String.format("Fetching show %s with following values: %s.", showId, options));
             logger.debug(String.format("%s / %s", httpCall.request().method(), httpCall.request().url().toString()));
             Response<ShowFull> response = httpCall.execute();
 
@@ -53,15 +55,15 @@ public class ShowApiRetrofit implements ShowApi {
     }
 
     @Override
-    public Paging<EpisodeSimplified> getShowEpisodes(String showId, int limit, int offset, String market) {
-        ValidatorUtil.validateFiltersAndThrowIfInvalid(limit, offset);
-        market = ValidatorUtil.emptyValueCheck(market);
+    public Paging<EpisodeSimplified> getShowEpisodes(String showId, Map<String, String> options) {
+        options = ValidatorUtil.optionsValueCheck(options);
 
         logger.trace("Constructing HTTP call to fetch show episodes.");
-        Call<Paging<EpisodeSimplified>> httpCall = showService.getShowEpisodes("Bearer " + this.accessToken, showId, limit, offset, market);
+        Call<Paging<EpisodeSimplified>> httpCall = showService.getShowEpisodes("Bearer " + this.accessToken, showId, options);
 
         try {
             logger.info("Executing HTTP call to fetch show episodes.");
+            logger.debug(String.format("Fetching show %s episodes with following values: %s.", showId, options));
             logger.debug(String.format("%s / %s", httpCall.request().method(), httpCall.request().url().toString()));
             Response<Paging<EpisodeSimplified>> response = httpCall.execute();
 
@@ -76,15 +78,16 @@ public class ShowApiRetrofit implements ShowApi {
     }
 
     @Override
-    public ShowSimplifiedCollection getShows(List<String> listOfShowIds, String market) {
+    public ShowSimplifiedCollection getShows(List<String> listOfShowIds, Map<String, String> options) {
         String showIds = String.join(",", listOfShowIds);
-        market = ValidatorUtil.emptyValueCheck(market);
+        options = ValidatorUtil.optionsValueCheck(options);
 
         logger.trace("Constructing HTTP call to fetch multiple shows.");
-        Call<ShowSimplifiedCollection> httpCall = showService.getShows("Bearer " + this.accessToken, showIds, market);
+        Call<ShowSimplifiedCollection> httpCall = showService.getShows("Bearer " + this.accessToken, showIds, options);
 
         try {
             logger.info("Executing HTTP call to fetch multiple shows.");
+            logger.debug(String.format("Fetching following shows: %s with following values: %s.", showIds, options));
             logger.debug(String.format("%s / %s", httpCall.request().method(), httpCall.request().url().toString()));
             Response<ShowSimplifiedCollection> response = httpCall.execute();
 
