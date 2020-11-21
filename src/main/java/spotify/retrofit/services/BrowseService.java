@@ -6,6 +6,7 @@ import retrofit2.http.Header;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 import spotify.models.categories.CategoryFull;
+import spotify.models.categories.CategoryFullPaging;
 import spotify.models.playlists.PlaylistSimplifiedPaging;
 
 public interface BrowseService {
@@ -21,4 +22,11 @@ public interface BrowseService {
                                                         @Query("country") String country,
                                                         @Query("limit") int limit,
                                                         @Query("offset") int offset);
+
+    @GET("browse/categories")
+    Call<CategoryFullPaging> getCategories(@Header("Authorization") String accessToken,
+                                           @Query("country") String country,
+                                           @Query("locale") String locale,
+                                           @Query("limit") int limit,
+                                           @Query("offset") int offset);
 }
