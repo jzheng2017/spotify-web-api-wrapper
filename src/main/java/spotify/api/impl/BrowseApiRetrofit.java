@@ -8,7 +8,6 @@ import retrofit2.Retrofit;
 import spotify.api.interfaces.BrowseApi;
 import spotify.config.ApiUrl;
 import spotify.exceptions.HttpRequestFailedException;
-import spotify.exceptions.ResponseChecker;
 import spotify.factories.RetrofitClientFactory;
 import spotify.models.albums.AlbumSimplifiedPaging;
 import spotify.models.categories.CategoryFull;
@@ -17,6 +16,7 @@ import spotify.models.playlists.FeaturedPlaylistCollection;
 import spotify.models.playlists.PlaylistSimplifiedPaging;
 import spotify.models.recommendations.RecommendationCollection;
 import spotify.retrofit.services.BrowseService;
+import spotify.utils.ResponseChecker;
 import spotify.utils.ValidatorUtil;
 
 import java.io.IOException;

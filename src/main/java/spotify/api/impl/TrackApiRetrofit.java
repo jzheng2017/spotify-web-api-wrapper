@@ -8,7 +8,6 @@ import retrofit2.Retrofit;
 import spotify.api.interfaces.TrackApi;
 import spotify.config.ApiUrl;
 import spotify.exceptions.HttpRequestFailedException;
-import spotify.exceptions.ResponseChecker;
 import spotify.factories.RetrofitClientFactory;
 import spotify.models.audio.AudioAnalysis;
 import spotify.models.audio.AudioFeatures;
@@ -16,6 +15,7 @@ import spotify.models.audio.AudioFeaturesCollection;
 import spotify.models.tracks.TrackFull;
 import spotify.models.tracks.TrackFullCollection;
 import spotify.retrofit.services.TrackService;
+import spotify.utils.ResponseChecker;
 import spotify.utils.ValidatorUtil;
 
 import java.io.IOException;

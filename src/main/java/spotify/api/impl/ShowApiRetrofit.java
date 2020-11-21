@@ -8,13 +8,13 @@ import retrofit2.Retrofit;
 import spotify.api.interfaces.ShowApi;
 import spotify.config.ApiUrl;
 import spotify.exceptions.HttpRequestFailedException;
-import spotify.exceptions.ResponseChecker;
 import spotify.factories.RetrofitClientFactory;
 import spotify.models.episodes.EpisodeSimplified;
 import spotify.models.paging.Paging;
 import spotify.models.shows.ShowFull;
 import spotify.models.shows.ShowSimplifiedCollection;
 import spotify.retrofit.services.ShowService;
+import spotify.utils.ResponseChecker;
 import spotify.utils.ValidatorUtil;
 
 import java.io.IOException;

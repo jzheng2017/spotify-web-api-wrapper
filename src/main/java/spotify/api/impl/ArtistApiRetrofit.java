@@ -9,7 +9,6 @@ import spotify.api.enums.AlbumType;
 import spotify.api.interfaces.ArtistApi;
 import spotify.config.ApiUrl;
 import spotify.exceptions.HttpRequestFailedException;
-import spotify.exceptions.ResponseChecker;
 import spotify.factories.RetrofitClientFactory;
 import spotify.models.artists.ArtistFull;
 import spotify.models.artists.ArtistFullCollection;
@@ -17,6 +16,7 @@ import spotify.models.artists.ArtistSimplified;
 import spotify.models.paging.Paging;
 import spotify.models.tracks.TrackFullCollection;
 import spotify.retrofit.services.ArtistService;
+import spotify.utils.ResponseChecker;
 import spotify.utils.ValidatorUtil;
 
 import java.io.IOException;

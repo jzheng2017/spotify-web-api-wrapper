@@ -8,13 +8,13 @@ import retrofit2.Retrofit;
 import spotify.api.interfaces.AlbumApi;
 import spotify.config.ApiUrl;
 import spotify.exceptions.HttpRequestFailedException;
-import spotify.exceptions.ResponseChecker;
 import spotify.factories.RetrofitClientFactory;
 import spotify.models.albums.AlbumFull;
 import spotify.models.albums.AlbumFullCollection;
 import spotify.models.paging.Paging;
 import spotify.models.tracks.TrackSimplified;
 import spotify.retrofit.services.AlbumService;
+import spotify.utils.ResponseChecker;
 import spotify.utils.ValidatorUtil;
 
 import java.io.IOException;

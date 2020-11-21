@@ -8,10 +8,10 @@ import retrofit2.Retrofit;
 import spotify.api.interfaces.UserApi;
 import spotify.config.ApiUrl;
 import spotify.exceptions.HttpRequestFailedException;
-import spotify.exceptions.ResponseChecker;
 import spotify.factories.RetrofitClientFactory;
 import spotify.models.users.User;
 import spotify.retrofit.services.UserService;
+import spotify.utils.ResponseChecker;
 
 import java.io.IOException;
 
