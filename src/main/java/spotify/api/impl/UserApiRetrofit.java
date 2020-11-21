@@ -48,7 +48,7 @@ public class UserApiRetrofit implements UserApi {
     @Override
     public User getUser(String userId) {
         logger.trace("Constructing HTTP call to fetch user.");
-        Call<User> httpCall = userService.getUserById("Bearer " + this.accessToken, userId);
+        Call<User> httpCall = userService.getUser("Bearer " + this.accessToken, userId);
 
         try {
             logger.info(String.format("Executing HTTP call to fetch user with id %s.", userId));
