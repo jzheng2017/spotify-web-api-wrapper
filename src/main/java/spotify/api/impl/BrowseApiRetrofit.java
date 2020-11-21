@@ -12,11 +12,14 @@ import spotify.exceptions.ResponseChecker;
 import spotify.factories.RetrofitClientFactory;
 import spotify.models.categories.CategoryFull;
 import spotify.models.categories.CategoryFullPaging;
+import spotify.models.playlists.FeaturedPlaylistCollection;
 import spotify.models.playlists.PlaylistSimplifiedPaging;
 import spotify.retrofit.services.BrowseService;
 import spotify.utils.ValidatorUtil;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class BrowseApiRetrofit implements BrowseApi {
     private final Logger logger = LoggerFactory.getLogger(UserApiRetrofit.class);
@@ -97,6 +100,32 @@ public class BrowseApiRetrofit implements BrowseApi {
             return response.body();
         } catch (IOException ex) {
             logger.error("HTTP request to fetch categories has failed.");
+            throw new HttpRequestFailedException(ex.getMessage());
+        }
+    }
+
+    @Override
+    public FeaturedPlaylistCollection getFeaturedPlaylists(Map<String, String> options) {
+        if (options == null) {
+            logger.warn("A null value options has been passed in! An empty hashmap has now been assigned to it.");
+            options = new HashMap<>();
+        }
+
+        logger.trace("Constructing HTTP call to fetch featured playlists.");
+        Call<FeaturedPlaylistCollection> httpCall = browseService.getFeaturedPlaylists("Bearer " + this.accessToken, options);
+
+        try {
+            logger.info("Executing HTTP call to fetch featured playlists.");
+            logger.debug(String.format("Fetching featured playlists with following values: %s", options));
+            logger.debug(String.format("%s / %s", httpCall.request().method(), httpCall.request().url().toString()));
+            Response<FeaturedPlaylistCollection> response = httpCall.execute();
+
+            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response.errorBody());
+
+            logger.info("Featured playlists have been successfully fetched.");
+            return response.body();
+        } catch (IOException ex) {
+            logger.error("HTTP request to fetch featured playlists has failed.");
             throw new HttpRequestFailedException(ex.getMessage());
         }
     }

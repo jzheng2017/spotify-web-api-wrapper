@@ -19,6 +19,7 @@ import spotify.models.episodes.EpisodeFull;
 import spotify.models.episodes.EpisodeFullCollection;
 import spotify.models.episodes.EpisodeSimplified;
 import spotify.models.paging.Paging;
+import spotify.models.playlists.FeaturedPlaylistCollection;
 import spotify.models.playlists.PlaylistSimplifiedPaging;
 import spotify.models.shows.ShowFull;
 import spotify.models.shows.ShowSimplifiedCollection;
@@ -28,6 +29,7 @@ import spotify.models.tracks.TrackSimplified;
 import spotify.models.users.User;
 
 import java.util.List;
+import java.util.Map;
 
 
 public class SpotifyApi {
@@ -163,6 +165,11 @@ public class SpotifyApi {
     public CategoryFullPaging getCategories(String country, String locale, int limit, int offset) {
         logger.info("Requesting categories");
         return browseApi.getCategories(country, locale, limit, offset);
+    }
+
+    public FeaturedPlaylistCollection getFeaturedPlaylists(Map<String, String> options) {
+        logger.info("Requesting featured playlists");
+        return browseApi.getFeaturedPlaylists(options);
     }
 
     private void setup(String accessToken) {
