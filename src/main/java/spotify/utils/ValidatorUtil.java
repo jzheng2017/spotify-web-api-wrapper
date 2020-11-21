@@ -13,7 +13,7 @@ public class ValidatorUtil {
      * Checks if the passed in value is empty, if it is it will set it to null.
      *
      * @param value the spotify value
-     * @return market value
+     * @return potentially transformed (null) value
      */
     public static String emptyValueCheck(String value) {
         // this is done because retrofit ignores null values
