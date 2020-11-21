@@ -81,14 +81,14 @@ See the [LICENSE](https://github.com/jzheng2017/spotify-web-api-wrapper/blob/mai
 - - [x] Get an Artist's Top Tracks
 - - [x] Get an Artist
 - - [x] Get Several Artists
-- [ ] Browse
-- - [ ] Get Available Genre Seeds
-- - [ ] Get a List of Browse Categories
-- - [ ] Get a Single Browse Category
-- - [ ] Get a Category's playlists
-- - [ ] Get a List of Featured Playlists
-- - [ ] Get a List of New Releases
-- - [ ] Get Recommendations Based on Seeds
+- [x] Browse
+- - [x] Get Available Genre Seeds
+- - [x] Get a List of Browse Categories
+- - [x] Get a Single Browse Category
+- - [x] Get a Category's playlists
+- - [x] Get a List of Featured Playlists
+- - [x] Get a List of New Releases
+- - [x] Get Recommendations Based on Seeds
 - [x] Episodes
 - - [x] Get an Episode
 - - [x] Get Several Episodes
