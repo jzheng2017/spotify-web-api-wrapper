@@ -14,6 +14,7 @@ import spotify.models.audio.AudioAnalysis;
 import spotify.models.audio.AudioFeatures;
 import spotify.models.audio.AudioFeaturesCollection;
 import spotify.models.categories.CategoryFull;
+import spotify.models.categories.CategoryFullPaging;
 import spotify.models.episodes.EpisodeFull;
 import spotify.models.episodes.EpisodeFullCollection;
 import spotify.models.episodes.EpisodeSimplified;
@@ -157,6 +158,11 @@ public class SpotifyApi {
     public PlaylistSimplifiedPaging getCategoryPlaylists(String categoryId, String country, int limit, int offset) {
         logger.info("Requesting category playlists");
         return browseApi.getCategoryPlaylists(categoryId, country, limit, offset);
+    }
+
+    public CategoryFullPaging getCategories(String country, String locale, int limit, int offset) {
+        logger.info("Requesting categories");
+        return browseApi.getCategories(country, locale, limit, offset);
     }
 
     private void setup(String accessToken) {

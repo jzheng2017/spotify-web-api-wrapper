@@ -11,6 +11,7 @@ import spotify.exceptions.HttpRequestFailedException;
 import spotify.exceptions.ResponseChecker;
 import spotify.factories.RetrofitClientFactory;
 import spotify.models.categories.CategoryFull;
+import spotify.models.categories.CategoryFullPaging;
 import spotify.models.playlists.PlaylistSimplifiedPaging;
 import spotify.retrofit.services.BrowseService;
 import spotify.utils.ValidatorUtil;
@@ -71,6 +72,31 @@ public class BrowseApiRetrofit implements BrowseApi {
             return response.body();
         } catch (IOException ex) {
             logger.error("HTTP request to fetch category playlists has failed.");
+            throw new HttpRequestFailedException(ex.getMessage());
+        }
+    }
+
+    @Override
+    public CategoryFullPaging getCategories(String country, String locale, int limit, int offset) {
+        ValidatorUtil.validateFiltersAndThrowIfInvalid(limit, offset);
+        country = ValidatorUtil.emptyValueCheck(country);
+        locale = ValidatorUtil.emptyValueCheck(locale);
+
+        logger.trace("Constructing HTTP call to fetch categories.");
+        Call<CategoryFullPaging> httpCall = browseService.getCategories("Bearer " + this.accessToken, country, locale, limit, offset);
+
+        try {
+            logger.info("Executing HTTP call to fetch categories.");
+            logger.debug(String.format("Fetching categories with country code %s", country));
+            logger.debug(String.format("%s / %s", httpCall.request().method(), httpCall.request().url().toString()));
+            Response<CategoryFullPaging> response = httpCall.execute();
+
+            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response.errorBody());
+
+            logger.info("Categories have been successfully fetched.");
+            return response.body();
+        } catch (IOException ex) {
+            logger.error("HTTP request to fetch categories has failed.");
             throw new HttpRequestFailedException(ex.getMessage());
         }
     }
