@@ -7,10 +7,6 @@ public class ClientCredentialsFlowTokenResponse {
     private int expiresIn;
     private String scope;
 
-    public ClientCredentialsFlowTokenResponse() {
-
-    }
-
     public String getAccessToken() {
         return accessToken;
     }

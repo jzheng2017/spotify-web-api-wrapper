@@ -20,10 +20,6 @@ public class AlbumSimplified {
     private String uri;
     private ExternalUrl externalUrls;
 
-    public AlbumSimplified() {
-
-    }
-
     public String getAlbumType() {
         return albumType;
     }

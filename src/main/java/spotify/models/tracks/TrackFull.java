@@ -24,10 +24,6 @@ public class TrackFull {
     private String type;
     private String uri;
 
-    public TrackFull() {
-
-    }
-
     public AlbumSimplified getAlbum() {
         return album;
     }

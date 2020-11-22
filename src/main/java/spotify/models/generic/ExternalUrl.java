@@ -3,10 +3,6 @@ package spotify.models.generic;
 public class ExternalUrl {
     private String spotify;
 
-    public ExternalUrl() {
-
-    }
-
     public String getSpotify() {
         return spotify;
     }
