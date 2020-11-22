@@ -79,6 +79,17 @@ This exception will be thrown when authorization has failed. This may be thrown 
 ## Why use this library?
 Because this library is very simple and straightforward with a clear and simple interface. You only need to provide a few credential info and you're ready to access the endpoints. All other stuff is already taken care for you. When looking at other similar existing libraries, they have really complicated constructs to access an endpoint, where with this library it can be done with 1 line of code. 
 
+## Installation
+### Maven
+Latest official release:
+```xml
+<dependency>
+  <groupId>nl.jiankai</groupId>
+  <artifactId>spotify-web-api-wrapper</artifactId>
+  <version>1.0.0</version>
+</dependency>
+```
+
 ## License
 See the [LICENSE](https://github.com/jzheng2017/spotify-web-api-wrapper/blob/main/LICENSE) file for the license rights and limitations (GNU GPLv3).
 
