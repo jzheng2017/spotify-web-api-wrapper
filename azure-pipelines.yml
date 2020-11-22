@@ -10,11 +10,6 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
-- task: DownloadSecureFile@1
-  displayName: Download Secure file
-  inputs:
-    secureFile: privatekey.gpg
-  name: privateKeyRing
 - task: Maven@3
   inputs:
     mavenPomFile: 'pom.xml'
