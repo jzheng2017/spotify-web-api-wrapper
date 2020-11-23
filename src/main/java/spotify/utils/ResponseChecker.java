@@ -21,6 +21,13 @@ public class ResponseChecker {
         logger.trace("Spotify API has returned an error body.");
         SpotifyError spotifyError = gson.fromJson(errorBody.charStream(), SpotifyError.class);
 
+        if (spotifyError == null) {
+            final String errorMessage = "HTTP request to Spotify's server has not been fulfilled correctly. Reason is unknown.";
+            logger.error(errorMessage);
+            logger.warn("Converting error body to SpotifyError object has failed for some reason.");
+            throw new SpotifyActionFailedException(errorMessage);
+        }
+
         final boolean hasFailed = spotifyError.getError().getStatus() > 300;
         final int statusCode = spotifyError.getError().getStatus();
         final String message = spotifyError.getError().getMessage();
