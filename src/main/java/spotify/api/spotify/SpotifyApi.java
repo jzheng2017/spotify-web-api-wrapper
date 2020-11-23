@@ -3,6 +3,7 @@ package spotify.api.spotify;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import spotify.api.enums.AlbumType;
+import spotify.api.enums.EntityType;
 import spotify.api.impl.*;
 import spotify.api.interfaces.*;
 import spotify.models.albums.AlbumFull;
@@ -43,6 +44,7 @@ public class SpotifyApi {
     private ShowApi showApi;
     private ArtistApi artistApi;
     private BrowseApi browseApi;
+    private FollowApi followApi;
 
     public SpotifyApi(String accessToken) {
         this.setup(accessToken);
@@ -184,6 +186,11 @@ public class SpotifyApi {
         return browseApi.getRecommendations(listOfSeedArtists, listOfSeedGenres, listOfSeedTracks, options);
     }
 
+    public List<Boolean> isFollowing(EntityType entityType, List<String> listOfEntityIds) {
+        logger.info("Requesting following list");
+        return followApi.isFollowing(entityType, listOfEntityIds);
+    }
+
     private void setup(String accessToken) {
         logger.trace("Constructing Retrofit APIs");
         this.trackApi = new TrackApiRetrofit(accessToken);
@@ -193,5 +200,6 @@ public class SpotifyApi {
         this.showApi = new ShowApiRetrofit(accessToken);
         this.artistApi = new ArtistApiRetrofit(accessToken);
         this.browseApi = new BrowseApiRetrofit(accessToken);
+        this.followApi = new FollowApiRetrofit(accessToken);
     }
 }
