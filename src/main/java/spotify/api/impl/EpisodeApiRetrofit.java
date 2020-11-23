@@ -10,6 +10,7 @@ import spotify.factories.RetrofitHttpServiceFactory;
 import spotify.models.episodes.EpisodeFull;
 import spotify.models.episodes.EpisodeFullCollection;
 import spotify.retrofit.services.EpisodeService;
+import spotify.utils.LoggingUtil;
 import spotify.utils.ResponseChecker;
 import spotify.utils.ValidatorUtil;
 
@@ -37,7 +38,7 @@ public class EpisodeApiRetrofit implements EpisodeApi {
         try {
             logger.info("Executing HTTP call to fetch episode.");
             logger.debug(String.format("Fetching episodes %s with following values: %s.", episodeId, options));
-            logger.debug(String.format("%s / %s", httpCall.request().method(), httpCall.request().url().toString()));
+            LoggingUtil.logHttpCall(logger, httpCall);
             Response<EpisodeFull> response = httpCall.execute();
 
             ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response.errorBody());
@@ -63,7 +64,7 @@ public class EpisodeApiRetrofit implements EpisodeApi {
         try {
             logger.info("Executing HTTP call to fetch multiple episodes.");
             logger.debug(String.format("Fetching following episodes: %s with following values: %s.", episodeIds, options));
-            logger.debug(String.format("%s / %s", httpCall.request().method(), httpCall.request().url().toString()));
+            LoggingUtil.logHttpCall(logger, httpCall);
             Response<EpisodeFullCollection> response = httpCall.execute();
 
             ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response.errorBody());

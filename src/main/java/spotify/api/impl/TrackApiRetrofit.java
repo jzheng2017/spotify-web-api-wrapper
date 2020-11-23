@@ -13,6 +13,7 @@ import spotify.models.audio.AudioFeaturesCollection;
 import spotify.models.tracks.TrackFull;
 import spotify.models.tracks.TrackFullCollection;
 import spotify.retrofit.services.TrackService;
+import spotify.utils.LoggingUtil;
 import spotify.utils.ResponseChecker;
 import spotify.utils.ValidatorUtil;
 
@@ -40,7 +41,7 @@ public class TrackApiRetrofit implements TrackApi {
         try {
             logger.info("Executing HTTP call to fetch a track.");
             logger.debug(String.format("Fetching track %s with following values: %s.", trackId, options));
-            logger.debug(String.format("%s / %s", httpCall.request().method(), httpCall.request().url().toString()));
+            LoggingUtil.logHttpCall(logger, httpCall);
             Response<TrackFull> response = httpCall.execute();
 
             ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response.errorBody());
@@ -66,7 +67,7 @@ public class TrackApiRetrofit implements TrackApi {
         try {
             logger.info("Executing HTTP call to fetch multiple tracks.");
             logger.debug(String.format("Fetching following tracks: %s with following values: %s.", trackIds, options));
-            logger.debug(String.format("%s / %s", httpCall.request().method(), httpCall.request().url().toString()));
+            LoggingUtil.logHttpCall(logger, httpCall);
             Response<TrackFullCollection> response = httpCall.execute();
 
             ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response.errorBody());
@@ -87,7 +88,7 @@ public class TrackApiRetrofit implements TrackApi {
         try {
             logger.info("Executing HTTP call to fetch multiple track audio features.");
             logger.debug(String.format("Fetching track %s audio features.", trackId));
-            logger.debug(String.format("%s / %s", httpCall.request().method(), httpCall.request().url().toString()));
+            LoggingUtil.logHttpCall(logger, httpCall);
             Response<AudioFeatures> response = httpCall.execute();
 
             ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response.errorBody());
@@ -112,7 +113,7 @@ public class TrackApiRetrofit implements TrackApi {
         try {
             logger.info("Executing HTTP call to fetch track audio features.");
             logger.debug(String.format("Fetching following tracks: %s audio features.", trackIds));
-            logger.debug(String.format("%s / %s", httpCall.request().method(), httpCall.request().url().toString()));
+            LoggingUtil.logHttpCall(logger, httpCall);
             Response<AudioFeaturesCollection> response = httpCall.execute();
 
             ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response.errorBody());
@@ -132,7 +133,7 @@ public class TrackApiRetrofit implements TrackApi {
 
         try {
             logger.info(String.format("Executing HTTP call to fetch audio analysis for track %s.", trackId));
-            logger.debug(String.format("%s / %s", httpCall.request().method(), httpCall.request().url().toString()));
+            LoggingUtil.logHttpCall(logger, httpCall);
             Response<AudioAnalysis> response = httpCall.execute();
 
             ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response.errorBody());

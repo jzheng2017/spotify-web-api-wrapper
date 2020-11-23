@@ -14,6 +14,7 @@ import spotify.models.artists.ArtistSimplified;
 import spotify.models.paging.Paging;
 import spotify.models.tracks.TrackFullCollection;
 import spotify.retrofit.services.ArtistService;
+import spotify.utils.LoggingUtil;
 import spotify.utils.ResponseChecker;
 import spotify.utils.ValidatorUtil;
 
@@ -39,7 +40,7 @@ public class ArtistApiRetrofit implements ArtistApi {
 
         try {
             logger.info("Executing HTTP call to fetch an artist.");
-            logger.debug(String.format("%s / %s", httpCall.request().method(), httpCall.request().url().toString()));
+            LoggingUtil.logHttpCall(logger, httpCall);
             Response<ArtistFull> response = httpCall.execute();
 
             ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response.errorBody());
@@ -70,7 +71,7 @@ public class ArtistApiRetrofit implements ArtistApi {
         try {
             logger.info("Executing HTTP call to fetch albums of artist.");
             logger.debug(String.format("Fetching artist %s albums with following values: %s.", artistId, options));
-            logger.debug(String.format("%s / %s", httpCall.request().method(), httpCall.request().url().toString()));
+            LoggingUtil.logHttpCall(logger, httpCall);
             Response<Paging<ArtistSimplified>> response = httpCall.execute();
 
             ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response.errorBody());
@@ -93,7 +94,7 @@ public class ArtistApiRetrofit implements ArtistApi {
         try {
             logger.info("Executing HTTP call to fetch an artist top tracks.");
             logger.debug(String.format("Fetching artist %s top tracks with following values: %s.", artistId, options));
-            logger.debug(String.format("%s / %s", httpCall.request().method(), httpCall.request().url().toString()));
+            LoggingUtil.logHttpCall(logger, httpCall);
             Response<TrackFullCollection> response = httpCall.execute();
 
             ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response.errorBody());
@@ -113,7 +114,7 @@ public class ArtistApiRetrofit implements ArtistApi {
 
         try {
             logger.info("Executing HTTP call to fetch related artists.");
-            logger.debug(String.format("%s / %s", httpCall.request().method(), httpCall.request().url().toString()));
+            LoggingUtil.logHttpCall(logger, httpCall);
             Response<ArtistFullCollection> response = httpCall.execute();
 
             ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response.errorBody());
@@ -136,7 +137,7 @@ public class ArtistApiRetrofit implements ArtistApi {
 
         try {
             logger.info("Executing HTTP call to fetch multiple artists.");
-            logger.debug(String.format("%s / %s", httpCall.request().method(), httpCall.request().url().toString()));
+            LoggingUtil.logHttpCall(logger, httpCall);
             Response<ArtistFullCollection> response = httpCall.execute();
 
             ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response.errorBody());

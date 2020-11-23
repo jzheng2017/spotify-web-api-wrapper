@@ -11,6 +11,7 @@ import spotify.exceptions.SpotifyAuthorizationFailedException;
 import spotify.factories.RetrofitHttpServiceFactory;
 import spotify.models.authorization.AuthorizationCodeFlowTokenResponse;
 import spotify.retrofit.services.AuthorizationCodeFlowService;
+import spotify.utils.LoggingUtil;
 
 import java.io.IOException;
 
@@ -50,7 +51,7 @@ public class AuthorizationRefreshToken {
 
         try {
             logger.info("Executing HTTP call to refresh the access token.");
-            logger.debug(String.format("%s / %s", httpCall.request().method(), httpCall.request().url().toString()));
+            LoggingUtil.logHttpCall(logger, httpCall);
             final Response<AuthorizationCodeFlowTokenResponse> response = httpCall.execute();
 
             if (response.body() == null) {

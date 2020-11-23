@@ -12,6 +12,7 @@ import spotify.models.albums.AlbumFullCollection;
 import spotify.models.paging.Paging;
 import spotify.models.tracks.TrackSimplified;
 import spotify.retrofit.services.AlbumService;
+import spotify.utils.LoggingUtil;
 import spotify.utils.ResponseChecker;
 import spotify.utils.ValidatorUtil;
 
@@ -39,7 +40,7 @@ public class AlbumApiRetrofit implements AlbumApi {
         try {
             logger.info("Executing HTTP call to fetch an album.");
             logger.debug(String.format("Fetching album %s with following values: %s.", albumId, options));
-            logger.debug(String.format("%s / %s", httpCall.request().method(), httpCall.request().url().toString()));
+            LoggingUtil.logHttpCall(logger, httpCall);
             Response<AlbumFull> response = httpCall.execute();
 
             ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response.errorBody());
@@ -66,7 +67,7 @@ public class AlbumApiRetrofit implements AlbumApi {
         try {
             logger.info("Executing HTTP call to fetch albums.");
             logger.debug(String.format("Fetching following albums: %s with following values: %s.", albumIds, options));
-            logger.debug(String.format("%s / %s", httpCall.request().method(), httpCall.request().url().toString()));
+            LoggingUtil.logHttpCall(logger, httpCall);
             Response<AlbumFullCollection> response = httpCall.execute();
 
             ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response.errorBody());
@@ -89,7 +90,7 @@ public class AlbumApiRetrofit implements AlbumApi {
         try {
             logger.info("Executing HTTP call to fetch album tracks.");
             logger.debug(String.format("Fetching album %s tracks with following values: %s.", albumId, options));
-            logger.debug(String.format("%s / %s", httpCall.request().method(), httpCall.request().url().toString()));
+            LoggingUtil.logHttpCall(logger, httpCall);
             Response<Paging<TrackSimplified>> response = httpCall.execute();
 
             ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response.errorBody());

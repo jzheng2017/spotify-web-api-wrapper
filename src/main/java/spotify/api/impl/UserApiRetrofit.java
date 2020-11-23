@@ -9,6 +9,7 @@ import spotify.exceptions.HttpRequestFailedException;
 import spotify.factories.RetrofitHttpServiceFactory;
 import spotify.models.users.User;
 import spotify.retrofit.services.UserService;
+import spotify.utils.LoggingUtil;
 import spotify.utils.ResponseChecker;
 
 import java.io.IOException;
@@ -30,7 +31,7 @@ public class UserApiRetrofit implements UserApi {
 
         try {
             logger.info("Executing HTTP call to fetch current user.");
-            logger.debug(String.format("%s / %s", httpCall.request().method(), httpCall.request().url().toString()));
+            LoggingUtil.logHttpCall(logger, httpCall);
             Response<User> response = httpCall.execute();
 
             ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response.errorBody());
@@ -50,7 +51,7 @@ public class UserApiRetrofit implements UserApi {
 
         try {
             logger.info(String.format("Executing HTTP call to fetch user with id %s.", userId));
-            logger.debug(String.format("%s / %s", httpCall.request().method(), httpCall.request().url().toString()));
+            LoggingUtil.logHttpCall(logger, httpCall);
             Response<User> response = httpCall.execute();
 
             ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response.errorBody());

@@ -14,6 +14,7 @@ import spotify.models.playlists.FeaturedPlaylistCollection;
 import spotify.models.playlists.PlaylistSimplifiedPaging;
 import spotify.models.recommendations.RecommendationCollection;
 import spotify.retrofit.services.BrowseService;
+import spotify.utils.LoggingUtil;
 import spotify.utils.ResponseChecker;
 import spotify.utils.ValidatorUtil;
 
@@ -41,7 +42,7 @@ public class BrowseApiRetrofit implements BrowseApi {
         try {
             logger.info("Executing HTTP call to fetch category.");
             logger.debug(String.format("Fetching category %s with following values: %s.", categoryId, options));
-            logger.debug(String.format("%s / %s", httpCall.request().method(), httpCall.request().url().toString()));
+            LoggingUtil.logHttpCall(logger, httpCall);
             Response<CategoryFull> response = httpCall.execute();
 
             ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response.errorBody());
@@ -64,7 +65,7 @@ public class BrowseApiRetrofit implements BrowseApi {
         try {
             logger.info("Executing HTTP call to fetch category playlists.");
             logger.debug(String.format("Fetching category %s playlists with following values: %s.", categoryId, options));
-            logger.debug(String.format("%s / %s", httpCall.request().method(), httpCall.request().url().toString()));
+            LoggingUtil.logHttpCall(logger, httpCall);
             Response<PlaylistSimplifiedPaging> response = httpCall.execute();
 
             ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response.errorBody());
@@ -87,7 +88,7 @@ public class BrowseApiRetrofit implements BrowseApi {
         try {
             logger.info("Executing HTTP call to fetch categories.");
             logger.debug(String.format("Fetching categories with following values: %s.", options));
-            logger.debug(String.format("%s / %s", httpCall.request().method(), httpCall.request().url().toString()));
+            LoggingUtil.logHttpCall(logger, httpCall);
             Response<CategoryFullPaging> response = httpCall.execute();
 
             ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response.errorBody());
@@ -110,7 +111,7 @@ public class BrowseApiRetrofit implements BrowseApi {
         try {
             logger.info("Executing HTTP call to fetch featured playlists.");
             logger.debug(String.format("Fetching featured playlists with following values: %s", options));
-            logger.debug(String.format("%s / %s", httpCall.request().method(), httpCall.request().url().toString()));
+            LoggingUtil.logHttpCall(logger, httpCall);
             Response<FeaturedPlaylistCollection> response = httpCall.execute();
 
             ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response.errorBody());
@@ -133,7 +134,7 @@ public class BrowseApiRetrofit implements BrowseApi {
         try {
             logger.info("Executing HTTP call to fetch new releases.");
             logger.debug(String.format("Fetching new releases with following values: %s", options));
-            logger.debug(String.format("%s / %s", httpCall.request().method(), httpCall.request().url().toString()));
+            LoggingUtil.logHttpCall(logger, httpCall);
             Response<AlbumSimplifiedPaging> response = httpCall.execute();
 
             ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response.errorBody());
@@ -158,7 +159,7 @@ public class BrowseApiRetrofit implements BrowseApi {
         try {
             logger.info("Executing HTTP call to fetch recommendations.");
             logger.debug(String.format("Fetching recommendations with following values: %s", options));
-            logger.debug(String.format("%s / %s", httpCall.request().method(), httpCall.request().url().toString()));
+            LoggingUtil.logHttpCall(logger, httpCall);
             Response<RecommendationCollection> response = httpCall.execute();
 
             ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response.errorBody());

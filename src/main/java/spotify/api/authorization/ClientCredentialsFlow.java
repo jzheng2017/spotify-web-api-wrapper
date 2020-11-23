@@ -11,6 +11,7 @@ import spotify.exceptions.SpotifyAuthorizationFailedException;
 import spotify.factories.RetrofitHttpServiceFactory;
 import spotify.models.authorization.ClientCredentialsFlowTokenResponse;
 import spotify.retrofit.services.ClientCredentialsFlowService;
+import spotify.utils.LoggingUtil;
 
 import java.io.IOException;
 
@@ -51,7 +52,7 @@ public class ClientCredentialsFlow {
 
         try {
             logger.info("Executing HTTP call to fetch an access token.");
-            logger.debug(String.format("%s / %s", httpCall.request().method(), httpCall.request().url().toString()));
+            LoggingUtil.logHttpCall(logger, httpCall);
             final Response<ClientCredentialsFlowTokenResponse> response = httpCall.execute();
 
             if (response.body() == null) {
