@@ -16,6 +16,13 @@ import spotify.retrofit.services.AuthorizationCodeFlowService;
 
 import java.io.IOException;
 
+/**
+ * This class is used to refresh the access token.
+ * <p>
+ * For more information see: @see <a href="https://developer.spotify.com/documentation/general/guides/authorization-guide/#authorization-code-flow">Authorization Code Flow</a>
+ *
+ * @author Jiankai Zheng
+ */
 public class AuthorizationRefreshToken {
     private final Logger logger = LoggerFactory.getLogger(AuthorizationRefreshToken.class);
     private final Retrofit httpClient;
@@ -25,6 +32,14 @@ public class AuthorizationRefreshToken {
         httpClient = RetrofitClientFactory.getRetrofitClient(ApiUrl.ACCOUNTS_URL_HTTPS);
     }
 
+    /**
+     * Makes a request to the Spotify API to refresh the access token.
+     *
+     * @param clientId     the client id
+     * @param clientSecret the client secret
+     * @param refreshToken the refresh token
+     * @return Object containing the new access and refresh token
+     */
     public AuthorizationCodeFlowTokenResponse refreshAccessToken(String clientId, String clientSecret, String refreshToken) {
         final AuthorizationCodeFlowService authorizationCodeFlowService = httpClient.create(AuthorizationCodeFlowService.class);
 
