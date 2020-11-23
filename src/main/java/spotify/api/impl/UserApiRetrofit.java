@@ -4,11 +4,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import retrofit2.Call;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 import spotify.api.interfaces.UserApi;
-import spotify.config.ApiUrl;
 import spotify.exceptions.HttpRequestFailedException;
-import spotify.factories.RetrofitClientFactory;
+import spotify.factories.RetrofitHttpServiceFactory;
 import spotify.models.users.User;
 import spotify.retrofit.services.UserService;
 import spotify.utils.ResponseChecker;
@@ -22,7 +20,7 @@ public class UserApiRetrofit implements UserApi {
 
     public UserApiRetrofit(String accessToken) {
         this.accessToken = accessToken;
-        setup();
+        this.userService = RetrofitHttpServiceFactory.getUserService();
     }
 
     @Override
@@ -63,12 +61,5 @@ public class UserApiRetrofit implements UserApi {
             logger.error("HTTP request to fetch requested user has failed.");
             throw new HttpRequestFailedException(ex.getMessage());
         }
-    }
-
-    private void setup() {
-        logger.trace("Requesting Retrofit HTTP client.");
-        Retrofit httpClient = RetrofitClientFactory.getRetrofitClient(ApiUrl.API_URL_HTTPS + ApiUrl.VERSION);
-
-        userService = httpClient.create(UserService.class);
     }
 }

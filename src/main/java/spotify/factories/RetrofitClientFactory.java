@@ -5,10 +5,10 @@ import org.slf4j.LoggerFactory;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class RetrofitClientFactory {
+class RetrofitClientFactory {
     private final static Logger logger = LoggerFactory.getLogger(RetrofitClientFactory.class);
 
-    public static Retrofit getRetrofitClient(String baseUrl) {
+    static Retrofit getRetrofitClient(String baseUrl) {
         logger.trace(String.format("Building Retrofit HTTP client with base url %s.", baseUrl));
         return new Retrofit.Builder()
                 .baseUrl(baseUrl)

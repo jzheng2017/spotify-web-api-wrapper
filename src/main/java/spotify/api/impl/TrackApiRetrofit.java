@@ -4,11 +4,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import retrofit2.Call;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 import spotify.api.interfaces.TrackApi;
-import spotify.config.ApiUrl;
 import spotify.exceptions.HttpRequestFailedException;
-import spotify.factories.RetrofitClientFactory;
+import spotify.factories.RetrofitHttpServiceFactory;
 import spotify.models.audio.AudioAnalysis;
 import spotify.models.audio.AudioFeatures;
 import spotify.models.audio.AudioFeaturesCollection;
@@ -25,11 +23,11 @@ import java.util.Map;
 public class TrackApiRetrofit implements TrackApi {
     private final Logger logger = LoggerFactory.getLogger(TrackApiRetrofit.class);
     private final String accessToken;
-    private TrackService trackService;
+    private final TrackService trackService;
 
     public TrackApiRetrofit(String accessToken) {
         this.accessToken = accessToken;
-        setup();
+        this.trackService = RetrofitHttpServiceFactory.getTrackService();
     }
 
     @Override
@@ -145,13 +143,6 @@ public class TrackApiRetrofit implements TrackApi {
             logger.error("Fetching track audio analysis has failed.");
             throw new HttpRequestFailedException(e.getMessage());
         }
-    }
-
-    private void setup() {
-        logger.trace("Requesting Retrofit HTTP client.");
-        Retrofit httpClient = RetrofitClientFactory.getRetrofitClient(ApiUrl.API_URL_HTTPS + ApiUrl.VERSION);
-
-        trackService = httpClient.create(TrackService.class);
     }
 
     private void validateTrackListSizeAndThrowIfExceeded(List<String> listOfTrackIds, int maximumAmountOfTrackIdsAllowed) {

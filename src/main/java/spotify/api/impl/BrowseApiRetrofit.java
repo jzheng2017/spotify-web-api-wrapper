@@ -4,11 +4,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import retrofit2.Call;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 import spotify.api.interfaces.BrowseApi;
-import spotify.config.ApiUrl;
 import spotify.exceptions.HttpRequestFailedException;
-import spotify.factories.RetrofitClientFactory;
+import spotify.factories.RetrofitHttpServiceFactory;
 import spotify.models.albums.AlbumSimplifiedPaging;
 import spotify.models.categories.CategoryFull;
 import spotify.models.categories.CategoryFullPaging;
@@ -26,11 +24,11 @@ import java.util.Map;
 public class BrowseApiRetrofit implements BrowseApi {
     private final Logger logger = LoggerFactory.getLogger(UserApiRetrofit.class);
     private final String accessToken;
-    private BrowseService browseService;
+    private final BrowseService browseService;
 
     public BrowseApiRetrofit(String accessToken) {
         this.accessToken = accessToken;
-        setup();
+        this.browseService = RetrofitHttpServiceFactory.getBrowseService();
     }
 
     @Override
@@ -189,12 +187,5 @@ public class BrowseApiRetrofit implements BrowseApi {
         if (!trackSeedIds.isEmpty()) {
             options.put("seed_tracks", trackSeedIds);
         }
-    }
-
-    private void setup() {
-        logger.trace("Requesting Retrofit HTTP client.");
-        Retrofit httpClient = RetrofitClientFactory.getRetrofitClient(ApiUrl.API_URL_HTTPS + ApiUrl.VERSION);
-
-        browseService = httpClient.create(BrowseService.class);
     }
 }

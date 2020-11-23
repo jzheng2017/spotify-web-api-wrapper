@@ -4,11 +4,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import retrofit2.Call;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 import spotify.api.interfaces.ShowApi;
-import spotify.config.ApiUrl;
 import spotify.exceptions.HttpRequestFailedException;
-import spotify.factories.RetrofitClientFactory;
+import spotify.factories.RetrofitHttpServiceFactory;
 import spotify.models.episodes.EpisodeSimplified;
 import spotify.models.paging.Paging;
 import spotify.models.shows.ShowFull;
@@ -24,11 +22,11 @@ import java.util.Map;
 public class ShowApiRetrofit implements ShowApi {
     private final Logger logger = LoggerFactory.getLogger(ShowApiRetrofit.class);
     private final String accessToken;
-    private ShowService showService;
+    private final ShowService showService;
 
     public ShowApiRetrofit(String accessToken) {
         this.accessToken = accessToken;
-        setup();
+        this.showService = RetrofitHttpServiceFactory.getShowService();
     }
 
     @Override
@@ -99,12 +97,5 @@ public class ShowApiRetrofit implements ShowApi {
             logger.error("HTTP request to fetch shows has failed.");
             throw new HttpRequestFailedException(ex.getMessage());
         }
-    }
-
-    private void setup() {
-        logger.trace("Requesting Retrofit HTTP client.");
-        Retrofit httpClient = RetrofitClientFactory.getRetrofitClient(ApiUrl.API_URL_HTTPS + ApiUrl.VERSION);
-
-        showService = httpClient.create(ShowService.class);
     }
 }

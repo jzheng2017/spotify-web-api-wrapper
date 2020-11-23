@@ -5,12 +5,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import retrofit2.Call;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 import spotify.api.enums.GrantType;
-import spotify.config.ApiUrl;
 import spotify.exceptions.HttpRequestFailedException;
 import spotify.exceptions.SpotifyAuthorizationFailedException;
-import spotify.factories.RetrofitClientFactory;
+import spotify.factories.RetrofitHttpServiceFactory;
 import spotify.models.authorization.AuthorizationCodeFlowTokenResponse;
 import spotify.retrofit.services.AuthorizationCodeFlowService;
 
@@ -26,11 +24,10 @@ import java.io.IOException;
  */
 public class AuthorizationRequestTokens {
     private final Logger logger = LoggerFactory.getLogger(AuthorizationRequestTokens.class);
-    private final Retrofit httpClient;
+    private final AuthorizationCodeFlowService authorizationCodeFlowService;
 
     public AuthorizationRequestTokens() {
-        logger.trace("Requesting Retrofit HTTP client.");
-        this.httpClient = RetrofitClientFactory.getRetrofitClient(ApiUrl.ACCOUNTS_URL_HTTPS);
+        this.authorizationCodeFlowService = RetrofitHttpServiceFactory.getAuthorizationCodeFlowService();
     }
 
     /**
@@ -43,8 +40,6 @@ public class AuthorizationRequestTokens {
      * @return an object containing values like the access and refresh token
      */
     public AuthorizationCodeFlowTokenResponse getAccessAndRefreshToken(String clientId, String clientSecret, String code, String redirectUri) {
-        final AuthorizationCodeFlowService authorizationCodeFlowService = httpClient.create(AuthorizationCodeFlowService.class);
-
         logger.trace("Encoding client id and secret to base 64.");
         final String base64EncodedBasicAuth = Credentials.basic(clientId, clientSecret);
 

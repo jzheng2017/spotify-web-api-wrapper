@@ -4,11 +4,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import retrofit2.Call;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 import spotify.api.interfaces.AlbumApi;
-import spotify.config.ApiUrl;
 import spotify.exceptions.HttpRequestFailedException;
-import spotify.factories.RetrofitClientFactory;
+import spotify.factories.RetrofitHttpServiceFactory;
 import spotify.models.albums.AlbumFull;
 import spotify.models.albums.AlbumFullCollection;
 import spotify.models.paging.Paging;
@@ -24,11 +22,11 @@ import java.util.Map;
 public class AlbumApiRetrofit implements AlbumApi {
     private final Logger logger = LoggerFactory.getLogger(AlbumApiRetrofit.class);
     private final String accessToken;
-    private AlbumService albumService;
+    private final AlbumService albumService;
 
     public AlbumApiRetrofit(String accessToken) {
         this.accessToken = accessToken;
-        this.setup();
+        this.albumService = RetrofitHttpServiceFactory.getAlbumService();
     }
 
     @Override
@@ -103,15 +101,6 @@ public class AlbumApiRetrofit implements AlbumApi {
             throw new HttpRequestFailedException(ex.getMessage());
         }
     }
-
-
-    private void setup() {
-        logger.trace("Requesting Retrofit HTTP client.");
-        Retrofit httpClient = RetrofitClientFactory.getRetrofitClient(ApiUrl.API_URL_HTTPS + ApiUrl.VERSION);
-
-        albumService = httpClient.create(AlbumService.class);
-    }
-
     private void validateAlbumListSizeAndThrowIfExceeded(List<String> listOfAlbumIds, int maximumAmountOfAlbumIdsAllowed) {
         final int listSize = listOfAlbumIds.size();
 

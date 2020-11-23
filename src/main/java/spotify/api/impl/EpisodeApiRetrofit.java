@@ -4,11 +4,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import retrofit2.Call;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 import spotify.api.interfaces.EpisodeApi;
-import spotify.config.ApiUrl;
 import spotify.exceptions.HttpRequestFailedException;
-import spotify.factories.RetrofitClientFactory;
+import spotify.factories.RetrofitHttpServiceFactory;
 import spotify.models.episodes.EpisodeFull;
 import spotify.models.episodes.EpisodeFullCollection;
 import spotify.retrofit.services.EpisodeService;
@@ -22,11 +20,11 @@ import java.util.Map;
 public class EpisodeApiRetrofit implements EpisodeApi {
     private final Logger logger = LoggerFactory.getLogger(EpisodeApiRetrofit.class);
     private final String accessToken;
-    private EpisodeService episodeService;
+    private final EpisodeService episodeService;
 
     public EpisodeApiRetrofit(String accessToken) {
         this.accessToken = accessToken;
-        setup();
+        this.episodeService = RetrofitHttpServiceFactory.getEpisodeService();
     }
 
     @Override
@@ -76,13 +74,6 @@ public class EpisodeApiRetrofit implements EpisodeApi {
             logger.error("HTTP request to fetch episodes has failed.");
             throw new HttpRequestFailedException(ex.getMessage());
         }
-    }
-
-    private void setup() {
-        logger.trace("Requesting Retrofit HTTP client.");
-        Retrofit httpClient = RetrofitClientFactory.getRetrofitClient(ApiUrl.API_URL_HTTPS + ApiUrl.VERSION);
-
-        episodeService = httpClient.create(EpisodeService.class);
     }
 
     private void validateEpisodeListSizeAndThrowIfExceeded(List<String> listOfEpisodeIds, int maximumAmountOfEpisodeIdsAllowed) {
