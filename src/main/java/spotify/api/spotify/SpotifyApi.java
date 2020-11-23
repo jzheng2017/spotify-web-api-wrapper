@@ -191,6 +191,11 @@ public class SpotifyApi {
         return followApi.isFollowing(entityType, listOfEntityIds);
     }
 
+    public List<Boolean> isFollowingPlaylist(String playlistId, List<String> listOfUserIds) {
+        logger.info("Requesting following list");
+        return followApi.isFollowingPlaylist(playlistId, listOfUserIds);
+    }
+
     private void setup(String accessToken) {
         logger.trace("Constructing Retrofit APIs");
         this.trackApi = new TrackApiRetrofit(accessToken);

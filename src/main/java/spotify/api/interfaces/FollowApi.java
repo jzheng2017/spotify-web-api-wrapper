@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface FollowApi {
     List<Boolean> isFollowing(EntityType entityType, List<String> listOfEntityIds);
+
+    List<Boolean> isFollowingPlaylist(String playlistId, List<String> listOfUserIds);
 }

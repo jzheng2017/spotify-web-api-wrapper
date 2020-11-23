@@ -9,6 +9,7 @@ import spotify.api.interfaces.FollowApi;
 import spotify.exceptions.HttpRequestFailedException;
 import spotify.factories.RetrofitHttpServiceFactory;
 import spotify.retrofit.services.FollowService;
+import spotify.utils.LoggingUtil;
 import spotify.utils.ResponseChecker;
 
 import java.io.IOException;
@@ -34,7 +35,30 @@ public class FollowApiRetrofit implements FollowApi {
         try {
             logger.info("Executing HTTP call to check if user follows the provided entities.");
             logger.debug(String.format("Fetching %s following list with following entity ids: %s.", entityType, entityIds));
-            logger.debug(String.format("%s / %s", httpCall.request().method(), httpCall.request().url().toString()));
+            LoggingUtil.logHttpCall(logger, httpCall);
+            Response<List<Boolean>> response = httpCall.execute();
+
+            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response.errorBody());
+
+            logger.info("Following list has been successfully fetched.");
+            return response.body();
+        } catch (IOException ex) {
+            logger.error("HTTP request to fetch following list has failed.");
+            throw new HttpRequestFailedException(ex.getMessage());
+        }
+    }
+
+    @Override
+    public List<Boolean> isFollowingPlaylist(String playlistId, List<String> listOfUserIds) {
+        String userIds = String.join(",", listOfUserIds);
+
+        logger.trace("Constructing HTTP call to check if users are following the playlist.");
+        Call<List<Boolean>> httpCall = followService.isFollowingPlaylist("Bearer " + this.accessToken, playlistId, userIds);
+
+        try {
+            logger.info("Executing HTTP call to check if users are following the playlist.");
+            logger.debug(String.format("Fetching %s playlist following list with following user ids: %s.", playlistId, userIds));
+            LoggingUtil.logHttpCall(logger, httpCall);
             Response<List<Boolean>> response = httpCall.execute();
 
             ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response.errorBody());
