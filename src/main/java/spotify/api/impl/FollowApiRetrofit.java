@@ -8,6 +8,7 @@ import spotify.api.enums.EntityType;
 import spotify.api.interfaces.FollowApi;
 import spotify.exceptions.HttpRequestFailedException;
 import spotify.factories.RetrofitHttpServiceFactory;
+import spotify.models.playlists.FollowPlaylistRequestBody;
 import spotify.retrofit.services.FollowService;
 import spotify.utils.LoggingUtil;
 import spotify.utils.ResponseChecker;
@@ -88,7 +89,27 @@ public class FollowApiRetrofit implements FollowApi {
 
             logger.info("Entities have been successfully followed.");
         } catch (IOException ex) {
-            logger.error("HTTP request to follow entities.");
+            logger.error("HTTP request to follow entities has failed.");
+            throw new HttpRequestFailedException(ex.getMessage());
+        }
+    }
+
+    @Override
+    public void followPlaylist(String playlistId, boolean setPlaylistPublic) {
+        logger.trace("Constructing HTTP call to follow playlist");
+        Call<Void> httpCall = followService.followPlaylist("Bearer " + this.accessToken, playlistId, new FollowPlaylistRequestBody(setPlaylistPublic));
+
+        try {
+            logger.info("Executing HTTP call to follow playlist.");
+            logger.debug(String.format("Following playlist %s and set it to %s", playlistId, setPlaylistPublic ? "public" : "private"));
+            LoggingUtil.logHttpCall(logger, httpCall);
+            Response<Void> response = httpCall.execute();
+
+            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response.errorBody());
+
+            logger.info("Playlist has been successfully followed.");
+        } catch (IOException ex) {
+            logger.error("HTTP request to follow playlist has failed.");
             throw new HttpRequestFailedException(ex.getMessage());
         }
     }

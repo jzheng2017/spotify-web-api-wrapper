@@ -10,4 +10,6 @@ public interface FollowApi {
     List<Boolean> isFollowingPlaylist(String playlistId, List<String> listOfUserIds);
 
     void followEntity(EntityType entityType, List<String> listOfEntityIds);
+
+    void followPlaylist(String playlistId, boolean setPlaylistPublic);
 }
