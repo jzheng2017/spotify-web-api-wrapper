@@ -95,6 +95,7 @@ Latest official release:
 See the [LICENSE](https://github.com/jzheng2017/spotify-web-api-wrapper/blob/main/LICENSE) file for the license rights and limitations (GNU GPLv3).
 
 ## Spotify endpoint coverage
+This is the most recent coverage in the repository. The marked endpoints may not be available yet in the most recent official release.
 - [x] Albums
 - - [x] Get an Album
 - - [x] Get Several Albums
@@ -119,11 +120,11 @@ See the [LICENSE](https://github.com/jzheng2017/spotify-web-api-wrapper/blob/mai
 - [ ] Follow
 - - [ ] Unfollow Artists or Users
 - - [ ] Unfollow a Playlist
-- - [ ] Check if Current User Follows Artists or Users
+- - [x] Check if Current User Follows Artists or Users
 - - [ ] Get Followed Artists
-- - [ ] Check if Users Follow a Playlist
-- - [ ] Follow Artists or Users
-- - [ ] Follow a Playlist
+- - [x] Check if Users Follow a Playlist
+- - [x] Follow Artists or Users
+- - [] Follow a Playlist
 - [ ] Library
 - - [ ] Remove Albums for Current User
 - - [ ] Remove User's Saved Shows
