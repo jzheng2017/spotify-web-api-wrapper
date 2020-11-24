@@ -31,4 +31,7 @@ public interface FollowService {
 
     @DELETE("me/following")
     Call<Void> unfollowEntities(@Header("Authorization") String accessToken, @Query("type") EntityType entityType, @Query("ids") String entityIds);
+
+    @DELETE("playlists/{playlist_id}/followers")
+    Call<Void> unfollowPlaylist(@Header("Authorization") String accessToken, @Path("playlist_id") String playlistId);
 }
