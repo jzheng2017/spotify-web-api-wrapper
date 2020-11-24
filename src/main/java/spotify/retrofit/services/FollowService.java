@@ -1,10 +1,7 @@
 package spotify.retrofit.services;
 
 import retrofit2.Call;
-import retrofit2.http.GET;
-import retrofit2.http.Header;
-import retrofit2.http.Path;
-import retrofit2.http.Query;
+import retrofit2.http.*;
 import spotify.api.enums.EntityType;
 
 import java.util.List;
@@ -15,4 +12,7 @@ public interface FollowService {
 
     @GET("playlists/{playlist_id}/followers/contains")
     Call<List<Boolean>> isFollowingPlaylist(@Header("Authorization") String accessToken, @Path("playlist_id") String playlistId, @Query("ids") String userIds);
+
+    @PUT("me/following")
+    Call<Void> followEntity(@Header("Authorization") String accessToken, @Query("type") EntityType entityType, @Query("ids") String entityIds);
 }
