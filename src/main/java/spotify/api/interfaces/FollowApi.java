@@ -16,4 +16,7 @@ public interface FollowApi {
     void followPlaylist(String playlistId, boolean setPlaylistPublic);
 
     ArtistFullCursorBasedPaging getFollowedArtists(EntityType entityType, Map<String, String> options);
+
+    void unfollowEntities(EntityType entityType, List<String> listOfEntityIds);
+
 }

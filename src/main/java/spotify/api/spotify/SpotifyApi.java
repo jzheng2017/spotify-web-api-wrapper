@@ -212,6 +212,11 @@ public class SpotifyApi {
         return followApi.getFollowedArtists(entityType, options);
     }
 
+    public void unfollowEntities(EntityType entityType, List<String> listOfEntityIds) {
+        logger.info("Requesting to unfollow entities");
+        followApi.unfollowEntities(entityType, listOfEntityIds);
+    }
+
     private void setup(String accessToken) {
         logger.trace("Constructing Retrofit APIs");
         this.trackApi = new TrackApiRetrofit(accessToken);

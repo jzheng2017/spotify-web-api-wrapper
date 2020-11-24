@@ -145,4 +145,26 @@ public class FollowApiRetrofit implements FollowApi {
             throw new HttpRequestFailedException(ex.getMessage());
         }
     }
+
+    @Override
+    public void unfollowEntities(EntityType entityType, List<String> listOfEntityIds) {
+        String entityIds = String.join(",", listOfEntityIds);
+
+        logger.trace("Constructing HTTP call to unfollow entities.");
+        Call<Void> httpCall = followService.unfollowEntities("Bearer " + this.accessToken, entityType, entityIds);
+
+        try {
+            logger.info("Executing HTTP call to unfollow entities.");
+            logger.debug(String.format("Unfollowing entities with following entity ids: %s.", entityIds));
+            LoggingUtil.logHttpCall(logger, httpCall);
+            Response<Void> response = httpCall.execute();
+
+            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response.errorBody());
+
+            logger.info("Entities have been successfully unfollowed.");
+        } catch (IOException ex) {
+            logger.error("HTTP request to unfollow entities has failed.");
+            throw new HttpRequestFailedException(ex.getMessage());
+        }
+    }
 }
