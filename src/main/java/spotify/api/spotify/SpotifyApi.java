@@ -11,6 +11,7 @@ import spotify.models.albums.AlbumFullCollection;
 import spotify.models.albums.AlbumSimplifiedPaging;
 import spotify.models.artists.ArtistFull;
 import spotify.models.artists.ArtistFullCollection;
+import spotify.models.artists.ArtistFullCursorBasedPaging;
 import spotify.models.artists.ArtistSimplified;
 import spotify.models.audio.AudioAnalysis;
 import spotify.models.audio.AudioFeatures;
@@ -204,6 +205,11 @@ public class SpotifyApi {
     public void followPlaylist(String playlistId, boolean setPlaylistPublic) {
         logger.info("Requesting to follow playlist");
         followApi.followPlaylist(playlistId, setPlaylistPublic);
+    }
+
+    public ArtistFullCursorBasedPaging getFollowedArtists(EntityType entityType, Map<String, String> options) {
+        logger.info("Requesting current user's followed artists");
+        return followApi.getFollowedArtists(entityType, options);
     }
 
     private void setup(String accessToken) {

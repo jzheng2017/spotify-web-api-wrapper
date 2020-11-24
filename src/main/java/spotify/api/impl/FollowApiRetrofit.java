@@ -7,7 +7,10 @@ import retrofit2.Response;
 import spotify.api.enums.EntityType;
 import spotify.api.interfaces.FollowApi;
 import spotify.exceptions.HttpRequestFailedException;
+import spotify.exceptions.SpotifyActionFailedException;
 import spotify.factories.RetrofitHttpServiceFactory;
+import spotify.models.artists.ArtistFullCursorBasedPaging;
+import spotify.models.artists.ArtistFullCursorBasedPagingWrapper;
 import spotify.models.playlists.FollowPlaylistRequestBody;
 import spotify.retrofit.services.FollowService;
 import spotify.utils.LoggingUtil;
@@ -15,6 +18,7 @@ import spotify.utils.ResponseChecker;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 public class FollowApiRetrofit implements FollowApi {
     private final Logger logger = LoggerFactory.getLogger(EpisodeApiRetrofit.class);
@@ -76,7 +80,7 @@ public class FollowApiRetrofit implements FollowApi {
     public void followEntity(EntityType entityType, List<String> listOfEntityIds) {
         String entityIds = String.join(",", listOfEntityIds);
 
-        logger.trace("Constructing HTTP call to follow entities");
+        logger.trace("Constructing HTTP call to follow entities.");
         Call<Void> httpCall = followService.followEntity("Bearer " + this.accessToken, entityType, entityIds);
 
         try {
@@ -96,7 +100,7 @@ public class FollowApiRetrofit implements FollowApi {
 
     @Override
     public void followPlaylist(String playlistId, boolean setPlaylistPublic) {
-        logger.trace("Constructing HTTP call to follow playlist");
+        logger.trace("Constructing HTTP call to follow playlist.");
         Call<Void> httpCall = followService.followPlaylist("Bearer " + this.accessToken, playlistId, new FollowPlaylistRequestBody(setPlaylistPublic));
 
         try {
@@ -110,6 +114,34 @@ public class FollowApiRetrofit implements FollowApi {
             logger.info("Playlist has been successfully followed.");
         } catch (IOException ex) {
             logger.error("HTTP request to follow playlist has failed.");
+            throw new HttpRequestFailedException(ex.getMessage());
+        }
+    }
+
+    @Override
+    public ArtistFullCursorBasedPaging getFollowedArtists(EntityType entityType, Map<String, String> options) {
+        logger.trace("Constructing HTTP call to fetch followed artists of the current user.");
+        Call<ArtistFullCursorBasedPagingWrapper> httpCall = followService.getFollowedArtists("Bearer " + this.accessToken, entityType, options);
+
+        try {
+            logger.info("Executing HTTP call to fetch followed artists of the current user.");
+            logger.debug(String.format("Fetching current user's followed artists with the following values: %s", options));
+            LoggingUtil.logHttpCall(logger, httpCall);
+            Response<ArtistFullCursorBasedPagingWrapper> response = httpCall.execute();
+
+            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response.errorBody());
+
+            if (response.body() != null) {
+                logger.info("Followed artists has been successfully followed.");
+                return response.body().getArtists();
+            }
+
+            final String errorMessage = "Empty response body has been returned. Reason is unknown";
+
+            logger.error(errorMessage);
+            throw new SpotifyActionFailedException(errorMessage);
+        } catch (IOException ex) {
+            logger.error("HTTP request to fetch followed artists has failed.");
             throw new HttpRequestFailedException(ex.getMessage());
         }
     }
