@@ -19,4 +19,5 @@ public interface FollowApi {
 
     void unfollowEntities(EntityType entityType, List<String> listOfEntityIds);
 
+    void unfollowPlaylist(String playlistId);
 }

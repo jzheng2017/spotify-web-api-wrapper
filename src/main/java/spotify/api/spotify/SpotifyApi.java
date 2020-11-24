@@ -217,6 +217,11 @@ public class SpotifyApi {
         followApi.unfollowEntities(entityType, listOfEntityIds);
     }
 
+    public void unfollowPlaylist(String playlistId) {
+        logger.info("Requesting to unfollow playlist");
+        followApi.unfollowPlaylist(playlistId);
+    }
+
     private void setup(String accessToken) {
         logger.trace("Constructing Retrofit APIs");
         this.trackApi = new TrackApiRetrofit(accessToken);

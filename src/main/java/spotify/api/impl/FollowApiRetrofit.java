@@ -167,4 +167,24 @@ public class FollowApiRetrofit implements FollowApi {
             throw new HttpRequestFailedException(ex.getMessage());
         }
     }
+
+    @Override
+    public void unfollowPlaylist(String playlistId) {
+        logger.trace("Constructing HTTP call to unfollow playlist.");
+        Call<Void> httpCall = followService.unfollowPlaylist("Bearer " + this.accessToken, playlistId);
+
+        try {
+            logger.info("Executing HTTP call to unfollow playlist.");
+            logger.debug(String.format("Unfollowing playlist %s ", playlistId));
+            LoggingUtil.logHttpCall(logger, httpCall);
+            Response<Void> response = httpCall.execute();
+
+            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response.errorBody());
+
+            logger.info("Playlist has been successfully unfollowed.");
+        } catch (IOException ex) {
+            logger.error("HTTP request to unfollow playlist has failed.");
+            throw new HttpRequestFailedException(ex.getMessage());
+        }
+    }
 }
