@@ -117,14 +117,14 @@ This is the most recent coverage in the repository. The marked endpoints may not
 - [x] Episodes
 - - [x] Get an Episode
 - - [x] Get Several Episodes
-- [ ] Follow
-- - [ ] Unfollow Artists or Users
-- - [ ] Unfollow a Playlist
+- [x] Follow
+- - [x] Unfollow Artists or Users
+- - [x] Unfollow a Playlist
 - - [x] Check if Current User Follows Artists or Users
-- - [ ] Get Followed Artists
+- - [x] Get Followed Artists
 - - [x] Check if Users Follow a Playlist
 - - [x] Follow Artists or Users
-- - [] Follow a Playlist
+- - [x] Follow a Playlist
 - [ ] Library
 - - [ ] Remove Albums for Current User
 - - [ ] Remove User's Saved Shows
