@@ -17,7 +17,7 @@ public interface FollowService {
     Call<List<Boolean>> isFollowingPlaylist(@Header("Authorization") String accessToken, @Path("playlist_id") String playlistId, @Query("ids") String userIds);
 
     @PUT("me/following")
-    Call<Void> followEntity(@Header("Authorization") String accessToken, @Query("type") EntityType entityType, @Query("ids") String entityIds);
+    Call<Void> followEntities(@Header("Authorization") String accessToken, @Query("type") EntityType entityType, @Query("ids") String entityIds);
 
     @GET("me/following")
     Call<ArtistFullCursorBasedPagingWrapper> getFollowedArtists(@Header("Authorization") String accessToken,

@@ -77,11 +77,11 @@ public class FollowApiRetrofit implements FollowApi {
     }
 
     @Override
-    public void followEntity(EntityType entityType, List<String> listOfEntityIds) {
+    public void followEntities(EntityType entityType, List<String> listOfEntityIds) {
         String entityIds = String.join(",", listOfEntityIds);
 
         logger.trace("Constructing HTTP call to follow entities.");
-        Call<Void> httpCall = followService.followEntity("Bearer " + this.accessToken, entityType, entityIds);
+        Call<Void> httpCall = followService.followEntities("Bearer " + this.accessToken, entityType, entityIds);
 
         try {
             logger.info("Executing HTTP call to follow entities.");

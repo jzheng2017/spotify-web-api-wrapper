@@ -197,9 +197,9 @@ public class SpotifyApi {
         return followApi.isFollowingPlaylist(playlistId, listOfUserIds);
     }
 
-    public void followEntity(EntityType entityType, List<String> listOfEntityIds) {
+    public void followEntities(EntityType entityType, List<String> listOfEntityIds) {
         logger.info("Requesting to follow entities");
-        followApi.followEntity(entityType, listOfEntityIds);
+        followApi.followEntities(entityType, listOfEntityIds);
     }
 
     public void followPlaylist(String playlistId, boolean setPlaylistPublic) {
