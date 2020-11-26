@@ -46,8 +46,9 @@ public class SpotifyApi {
     private ArtistApi artistApi;
     private BrowseApi browseApi;
     private FollowApi followApi;
+    private LibraryApi libraryApi;
 
-    public SpotifyApi(String accessToken) {
+    public SpotifyApi(final String accessToken) {
         this.setup(accessToken);
     }
 
@@ -222,7 +223,12 @@ public class SpotifyApi {
         followApi.unfollowPlaylist(playlistId);
     }
 
-    private void setup(String accessToken) {
+    public List<Boolean> hasSavedAlbums(List<String> listOfAlbumIds) {
+        logger.info("Requesting to check saved albums");
+        return libraryApi.hasSavedAlbums(listOfAlbumIds);
+    }
+
+    private void setup(final String accessToken) {
         logger.trace("Constructing Retrofit APIs");
         this.trackApi = new TrackApiRetrofit(accessToken);
         this.albumApi = new AlbumApiRetrofit(accessToken);
@@ -232,5 +238,6 @@ public class SpotifyApi {
         this.artistApi = new ArtistApiRetrofit(accessToken);
         this.browseApi = new BrowseApiRetrofit(accessToken);
         this.followApi = new FollowApiRetrofit(accessToken);
+        this.libraryApi = new LibraryApiRetrofit(accessToken);
     }
 }
