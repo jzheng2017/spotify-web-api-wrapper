@@ -129,9 +129,9 @@ This is the most recent coverage in the repository. The marked endpoints may not
 - - [ ] Remove Albums for Current User
 - - [ ] Remove User's Saved Shows
 - - [ ] Remove Tracks for Current User
-- - [ ] Check Current User's Saved Albums
-- - [ ] Check User's Saved Shows
-- - [ ] Check Current User's Saved Tracks
+- - [x] Check Current User's Saved Albums
+- - [x] Check User's Saved Shows
+- - [x] Check Current User's Saved Tracks
 - - [ ] Get Current User's Saved Albums
 - - [ ] Get User's Saved Shows
 - - [ ] Get Current User's Saved Tracks
