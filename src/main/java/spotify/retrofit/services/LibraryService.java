@@ -13,4 +13,7 @@ public interface LibraryService {
 
     @GET("me/shows/contains")
     Call<List<Boolean>> hasSavedShows(@Header("Authorization") String accessToken, @Query("ids") String showIds);
+
+    @GET("me/tracks/contains")
+    Call<List<Boolean>> hasSavedTracks(@Header("Authorization") String accessToken, @Query("ids") String trackIds);
 }
