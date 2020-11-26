@@ -10,4 +10,7 @@ import java.util.List;
 public interface LibraryService {
     @GET("me/albums/contains")
     Call<List<Boolean>> hasSavedAlbums(@Header("Authorization") String accessToken, @Query("ids") String albumIds);
+
+    @GET("me/shows/contains")
+    Call<List<Boolean>> hasSavedShows(@Header("Authorization") String accessToken, @Query("ids") String showIds);
 }
