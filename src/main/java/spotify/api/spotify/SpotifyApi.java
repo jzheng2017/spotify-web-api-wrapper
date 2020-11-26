@@ -233,6 +233,11 @@ public class SpotifyApi {
         return libraryApi.hasSavedAlbums(listOfShowIds);
     }
 
+    public List<Boolean> hasSavedTracks(List<String> listOfTrackIds) {
+        logger.info("Requesting to check saved tracks");
+        return libraryApi.hasSavedAlbums(listOfTrackIds);
+    }
+
     private void setup(final String accessToken) {
         logger.trace("Constructing Retrofit APIs");
         this.trackApi = new TrackApiRetrofit(accessToken);
