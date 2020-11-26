@@ -46,4 +46,27 @@ public class LibraryApiRetrofit implements LibraryApi {
             throw new HttpRequestFailedException(ex.getMessage());
         }
     }
+
+    @Override
+    public List<Boolean> hasSavedShows(List<String> listOfShowIds) {
+        String showIds = String.join(",", listOfShowIds);
+
+        logger.trace("Constructing HTTP call check if current user has saved the given shows ");
+        Call<List<Boolean>> httpCall = libraryService.hasSavedShows("Bearer " + this.accessToken, showIds);
+
+        try {
+            logger.info("Executing HTTP call to check saved shows.");
+            logger.debug(String.format("Checking shows with following show ids: %s.", showIds));
+            LoggingUtil.logHttpCall(logger, httpCall);
+            Response<List<Boolean>> response = httpCall.execute();
+
+            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response.errorBody());
+
+            logger.info("Saved shows have been successfully checked");
+            return response.body();
+        } catch (IOException ex) {
+            logger.error("HTTP request to check saved shows has failed.");
+            throw new HttpRequestFailedException(ex.getMessage());
+        }
+    }
 }
