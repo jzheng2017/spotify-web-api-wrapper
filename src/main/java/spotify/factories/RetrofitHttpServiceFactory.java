@@ -56,4 +56,7 @@ public class RetrofitHttpServiceFactory {
         return getRetrofitHttpService(FollowService.class, ApiUrl.API_URL_HTTPS + ApiUrl.VERSION);
     }
 
+    public static LibraryService getLibraryService() {
+        return getRetrofitHttpService(LibraryService.class, ApiUrl.API_URL_HTTPS + ApiUrl.VERSION);
+    }
 }
