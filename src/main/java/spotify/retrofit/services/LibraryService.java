@@ -8,6 +8,7 @@ import retrofit2.http.QueryMap;
 import spotify.models.albums.SavedAlbumFull;
 import spotify.models.paging.Paging;
 import spotify.models.shows.SavedShowSimplified;
+import spotify.models.tracks.SavedTrackFull;
 
 import java.util.List;
 import java.util.Map;
@@ -27,4 +28,7 @@ public interface LibraryService {
 
     @GET("me/shows")
     Call<Paging<SavedShowSimplified>> getSavedShows(@Header("Authorization") String accessToken, @QueryMap Map<String, String> options);
+
+    @GET("me/tracks")
+    Call<Paging<SavedTrackFull>> getSavedTracks(@Header("Authorization") String accessToken, @QueryMap Map<String, String> options);
 }
