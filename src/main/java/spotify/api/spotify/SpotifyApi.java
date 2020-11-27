@@ -239,7 +239,7 @@ public class SpotifyApi {
         return libraryApi.hasSavedAlbums(listOfTrackIds);
     }
 
-    public Paging<SavedAlbumFull> getSavedTracks(Map<String, String> options) {
+    public Paging<SavedAlbumFull> getSavedAlbums(Map<String, String> options) {
         logger.info("Requesting to fetch current user's saved albums");
         return libraryApi.getSavedAlbums(options);
     }
