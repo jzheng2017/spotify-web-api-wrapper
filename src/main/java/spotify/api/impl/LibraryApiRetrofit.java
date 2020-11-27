@@ -10,6 +10,7 @@ import spotify.factories.RetrofitHttpServiceFactory;
 import spotify.models.albums.SavedAlbumFull;
 import spotify.models.paging.Paging;
 import spotify.models.shows.SavedShowSimplified;
+import spotify.models.tracks.SavedTrackFull;
 import spotify.retrofit.services.LibraryService;
 import spotify.utils.LoggingUtil;
 import spotify.utils.ResponseChecker;
@@ -101,6 +102,7 @@ public class LibraryApiRetrofit implements LibraryApi {
     @Override
     public Paging<SavedAlbumFull> getSavedAlbums(Map<String, String> options) {
         options = ValidatorUtil.optionsValueCheck(options);
+
         logger.trace("Constructing HTTP call fetch current user saved albums");
         Call<Paging<SavedAlbumFull>> httpCall = libraryService.getSavedAlbums("Bearer " + this.accessToken, options);
 
@@ -123,6 +125,7 @@ public class LibraryApiRetrofit implements LibraryApi {
     @Override
     public Paging<SavedShowSimplified> getSavedShows(Map<String, String> options) {
         options = ValidatorUtil.optionsValueCheck(options);
+
         logger.trace("Constructing HTTP call fetch current user saved shows");
         Call<Paging<SavedShowSimplified>> httpCall = libraryService.getSavedShows("Bearer " + this.accessToken, options);
 
@@ -138,6 +141,29 @@ public class LibraryApiRetrofit implements LibraryApi {
             return response.body();
         } catch (IOException ex) {
             logger.error("HTTP request to fetch saved shows has failed.");
+            throw new HttpRequestFailedException(ex.getMessage());
+        }
+    }
+
+    @Override
+    public Paging<SavedTrackFull> getSavedTracks(Map<String, String> options) {
+        options = ValidatorUtil.optionsValueCheck(options);
+
+        logger.trace("Constructing HTTP call fetch current user saved tracks");
+        Call<Paging<SavedTrackFull>> httpCall = libraryService.getSavedTracks("Bearer " + this.accessToken, options);
+
+        try {
+            logger.info("Executing HTTP call to fetch current user saved tracks");
+            logger.debug(String.format("Fetching current user saved tracks with the following values: %s.", options));
+            LoggingUtil.logHttpCall(logger, httpCall);
+            Response<Paging<SavedTrackFull>> response = httpCall.execute();
+
+            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response.errorBody());
+
+            logger.info("Saved tracks have been successfully fetched");
+            return response.body();
+        } catch (IOException ex) {
+            logger.error("HTTP request to fetch saved tracks has failed.");
             throw new HttpRequestFailedException(ex.getMessage());
         }
     }
