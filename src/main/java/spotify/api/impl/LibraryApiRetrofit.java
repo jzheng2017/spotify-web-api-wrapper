@@ -7,12 +7,16 @@ import retrofit2.Response;
 import spotify.api.interfaces.LibraryApi;
 import spotify.exceptions.HttpRequestFailedException;
 import spotify.factories.RetrofitHttpServiceFactory;
+import spotify.models.albums.SavedAlbumFull;
+import spotify.models.paging.Paging;
 import spotify.retrofit.services.LibraryService;
 import spotify.utils.LoggingUtil;
 import spotify.utils.ResponseChecker;
+import spotify.utils.ValidatorUtil;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 public class LibraryApiRetrofit implements LibraryApi {
     private final Logger logger = LoggerFactory.getLogger(LibraryApiRetrofit.class);
@@ -89,6 +93,28 @@ public class LibraryApiRetrofit implements LibraryApi {
             return response.body();
         } catch (IOException ex) {
             logger.error("HTTP request to check saved tracks has failed.");
+            throw new HttpRequestFailedException(ex.getMessage());
+        }
+    }
+
+    @Override
+    public Paging<SavedAlbumFull> getSavedAlbums(Map<String, String> options) {
+        options = ValidatorUtil.optionsValueCheck(options);
+        logger.trace("Constructing HTTP call fetch current user saved albums");
+        Call<Paging<SavedAlbumFull>> httpCall = libraryService.getSavedAlbums("Bearer " + this.accessToken, options);
+
+        try {
+            logger.info("Executing HTTP call to fetch current user saved albums");
+            logger.debug(String.format("Fetching current user saved albums with the following values: %s.", options));
+            LoggingUtil.logHttpCall(logger, httpCall);
+            Response<Paging<SavedAlbumFull>> response = httpCall.execute();
+
+            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response.errorBody());
+
+            logger.info("Saved albums have been successfully fetched");
+            return response.body();
+        } catch (IOException ex) {
+            logger.error("HTTP request to fetch saved albums has failed.");
             throw new HttpRequestFailedException(ex.getMessage());
         }
     }

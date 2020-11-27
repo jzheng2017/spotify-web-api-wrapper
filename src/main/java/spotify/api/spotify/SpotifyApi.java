@@ -9,6 +9,7 @@ import spotify.api.interfaces.*;
 import spotify.models.albums.AlbumFull;
 import spotify.models.albums.AlbumFullCollection;
 import spotify.models.albums.AlbumSimplifiedPaging;
+import spotify.models.albums.SavedAlbumFull;
 import spotify.models.artists.ArtistFull;
 import spotify.models.artists.ArtistFullCollection;
 import spotify.models.artists.ArtistFullCursorBasedPaging;
@@ -236,6 +237,11 @@ public class SpotifyApi {
     public List<Boolean> hasSavedTracks(List<String> listOfTrackIds) {
         logger.info("Requesting to check saved tracks");
         return libraryApi.hasSavedAlbums(listOfTrackIds);
+    }
+
+    public Paging<SavedAlbumFull> getSavedTracks(Map<String, String> options) {
+        logger.info("Requesting to fetch current user's saved albums");
+        return libraryApi.getSavedAlbums(options);
     }
 
     private void setup(final String accessToken) {
