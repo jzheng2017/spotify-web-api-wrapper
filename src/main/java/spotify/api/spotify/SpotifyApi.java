@@ -26,6 +26,7 @@ import spotify.models.paging.Paging;
 import spotify.models.playlists.FeaturedPlaylistCollection;
 import spotify.models.playlists.PlaylistSimplifiedPaging;
 import spotify.models.recommendations.RecommendationCollection;
+import spotify.models.shows.SavedShowSimplified;
 import spotify.models.shows.ShowFull;
 import spotify.models.shows.ShowSimplifiedCollection;
 import spotify.models.tracks.TrackFull;
@@ -242,6 +243,11 @@ public class SpotifyApi {
     public Paging<SavedAlbumFull> getSavedAlbums(Map<String, String> options) {
         logger.info("Requesting to fetch current user's saved albums");
         return libraryApi.getSavedAlbums(options);
+    }
+
+    public Paging<SavedShowSimplified> getSavedShows(Map<String, String> options) {
+        logger.info("Requesting to fetch current user's saved shows");
+        return libraryApi.getSavedShows(options);
     }
 
     private void setup(final String accessToken) {
