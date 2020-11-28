@@ -12,6 +12,7 @@ import spotify.models.generic.Image;
 import spotify.models.paging.Paging;
 import spotify.models.playlists.PlaylistFull;
 import spotify.models.playlists.PlaylistSimplified;
+import spotify.models.playlists.PlaylistTrack;
 import spotify.retrofit.services.PlaylistService;
 import spotify.utils.LoggingUtil;
 import spotify.utils.ResponseChecker;
@@ -118,6 +119,29 @@ public class PlaylistApiRetrofit implements PlaylistApi {
             return response.body();
         } catch (IOException ex) {
             logger.error("HTTP request to fetch playlist has failed.");
+            throw new HttpRequestFailedException(ex.getMessage());
+        }
+    }
+
+    @Override
+    public Paging<PlaylistTrack> getPlaylistTracks(String playlistId, Map<String, String> options) {
+        options = ValidatorUtil.optionsValueCheck(options);
+
+        logger.trace("Constructing HTTP call to fetch tracks of a playlist.");
+        Call<Paging<PlaylistTrack>> httpCall = playlistService.getPlaylistTracks("Bearer " + this.accessToken, playlistId, options);
+
+        try {
+            logger.info("Executing HTTP call to fetch tracks of a playlist.");
+            logger.debug(String.format("Fetching tracks of a playlist with the playlist id: %s, with the following parameter values: %s.", playlistId, options));
+            LoggingUtil.logHttpCall(logger, httpCall);
+            Response<Paging<PlaylistTrack>> response = httpCall.execute();
+
+            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response, HttpStatusCode.OK);
+
+            logger.info("Tracks has been successfully fetched");
+            return response.body();
+        } catch (IOException ex) {
+            logger.error("HTTP request to fetch tracks has failed.");
             throw new HttpRequestFailedException(ex.getMessage());
         }
     }

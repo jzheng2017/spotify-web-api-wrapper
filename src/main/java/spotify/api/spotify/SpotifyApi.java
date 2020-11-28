@@ -24,10 +24,7 @@ import spotify.models.episodes.EpisodeFullCollection;
 import spotify.models.episodes.EpisodeSimplified;
 import spotify.models.generic.Image;
 import spotify.models.paging.Paging;
-import spotify.models.playlists.FeaturedPlaylistCollection;
-import spotify.models.playlists.PlaylistFull;
-import spotify.models.playlists.PlaylistSimplified;
-import spotify.models.playlists.PlaylistSimplifiedPaging;
+import spotify.models.playlists.*;
 import spotify.models.recommendations.RecommendationCollection;
 import spotify.models.shows.SavedShowSimplified;
 import spotify.models.shows.ShowFull;
@@ -308,6 +305,11 @@ public class SpotifyApi {
     public PlaylistFull getPlaylist(String playlistId, Map<String, String> options) {
         logger.info("Requesting to fetch a playlist");
         return playlistApi.getPlaylist(playlistId, options);
+    }
+
+    public Paging<PlaylistTrack> getPlaylistTracks(String playlistId, Map<String, String> options) {
+        logger.info("Requesting to fetch tracks of a playlist");
+        return playlistApi.getPlaylistTracks(playlistId, options);
     }
 
     private void setup(final String accessToken) {
