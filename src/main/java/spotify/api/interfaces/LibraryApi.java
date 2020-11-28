@@ -22,4 +22,6 @@ public interface LibraryApi {
     Paging<SavedTrackFull> getSavedTracks(Map<String, String> options);
 
     void saveAlbums(List<String> listOfAlbumIds);
+
+    void saveShows(List<String> listOfShowIds);
 }

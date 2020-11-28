@@ -261,6 +261,11 @@ public class SpotifyApi {
         libraryApi.saveAlbums(listOfAlbumIds);
     }
 
+    public void saveShows(List<String> listOfShowIds) {
+        logger.info("Requesting to save shows");
+        libraryApi.saveShows(listOfShowIds);
+    }
+
     private void setup(final String accessToken) {
         logger.trace("Constructing Retrofit APIs");
         this.trackApi = new TrackApiRetrofit(accessToken);
