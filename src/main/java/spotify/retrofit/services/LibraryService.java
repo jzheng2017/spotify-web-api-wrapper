@@ -40,4 +40,7 @@ public interface LibraryService {
 
     @DELETE("me/albums")
     Call<Void> deleteAlbums(@Header("Authorization") String accessToken, @Query("ids") String albumIds);
+
+    @DELETE("me/shows")
+    Call<Void> deleteShows(@Header("Authorization") String accessToken, @Query("ids") String showIds, @QueryMap Map<String, String> options);
 }
