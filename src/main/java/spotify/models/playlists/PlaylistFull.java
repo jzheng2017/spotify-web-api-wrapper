@@ -5,7 +5,6 @@ import spotify.models.artists.Follower;
 import spotify.models.generic.ExternalUrl;
 import spotify.models.generic.Image;
 import spotify.models.paging.Paging;
-import spotify.models.tracks.TrackFull;
 import spotify.models.users.User;
 
 import java.util.List;
@@ -23,7 +22,7 @@ public class PlaylistFull {
     @SerializedName("public")
     private boolean isPublic;
     private String snapshotId;
-    private Paging<PlaylistTrack<TrackFull>> tracks;
+    private Paging<PlaylistTrack> tracks;
     private String type;
     private String uri;
 
@@ -115,11 +114,11 @@ public class PlaylistFull {
         this.snapshotId = snapshotId;
     }
 
-    public Paging<PlaylistTrack<TrackFull>> getTracks() {
+    public Paging<PlaylistTrack> getTracks() {
         return tracks;
     }
 
-    public void setTracks(Paging<PlaylistTrack<TrackFull>> tracks) {
+    public void setTracks(Paging<PlaylistTrack> tracks) {
         this.tracks = tracks;
     }
 
