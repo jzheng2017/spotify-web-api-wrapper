@@ -213,4 +213,26 @@ public class LibraryApiRetrofit implements LibraryApi {
             throw new HttpRequestFailedException(ex.getMessage());
         }
     }
+
+    @Override
+    public void saveTracks(List<String> listOfTrackIds) {
+        String trackIds = String.join(",", listOfTrackIds);
+
+        logger.trace("Constructing HTTP call to save the given tracks");
+        Call<Void> httpCall = libraryService.saveTracks("Bearer " + this.accessToken, trackIds);
+
+        try {
+            logger.info("Executing HTTP call to save the given tracks.");
+            logger.debug(String.format("Saving tracks with following track ids: %s.", trackIds));
+            LoggingUtil.logHttpCall(logger, httpCall);
+            Response<Void> response = httpCall.execute();
+
+            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response, HttpStatusCode.OK);
+
+            logger.info("Tracks have been successfully saved");
+        } catch (IOException ex) {
+            logger.error("HTTP request to save tracks has failed.");
+            throw new HttpRequestFailedException(ex.getMessage());
+        }
+    }
 }
