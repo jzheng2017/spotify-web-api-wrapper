@@ -24,6 +24,7 @@ import spotify.models.episodes.EpisodeFullCollection;
 import spotify.models.episodes.EpisodeSimplified;
 import spotify.models.paging.Paging;
 import spotify.models.playlists.FeaturedPlaylistCollection;
+import spotify.models.playlists.PlaylistSimplified;
 import spotify.models.playlists.PlaylistSimplifiedPaging;
 import spotify.models.recommendations.RecommendationCollection;
 import spotify.models.shows.SavedShowSimplified;
@@ -50,6 +51,7 @@ public class SpotifyApi {
     private BrowseApi browseApi;
     private FollowApi followApi;
     private LibraryApi libraryApi;
+    private PlaylistApi playlistApi;
 
     public SpotifyApi(final String accessToken) {
         this.setup(accessToken);
@@ -286,6 +288,11 @@ public class SpotifyApi {
         libraryApi.deleteTracks(listOfTracksIds);
     }
 
+    public Paging<PlaylistSimplified> getPlaylists(Map<String, String> options) {
+        logger.info("Requesting to fetch current user's playlists");
+        return playlistApi.getPlaylists(options);
+    }
+
     private void setup(final String accessToken) {
         logger.trace("Constructing Retrofit APIs");
         this.trackApi = new TrackApiRetrofit(accessToken);
@@ -297,5 +304,6 @@ public class SpotifyApi {
         this.browseApi = new BrowseApiRetrofit(accessToken);
         this.followApi = new FollowApiRetrofit(accessToken);
         this.libraryApi = new LibraryApiRetrofit(accessToken);
+        this.playlistApi = new PlaylistApiRetrofit(accessToken);
     }
 }
