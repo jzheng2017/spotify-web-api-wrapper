@@ -34,4 +34,7 @@ public interface LibraryService {
 
     @PUT("me/shows")
     Call<Void> saveShows(@Header("Authorization") String accessToken, @Query("ids") String showIds);
+
+    @PUT("me/tracks")
+    Call<Void> saveTracks(@Header("Authorization") String accessToken, @Query("ids") String trackIds);
 }
