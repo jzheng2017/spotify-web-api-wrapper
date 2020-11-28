@@ -26,4 +26,6 @@ public interface LibraryApi {
     void saveShows(List<String> listOfShowIds);
 
     void saveTracks(List<String> listOfTrackIds);
+
+    void deleteAlbums(List<String> listOfAlbumIds);
 }
