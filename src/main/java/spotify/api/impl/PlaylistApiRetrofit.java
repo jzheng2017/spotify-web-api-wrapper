@@ -33,13 +33,35 @@ public class PlaylistApiRetrofit implements PlaylistApi {
     public Paging<PlaylistSimplified> getPlaylists(Map<String, String> options) {
         options = ValidatorUtil.optionsValueCheck(options);
 
-
         logger.trace("Constructing HTTP call to fetch current user's playlists.");
         Call<Paging<PlaylistSimplified>> httpCall = playlistService.getPlaylists("Bearer " + this.accessToken, options);
 
         try {
             logger.info("Executing HTTP call to fetch current user's playlists.");
             logger.debug(String.format("Fetching playlists with following parameter values: %s.", options));
+            LoggingUtil.logHttpCall(logger, httpCall);
+            Response<Paging<PlaylistSimplified>> response = httpCall.execute();
+
+            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response, HttpStatusCode.OK);
+
+            logger.info("Playlists have been successfully fetched");
+            return response.body();
+        } catch (IOException ex) {
+            logger.error("HTTP request to fetch playlists has failed.");
+            throw new HttpRequestFailedException(ex.getMessage());
+        }
+    }
+
+    @Override
+    public Paging<PlaylistSimplified> getUserPlaylists(String userId, Map<String, String> options) {
+        options = ValidatorUtil.optionsValueCheck(options);
+
+        logger.trace("Constructing HTTP call to fetch a user's playlists.");
+        Call<Paging<PlaylistSimplified>> httpCall = playlistService.getUserPlaylists("Bearer " + this.accessToken, userId, options);
+
+        try {
+            logger.info("Executing HTTP call to fetch a user's playlists.");
+            logger.debug(String.format("Fetching playlists from user %s with the following parameter values: %s.", userId, options));
             LoggingUtil.logHttpCall(logger, httpCall);
             Response<Paging<PlaylistSimplified>> response = httpCall.execute();
 

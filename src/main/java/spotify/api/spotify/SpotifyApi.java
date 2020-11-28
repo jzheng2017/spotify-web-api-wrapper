@@ -293,6 +293,12 @@ public class SpotifyApi {
         return playlistApi.getPlaylists(options);
     }
 
+    public Paging<PlaylistSimplified> getUserPlaylists(String userId, Map<String, String> options) {
+        logger.info("Requesting to fetch a user's playlists");
+        return playlistApi.getUserPlaylists(userId, options);
+    }
+
+
     private void setup(final String accessToken) {
         logger.trace("Constructing Retrofit APIs");
         this.trackApi = new TrackApiRetrofit(accessToken);
