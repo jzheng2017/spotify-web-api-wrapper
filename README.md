@@ -132,12 +132,12 @@ This is the most recent coverage in the repository. The marked endpoints may not
 - - [x] Check Current User's Saved Albums
 - - [x] Check User's Saved Shows
 - - [x] Check Current User's Saved Tracks
-- - [ ] Get Current User's Saved Albums
-- - [ ] Get User's Saved Shows
-- - [ ] Get Current User's Saved Tracks
-- - [ ] Save Albums for Current User
-- - [ ] Save Shows for Current User
-- - [ ] Save Tracks for Current User
+- - [x] Get Current User's Saved Albums
+- - [x] Get User's Saved Shows
+- - [x] Get Current User's Saved Tracks
+- - [x] Save Albums for Current User
+- - [x] Save Shows for Current User
+- - [x] Save Tracks for Current User
 - [ ] Personalization
 - - [ ] Get User's Top Artists and Tracks
 - [ ] Player
