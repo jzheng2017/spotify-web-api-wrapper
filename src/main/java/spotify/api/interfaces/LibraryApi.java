@@ -20,4 +20,6 @@ public interface LibraryApi {
     Paging<SavedShowSimplified> getSavedShows(Map<String, String> options);
 
     Paging<SavedTrackFull> getSavedTracks(Map<String, String> options);
+
+    void saveAlbums(List<String> listOfAlbumIds);
 }

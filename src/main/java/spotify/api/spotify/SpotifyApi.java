@@ -256,6 +256,11 @@ public class SpotifyApi {
         return libraryApi.getSavedTracks(options);
     }
 
+    public void saveAlbums(List<String> listOfAlbumIds) {
+        logger.info("Requesting to save albums");
+        libraryApi.saveAlbums(listOfAlbumIds);
+    }
+
     private void setup(final String accessToken) {
         logger.trace("Constructing Retrofit APIs");
         this.trackApi = new TrackApiRetrofit(accessToken);
