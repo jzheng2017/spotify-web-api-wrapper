@@ -30,4 +30,6 @@ public interface LibraryApi {
     void deleteAlbums(List<String> listOfAlbumIds);
 
     void deleteShows(List<String> listOfShowIds, Map<String, String> options);
+
+    void deleteTracks(List<String> listOfTrackIds);
 }

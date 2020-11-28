@@ -281,6 +281,11 @@ public class SpotifyApi {
         libraryApi.deleteShows(listOfShowIds, options);
     }
 
+    public void deleteTracks(List<String> listOfTracksIds) {
+        logger.info("Requesting to delete saved tracks");
+        libraryApi.deleteTracks(listOfTracksIds);
+    }
+
     private void setup(final String accessToken) {
         logger.trace("Constructing Retrofit APIs");
         this.trackApi = new TrackApiRetrofit(accessToken);
