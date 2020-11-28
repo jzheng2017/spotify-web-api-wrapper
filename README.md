@@ -125,10 +125,10 @@ This is the most recent coverage in the repository. The marked endpoints may not
 - - [x] Check if Users Follow a Playlist
 - - [x] Follow Artists or Users
 - - [x] Follow a Playlist
-- [ ] Library
-- - [ ] Remove Albums for Current User
-- - [ ] Remove User's Saved Shows
-- - [ ] Remove Tracks for Current User
+- [x] Library
+- - [x] Remove Albums for Current User
+- - [x] Remove User's Saved Shows
+- - [x] Remove Tracks for Current User
 - - [x] Check Current User's Saved Albums
 - - [x] Check User's Saved Shows
 - - [x] Check Current User's Saved Tracks
