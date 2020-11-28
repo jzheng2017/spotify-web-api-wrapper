@@ -276,6 +276,10 @@ public class SpotifyApi {
         libraryApi.deleteAlbums(listOfAlbumIds);
     }
 
+    public void deleteShows(List<String> listOfShowIds, Map<String, String> options) {
+        logger.info("Requesting to delete saved shows");
+        libraryApi.deleteShows(listOfShowIds, options);
+    }
 
     private void setup(final String accessToken) {
         logger.trace("Constructing Retrofit APIs");

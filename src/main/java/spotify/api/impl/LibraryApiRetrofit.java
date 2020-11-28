@@ -257,4 +257,28 @@ public class LibraryApiRetrofit implements LibraryApi {
             throw new HttpRequestFailedException(ex.getMessage());
         }
     }
+
+    @Override
+    public void deleteShows(List<String> listOfShowIds, Map<String, String> options) {
+        options = ValidatorUtil.optionsValueCheck(options);
+
+        String showIds = String.join(",", listOfShowIds);
+
+        logger.trace("Constructing HTTP call to delete the saved shows");
+        Call<Void> httpCall = libraryService.deleteShows("Bearer " + this.accessToken, showIds, options);
+
+        try {
+            logger.info("Executing HTTP call to delete the saved shows.");
+            logger.debug(String.format("Deleting saved shows with following show ids: %s and parameter values: %s.", showIds, options));
+            LoggingUtil.logHttpCall(logger, httpCall);
+            Response<Void> response = httpCall.execute();
+
+            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response, HttpStatusCode.OK);
+
+            logger.info("Saved shows have been successfully deleted");
+        } catch (IOException ex) {
+            logger.error("HTTP request to delete saved shows has failed.");
+            throw new HttpRequestFailedException(ex.getMessage());
+        }
+    }
 }
