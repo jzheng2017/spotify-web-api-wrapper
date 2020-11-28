@@ -5,13 +5,34 @@ import com.google.gson.Gson;
 import okhttp3.ResponseBody;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import retrofit2.Response;
+import spotify.api.enums.HttpStatusCode;
 import spotify.exceptions.SpotifyActionFailedException;
 import spotify.models.errors.SpotifyError;
 
 public class ResponseChecker {
     private final static Logger logger = LoggerFactory.getLogger(ResponseChecker.class);
 
-    public static void throwIfRequestHasNotBeenFulfilledCorrectly(ResponseBody errorBody) {
+    public static <T> void throwIfRequestHasNotBeenFulfilledCorrectly(final Response<T> response, final HttpStatusCode expectedStatusCode) {
+        checkHttpStatusCode(response, expectedStatusCode.toInt());
+        checkErrorBody(response.errorBody());
+    }
+
+    private static <T> void checkHttpStatusCode(Response<T> response, int expectedStatusCode) {
+        final int actualHttpStatusCode = response.code();
+
+        if (actualHttpStatusCode != expectedStatusCode) {
+            final String errorMessage = String.format("HTTP request has not returned the expected status code. " +
+                            "This may mean that the request has not been handled correctly. " +
+                            "Expected status code: %s. Actual status code: %s.",
+                    expectedStatusCode,
+                    actualHttpStatusCode);
+
+            logger.warn(errorMessage); // it should throw an exception but spotify returns inconsistent http status codes
+        }
+    }
+
+    private static void checkErrorBody(final ResponseBody errorBody) {
         if (errorBody == null) {
             return;
         }
@@ -28,9 +49,9 @@ public class ResponseChecker {
             throw new SpotifyActionFailedException(errorMessage);
         }
 
-        final boolean hasFailed = spotifyError.getError().getStatus() > 300;
-        final int statusCode = spotifyError.getError().getStatus();
         final String message = spotifyError.getError().getMessage();
+        final int statusCode = spotifyError.getError().getStatus();
+        final boolean hasFailed = statusCode > 300;
 
         if (hasFailed) {
             logger.error(
