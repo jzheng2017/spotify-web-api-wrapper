@@ -9,6 +9,7 @@ import spotify.models.generic.Image;
 import spotify.models.paging.Paging;
 import spotify.models.playlists.PlaylistFull;
 import spotify.models.playlists.PlaylistSimplified;
+import spotify.models.playlists.PlaylistTrack;
 
 import java.util.List;
 import java.util.Map;
@@ -18,11 +19,20 @@ public interface PlaylistService {
     Call<Paging<PlaylistSimplified>> getPlaylists(@Header("Authorization") String accessToken, @QueryMap Map<String, String> options);
 
     @GET("users/{user_id}/playlists")
-    Call<Paging<PlaylistSimplified>> getUserPlaylists(@Header("Authorization") String accessToken, @Path("user_id") String userId, @QueryMap Map<String, String> options);
+    Call<Paging<PlaylistSimplified>> getUserPlaylists(@Header("Authorization") String accessToken,
+                                                      @Path("user_id") String userId,
+                                                      @QueryMap Map<String, String> options);
 
     @GET("playlists/{playlist_id}/images")
     Call<List<Image>> getPlaylistCoverImages(@Header("Authorization") String accessToken, @Path("playlist_id") String playlistId);
 
     @GET("playlists/{playlist_id}")
-    Call<PlaylistFull> getPlaylist(@Header("Authorization") String accessToken, @Path("playlist_id") String playlistId, @QueryMap Map<String, String> options);
+    Call<PlaylistFull> getPlaylist(@Header("Authorization") String accessToken,
+                                   @Path("playlist_id") String playlistId,
+                                   @QueryMap Map<String, String> options);
+
+    @GET("playlists/{playlist_id}/tracks")
+    Call<Paging<PlaylistTrack>> getPlaylistTracks(@Header("Authorization") String accessToken,
+                                                  @Path("playlist_id") String playlistId,
+                                                  @QueryMap Map<String, String> options);
 }
