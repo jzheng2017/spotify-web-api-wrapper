@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import retrofit2.Call;
 import retrofit2.Response;
+import spotify.api.enums.HttpStatusCode;
 import spotify.api.interfaces.AlbumApi;
 import spotify.exceptions.HttpRequestFailedException;
 import spotify.factories.RetrofitHttpServiceFactory;
@@ -43,7 +44,7 @@ public class AlbumApiRetrofit implements AlbumApi {
             LoggingUtil.logHttpCall(logger, httpCall);
             Response<AlbumFull> response = httpCall.execute();
 
-            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response.errorBody());
+            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response, HttpStatusCode.OK);
 
             logger.info("Album has been successfully fetched.");
             return response.body();
@@ -70,7 +71,7 @@ public class AlbumApiRetrofit implements AlbumApi {
             LoggingUtil.logHttpCall(logger, httpCall);
             Response<AlbumFullCollection> response = httpCall.execute();
 
-            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response.errorBody());
+            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response, HttpStatusCode.OK);
 
             logger.info("Albums have been successfully fetched.");
             return response.body();
@@ -93,7 +94,7 @@ public class AlbumApiRetrofit implements AlbumApi {
             LoggingUtil.logHttpCall(logger, httpCall);
             Response<Paging<TrackSimplified>> response = httpCall.execute();
 
-            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response.errorBody());
+            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response, HttpStatusCode.OK);
 
             logger.info("Album tracks have been successfully fetched.");
             return response.body();

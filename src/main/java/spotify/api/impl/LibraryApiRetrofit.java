@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import retrofit2.Call;
 import retrofit2.Response;
+import spotify.api.enums.HttpStatusCode;
 import spotify.api.interfaces.LibraryApi;
 import spotify.exceptions.HttpRequestFailedException;
 import spotify.factories.RetrofitHttpServiceFactory;
@@ -43,7 +44,7 @@ public class LibraryApiRetrofit implements LibraryApi {
             LoggingUtil.logHttpCall(logger, httpCall);
             Response<List<Boolean>> response = httpCall.execute();
 
-            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response.errorBody());
+            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response, HttpStatusCode.OK);
 
             logger.info("Saved albums have been successfully checked");
             return response.body();
@@ -66,7 +67,7 @@ public class LibraryApiRetrofit implements LibraryApi {
             LoggingUtil.logHttpCall(logger, httpCall);
             Response<List<Boolean>> response = httpCall.execute();
 
-            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response.errorBody());
+            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response, HttpStatusCode.OK);
 
             logger.info("Saved shows have been successfully checked");
             return response.body();
@@ -89,7 +90,7 @@ public class LibraryApiRetrofit implements LibraryApi {
             LoggingUtil.logHttpCall(logger, httpCall);
             Response<List<Boolean>> response = httpCall.execute();
 
-            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response.errorBody());
+            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response, HttpStatusCode.OK);
 
             logger.info("Saved tracks have been successfully checked");
             return response.body();
@@ -112,7 +113,7 @@ public class LibraryApiRetrofit implements LibraryApi {
             LoggingUtil.logHttpCall(logger, httpCall);
             Response<Paging<SavedAlbumFull>> response = httpCall.execute();
 
-            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response.errorBody());
+            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response, HttpStatusCode.OK);
 
             logger.info("Saved albums have been successfully fetched");
             return response.body();
@@ -135,7 +136,7 @@ public class LibraryApiRetrofit implements LibraryApi {
             LoggingUtil.logHttpCall(logger, httpCall);
             Response<Paging<SavedShowSimplified>> response = httpCall.execute();
 
-            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response.errorBody());
+            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response, HttpStatusCode.OK);
 
             logger.info("Saved shows have been successfully fetched");
             return response.body();
@@ -158,7 +159,7 @@ public class LibraryApiRetrofit implements LibraryApi {
             LoggingUtil.logHttpCall(logger, httpCall);
             Response<Paging<SavedTrackFull>> response = httpCall.execute();
 
-            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response.errorBody());
+            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response, HttpStatusCode.OK);
 
             logger.info("Saved tracks have been successfully fetched");
             return response.body();

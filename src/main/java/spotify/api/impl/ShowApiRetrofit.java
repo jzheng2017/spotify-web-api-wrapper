@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import retrofit2.Call;
 import retrofit2.Response;
+import spotify.api.enums.HttpStatusCode;
 import spotify.api.interfaces.ShowApi;
 import spotify.exceptions.HttpRequestFailedException;
 import spotify.factories.RetrofitHttpServiceFactory;
@@ -43,7 +44,7 @@ public class ShowApiRetrofit implements ShowApi {
             LoggingUtil.logHttpCall(logger, httpCall);
             Response<ShowFull> response = httpCall.execute();
 
-            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response.errorBody());
+            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response, HttpStatusCode.OK);
 
             logger.info("Show has been successfully fetched.");
             return response.body();
@@ -66,7 +67,7 @@ public class ShowApiRetrofit implements ShowApi {
             LoggingUtil.logHttpCall(logger, httpCall);
             Response<Paging<EpisodeSimplified>> response = httpCall.execute();
 
-            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response.errorBody());
+            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response, HttpStatusCode.OK);
 
             logger.info("Show episodes has been successfully fetched.");
             return response.body();
@@ -90,7 +91,7 @@ public class ShowApiRetrofit implements ShowApi {
             LoggingUtil.logHttpCall(logger, httpCall);
             Response<ShowSimplifiedCollection> response = httpCall.execute();
 
-            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response.errorBody());
+            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response, HttpStatusCode.OK);
 
             logger.info("Shows has been successfully fetched.");
             return response.body();

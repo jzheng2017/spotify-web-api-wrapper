@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import retrofit2.Call;
 import retrofit2.Response;
+import spotify.api.enums.HttpStatusCode;
 import spotify.api.interfaces.UserApi;
 import spotify.exceptions.HttpRequestFailedException;
 import spotify.factories.RetrofitHttpServiceFactory;
@@ -34,7 +35,7 @@ public class UserApiRetrofit implements UserApi {
             LoggingUtil.logHttpCall(logger, httpCall);
             Response<User> response = httpCall.execute();
 
-            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response.errorBody());
+            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response, HttpStatusCode.OK);
 
             logger.info("Current user has been successfully fetched.");
             return response.body();
@@ -54,7 +55,7 @@ public class UserApiRetrofit implements UserApi {
             LoggingUtil.logHttpCall(logger, httpCall);
             Response<User> response = httpCall.execute();
 
-            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response.errorBody());
+            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response, HttpStatusCode.OK);
 
             logger.info("Requested user has been successfully fetched.");
             return response.body();

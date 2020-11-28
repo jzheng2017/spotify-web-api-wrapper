@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import retrofit2.Call;
 import retrofit2.Response;
+import spotify.api.enums.HttpStatusCode;
 import spotify.api.interfaces.TrackApi;
 import spotify.exceptions.HttpRequestFailedException;
 import spotify.factories.RetrofitHttpServiceFactory;
@@ -44,7 +45,7 @@ public class TrackApiRetrofit implements TrackApi {
             LoggingUtil.logHttpCall(logger, httpCall);
             Response<TrackFull> response = httpCall.execute();
 
-            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response.errorBody());
+            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response, HttpStatusCode.OK);
 
             logger.info("Track has been successfully fetched.");
             return response.body();
@@ -70,7 +71,7 @@ public class TrackApiRetrofit implements TrackApi {
             LoggingUtil.logHttpCall(logger, httpCall);
             Response<TrackFullCollection> response = httpCall.execute();
 
-            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response.errorBody());
+            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response, HttpStatusCode.OK);
 
             logger.info("Tracks have been successfully fetched.");
             return response.body();
@@ -91,7 +92,7 @@ public class TrackApiRetrofit implements TrackApi {
             LoggingUtil.logHttpCall(logger, httpCall);
             Response<AudioFeatures> response = httpCall.execute();
 
-            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response.errorBody());
+            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response, HttpStatusCode.OK);
 
             logger.info("Track audio features has been successfully fetched.");
             return response.body();
@@ -116,7 +117,7 @@ public class TrackApiRetrofit implements TrackApi {
             LoggingUtil.logHttpCall(logger, httpCall);
             Response<AudioFeaturesCollection> response = httpCall.execute();
 
-            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response.errorBody());
+            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response, HttpStatusCode.OK);
 
             logger.info("Track audio features has been successfully fetched.");
             return response.body();
@@ -136,7 +137,7 @@ public class TrackApiRetrofit implements TrackApi {
             LoggingUtil.logHttpCall(logger, httpCall);
             Response<AudioAnalysis> response = httpCall.execute();
 
-            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response.errorBody());
+            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response, HttpStatusCode.OK);
 
             logger.info("Track audio analysis has been successfully fetched.");
             return response.body();

@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import retrofit2.Call;
 import retrofit2.Response;
 import spotify.api.enums.EntityType;
+import spotify.api.enums.HttpStatusCode;
 import spotify.api.interfaces.FollowApi;
 import spotify.exceptions.HttpRequestFailedException;
 import spotify.exceptions.SpotifyActionFailedException;
@@ -43,7 +44,7 @@ public class FollowApiRetrofit implements FollowApi {
             LoggingUtil.logHttpCall(logger, httpCall);
             Response<List<Boolean>> response = httpCall.execute();
 
-            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response.errorBody());
+            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response, HttpStatusCode.OK);
 
             logger.info("Following list has been successfully fetched.");
             return response.body();
@@ -66,7 +67,7 @@ public class FollowApiRetrofit implements FollowApi {
             LoggingUtil.logHttpCall(logger, httpCall);
             Response<List<Boolean>> response = httpCall.execute();
 
-            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response.errorBody());
+            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response, HttpStatusCode.OK);
 
             logger.info("Following list has been successfully fetched.");
             return response.body();
@@ -89,7 +90,7 @@ public class FollowApiRetrofit implements FollowApi {
             LoggingUtil.logHttpCall(logger, httpCall);
             Response<Void> response = httpCall.execute();
 
-            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response.errorBody());
+            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response, HttpStatusCode.NO_CONTENT);
 
             logger.info("Entities have been successfully followed.");
         } catch (IOException ex) {
@@ -109,7 +110,7 @@ public class FollowApiRetrofit implements FollowApi {
             LoggingUtil.logHttpCall(logger, httpCall);
             Response<Void> response = httpCall.execute();
 
-            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response.errorBody());
+            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response, HttpStatusCode.OK);
 
             logger.info("Playlist has been successfully followed.");
         } catch (IOException ex) {
@@ -129,7 +130,7 @@ public class FollowApiRetrofit implements FollowApi {
             LoggingUtil.logHttpCall(logger, httpCall);
             Response<ArtistFullCursorBasedPagingWrapper> response = httpCall.execute();
 
-            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response.errorBody());
+            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response, HttpStatusCode.OK);
 
             if (response.body() != null) {
                 logger.info("Followed artists has been successfully followed.");
@@ -159,7 +160,7 @@ public class FollowApiRetrofit implements FollowApi {
             LoggingUtil.logHttpCall(logger, httpCall);
             Response<Void> response = httpCall.execute();
 
-            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response.errorBody());
+            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response, HttpStatusCode.NO_CONTENT);
 
             logger.info("Entities have been successfully unfollowed.");
         } catch (IOException ex) {
@@ -179,7 +180,7 @@ public class FollowApiRetrofit implements FollowApi {
             LoggingUtil.logHttpCall(logger, httpCall);
             Response<Void> response = httpCall.execute();
 
-            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response.errorBody());
+            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response, HttpStatusCode.OK);
 
             logger.info("Playlist has been successfully unfollowed.");
         } catch (IOException ex) {

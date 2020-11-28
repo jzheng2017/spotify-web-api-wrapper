@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import retrofit2.Call;
 import retrofit2.Response;
+import spotify.api.enums.HttpStatusCode;
 import spotify.api.interfaces.BrowseApi;
 import spotify.exceptions.HttpRequestFailedException;
 import spotify.factories.RetrofitHttpServiceFactory;
@@ -45,7 +46,7 @@ public class BrowseApiRetrofit implements BrowseApi {
             LoggingUtil.logHttpCall(logger, httpCall);
             Response<CategoryFull> response = httpCall.execute();
 
-            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response.errorBody());
+            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response, HttpStatusCode.OK);
 
             logger.info("Category has been successfully fetched.");
             return response.body();
@@ -68,7 +69,7 @@ public class BrowseApiRetrofit implements BrowseApi {
             LoggingUtil.logHttpCall(logger, httpCall);
             Response<PlaylistSimplifiedPaging> response = httpCall.execute();
 
-            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response.errorBody());
+            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response, HttpStatusCode.OK);
 
             logger.info("Category playlists have been successfully fetched.");
             return response.body();
@@ -91,7 +92,7 @@ public class BrowseApiRetrofit implements BrowseApi {
             LoggingUtil.logHttpCall(logger, httpCall);
             Response<CategoryFullPaging> response = httpCall.execute();
 
-            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response.errorBody());
+            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response, HttpStatusCode.OK);
 
             logger.info("Categories have been successfully fetched.");
             return response.body();
@@ -114,7 +115,7 @@ public class BrowseApiRetrofit implements BrowseApi {
             LoggingUtil.logHttpCall(logger, httpCall);
             Response<FeaturedPlaylistCollection> response = httpCall.execute();
 
-            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response.errorBody());
+            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response, HttpStatusCode.OK);
 
             logger.info("Featured playlists have been successfully fetched.");
             return response.body();
@@ -137,7 +138,7 @@ public class BrowseApiRetrofit implements BrowseApi {
             LoggingUtil.logHttpCall(logger, httpCall);
             Response<AlbumSimplifiedPaging> response = httpCall.execute();
 
-            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response.errorBody());
+            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response, HttpStatusCode.OK);
 
             logger.info("New releases have been successfully fetched.");
             return response.body();
@@ -162,7 +163,7 @@ public class BrowseApiRetrofit implements BrowseApi {
             LoggingUtil.logHttpCall(logger, httpCall);
             Response<RecommendationCollection> response = httpCall.execute();
 
-            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response.errorBody());
+            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response, HttpStatusCode.OK);
 
             logger.info("Recommendations have been successfully fetched.");
             return response.body();

@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import retrofit2.Call;
 import retrofit2.Response;
+import spotify.api.enums.HttpStatusCode;
 import spotify.api.interfaces.EpisodeApi;
 import spotify.exceptions.HttpRequestFailedException;
 import spotify.factories.RetrofitHttpServiceFactory;
@@ -41,7 +42,7 @@ public class EpisodeApiRetrofit implements EpisodeApi {
             LoggingUtil.logHttpCall(logger, httpCall);
             Response<EpisodeFull> response = httpCall.execute();
 
-            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response.errorBody());
+            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response, HttpStatusCode.OK);
 
             logger.info("Episode has been successfully fetched.");
             return response.body();
@@ -67,7 +68,7 @@ public class EpisodeApiRetrofit implements EpisodeApi {
             LoggingUtil.logHttpCall(logger, httpCall);
             Response<EpisodeFullCollection> response = httpCall.execute();
 
-            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response.errorBody());
+            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response, HttpStatusCode.OK);
 
             logger.info("Episodes has been successfully fetched.");
             return response.body();

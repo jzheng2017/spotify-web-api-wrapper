@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import retrofit2.Call;
 import retrofit2.Response;
 import spotify.api.enums.AlbumType;
+import spotify.api.enums.HttpStatusCode;
 import spotify.api.interfaces.ArtistApi;
 import spotify.exceptions.HttpRequestFailedException;
 import spotify.factories.RetrofitHttpServiceFactory;
@@ -43,7 +44,7 @@ public class ArtistApiRetrofit implements ArtistApi {
             LoggingUtil.logHttpCall(logger, httpCall);
             Response<ArtistFull> response = httpCall.execute();
 
-            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response.errorBody());
+            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response, HttpStatusCode.OK);
 
             logger.info("Artist has been successfully fetched.");
             return response.body();
@@ -74,7 +75,7 @@ public class ArtistApiRetrofit implements ArtistApi {
             LoggingUtil.logHttpCall(logger, httpCall);
             Response<Paging<ArtistSimplified>> response = httpCall.execute();
 
-            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response.errorBody());
+            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response, HttpStatusCode.OK);
 
             logger.info("Artist albums has been successfully fetched.");
             return response.body();
@@ -97,7 +98,7 @@ public class ArtistApiRetrofit implements ArtistApi {
             LoggingUtil.logHttpCall(logger, httpCall);
             Response<TrackFullCollection> response = httpCall.execute();
 
-            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response.errorBody());
+            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response, HttpStatusCode.OK);
 
             logger.info("Artist top tracks have been successfully fetched.");
             return response.body();
@@ -117,7 +118,7 @@ public class ArtistApiRetrofit implements ArtistApi {
             LoggingUtil.logHttpCall(logger, httpCall);
             Response<ArtistFullCollection> response = httpCall.execute();
 
-            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response.errorBody());
+            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response, HttpStatusCode.OK);
 
             logger.info("Related artist has been successfully fetched.");
             return response.body();
@@ -140,7 +141,7 @@ public class ArtistApiRetrofit implements ArtistApi {
             LoggingUtil.logHttpCall(logger, httpCall);
             Response<ArtistFullCollection> response = httpCall.execute();
 
-            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response.errorBody());
+            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response, HttpStatusCode.OK);
 
             logger.info("Artists has been successfully fetched.");
             return response.body();
