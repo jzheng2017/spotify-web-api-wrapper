@@ -157,11 +157,11 @@ This is the most recent coverage in the repository. The marked endpoints may not
 - - [ ] Set Volume For User's Playback
 - [ ] Playlists
 - - [ ] Remove Items from a Playlist
-- - [ ] Get a List of Current User's Playlists
-- - [ ] Get a Playlist Cover Image
-- - [ ] Get a Playlist's Items
-- - [ ] Get a Playlist
-- - [ ] Get a List of a User's Playlists
+- - [x] Get a List of Current User's Playlists
+- - [x] Get a Playlist Cover Image
+- - [x] Get a Playlist's Items
+- - [x] Get a Playlist
+- - [x] Get a List of a User's Playlists
 - - [ ] Add Items to a Playlist
 - - [ ] Create a Playlist
 - - [ ] Upload a Custom Playlist Cover Image
