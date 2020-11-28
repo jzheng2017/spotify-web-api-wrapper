@@ -37,4 +37,7 @@ public interface LibraryService {
 
     @PUT("me/tracks")
     Call<Void> saveTracks(@Header("Authorization") String accessToken, @Query("ids") String trackIds);
+
+    @DELETE("me/albums")
+    Call<Void> deleteAlbums(@Header("Authorization") String accessToken, @Query("ids") String albumIds);
 }
