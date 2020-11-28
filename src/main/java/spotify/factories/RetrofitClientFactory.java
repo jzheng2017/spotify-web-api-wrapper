@@ -17,4 +17,14 @@ class RetrofitClientFactory {
                                 .getGsonLowerCaseUnderScorePolicy()))
                 .build();
     }
+
+    static Retrofit getRetrofitClientWithAbstractPlayableObjectDeserializer(final String baseUrl) {
+        logger.trace(String.format("Building Retrofit HTTP client with base url %s.", baseUrl));
+        return new Retrofit.Builder()
+                .baseUrl(baseUrl)
+                .addConverterFactory(GsonConverterFactory
+                        .create(GsonFactory
+                                .getGsonLowerCaseUnderScorePolicyWithAbstractPlayableObjectDeserializer()))
+                .build();
+    }
 }

@@ -62,6 +62,8 @@ public class RetrofitHttpServiceFactory {
     }
 
     public static PlaylistService getPlaylistService() {
-        return getRetrofitHttpService(PlaylistService.class, API_BASE_URL_HTTPS_WITH_VERSION);
+        Retrofit httpClient = RetrofitClientFactory.getRetrofitClientWithAbstractPlayableObjectDeserializer(API_BASE_URL_HTTPS_WITH_VERSION);
+
+        return httpClient.create(PlaylistService.class);
     }
 }
