@@ -60,4 +60,8 @@ public class RetrofitHttpServiceFactory {
     public static LibraryService getLibraryService() {
         return getRetrofitHttpService(LibraryService.class, API_BASE_URL_HTTPS_WITH_VERSION);
     }
+
+    public static PlaylistService getPlaylistService() {
+        return getRetrofitHttpService(PlaylistService.class, API_BASE_URL_HTTPS_WITH_VERSION);
+    }
 }
