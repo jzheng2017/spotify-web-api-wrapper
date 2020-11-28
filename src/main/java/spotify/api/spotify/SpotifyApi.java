@@ -22,8 +22,10 @@ import spotify.models.categories.CategoryFullPaging;
 import spotify.models.episodes.EpisodeFull;
 import spotify.models.episodes.EpisodeFullCollection;
 import spotify.models.episodes.EpisodeSimplified;
+import spotify.models.generic.Image;
 import spotify.models.paging.Paging;
 import spotify.models.playlists.FeaturedPlaylistCollection;
+import spotify.models.playlists.PlaylistFull;
 import spotify.models.playlists.PlaylistSimplified;
 import spotify.models.playlists.PlaylistSimplifiedPaging;
 import spotify.models.recommendations.RecommendationCollection;
@@ -298,6 +300,15 @@ public class SpotifyApi {
         return playlistApi.getUserPlaylists(userId, options);
     }
 
+    public List<Image> getPlaylistCoverImages(String playlistId) {
+        logger.info("Requesting to fetch a playlist cover images");
+        return playlistApi.getPlaylistCoverImages(playlistId);
+    }
+
+    public PlaylistFull getPlaylist(String playlistId, Map<String, String> options) {
+        logger.info("Requesting to fetch a playlist");
+        return playlistApi.getPlaylist(playlistId, options);
+    }
 
     private void setup(final String accessToken) {
         logger.trace("Constructing Retrofit APIs");
