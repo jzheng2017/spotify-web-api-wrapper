@@ -155,8 +155,8 @@ This is the most recent coverage in the repository. The marked endpoints may not
 - - [ ] Toggle Shuffle For User's Playback
 - - [ ]	Transfer a User's Playback
 - - [ ] Set Volume For User's Playback
-- [ ] Playlists
-- - [ ] Remove Items from a Playlist
+- [x] Playlists
+- - [x] Remove Items from a Playlist
 - - [x] Get a List of Current User's Playlists
 - - [x] Get a Playlist Cover Image
 - - [x] Get a Playlist's Items
@@ -164,9 +164,9 @@ This is the most recent coverage in the repository. The marked endpoints may not
 - - [x] Get a List of a User's Playlists
 - - [x] Add Items to a Playlist
 - - [x] Create a Playlist
-- - [ ] Upload a Custom Playlist Cover Image
+- - [x] Upload a Custom Playlist Cover Image
 - - [x] Reorder a Playlist's Items
-- - [ ] Replace a Playlist's Items
+- - [x] Replace a Playlist's Items
 - - [x] Change a Playlist's Details
 - [ ] Search
 - - [ ] Search for an item
