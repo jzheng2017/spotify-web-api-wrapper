@@ -184,7 +184,7 @@ public class PlaylistApiRetrofit implements PlaylistApi {
         Call<Void> httpCall = playlistService.createPlaylist("Bearer " + this.accessToken, userId, requestBody);
 
         try {
-            logger.info("Executing HTTP call to create a playlist.");
+            logger.info("Executing HTTP call to creat2e a playlist.");
             logger.debug(String.format(
                     "Creating a playlist with the name: %s and description: %s. The playlist is %s and %s.",
                     playlistName,
