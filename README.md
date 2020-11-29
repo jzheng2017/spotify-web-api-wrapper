@@ -26,8 +26,10 @@ AuthorizationCodeFlow authorizationCodeFlow = new AuthorizationCodeFlow.Builder(
         .setClientId("CLIENT ID")
         .setRedirectUri("https://www.example.com/callback/")
         .setResponseType("code")
-        .setScope(Arrays.asList(AuthorizationScope.APP_REMOTE_CONTROL, AuthorizationScope.PLAYLIST_MODIFY_PRIVATE))
-        .build();
+        .setScope(Arrays.asList(
+                 AuthorizationScope.APP_REMOTE_CONTROL,
+                 AuthorizationScope.PLAYLIST_MODIFY_PRIVATE))
+         .build();
 ```
 The above code will result in the following url.
 ```
