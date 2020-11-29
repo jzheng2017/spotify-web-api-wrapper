@@ -6,7 +6,7 @@ import spotify.models.playlists.PlaylistFull;
 import spotify.models.playlists.PlaylistSimplified;
 import spotify.models.playlists.PlaylistTrack;
 import spotify.models.playlists.Snapshot;
-import spotify.models.playlists.requests.CreatePlaylistRequestBody;
+import spotify.models.playlists.requests.CreateUpdatePlaylistRequestBody;
 import spotify.models.playlists.requests.ReorderPlaylistItemsRequestBody;
 
 import java.util.List;
@@ -25,9 +25,9 @@ public interface PlaylistApi {
 
     void addItemToPlaylist(List<String> listOfObjectUris, String playlistId, int startPositionToInsert);
 
-    void createPlaylist(String userId, CreatePlaylistRequestBody requestBody);
+    void createPlaylist(String userId, CreateUpdatePlaylistRequestBody requestBody);
 
-    void updatePlaylist(String playlistId, CreatePlaylistRequestBody requestBody);
+    void updatePlaylist(String playlistId, CreateUpdatePlaylistRequestBody requestBody);
 
     Snapshot reorderPlaylistItems(String playlistId, ReorderPlaylistItemsRequestBody requestBody);
 }

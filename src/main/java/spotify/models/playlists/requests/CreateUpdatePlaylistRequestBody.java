@@ -2,14 +2,14 @@ package spotify.models.playlists.requests;
 
 import com.google.gson.annotations.SerializedName;
 
-public class CreatePlaylistRequestBody {
+public class CreateUpdatePlaylistRequestBody {
     private String name;
     private String description;
     @SerializedName("public")
     private boolean isPublic;
     private boolean collaborative;
 
-    public CreatePlaylistRequestBody(String name, String description, boolean isPublic, boolean collaborative) {
+    public CreateUpdatePlaylistRequestBody(String name, String description, boolean isPublic, boolean collaborative) {
         this.name = name;
         this.description = description;
         this.isPublic = isPublic;

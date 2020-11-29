@@ -25,7 +25,7 @@ import spotify.models.episodes.EpisodeSimplified;
 import spotify.models.generic.Image;
 import spotify.models.paging.Paging;
 import spotify.models.playlists.*;
-import spotify.models.playlists.requests.CreatePlaylistRequestBody;
+import spotify.models.playlists.requests.CreateUpdatePlaylistRequestBody;
 import spotify.models.playlists.requests.ReorderPlaylistItemsRequestBody;
 import spotify.models.recommendations.RecommendationCollection;
 import spotify.models.shows.SavedShowSimplified;
@@ -319,13 +319,13 @@ public class SpotifyApi {
         playlistApi.addItemToPlaylist(listOfObjectUris, playlistId, startPositionToInsert);
     }
 
-    public void createPlaylist(String userId, CreatePlaylistRequestBody requestBody) {
+    public void createPlaylist(String userId, CreateUpdatePlaylistRequestBody requestBody) {
         logger.info("Requesting to create a playlist");
         playlistApi.createPlaylist(userId, requestBody);
     }
 
 
-    public void updatePlaylist(String playlistId, CreatePlaylistRequestBody requestBody) {
+    public void updatePlaylist(String playlistId, CreateUpdatePlaylistRequestBody requestBody) {
         logger.info("Requesting to update a playlist");
         playlistApi.updatePlaylist(playlistId, requestBody);
     }

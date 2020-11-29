@@ -9,7 +9,7 @@ import spotify.models.playlists.PlaylistSimplified;
 import spotify.models.playlists.PlaylistTrack;
 import spotify.models.playlists.Snapshot;
 import spotify.models.playlists.requests.AddItemPlaylistRequestBody;
-import spotify.models.playlists.requests.CreatePlaylistRequestBody;
+import spotify.models.playlists.requests.CreateUpdatePlaylistRequestBody;
 import spotify.models.playlists.requests.ReorderPlaylistItemsRequestBody;
 
 import java.util.List;
@@ -47,13 +47,13 @@ public interface PlaylistService {
     @POST("users/{user_id}/playlists")
     Call<Void> createPlaylist(@Header("Authorization") String accessToken,
                               @Path("user_id") String userId,
-                              @Body CreatePlaylistRequestBody requestBody);
+                              @Body CreateUpdatePlaylistRequestBody requestBody);
 
     @Headers({"Content-Type: application/json"})
     @PUT("playlists/{playlist_id}")
     Call<Void> updatePlaylist(@Header("Authorization") String accessToken,
                               @Path("playlist_id") String playlistId,
-                              @Body CreatePlaylistRequestBody requestBody);
+                              @Body CreateUpdatePlaylistRequestBody requestBody);
 
     @PUT("playlists/{playlist_id}/tracks")
     Call<Snapshot> reorderPlaylistItems(@Header("Authorization") String accessToken,

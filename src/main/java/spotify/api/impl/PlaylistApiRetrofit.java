@@ -15,7 +15,7 @@ import spotify.models.playlists.PlaylistSimplified;
 import spotify.models.playlists.PlaylistTrack;
 import spotify.models.playlists.Snapshot;
 import spotify.models.playlists.requests.AddItemPlaylistRequestBody;
-import spotify.models.playlists.requests.CreatePlaylistRequestBody;
+import spotify.models.playlists.requests.CreateUpdatePlaylistRequestBody;
 import spotify.models.playlists.requests.ReorderPlaylistItemsRequestBody;
 import spotify.retrofit.services.PlaylistService;
 import spotify.utils.LoggingUtil;
@@ -173,7 +173,7 @@ public class PlaylistApiRetrofit implements PlaylistApi {
     }
 
     @Override
-    public void createPlaylist(String userId, CreatePlaylistRequestBody requestBody) {
+    public void createPlaylist(String userId, CreateUpdatePlaylistRequestBody requestBody) {
         if (userId == null || requestBody.getName() == null || userId.isEmpty() || requestBody.getName().isEmpty()) {
             final String errorMessage = "Required parameters are empty!";
             logger.error(errorMessage);
@@ -204,7 +204,7 @@ public class PlaylistApiRetrofit implements PlaylistApi {
     }
 
     @Override
-    public void updatePlaylist(String playlistId, CreatePlaylistRequestBody requestBody) {
+    public void updatePlaylist(String playlistId, CreateUpdatePlaylistRequestBody requestBody) {
         if (playlistId == null || playlistId.isEmpty()) {
             final String errorMessage = "Playlist id can not be empty!";
             logger.error(errorMessage);
