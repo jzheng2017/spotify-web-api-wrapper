@@ -30,4 +30,6 @@ public interface PlaylistApi {
     void updatePlaylist(String playlistId, CreateUpdatePlaylistRequestBody requestBody);
 
     Snapshot reorderPlaylistItems(String playlistId, ReorderPlaylistItemsRequestBody requestBody);
+
+    void replacePlaylistItems(String playlistId, List<String> listOfItemUris);
 }

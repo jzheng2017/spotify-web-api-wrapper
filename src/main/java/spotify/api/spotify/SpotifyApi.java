@@ -335,6 +335,11 @@ public class SpotifyApi {
         return playlistApi.reorderPlaylistItems(playlistId, requestBody);
     }
 
+    public void replacePlaylistItems(String playlistId, List<String> listOfItemUris) {
+        logger.info("Requesting to replace items of a playlist");
+        playlistApi.replacePlaylistItems(playlistId, listOfItemUris);
+    }
+
     private void setup(final String accessToken) {
         logger.trace("Constructing Retrofit APIs");
         this.trackApi = new TrackApiRetrofit(accessToken);

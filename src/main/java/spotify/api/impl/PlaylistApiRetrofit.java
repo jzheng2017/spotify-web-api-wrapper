@@ -17,6 +17,7 @@ import spotify.models.playlists.Snapshot;
 import spotify.models.playlists.requests.AddItemPlaylistRequestBody;
 import spotify.models.playlists.requests.CreateUpdatePlaylistRequestBody;
 import spotify.models.playlists.requests.ReorderPlaylistItemsRequestBody;
+import spotify.models.playlists.requests.ReplacePlaylistItemsRequestBody;
 import spotify.retrofit.services.PlaylistService;
 import spotify.utils.LoggingUtil;
 import spotify.utils.ResponseChecker;
@@ -257,6 +258,32 @@ public class PlaylistApiRetrofit implements PlaylistApi {
             return response.body();
         } catch (IOException ex) {
             logger.error("HTTP request to reorder a playlist has failed.");
+            throw new HttpRequestFailedException(ex.getMessage());
+        }
+    }
+
+    @Override
+    public void replacePlaylistItems(String playlistId, List<String> listOfItemUris) {
+        if (playlistId == null || playlistId.isEmpty()) {
+            final String errorMessage = "Playlist id is empty!";
+            logger.error(errorMessage);
+            throw new IllegalArgumentException(errorMessage);
+        }
+
+        logger.trace("Constructing HTTP call to replace items of a playlist.");
+        Call<Void> httpCall = playlistService.replacePlaylistItems("Bearer " + this.accessToken, playlistId, new ReplacePlaylistItemsRequestBody(listOfItemUris));
+
+        try {
+            logger.info("Executing HTTP call to replace items of a playlist.");
+            logger.debug(String.format("Replacing items of playlist %s with the following items: %s", playlistId, listOfItemUris));
+            LoggingUtil.logHttpCall(logger, httpCall);
+            Response<Void> response = httpCall.execute();
+
+            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response, HttpStatusCode.CREATED);
+
+            logger.info("Playlist has been successfully replaced.");
+        } catch (IOException ex) {
+            logger.error("HTTP request to replace a playlist has failed.");
             throw new HttpRequestFailedException(ex.getMessage());
         }
     }
