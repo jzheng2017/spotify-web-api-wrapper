@@ -262,10 +262,10 @@ public class PlaylistApiRetrofit implements PlaylistApi {
 
             ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response, HttpStatusCode.OK);
 
-            logger.info("Playlist has been successfully updated.");
+            logger.info("Playlist has been successfully reordered.");
             return response.body();
         } catch (IOException ex) {
-            logger.error("HTTP request to update a playlist has failed.");
+            logger.error("HTTP request to reorder a playlist has failed.");
             throw new HttpRequestFailedException(ex.getMessage());
         }
     }
