@@ -172,7 +172,7 @@ public class PlaylistApiRetrofit implements PlaylistApi {
 
     @Override
     public void createPlaylist(String userId, String playlistName, String description, boolean isPublic, boolean isCollaborative) {
-        if (userId.isEmpty() || playlistName.isEmpty()) {
+        if (userId == null || playlistName == null || userId.isEmpty() || playlistName.isEmpty()) {
             final String errorMessage = "Required parameters are empty!";
             logger.error(errorMessage);
             throw new IllegalArgumentException(errorMessage);
