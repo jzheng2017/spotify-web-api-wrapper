@@ -11,6 +11,7 @@ import spotify.models.playlists.Snapshot;
 import spotify.models.playlists.requests.AddItemPlaylistRequestBody;
 import spotify.models.playlists.requests.CreateUpdatePlaylistRequestBody;
 import spotify.models.playlists.requests.ReorderPlaylistItemsRequestBody;
+import spotify.models.playlists.requests.ReplacePlaylistItemsRequestBody;
 
 import java.util.List;
 import java.util.Map;
@@ -59,4 +60,8 @@ public interface PlaylistService {
     Call<Snapshot> reorderPlaylistItems(@Header("Authorization") String accessToken,
                                         @Path("playlist_id") String playlistId,
                                         @Body ReorderPlaylistItemsRequestBody requestBody);
+
+    @Headers({"Content-Type: application/json"})
+    @PUT("playlists/{playlist_id}/tracks")
+    Call<Void> replacePlaylistItems(@Header("Authorization") String accessToken, @Path("playlist_id") String playlistId, @Body ReplacePlaylistItemsRequestBody requestBody);
 }
