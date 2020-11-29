@@ -244,6 +244,7 @@ public class PlaylistApiRetrofit implements PlaylistApi {
         }
 
         if (requestBody.getSnapshotId() != null && requestBody.getSnapshotId().isEmpty()) {
+            logger.warn("An empty snapshot id was passed in. The snapshot id has now been set to NULL.");
             requestBody.setSnapshotId(null);
         }
 
