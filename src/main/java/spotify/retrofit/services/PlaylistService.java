@@ -1,12 +1,10 @@
 package spotify.retrofit.services;
 
 import retrofit2.Call;
-import retrofit2.http.GET;
-import retrofit2.http.Header;
-import retrofit2.http.Path;
-import retrofit2.http.QueryMap;
+import retrofit2.http.*;
 import spotify.models.generic.Image;
 import spotify.models.paging.Paging;
+import spotify.models.playlists.AddItemPlaylistRequestBody;
 import spotify.models.playlists.PlaylistFull;
 import spotify.models.playlists.PlaylistSimplified;
 import spotify.models.playlists.PlaylistTrack;
@@ -35,4 +33,10 @@ public interface PlaylistService {
     Call<Paging<PlaylistTrack>> getPlaylistTracks(@Header("Authorization") String accessToken,
                                                   @Path("playlist_id") String playlistId,
                                                   @QueryMap Map<String, String> options);
+
+    @Headers({"Content-Type: application/json"})
+    @POST("playlists/{playlist_id}/tracks")
+    Call<Void> addItemToPlaylist(@Header("Authorization") String accessToken,
+                                 @Path("playlist_id") String playlistId,
+                                 @Body AddItemPlaylistRequestBody requestBody);
 }
