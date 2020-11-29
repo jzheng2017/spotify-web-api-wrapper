@@ -9,10 +9,7 @@ import spotify.models.playlists.PlaylistFull;
 import spotify.models.playlists.PlaylistSimplified;
 import spotify.models.playlists.PlaylistTrack;
 import spotify.models.playlists.Snapshot;
-import spotify.models.playlists.requests.AddItemPlaylistRequestBody;
-import spotify.models.playlists.requests.CreateUpdatePlaylistRequestBody;
-import spotify.models.playlists.requests.ReorderPlaylistItemsRequestBody;
-import spotify.models.playlists.requests.ReplacePlaylistItemsRequestBody;
+import spotify.models.playlists.requests.*;
 
 import java.util.List;
 import java.util.Map;
@@ -70,5 +67,11 @@ public interface PlaylistService {
 
     @Headers({"Content-Type: image/jpeg"})
     @PUT("playlists/{playlist_id}/images")
-    Call<Void> uploadCoverImageToPlaylist(@Header("Authorization") String accessToken, @Path("playlist_id") String playlistId, @Body RequestBody base64EncodedJpegImage);
+    Call<Void> uploadCoverImageToPlaylist(@Header("Authorization") String accessToken,
+                                          @Path("playlist_id") String playlistId,
+                                          @Body RequestBody base64EncodedJpegImage);
+
+    @Headers({"Content-Type: application/json"})
+    @HTTP(method = "DELETE", path = "playlists/{playlist_id}/tracks", hasBody = true)
+    Call<Snapshot> deleteItemsFromPlaylist(@Header("Authorization") String accessToken, @Path("playlist_id") String playlistId, @Body DeleteItemsPlaylistRequestBody items);
 }
