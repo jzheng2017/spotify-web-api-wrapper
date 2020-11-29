@@ -237,16 +237,7 @@ public class PlaylistApiRetrofit implements PlaylistApi {
 
     @Override
     public Snapshot reorderPlaylistItems(String playlistId, ReorderPlaylistItemsRequestBody requestBody) {
-        if (playlistId == null || playlistId.isEmpty()) {
-            final String errorMessage = "Playlist id can not be empty!";
-            logger.error(errorMessage);
-            throw new IllegalArgumentException(errorMessage);
-        }
-
-        if (requestBody.getSnapshotId() != null && requestBody.getSnapshotId().isEmpty()) {
-            logger.warn("An empty snapshot id was passed in. The snapshot id has now been set to NULL.");
-            requestBody.setSnapshotId(null);
-        }
+        validateParametersReorderFunction(playlistId, requestBody);
 
         logger.trace("Constructing HTTP call to reorder items of a playlist.");
         Call<Snapshot> httpCall = playlistService.reorderPlaylistItems("Bearer " + this.accessToken, playlistId, requestBody);
@@ -267,6 +258,19 @@ public class PlaylistApiRetrofit implements PlaylistApi {
         } catch (IOException ex) {
             logger.error("HTTP request to reorder a playlist has failed.");
             throw new HttpRequestFailedException(ex.getMessage());
+        }
+    }
+
+    private void validateParametersReorderFunction(String playlistId, ReorderPlaylistItemsRequestBody requestBody) {
+        if (playlistId == null || playlistId.isEmpty()) {
+            final String errorMessage = "Playlist id can not be empty!";
+            logger.error(errorMessage);
+            throw new IllegalArgumentException(errorMessage);
+        }
+
+        if (requestBody.getSnapshotId() != null && requestBody.getSnapshotId().isEmpty()) {
+            logger.warn("An empty snapshot id was passed in. The snapshot id has now been set to NULL.");
+            requestBody.setSnapshotId(null);
         }
     }
 }
