@@ -322,6 +322,13 @@ public class SpotifyApi {
         playlistApi.createPlaylist(userId, playlistName, description, isPublic, isCollaborative);
     }
 
+
+    public void updatePlaylist(String playlistId, String playlistName, String description, boolean isPublic, boolean isCollaborative) {
+        logger.info("Requesting to update a playlist");
+        playlistApi.updatePlaylist(playlistId, playlistName, description, isPublic, isCollaborative);
+    }
+
+
     private void setup(final String accessToken) {
         logger.trace("Constructing Retrofit APIs");
         this.trackApi = new TrackApiRetrofit(accessToken);

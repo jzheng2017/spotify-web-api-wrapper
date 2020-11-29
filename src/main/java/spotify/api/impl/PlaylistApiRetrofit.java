@@ -184,7 +184,7 @@ public class PlaylistApiRetrofit implements PlaylistApi {
         Call<Void> httpCall = playlistService.createPlaylist("Bearer " + this.accessToken, userId, requestBody);
 
         try {
-            logger.info("Executing HTTP call to creat2e a playlist.");
+            logger.info("Executing HTTP call to create a playlist.");
             logger.debug(String.format(
                     "Creating a playlist with the name: %s and description: %s. The playlist is %s and %s.",
                     playlistName,
@@ -198,7 +198,41 @@ public class PlaylistApiRetrofit implements PlaylistApi {
 
             logger.info("Playlist has been successfully created.");
         } catch (IOException ex) {
-            logger.error("HTTP request to create a playlist playlist has failed.");
+            logger.error("HTTP request to create a playlist has failed.");
+            throw new HttpRequestFailedException(ex.getMessage());
+        }
+    }
+
+    @Override
+    public void updatePlaylist(String playlistId, String playlistName, String description, boolean isPublic, boolean isCollaborative) {
+        if (playlistId == null || playlistId.isEmpty()) {
+            final String errorMessage = "Playlist id can not be empty!";
+            logger.error(errorMessage);
+            throw new IllegalArgumentException(errorMessage);
+        }
+
+        final CreatePlaylistRequestBody requestBody = new CreatePlaylistRequestBody(playlistName, description, isPublic, isCollaborative);
+
+        logger.trace("Constructing HTTP call to update a playlist.");
+        Call<Void> httpCall = playlistService.updatePlaylist("Bearer " + this.accessToken, playlistId, requestBody);
+
+        try {
+            logger.info("Executing HTTP call to update a playlist.");
+            logger.debug(String.format(
+                    "Updating playlist %s with the name: %s and description: %s. The playlist is %s and %s.",
+                    playlistId,
+                    playlistName,
+                    description,
+                    isPublic ? "public" : "private",
+                    isCollaborative ? "collaborative" : "not collaborative"));
+            LoggingUtil.logHttpCall(logger, httpCall);
+            Response<Void> response = httpCall.execute();
+
+            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response, HttpStatusCode.OK);
+
+            logger.info("Playlist has been successfully updated.");
+        } catch (IOException ex) {
+            logger.error("HTTP request to update a playlist has failed.");
             throw new HttpRequestFailedException(ex.getMessage());
         }
     }

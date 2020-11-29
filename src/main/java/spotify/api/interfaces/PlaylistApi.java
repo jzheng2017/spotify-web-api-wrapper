@@ -23,4 +23,6 @@ public interface PlaylistApi {
     void addItemToPlaylist(List<String> listOfObjectUris, String playlistId, int startPositionToInsert);
 
     void createPlaylist(String userId, String playlistName, String description, boolean isPublic, boolean isCollaborative);
+
+    void updatePlaylist(String playlistId, String playlistName, String description, boolean isPublic, boolean isCollaborative);
 }
