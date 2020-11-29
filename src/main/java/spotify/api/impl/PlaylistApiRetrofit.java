@@ -1,5 +1,7 @@
 package spotify.api.impl;
 
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import retrofit2.Call;
@@ -284,6 +286,37 @@ public class PlaylistApiRetrofit implements PlaylistApi {
             logger.info("Playlist has been successfully replaced.");
         } catch (IOException ex) {
             logger.error("HTTP request to replace a playlist has failed.");
+            throw new HttpRequestFailedException(ex.getMessage());
+        }
+    }
+
+    @Override
+    public void uploadCoverImageToPlaylist(String playlistId, String base64EncodedJpegImage) {
+        if (playlistId == null || base64EncodedJpegImage == null || playlistId.isEmpty() || base64EncodedJpegImage.isEmpty()) {
+            final String errorMessage = "Required parameters are empty!";
+            logger.error(errorMessage);
+            throw new IllegalArgumentException(errorMessage);
+        }
+
+        //this is done because Retrofit converts @Body automatically to json, by passing in a RequestBody with media type text/plain it will not be converted to json
+        logger.trace("Creating OkHttp3 request body with text/plain media type");
+        final RequestBody requestBody = RequestBody.create(MediaType.parse("text/plain"), base64EncodedJpegImage);
+
+        logger.trace("Constructing HTTP call to upload a cover image to a playlist.");
+        Call<Void> httpCall = playlistService.uploadCoverImageToPlaylist("Bearer " + this.accessToken, playlistId, requestBody);
+
+        try {
+            logger.info("Executing HTTP call to upload a cover image to a playlist.");
+            logger.debug(String.format("Uploading cover image to playlist %s", playlistId));
+            logger.debug(String.format("Base64 encoded jpeg image data: %s", base64EncodedJpegImage));
+            LoggingUtil.logHttpCall(logger, httpCall);
+            Response<Void> response = httpCall.execute();
+
+            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response, HttpStatusCode.ACCEPTED);
+
+            logger.info("Cover image has been accepted by Spotify");
+        } catch (IOException ex) {
+            logger.error("HTTP request to upload cover image.");
             throw new HttpRequestFailedException(ex.getMessage());
         }
     }

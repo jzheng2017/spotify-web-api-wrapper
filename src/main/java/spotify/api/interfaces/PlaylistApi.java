@@ -32,4 +32,6 @@ public interface PlaylistApi {
     Snapshot reorderPlaylistItems(String playlistId, ReorderPlaylistItemsRequestBody requestBody);
 
     void replacePlaylistItems(String playlistId, List<String> listOfItemUris);
+
+    void uploadCoverImageToPlaylist(String playlistId, String base64EncodedJpegImage);
 }

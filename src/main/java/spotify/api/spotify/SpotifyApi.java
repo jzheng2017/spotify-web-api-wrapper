@@ -340,6 +340,11 @@ public class SpotifyApi {
         playlistApi.replacePlaylistItems(playlistId, listOfItemUris);
     }
 
+    public void uploadCoverImageToPlaylist(String playlistId, String base64EncodedJpegImage) {
+        logger.info("Requesting to upload cover image to a playlist");
+        playlistApi.uploadCoverImageToPlaylist(playlistId, base64EncodedJpegImage);
+    }
+
     private void setup(final String accessToken) {
         logger.trace("Constructing Retrofit APIs");
         this.trackApi = new TrackApiRetrofit(accessToken);
