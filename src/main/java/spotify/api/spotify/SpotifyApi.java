@@ -25,6 +25,8 @@ import spotify.models.episodes.EpisodeSimplified;
 import spotify.models.generic.Image;
 import spotify.models.paging.Paging;
 import spotify.models.playlists.*;
+import spotify.models.playlists.requests.CreatePlaylistRequestBody;
+import spotify.models.playlists.requests.ReorderPlaylistItemsRequestBody;
 import spotify.models.recommendations.RecommendationCollection;
 import spotify.models.shows.SavedShowSimplified;
 import spotify.models.shows.ShowFull;
@@ -317,20 +319,20 @@ public class SpotifyApi {
         playlistApi.addItemToPlaylist(listOfObjectUris, playlistId, startPositionToInsert);
     }
 
-    public void createPlaylist(String userId, String playlistName, String description, boolean isPublic, boolean isCollaborative) {
+    public void createPlaylist(String userId, CreatePlaylistRequestBody requestBody) {
         logger.info("Requesting to create a playlist");
-        playlistApi.createPlaylist(userId, playlistName, description, isPublic, isCollaborative);
+        playlistApi.createPlaylist(userId, requestBody);
     }
 
 
-    public void updatePlaylist(String playlistId, String playlistName, String description, boolean isPublic, boolean isCollaborative) {
+    public void updatePlaylist(String playlistId, CreatePlaylistRequestBody requestBody) {
         logger.info("Requesting to update a playlist");
-        playlistApi.updatePlaylist(playlistId, playlistName, description, isPublic, isCollaborative);
+        playlistApi.updatePlaylist(playlistId, requestBody);
     }
 
-    public Snapshot reorderPlaylistItems(String playlistId, int rangeStart, int rangeLength, int insertBefore, String snapshotId) {
+    public Snapshot reorderPlaylistItems(String playlistId, ReorderPlaylistItemsRequestBody requestBody) {
         logger.info("Requesting to reorder items of a playlist");
-        return playlistApi.reorderPlaylistItems(playlistId, rangeStart, rangeLength, insertBefore, snapshotId);
+        return playlistApi.reorderPlaylistItems(playlistId, requestBody);
     }
 
     private void setup(final String accessToken) {

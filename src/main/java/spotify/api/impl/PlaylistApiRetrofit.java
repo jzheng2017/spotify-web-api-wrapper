@@ -173,14 +173,12 @@ public class PlaylistApiRetrofit implements PlaylistApi {
     }
 
     @Override
-    public void createPlaylist(String userId, String playlistName, String description, boolean isPublic, boolean isCollaborative) {
-        if (userId == null || playlistName == null || userId.isEmpty() || playlistName.isEmpty()) {
+    public void createPlaylist(String userId, CreatePlaylistRequestBody requestBody) {
+        if (userId == null || requestBody.getName() == null || userId.isEmpty() || requestBody.getName().isEmpty()) {
             final String errorMessage = "Required parameters are empty!";
             logger.error(errorMessage);
             throw new IllegalArgumentException(errorMessage);
         }
-
-        final CreatePlaylistRequestBody requestBody = new CreatePlaylistRequestBody(playlistName, description, isPublic, isCollaborative);
 
         logger.trace("Constructing HTTP call to create a playlist.");
         Call<Void> httpCall = playlistService.createPlaylist("Bearer " + this.accessToken, userId, requestBody);
@@ -189,10 +187,10 @@ public class PlaylistApiRetrofit implements PlaylistApi {
             logger.info("Executing HTTP call to create a playlist.");
             logger.debug(String.format(
                     "Creating a playlist with the name: %s and description: %s. The playlist is %s and %s.",
-                    playlistName,
-                    description,
-                    isPublic ? "public" : "private",
-                    isCollaborative ? "collaborative" : "not collaborative"));
+                    requestBody.getName(),
+                    requestBody.getDescription(),
+                    requestBody.isPublic() ? "public" : "private",
+                    requestBody.isCollaborative() ? "collaborative" : "not collaborative"));
             LoggingUtil.logHttpCall(logger, httpCall);
             Response<Void> response = httpCall.execute();
 
@@ -206,14 +204,12 @@ public class PlaylistApiRetrofit implements PlaylistApi {
     }
 
     @Override
-    public void updatePlaylist(String playlistId, String playlistName, String description, boolean isPublic, boolean isCollaborative) {
+    public void updatePlaylist(String playlistId, CreatePlaylistRequestBody requestBody) {
         if (playlistId == null || playlistId.isEmpty()) {
             final String errorMessage = "Playlist id can not be empty!";
             logger.error(errorMessage);
             throw new IllegalArgumentException(errorMessage);
         }
-
-        final CreatePlaylistRequestBody requestBody = new CreatePlaylistRequestBody(playlistName, description, isPublic, isCollaborative);
 
         logger.trace("Constructing HTTP call to update a playlist.");
         Call<Void> httpCall = playlistService.updatePlaylist("Bearer " + this.accessToken, playlistId, requestBody);
@@ -223,10 +219,10 @@ public class PlaylistApiRetrofit implements PlaylistApi {
             logger.debug(String.format(
                     "Updating playlist %s with the name: %s and description: %s. The playlist is %s and %s.",
                     playlistId,
-                    playlistName,
-                    description,
-                    isPublic ? "public" : "private",
-                    isCollaborative ? "collaborative" : "not collaborative"));
+                    requestBody.getName(),
+                    requestBody.getDescription(),
+                    requestBody.isPublic() ? "public" : "private",
+                    requestBody.isCollaborative() ? "collaborative" : "not collaborative"));
             LoggingUtil.logHttpCall(logger, httpCall);
             Response<Void> response = httpCall.execute();
 
@@ -240,18 +236,16 @@ public class PlaylistApiRetrofit implements PlaylistApi {
     }
 
     @Override
-    public Snapshot reorderPlaylistItems(String playlistId, int rangeStart, int rangeLength, int insertBefore, String snapshotId) {
+    public Snapshot reorderPlaylistItems(String playlistId, ReorderPlaylistItemsRequestBody requestBody) {
         if (playlistId == null || playlistId.isEmpty()) {
             final String errorMessage = "Playlist id can not be empty!";
             logger.error(errorMessage);
             throw new IllegalArgumentException(errorMessage);
         }
 
-        final ReorderPlaylistItemsRequestBody requestBody = new ReorderPlaylistItemsRequestBody(
-                rangeStart,
-                rangeLength,
-                insertBefore,
-                snapshotId != null && snapshotId.isEmpty() ? null : snapshotId);
+        if (requestBody.getSnapshotId() != null && requestBody.getSnapshotId().isEmpty()) {
+            requestBody.setSnapshotId(null);
+        }
 
         logger.trace("Constructing HTTP call to reorder items of a playlist.");
         Call<Snapshot> httpCall = playlistService.reorderPlaylistItems("Bearer " + this.accessToken, playlistId, requestBody);
@@ -260,7 +254,7 @@ public class PlaylistApiRetrofit implements PlaylistApi {
             logger.info("Executing HTTP call to reorder items of a playlist.");
             logger.debug(String.format(
                     "Reordering items of playlist %s with snapshot id %s from start position %s with range of %s length and insert it in position %s ",
-                    playlistId, snapshotId, rangeStart, rangeLength, insertBefore
+                    playlistId, requestBody.getSnapshotId(), requestBody.getRangeStart(), requestBody.getRangeLength(), requestBody.getInsertBefore()
             ));
             LoggingUtil.logHttpCall(logger, httpCall);
             Response<Snapshot> response = httpCall.execute();
