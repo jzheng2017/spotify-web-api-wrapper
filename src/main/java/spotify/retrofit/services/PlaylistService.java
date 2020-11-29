@@ -1,5 +1,6 @@
 package spotify.retrofit.services;
 
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.*;
 import spotify.models.generic.Image;
@@ -63,5 +64,11 @@ public interface PlaylistService {
 
     @Headers({"Content-Type: application/json"})
     @PUT("playlists/{playlist_id}/tracks")
-    Call<Void> replacePlaylistItems(@Header("Authorization") String accessToken, @Path("playlist_id") String playlistId, @Body ReplacePlaylistItemsRequestBody requestBody);
+    Call<Void> replacePlaylistItems(@Header("Authorization") String accessToken,
+                                    @Path("playlist_id") String playlistId,
+                                    @Body ReplacePlaylistItemsRequestBody requestBody);
+
+    @Headers({"Content-Type: image/jpeg"})
+    @PUT("playlists/{playlist_id}/images")
+    Call<Void> uploadCoverImageToPlaylist(@Header("Authorization") String accessToken, @Path("playlist_id") String playlistId, @Body RequestBody base64EncodedJpegImage);
 }
