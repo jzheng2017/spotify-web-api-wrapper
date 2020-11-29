@@ -3,6 +3,7 @@ package spotify.api.enums;
 public enum HttpStatusCode {
     OK(200),
     CREATED(201),
+    ACCEPTED(202),
     NO_CONTENT(204);
 
     private final int httpStatusCode;
