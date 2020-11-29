@@ -19,4 +19,6 @@ public interface PlaylistApi {
     PlaylistFull getPlaylist(String playlistId, Map<String, String> options);
 
     Paging<PlaylistTrack> getPlaylistTracks(String playlistId, Map<String, String> options);
+
+    void addItemToPlaylist(List<String> listOfObjectUris, String playlistId, int startPositionToInsert);
 }

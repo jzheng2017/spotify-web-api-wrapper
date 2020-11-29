@@ -312,6 +312,11 @@ public class SpotifyApi {
         return playlistApi.getPlaylistTracks(playlistId, options);
     }
 
+    public void addItemsToPlaylist(List<String> listOfObjectUris, String playlistId, int startPositionToInsert) {
+        logger.info("Requesting to add items to a playlist");
+        playlistApi.addItemToPlaylist(listOfObjectUris, playlistId, startPositionToInsert);
+    }
+
     private void setup(final String accessToken) {
         logger.trace("Constructing Retrofit APIs");
         this.trackApi = new TrackApiRetrofit(accessToken);

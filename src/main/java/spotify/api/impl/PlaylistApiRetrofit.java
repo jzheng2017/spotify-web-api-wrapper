@@ -10,6 +10,7 @@ import spotify.exceptions.HttpRequestFailedException;
 import spotify.factories.RetrofitHttpServiceFactory;
 import spotify.models.generic.Image;
 import spotify.models.paging.Paging;
+import spotify.models.playlists.AddItemPlaylistRequestBody;
 import spotify.models.playlists.PlaylistFull;
 import spotify.models.playlists.PlaylistSimplified;
 import spotify.models.playlists.PlaylistTrack;
@@ -142,6 +143,28 @@ public class PlaylistApiRetrofit implements PlaylistApi {
             return response.body();
         } catch (IOException ex) {
             logger.error("HTTP request to fetch tracks has failed.");
+            throw new HttpRequestFailedException(ex.getMessage());
+        }
+    }
+
+    @Override
+    public void addItemToPlaylist(List<String> listOfObjectUris, String playlistId, int startPositionToInsert) {
+        final AddItemPlaylistRequestBody requestBody = new AddItemPlaylistRequestBody(listOfObjectUris, startPositionToInsert);
+
+        logger.trace("Constructing HTTP call to add items to a playlist.");
+        Call<Void> httpCall = playlistService.addItemToPlaylist("Bearer " + this.accessToken, playlistId, requestBody);
+
+        try {
+            logger.info("Executing HTTP call to add items to a playlist.");
+            logger.debug(String.format("Adding the following items to the playlist: %s from position %s.", playlistId, startPositionToInsert));
+            LoggingUtil.logHttpCall(logger, httpCall);
+            Response<Void> response = httpCall.execute();
+
+            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response, HttpStatusCode.CREATED);
+
+            logger.info("Items have been successfully added to the playlist");
+        } catch (IOException ex) {
+            logger.error("HTTP request to add items to the playlist has failed.");
             throw new HttpRequestFailedException(ex.getMessage());
         }
     }
