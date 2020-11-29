@@ -1,6 +1,6 @@
 package spotify.models.generic;
 
-public class AbstractPlayableObject {
+public abstract class AbstractPlayableObject {
     protected int durationMs;
     protected boolean explicit;
     protected ExternalUrl externalUrls;
