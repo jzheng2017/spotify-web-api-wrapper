@@ -162,11 +162,12 @@ This is the most recent coverage in the repository. The marked endpoints may not
 - - [x] Get a Playlist's Items
 - - [x] Get a Playlist
 - - [x] Get a List of a User's Playlists
-- - [ ] Add Items to a Playlist
-- - [ ] Create a Playlist
+- - [x] Add Items to a Playlist
+- - [x] Create a Playlist
 - - [ ] Upload a Custom Playlist Cover Image
-- - [ ] Reorder or Replace a Playlist's Items
-- - [ ] Change a Playlist's Details
+- - [x] Reorder a Playlist's Items
+- - [ ] Replace a Playlist's Items
+- - [x] Change a Playlist's Details
 - [ ] Search
 - - [ ] Search for an item
 - [x] Tracks
