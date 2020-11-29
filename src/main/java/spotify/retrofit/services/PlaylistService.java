@@ -44,4 +44,8 @@ public interface PlaylistService {
     @Headers({"Content-Type: application/json"})
     @POST("users/{user_id}/playlists")
     Call<Void> createPlaylist(@Header("Authorization") String accessToken, @Path("user_id") String userId, @Body CreatePlaylistRequestBody requestBody);
+
+    @Headers({"Content-Type: application/json"})
+    @PUT("playlists/{playlist_id}")
+    Call<Void> updatePlaylist(@Header("Authorization") String accessToken, @Path("playlist_id") String playlistId, @Body CreatePlaylistRequestBody requestBody);
 }
