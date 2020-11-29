@@ -21,4 +21,6 @@ public interface PlaylistApi {
     Paging<PlaylistTrack> getPlaylistTracks(String playlistId, Map<String, String> options);
 
     void addItemToPlaylist(List<String> listOfObjectUris, String playlistId, int startPositionToInsert);
+
+    void createPlaylist(String userId, String playlistName, String description, boolean isPublic, boolean isCollaborative);
 }

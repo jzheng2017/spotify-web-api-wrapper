@@ -14,6 +14,7 @@ import spotify.models.playlists.PlaylistFull;
 import spotify.models.playlists.PlaylistSimplified;
 import spotify.models.playlists.PlaylistTrack;
 import spotify.models.playlists.requests.AddItemPlaylistRequestBody;
+import spotify.models.playlists.requests.CreatePlaylistRequestBody;
 import spotify.retrofit.services.PlaylistService;
 import spotify.utils.LoggingUtil;
 import spotify.utils.ResponseChecker;
@@ -165,6 +166,39 @@ public class PlaylistApiRetrofit implements PlaylistApi {
             logger.info("Items have been successfully added to the playlist");
         } catch (IOException ex) {
             logger.error("HTTP request to add items to the playlist has failed.");
+            throw new HttpRequestFailedException(ex.getMessage());
+        }
+    }
+
+    @Override
+    public void createPlaylist(String userId, String playlistName, String description, boolean isPublic, boolean isCollaborative) {
+        if (userId.isEmpty() || playlistName.isEmpty()) {
+            final String errorMessage = "Required parameters are empty!";
+            logger.error(errorMessage);
+            throw new IllegalArgumentException(errorMessage);
+        }
+
+        final CreatePlaylistRequestBody requestBody = new CreatePlaylistRequestBody(playlistName, description, isPublic, isCollaborative);
+
+        logger.trace("Constructing HTTP call to create a playlist.");
+        Call<Void> httpCall = playlistService.createPlaylist("Bearer " + this.accessToken, userId, requestBody);
+
+        try {
+            logger.info("Executing HTTP call to create a playlist.");
+            logger.debug(String.format(
+                    "Creating a playlist with the name: %s and description: %s. The playlist is %s and %s.",
+                    playlistName,
+                    description,
+                    isPublic ? "public" : "private",
+                    isCollaborative ? "collaborative" : "not collaborative"));
+            LoggingUtil.logHttpCall(logger, httpCall);
+            Response<Void> response = httpCall.execute();
+
+            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response, HttpStatusCode.CREATED);
+
+            logger.info("Playlist has been successfully created.");
+        } catch (IOException ex) {
+            logger.error("HTTP request to create a playlist playlist has failed.");
             throw new HttpRequestFailedException(ex.getMessage());
         }
     }
