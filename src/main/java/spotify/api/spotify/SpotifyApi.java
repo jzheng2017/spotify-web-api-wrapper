@@ -328,6 +328,10 @@ public class SpotifyApi {
         playlistApi.updatePlaylist(playlistId, playlistName, description, isPublic, isCollaborative);
     }
 
+    public Snapshot reorderPlaylistItems(String playlistId, int rangeStart, int rangeLength, int insertBefore, String snapshotId) {
+        logger.info("Requesting to reorder items of a playlist");
+        return playlistApi.reorderPlaylistItems(playlistId, rangeStart, rangeLength, insertBefore, snapshotId);
+    }
 
     private void setup(final String accessToken) {
         logger.trace("Constructing Retrofit APIs");
