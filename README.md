@@ -42,8 +42,13 @@ For the second step the following values need to be provided:
 - Redirect Uri (the redirect uri that was given in the first step)
 
 ```java
-   AuthorizationRequestTokens authorizationRequestTokens = new AuthorizationRequestTokens();
-   AuthorizationCodeFlowTokenResponse token = authorizationRequestTokens.getAccessAndRefreshToken("CLIENT ID", "CLIENT SECRET", "AUTHORIZATION CODE", "REDIRECT URI");
+AuthorizationRequestTokens authorizationRequestTokens = new AuthorizationRequestTokens();
+AuthorizationCodeFlowTokenResponse token = authorizationRequestTokens
+                .getAccessAndRefreshToken(
+                        "CLIENT ID",
+                        "CLIENT SECRET",
+                        "AUTHORIZATION CODE",
+                        "REDIRECT URI");
 ```
 The `AuthorizationCodeFlowTokenResponse` contains the access and refresh token. The access and refresh token can be used to access api endpoints.
 ```java
@@ -53,7 +58,11 @@ AlbumFull albumFull = spotifyApi.getAlbum("ALBUM ID");
 
 When the access token has expired it can be refreshed using `AuthorizationRefreshToken`
 ```java
-AuthorizationCodeFlowTokenResponse token = authorizationRefreshToken.refreshAccessToken("CIENT ID", "CLIENT SECRET", "REFRESH TOKEN");
+AuthorizationCodeFlowTokenResponse token = authorizationRefreshToken
+                .refreshAccessToken(
+                        "CLIENT ID",
+                        "CLIENT SECRET",
+                        "REFRESH TOKEN");
 ```
 The above code example will return an `AuthorizationCodeFlowTokenResponse` which contains the new access and refresh token.
 
