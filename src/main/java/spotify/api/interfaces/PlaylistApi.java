@@ -7,6 +7,7 @@ import spotify.models.playlists.PlaylistSimplified;
 import spotify.models.playlists.PlaylistTrack;
 import spotify.models.playlists.Snapshot;
 import spotify.models.playlists.requests.CreateUpdatePlaylistRequestBody;
+import spotify.models.playlists.requests.DeleteItemsPlaylistRequestBody;
 import spotify.models.playlists.requests.ReorderPlaylistItemsRequestBody;
 
 import java.util.List;
@@ -34,4 +35,6 @@ public interface PlaylistApi {
     void replacePlaylistItems(String playlistId, List<String> listOfItemUris);
 
     void uploadCoverImageToPlaylist(String playlistId, String base64EncodedJpegImage);
+
+    Snapshot deleteItemsFromPlaylist(String playlistId, String snapshotId, DeleteItemsPlaylistRequestBody items);
 }

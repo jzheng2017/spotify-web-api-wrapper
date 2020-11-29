@@ -16,10 +16,7 @@ import spotify.models.playlists.PlaylistFull;
 import spotify.models.playlists.PlaylistSimplified;
 import spotify.models.playlists.PlaylistTrack;
 import spotify.models.playlists.Snapshot;
-import spotify.models.playlists.requests.AddItemPlaylistRequestBody;
-import spotify.models.playlists.requests.CreateUpdatePlaylistRequestBody;
-import spotify.models.playlists.requests.ReorderPlaylistItemsRequestBody;
-import spotify.models.playlists.requests.ReplacePlaylistItemsRequestBody;
+import spotify.models.playlists.requests.*;
 import spotify.retrofit.services.PlaylistService;
 import spotify.utils.LoggingUtil;
 import spotify.utils.ResponseChecker;
@@ -317,6 +314,39 @@ public class PlaylistApiRetrofit implements PlaylistApi {
             logger.info("Cover image has been accepted by Spotify");
         } catch (IOException ex) {
             logger.error("HTTP request to upload cover image.");
+            throw new HttpRequestFailedException(ex.getMessage());
+        }
+    }
+
+    @Override
+    public Snapshot deleteItemsFromPlaylist(String playlistId, String snapshotId, DeleteItemsPlaylistRequestBody items) {
+        if (playlistId == null || playlistId.isEmpty()) {
+            final String errorMessage = "Playlist id is empty!";
+            logger.error(errorMessage);
+            throw new IllegalArgumentException(errorMessage);
+        }
+
+        if (snapshotId != null && snapshotId.isEmpty()) {
+            logger.warn("An empty snapshot id was passed in. The snapshot id has now been set to NULL.");
+            snapshotId = null;
+        }
+
+        logger.trace("Constructing HTTP call to remove items from a playlist.");
+        Call<Snapshot> httpCall = playlistService.deleteItemsFromPlaylist("Bearer " + this.accessToken, playlistId, items);
+
+        try {
+            logger.info("Executing HTTP call to remove items from a playlist.");
+            logger.debug(String.format("Removing items from playlist %s with snapshot id %s", playlistId, snapshotId));
+            logger.debug(String.format("Removing the following items %s", items));
+            LoggingUtil.logHttpCall(logger, httpCall);
+            Response<Snapshot> response = httpCall.execute();
+
+            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response, HttpStatusCode.OK);
+
+            logger.info("Items have been successfully removed from the playlist");
+            return response.body();
+        } catch (IOException ex) {
+            logger.error("HTTP request to remove items from playlist has failed");
             throw new HttpRequestFailedException(ex.getMessage());
         }
     }

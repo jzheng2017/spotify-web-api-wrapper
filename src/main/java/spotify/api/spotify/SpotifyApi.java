@@ -26,6 +26,7 @@ import spotify.models.generic.Image;
 import spotify.models.paging.Paging;
 import spotify.models.playlists.*;
 import spotify.models.playlists.requests.CreateUpdatePlaylistRequestBody;
+import spotify.models.playlists.requests.DeleteItemsPlaylistRequestBody;
 import spotify.models.playlists.requests.ReorderPlaylistItemsRequestBody;
 import spotify.models.recommendations.RecommendationCollection;
 import spotify.models.shows.SavedShowSimplified;
@@ -343,6 +344,11 @@ public class SpotifyApi {
     public void uploadCoverImageToPlaylist(String playlistId, String base64EncodedJpegImage) {
         logger.info("Requesting to upload cover image to a playlist");
         playlistApi.uploadCoverImageToPlaylist(playlistId, base64EncodedJpegImage);
+    }
+
+    public Snapshot deleteItemsFromPlaylist(String playlistId, String snapshotId, DeleteItemsPlaylistRequestBody items) {
+        logger.info("Requesting to remove items from a playlist");
+        return playlistApi.deleteItemsFromPlaylist(playlistId, snapshotId, items);
     }
 
     private void setup(final String accessToken) {
