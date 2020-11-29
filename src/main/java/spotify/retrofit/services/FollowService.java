@@ -4,7 +4,7 @@ import retrofit2.Call;
 import retrofit2.http.*;
 import spotify.api.enums.EntityType;
 import spotify.models.artists.ArtistFullCursorBasedPagingWrapper;
-import spotify.models.playlists.FollowPlaylistRequestBody;
+import spotify.models.playlists.requests.FollowPlaylistRequestBody;
 
 import java.util.List;
 import java.util.Map;

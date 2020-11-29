@@ -4,10 +4,10 @@ import retrofit2.Call;
 import retrofit2.http.*;
 import spotify.models.generic.Image;
 import spotify.models.paging.Paging;
-import spotify.models.playlists.AddItemPlaylistRequestBody;
 import spotify.models.playlists.PlaylistFull;
 import spotify.models.playlists.PlaylistSimplified;
 import spotify.models.playlists.PlaylistTrack;
+import spotify.models.playlists.requests.AddItemPlaylistRequestBody;
 
 import java.util.List;
 import java.util.Map;

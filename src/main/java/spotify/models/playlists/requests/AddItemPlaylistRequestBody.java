@@ -1,4 +1,4 @@
-package spotify.models.playlists;
+package spotify.models.playlists.requests;
 
 import java.util.List;
 

@@ -12,7 +12,7 @@ import spotify.exceptions.SpotifyActionFailedException;
 import spotify.factories.RetrofitHttpServiceFactory;
 import spotify.models.artists.ArtistFullCursorBasedPaging;
 import spotify.models.artists.ArtistFullCursorBasedPagingWrapper;
-import spotify.models.playlists.FollowPlaylistRequestBody;
+import spotify.models.playlists.requests.FollowPlaylistRequestBody;
 import spotify.retrofit.services.FollowService;
 import spotify.utils.LoggingUtil;
 import spotify.utils.ResponseChecker;

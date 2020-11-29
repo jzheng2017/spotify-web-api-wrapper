@@ -1,4 +1,4 @@
-package spotify.models.playlists;
+package spotify.models.playlists.requests;
 
 import com.google.gson.annotations.SerializedName;
 
