@@ -8,6 +8,7 @@ import spotify.models.playlists.PlaylistFull;
 import spotify.models.playlists.PlaylistSimplified;
 import spotify.models.playlists.PlaylistTrack;
 import spotify.models.playlists.requests.AddItemPlaylistRequestBody;
+import spotify.models.playlists.requests.CreatePlaylistRequestBody;
 
 import java.util.List;
 import java.util.Map;
@@ -39,4 +40,8 @@ public interface PlaylistService {
     Call<Void> addItemToPlaylist(@Header("Authorization") String accessToken,
                                  @Path("playlist_id") String playlistId,
                                  @Body AddItemPlaylistRequestBody requestBody);
+
+    @Headers({"Content-Type: application/json"})
+    @POST("users/{user_id}/playlists")
+    Call<Void> createPlaylist(@Header("Authorization") String accessToken, @Path("user_id") String userId, @Body CreatePlaylistRequestBody requestBody);
 }
