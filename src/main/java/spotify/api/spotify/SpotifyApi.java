@@ -54,6 +54,7 @@ public class SpotifyApi {
     private FollowApi followApi;
     private LibraryApi libraryApi;
     private PlaylistApi playlistApi;
+    private PersonalizationApi personalizationApi;
 
     public SpotifyApi(final String accessToken) {
         this.setup(accessToken);
@@ -351,6 +352,17 @@ public class SpotifyApi {
         return playlistApi.deleteItemsFromPlaylist(playlistId, snapshotId, items);
     }
 
+    public Paging<ArtistFull> getTopArtists(Map<String, String> options) {
+        logger.info("Requesting to fetch user's top artists");
+        return personalizationApi.getTopArtists(options);
+    }
+
+
+    public Paging<TrackFull> getTopTracks(Map<String, String> options) {
+        logger.info("Requesting to fetch user's top tracks");
+        return personalizationApi.getTopTracks(options);
+    }
+
     private void setup(final String accessToken) {
         logger.trace("Constructing Retrofit APIs");
         this.trackApi = new TrackApiRetrofit(accessToken);
@@ -363,5 +375,6 @@ public class SpotifyApi {
         this.followApi = new FollowApiRetrofit(accessToken);
         this.libraryApi = new LibraryApiRetrofit(accessToken);
         this.playlistApi = new PlaylistApiRetrofit(accessToken);
+        this.personalizationApi = new PersonalizationApiRetrofit(accessToken);
     }
 }
