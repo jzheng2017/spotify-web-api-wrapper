@@ -66,4 +66,8 @@ public class RetrofitHttpServiceFactory {
 
         return httpClient.create(PlaylistService.class);
     }
+
+    public static PersonalizationService getPersonalizationService() {
+        return getRetrofitHttpService(PersonalizationService.class, API_BASE_URL_HTTPS_WITH_VERSION);
+    }
 }
