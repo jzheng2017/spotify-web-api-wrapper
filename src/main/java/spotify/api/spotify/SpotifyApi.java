@@ -24,6 +24,7 @@ import spotify.models.episodes.EpisodeFullCollection;
 import spotify.models.episodes.EpisodeSimplified;
 import spotify.models.generic.Image;
 import spotify.models.paging.Paging;
+import spotify.models.players.DeviceCollection;
 import spotify.models.playlists.*;
 import spotify.models.playlists.requests.CreateUpdatePlaylistRequestBody;
 import spotify.models.playlists.requests.DeleteItemsPlaylistRequestBody;
@@ -55,6 +56,7 @@ public class SpotifyApi {
     private LibraryApi libraryApi;
     private PlaylistApi playlistApi;
     private PersonalizationApi personalizationApi;
+    private PlayerApi playerApi;
 
     public SpotifyApi(final String accessToken) {
         this.setup(accessToken);
@@ -363,6 +365,11 @@ public class SpotifyApi {
         return personalizationApi.getTopTracks(options);
     }
 
+    public DeviceCollection getAvailableDevices() {
+        logger.info("Requesting to fetch user's available devices");
+        return playerApi.getAvailableDevices();
+    }
+
     private void setup(final String accessToken) {
         logger.trace("Constructing Retrofit APIs");
         this.trackApi = new TrackApiRetrofit(accessToken);
@@ -376,5 +383,6 @@ public class SpotifyApi {
         this.libraryApi = new LibraryApiRetrofit(accessToken);
         this.playlistApi = new PlaylistApiRetrofit(accessToken);
         this.personalizationApi = new PersonalizationApiRetrofit(accessToken);
+        this.playerApi = new PlayerApiRetrofit(accessToken);
     }
 }
