@@ -70,4 +70,8 @@ public class RetrofitHttpServiceFactory {
     public static PersonalizationService getPersonalizationService() {
         return getRetrofitHttpService(PersonalizationService.class, API_BASE_URL_HTTPS_WITH_VERSION);
     }
+
+    public static PlayerService getPlayerService() {
+        return getRetrofitHttpService(PlayerService.class, API_BASE_URL_HTTPS_WITH_VERSION);
+    }
 }
