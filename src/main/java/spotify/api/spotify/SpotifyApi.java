@@ -25,6 +25,7 @@ import spotify.models.episodes.EpisodeSimplified;
 import spotify.models.generic.Image;
 import spotify.models.paging.Paging;
 import spotify.models.players.DeviceCollection;
+import spotify.models.players.PlayingContext;
 import spotify.models.playlists.*;
 import spotify.models.playlists.requests.CreateUpdatePlaylistRequestBody;
 import spotify.models.playlists.requests.DeleteItemsPlaylistRequestBody;
@@ -368,6 +369,11 @@ public class SpotifyApi {
     public DeviceCollection getAvailableDevices() {
         logger.info("Requesting to fetch user's available devices");
         return playerApi.getAvailableDevices();
+    }
+
+    public PlayingContext getCurrentPlayingContext(Map<String, String> options) {
+        logger.info("Requesting to fetch current playing context");
+        return playerApi.getCurrentPlayingContext(options);
     }
 
     private void setup(final String accessToken) {
