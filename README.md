@@ -153,8 +153,8 @@ This is the most recent coverage in the repository. The marked endpoints may not
 - - [x] Get User's Top Artists and Tracks
 - [ ] Player
 - - [ ] Get the Current User's Recently Played Tracks
-- - [ ] Get Information About The User's Current Playback
-- - [ ] Get a User's Available Devices
+- - [x] Get Information About The User's Current Playback
+- - [x] Get a User's Available Devices
 - - [ ] Get the User's Currently Playing Track
 - - [ ] Skip User's Playback To Next Track
 - - [ ] Skip User's Playback To Previous Track
