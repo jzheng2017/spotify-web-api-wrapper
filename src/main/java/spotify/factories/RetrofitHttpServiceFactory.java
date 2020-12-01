@@ -72,6 +72,8 @@ public class RetrofitHttpServiceFactory {
     }
 
     public static PlayerService getPlayerService() {
-        return getRetrofitHttpService(PlayerService.class, API_BASE_URL_HTTPS_WITH_VERSION);
+        Retrofit httpClient = RetrofitClientFactory.getRetrofitClientWithAbstractPlayableObjectDeserializer(API_BASE_URL_HTTPS_WITH_VERSION);
+
+        return httpClient.create(PlayerService.class);
     }
 }
