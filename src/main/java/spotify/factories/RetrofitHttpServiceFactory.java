@@ -11,7 +11,7 @@ public class RetrofitHttpServiceFactory {
     private static final Logger logger = LoggerFactory.getLogger(RetrofitHttpServiceFactory.class);
 
     private static <T> T getRetrofitHttpService(final Class<T> serviceClassToBeCreatedFor, final String baseUrl) {
-        logger.trace("Requesting Retrofit HTTP client.");
+        logger.trace(String.format("Requesting Retrofit HTTP client for %s", serviceClassToBeCreatedFor));
         Retrofit httpClient = RetrofitClientFactory.getRetrofitClient(baseUrl);
 
         return httpClient.create(serviceClassToBeCreatedFor);
