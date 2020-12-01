@@ -149,8 +149,8 @@ This is the most recent coverage in the repository. The marked endpoints may not
 - - [x] Save Albums for Current User
 - - [x] Save Shows for Current User
 - - [x] Save Tracks for Current User
-- [ ] Personalization
-- - [ ] Get User's Top Artists and Tracks
+- [x] Personalization
+- - [x] Get User's Top Artists and Tracks
 - [ ] Player
 - - [ ] Get the Current User's Recently Played Tracks
 - - [ ] Get Information About The User's Current Playback
