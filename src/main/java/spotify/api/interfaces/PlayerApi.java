@@ -18,4 +18,6 @@ public interface PlayerApi {
     CurrentlyPlayingObject getCurrentlyPlayedObject(Map<String, String> options);
 
     void addItemToQueue(String uri, Map<String, String> options);
+
+    void skipToNextTrack(Map<String, String> options);
 }

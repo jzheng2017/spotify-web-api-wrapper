@@ -144,4 +144,26 @@ public class PlayerApiRetrofit implements PlayerApi {
             throw new HttpRequestFailedException(ex.getMessage());
         }
     }
+
+    @Override
+    public void skipToNextTrack(Map<String, String> options) {
+        options = ValidatorUtil.optionsValueCheck(options);
+
+        logger.trace("Constructing HTTP call to skip to the next track.");
+        Call<Void> httpCall = playerService.skipToNextTrack("Bearer " + this.accessToken, options);
+
+        try {
+            logger.info("Executing HTTP call to skip to the next track.");
+            logger.debug(String.format("Skipping to the next track with following values: %s.", options));
+            LoggingUtil.logHttpCall(logger, httpCall);
+            Response<Void> response = httpCall.execute();
+
+            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response, HttpStatusCode.NO_CONTENT);
+
+            logger.info("Request to skip to the next track has been completed.");
+        } catch (IOException ex) {
+            logger.error("HTTP request to skip to the next track has failed.");
+            throw new HttpRequestFailedException(ex.getMessage());
+        }
+    }
 }
