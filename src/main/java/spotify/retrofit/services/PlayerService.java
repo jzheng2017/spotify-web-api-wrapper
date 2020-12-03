@@ -5,6 +5,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.QueryMap;
 import spotify.models.paging.CursorBasedPaging;
+import spotify.models.players.CurrentlyPlayingObject;
 import spotify.models.players.DeviceCollection;
 import spotify.models.players.PlayHistory;
 import spotify.models.players.PlayingContext;
@@ -20,4 +21,7 @@ public interface PlayerService {
 
     @GET("me/player/recently-played")
     Call<CursorBasedPaging<PlayHistory>> getRecentlyPlayedTracks(@Header("Authorization") String accessToken, @QueryMap Map<String, String> options);
+
+    @GET("me/player/currently-playing")
+    Call<CurrentlyPlayingObject> getCurrentlyPlayingObject(@Header("Authorization") String accessToken, @QueryMap Map<String, String> options);
 }
