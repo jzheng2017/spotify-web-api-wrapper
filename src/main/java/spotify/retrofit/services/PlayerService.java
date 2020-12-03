@@ -45,4 +45,9 @@ public interface PlayerService {
     Call<Void> setRepeatModePlayback(@Header("Authorization") String accessToken,
                                      @Query("state") RepeatType repeatType,
                                      @QueryMap Map<String, String> options);
+
+    @PUT("me/player/volume")
+    Call<Void> setVolumePlayback(@Header("Authorization") String accessToken,
+                                 @Query("volume_percent") int volumePercent,
+                                 @QueryMap Map<String, String> options);
 }
