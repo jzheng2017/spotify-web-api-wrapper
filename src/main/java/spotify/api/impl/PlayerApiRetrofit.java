@@ -8,7 +8,9 @@ import spotify.api.enums.HttpStatusCode;
 import spotify.api.interfaces.PlayerApi;
 import spotify.exceptions.HttpRequestFailedException;
 import spotify.factories.RetrofitHttpServiceFactory;
+import spotify.models.paging.CursorBasedPaging;
 import spotify.models.players.DeviceCollection;
+import spotify.models.players.PlayHistory;
 import spotify.models.players.PlayingContext;
 import spotify.retrofit.services.PlayerService;
 import spotify.utils.LoggingUtil;
@@ -60,6 +62,7 @@ public class PlayerApiRetrofit implements PlayerApi {
 
         try {
             logger.info("Executing HTTP call to fetch current playing context.");
+            logger.debug(String.format("Fetching current playing context with following values: %s.", options));
             LoggingUtil.logHttpCall(logger, httpCall);
             Response<PlayingContext> response = httpCall.execute();
 
@@ -69,6 +72,29 @@ public class PlayerApiRetrofit implements PlayerApi {
             return response.body();
         } catch (IOException ex) {
             logger.error("HTTP request to fetch current playing context has failed.");
+            throw new HttpRequestFailedException(ex.getMessage());
+        }
+    }
+
+    @Override
+    public CursorBasedPaging<PlayHistory> getRecentlyPlayedTracks(Map<String, String> options) {
+        options = ValidatorUtil.optionsValueCheck(options);
+
+        logger.trace("Constructing HTTP call to fetch current user's recently played tracks.");
+        Call<CursorBasedPaging<PlayHistory>> httpCall = playerService.getRecentlyPlayedTracks("Bearer " + this.accessToken, options);
+
+        try {
+            logger.info("Executing HTTP call to fetch current user's recently played tracks.");
+            logger.debug(String.format("Fetching recently played tracks with following values: %s.", options));
+            LoggingUtil.logHttpCall(logger, httpCall);
+            Response<CursorBasedPaging<PlayHistory>> response = httpCall.execute();
+
+            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response, HttpStatusCode.OK);
+
+            logger.info("Recently played tracks have been successfully fetched.");
+            return response.body();
+        } catch (IOException ex) {
+            logger.error("HTTP request to fetch recently played tracks has failed.");
             throw new HttpRequestFailedException(ex.getMessage());
         }
     }

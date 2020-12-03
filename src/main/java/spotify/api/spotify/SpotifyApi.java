@@ -25,6 +25,7 @@ import spotify.models.generic.Image;
 import spotify.models.paging.CursorBasedPaging;
 import spotify.models.paging.Paging;
 import spotify.models.players.DeviceCollection;
+import spotify.models.players.PlayHistory;
 import spotify.models.players.PlayingContext;
 import spotify.models.playlists.*;
 import spotify.models.playlists.requests.CreateUpdatePlaylistRequestBody;
@@ -374,6 +375,11 @@ public class SpotifyApi {
     public PlayingContext getCurrentPlayingContext(Map<String, String> options) {
         logger.info("Requesting to fetch current playing context");
         return playerApi.getCurrentPlayingContext(options);
+    }
+
+    public CursorBasedPaging<PlayHistory> getRecentlyPlayedTracks(Map<String, String> options) {
+        logger.info("Requesting to fetch user's recently played tracks");
+        return playerApi.getRecentlyPlayedTracks(options);
     }
 
     private void setup(final String accessToken) {
