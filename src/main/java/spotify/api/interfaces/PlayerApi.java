@@ -24,4 +24,6 @@ public interface PlayerApi {
     void skipToPreviousTrack(Map<String, String> options);
 
     void pausePlayback(Map<String, String> options);
+
+    void jumpToPositionInCurrentTrack(int positionMs, Map<String, String> options);
 }

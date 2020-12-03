@@ -210,4 +210,32 @@ public class PlayerApiRetrofit implements PlayerApi {
             throw new HttpRequestFailedException(ex.getMessage());
         }
     }
+
+    @Override
+    public void jumpToPositionInCurrentTrack(int positionMs, Map<String, String> options) {
+        if (positionMs < 0) {
+            final String errorMessage = "Time position must be a positive number!";
+            logger.error(errorMessage);
+            throw new IllegalArgumentException(errorMessage);
+        }
+
+        options = ValidatorUtil.optionsValueCheck(options);
+
+        logger.trace("Constructing HTTP call to jump to a position in the current track.");
+        Call<Void> httpCall = playerService.jumpToPositionInCurrentTrack("Bearer " + this.accessToken, positionMs, options);
+
+        try {
+            logger.info("Executing HTTP call to jump to a position in the current track.");
+            logger.debug(String.format("Jumping to position with following values: %s.", options));
+            LoggingUtil.logHttpCall(logger, httpCall);
+            Response<Void> response = httpCall.execute();
+
+            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response, HttpStatusCode.NO_CONTENT);
+
+            logger.info("Request to jump to position in the track has been completed.");
+        } catch (IOException ex) {
+            logger.error("HTTP request to jump to position in the track has failed.");
+            throw new HttpRequestFailedException(ex.getMessage());
+        }
+    }
 }

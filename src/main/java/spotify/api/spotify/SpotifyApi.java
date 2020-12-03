@@ -408,6 +408,11 @@ public class SpotifyApi {
         playerApi.pausePlayback(options);
     }
 
+    public void jumpToPositionInCurrentTrack(int positionMs, Map<String, String> options) {
+        logger.info("Requesting to jump to a time position in the current track");
+        playerApi.jumpToPositionInCurrentTrack(positionMs, options);
+    }
+
     private void setup(final String accessToken) {
         logger.trace("Constructing Retrofit APIs");
         this.trackApi = new TrackApiRetrofit(accessToken);
