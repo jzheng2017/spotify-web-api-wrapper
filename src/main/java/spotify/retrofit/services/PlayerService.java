@@ -31,4 +31,7 @@ public interface PlayerService {
 
     @POST("me/player/previous")
     Call<Void> skipToPreviousTrack(@Header("Authorization") String accessToken, @QueryMap Map<String, String> options);
+
+    @PUT("me/player/pause")
+    Call<Void> pausePlayback(@Header("Authorization") String accessToken, @QueryMap Map<String, String> options);
 }
