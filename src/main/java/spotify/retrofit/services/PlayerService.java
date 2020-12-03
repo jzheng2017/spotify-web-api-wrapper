@@ -2,6 +2,7 @@ package spotify.retrofit.services;
 
 import retrofit2.Call;
 import retrofit2.http.*;
+import spotify.api.enums.RepeatType;
 import spotify.models.paging.CursorBasedPaging;
 import spotify.models.players.CurrentlyPlayingObject;
 import spotify.models.players.DeviceCollection;
@@ -39,4 +40,9 @@ public interface PlayerService {
     Call<Void> jumpToPositionInCurrentTrack(@Header("Authorization") String accessToken,
                                             @Query("position_ms") int positionMs,
                                             @QueryMap Map<String, String> options);
+
+    @PUT("me/player/repeat")
+    Call<Void> setRepeatModePlayback(@Header("Authorization") String accessToken,
+                                     @Query("state") RepeatType repeatType,
+                                     @QueryMap Map<String, String> options);
 }
