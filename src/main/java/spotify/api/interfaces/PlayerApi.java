@@ -29,4 +29,6 @@ public interface PlayerApi {
     void jumpToPositionInCurrentTrack(int positionMs, Map<String, String> options);
 
     void setRepeatModePlayback(RepeatType repeatType, Map<String, String> options);
+
+    void setVolumePlayback(int volumePercent, Map<String, String> options);
 }

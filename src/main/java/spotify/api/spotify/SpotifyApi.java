@@ -419,6 +419,11 @@ public class SpotifyApi {
         playerApi.setRepeatModePlayback(repeatType, options);
     }
 
+    public void setVolumePlayback(int volumePercent, Map<String, String> options) {
+        logger.info("Requesting to set the volume of the playback");
+        playerApi.setVolumePlayback(volumePercent, options);
+    }
+
     private void setup(final String accessToken) {
         logger.trace("Constructing Retrofit APIs");
         this.trackApi = new TrackApiRetrofit(accessToken);

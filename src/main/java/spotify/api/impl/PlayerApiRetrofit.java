@@ -261,4 +261,26 @@ public class PlayerApiRetrofit implements PlayerApi {
             throw new HttpRequestFailedException(ex.getMessage());
         }
     }
+
+    @Override
+    public void setVolumePlayback(int volumePercent, Map<String, String> options) {
+        options = ValidatorUtil.optionsValueCheck(options);
+
+        logger.trace("Constructing HTTP call to set the volume of the playback.");
+        Call<Void> httpCall = playerService.setVolumePlayback("Bearer " + this.accessToken, volumePercent, options);
+
+        try {
+            logger.info("Executing HTTP call to set the volume of the playback.");
+            logger.debug(String.format("Setting the volume of the playback with following values: %s.", options));
+            LoggingUtil.logHttpCall(logger, httpCall);
+            Response<Void> response = httpCall.execute();
+
+            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response, HttpStatusCode.NO_CONTENT);
+
+            logger.info("Request to set the volume of the playback has been completed.");
+        } catch (IOException ex) {
+            logger.error("HTTP request to set the volume of the playback has failed.");
+            throw new HttpRequestFailedException(ex.getMessage());
+        }
+    }
 }
