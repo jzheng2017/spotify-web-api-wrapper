@@ -34,4 +34,9 @@ public interface PlayerService {
 
     @PUT("me/player/pause")
     Call<Void> pausePlayback(@Header("Authorization") String accessToken, @QueryMap Map<String, String> options);
+
+    @PUT("me/player/seek")
+    Call<Void> jumpToPositionInCurrentTrack(@Header("Authorization") String accessToken,
+                                            @Query("position_ms") int positionMs,
+                                            @QueryMap Map<String, String> options);
 }
