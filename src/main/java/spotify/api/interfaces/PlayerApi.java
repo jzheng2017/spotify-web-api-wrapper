@@ -22,4 +22,6 @@ public interface PlayerApi {
     void skipToNextTrack(Map<String, String> options);
 
     void skipToPreviousTrack(Map<String, String> options);
+
+    void pausePlayback(Map<String, String> options);
 }

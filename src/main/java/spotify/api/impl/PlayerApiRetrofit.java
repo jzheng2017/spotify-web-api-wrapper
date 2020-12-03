@@ -188,4 +188,26 @@ public class PlayerApiRetrofit implements PlayerApi {
             throw new HttpRequestFailedException(ex.getMessage());
         }
     }
+
+    @Override
+    public void pausePlayback(Map<String, String> options) {
+        options = ValidatorUtil.optionsValueCheck(options);
+
+        logger.trace("Constructing HTTP call to pause user's playback.");
+        Call<Void> httpCall = playerService.pausePlayback("Bearer " + this.accessToken, options);
+
+        try {
+            logger.info("Executing HTTP call to pause user's playback.");
+            logger.debug(String.format("Pausing playback with following values: %s.", options));
+            LoggingUtil.logHttpCall(logger, httpCall);
+            Response<Void> response = httpCall.execute();
+
+            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response, HttpStatusCode.NO_CONTENT);
+
+            logger.info("Request to pause user's playback has been completed.");
+        } catch (IOException ex) {
+            logger.error("HTTP request to pause user's playback has failed.");
+            throw new HttpRequestFailedException(ex.getMessage());
+        }
+    }
 }

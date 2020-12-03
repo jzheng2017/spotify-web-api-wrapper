@@ -398,10 +398,14 @@ public class SpotifyApi {
         playerApi.skipToNextTrack(options);
     }
 
-
     public void skipToPreviousTrack(Map<String, String> options) {
         logger.info("Requesting to skip to the previous track");
         playerApi.skipToPreviousTrack(options);
+    }
+
+    public void pausePlayback(Map<String, String> options) {
+        logger.info("Requesting to user's playback");
+        playerApi.pausePlayback(options);
     }
 
     private void setup(final String accessToken) {
