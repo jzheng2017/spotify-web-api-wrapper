@@ -388,6 +388,11 @@ public class SpotifyApi {
         return playerApi.getCurrentlyPlayedObject(options);
     }
 
+    public void addItemToQueue(String uri, Map<String, String> options) {
+        logger.info("Requesting to add item to the queue");
+        playerApi.addItemToQueue(uri, options);
+    }
+
     private void setup(final String accessToken) {
         logger.trace("Constructing Retrofit APIs");
         this.trackApi = new TrackApiRetrofit(accessToken);

@@ -16,4 +16,6 @@ public interface PlayerApi {
     CursorBasedPaging<PlayHistory> getRecentlyPlayedTracks(Map<String, String> options);
 
     CurrentlyPlayingObject getCurrentlyPlayedObject(Map<String, String> options);
+
+    void addItemToQueue(String uri, Map<String, String> options);
 }

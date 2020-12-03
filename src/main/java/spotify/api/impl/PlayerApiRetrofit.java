@@ -122,4 +122,26 @@ public class PlayerApiRetrofit implements PlayerApi {
             throw new HttpRequestFailedException(ex.getMessage());
         }
     }
+
+    @Override
+    public void addItemToQueue(String uri, Map<String, String> options) {
+        options = ValidatorUtil.optionsValueCheck(options);
+
+        logger.trace("Constructing HTTP call to add item to the queue.");
+        Call<Void> httpCall = playerService.addItemToQueue("Bearer " + this.accessToken, uri, options);
+
+        try {
+            logger.info("Executing HTTP call to add item to the queue.");
+            logger.debug(String.format("Adding item to the queue with following values: %s.", options));
+            LoggingUtil.logHttpCall(logger, httpCall);
+            Response<Void> response = httpCall.execute();
+
+            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response, HttpStatusCode.NO_CONTENT);
+
+            logger.info("Request to add an item to the queue has been completed.");
+        } catch (IOException ex) {
+            logger.error("HTTP request to add item to the queue has failed.");
+            throw new HttpRequestFailedException(ex.getMessage());
+        }
+    }
 }
