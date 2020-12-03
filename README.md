@@ -165,7 +165,7 @@ This is the most recent coverage in the repository. The marked endpoints may not
 - - [x] Seek To Position In Currently Playing Track
 - - [ ] Toggle Shuffle For User's Playback
 - - [ ]	Transfer a User's Playback
-- - [ ] Set Volume For User's Playback
+- - [x] Set Volume For User's Playback
 - [x] Playlists
 - - [x] Remove Items from a Playlist
 - - [x] Get a List of Current User's Playlists
