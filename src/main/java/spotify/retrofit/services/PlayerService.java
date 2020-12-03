@@ -25,4 +25,7 @@ public interface PlayerService {
 
     @POST("me/player/queue")
     Call<Void> addItemToQueue(@Header("Authorization") String accessToken, @Query("uri") String uri, @QueryMap Map<String, String> options);
+
+    @POST("me/player/next")
+    Call<Void> skipToNextTrack(@Header("Authorization") String accessToken, @QueryMap Map<String, String> option);
 }
