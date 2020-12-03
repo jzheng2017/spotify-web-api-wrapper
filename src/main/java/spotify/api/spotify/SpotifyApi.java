@@ -398,6 +398,12 @@ public class SpotifyApi {
         playerApi.skipToNextTrack(options);
     }
 
+
+    public void skipToPreviousTrack(Map<String, String> options) {
+        logger.info("Requesting to skip to the previous track");
+        playerApi.skipToPreviousTrack(options);
+    }
+
     private void setup(final String accessToken) {
         logger.trace("Constructing Retrofit APIs");
         this.trackApi = new TrackApiRetrofit(accessToken);

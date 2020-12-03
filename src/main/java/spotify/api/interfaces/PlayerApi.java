@@ -20,4 +20,6 @@ public interface PlayerApi {
     void addItemToQueue(String uri, Map<String, String> options);
 
     void skipToNextTrack(Map<String, String> options);
+
+    void skipToPreviousTrack(Map<String, String> options);
 }
