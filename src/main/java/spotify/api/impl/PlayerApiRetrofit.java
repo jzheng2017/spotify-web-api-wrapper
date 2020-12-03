@@ -26,6 +26,9 @@ public class PlayerApiRetrofit implements PlayerApi {
     public PlayerApiRetrofit(final String accessToken) {
         this.accessToken = accessToken;
         this.playerService = RetrofitHttpServiceFactory.getPlayerService();
+        logger.warn("The /player endpoints are in beta, changes that the Spotify API make may break any of these functions." +
+                "\nIf there are any issues please report them on GitHub." +
+                " https://github.com/jzheng2017/spotify-web-api-wrapper");
     }
 
     @Override
