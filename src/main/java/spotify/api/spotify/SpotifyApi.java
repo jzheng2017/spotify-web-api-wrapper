@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import spotify.api.enums.AlbumType;
 import spotify.api.enums.EntityType;
+import spotify.api.enums.RepeatType;
 import spotify.api.impl.*;
 import spotify.api.interfaces.*;
 import spotify.models.albums.AlbumFull;
@@ -411,6 +412,11 @@ public class SpotifyApi {
     public void jumpToPositionInCurrentTrack(int positionMs, Map<String, String> options) {
         logger.info("Requesting to jump to a time position in the current track");
         playerApi.jumpToPositionInCurrentTrack(positionMs, options);
+    }
+
+    public void setRepeatModePlayback(RepeatType repeatType, Map<String, String> options) {
+        logger.info("Requesting to set the repeat mode of the playback");
+        playerApi.setRepeatModePlayback(repeatType, options);
     }
 
     private void setup(final String accessToken) {

@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import retrofit2.Call;
 import retrofit2.Response;
 import spotify.api.enums.HttpStatusCode;
+import spotify.api.enums.RepeatType;
 import spotify.api.interfaces.PlayerApi;
 import spotify.exceptions.HttpRequestFailedException;
 import spotify.factories.RetrofitHttpServiceFactory;
@@ -235,6 +236,28 @@ public class PlayerApiRetrofit implements PlayerApi {
             logger.info("Request to jump to position in the track has been completed.");
         } catch (IOException ex) {
             logger.error("HTTP request to jump to position in the track has failed.");
+            throw new HttpRequestFailedException(ex.getMessage());
+        }
+    }
+
+    @Override
+    public void setRepeatModePlayback(RepeatType repeatType, Map<String, String> options) {
+        options = ValidatorUtil.optionsValueCheck(options);
+
+        logger.trace("Constructing HTTP call to set the repeat mode of the playback.");
+        Call<Void> httpCall = playerService.setRepeatModePlayback("Bearer " + this.accessToken, repeatType, options);
+
+        try {
+            logger.info("Executing HTTP call to set the repeat mode of the playback.");
+            logger.debug(String.format("Setting the repeat mode of the playback with following values: %s.", options));
+            LoggingUtil.logHttpCall(logger, httpCall);
+            Response<Void> response = httpCall.execute();
+
+            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response, HttpStatusCode.NO_CONTENT);
+
+            logger.info("Request to set the repeat mode of the playback has been completed.");
+        } catch (IOException ex) {
+            logger.error("HTTP request to set the repeat mode of the playback has failed.");
             throw new HttpRequestFailedException(ex.getMessage());
         }
     }
