@@ -10,8 +10,9 @@ import spotify.api.interfaces.FollowApi;
 import spotify.exceptions.HttpRequestFailedException;
 import spotify.exceptions.SpotifyActionFailedException;
 import spotify.factories.RetrofitHttpServiceFactory;
-import spotify.models.artists.ArtistFullCursorBasedPaging;
+import spotify.models.artists.ArtistFull;
 import spotify.models.artists.ArtistFullCursorBasedPagingWrapper;
+import spotify.models.paging.CursorBasedPaging;
 import spotify.models.playlists.requests.FollowPlaylistRequestBody;
 import spotify.retrofit.services.FollowService;
 import spotify.utils.LoggingUtil;
@@ -120,7 +121,7 @@ public class FollowApiRetrofit implements FollowApi {
     }
 
     @Override
-    public ArtistFullCursorBasedPaging getFollowedArtists(EntityType entityType, Map<String, String> options) {
+    public CursorBasedPaging<ArtistFull> getFollowedArtists(EntityType entityType, Map<String, String> options) {
         logger.trace("Constructing HTTP call to fetch followed artists of the current user.");
         Call<ArtistFullCursorBasedPagingWrapper> httpCall = followService.getFollowedArtists("Bearer " + this.accessToken, entityType, options);
 

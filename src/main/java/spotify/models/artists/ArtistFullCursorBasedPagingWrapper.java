@@ -1,13 +1,15 @@
 package spotify.models.artists;
 
-public class ArtistFullCursorBasedPagingWrapper {
-    private ArtistFullCursorBasedPaging artists;
+import spotify.models.paging.CursorBasedPaging;
 
-    public ArtistFullCursorBasedPaging getArtists() {
+public class ArtistFullCursorBasedPagingWrapper {
+    private CursorBasedPaging<ArtistFull> artists;
+
+    public CursorBasedPaging<ArtistFull> getArtists() {
         return artists;
     }
 
-    public void setArtists(ArtistFullCursorBasedPaging artists) {
+    public void setArtists(CursorBasedPaging<ArtistFull> artists) {
         this.artists = artists;
     }
 }

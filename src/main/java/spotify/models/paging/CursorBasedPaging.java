@@ -1,12 +1,12 @@
-package spotify.models.artists;
+package spotify.models.paging;
 
 import spotify.models.generic.Cursor;
 
 import java.util.List;
 
-public class ArtistFullCursorBasedPaging {
+public class CursorBasedPaging<T> {
     private String href;
-    private List<ArtistFull> items;
+    private List<T> items;
     private int limit;
     private String next;
     private Cursor cursors;
@@ -20,11 +20,11 @@ public class ArtistFullCursorBasedPaging {
         this.href = href;
     }
 
-    public List<ArtistFull> getItems() {
+    public List<T> getItems() {
         return items;
     }
 
-    public void setItems(List<ArtistFull> items) {
+    public void setItems(List<T> items) {
         this.items = items;
     }
 

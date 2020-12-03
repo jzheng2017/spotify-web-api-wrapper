@@ -12,7 +12,6 @@ import spotify.models.albums.AlbumSimplifiedPaging;
 import spotify.models.albums.SavedAlbumFull;
 import spotify.models.artists.ArtistFull;
 import spotify.models.artists.ArtistFullCollection;
-import spotify.models.artists.ArtistFullCursorBasedPaging;
 import spotify.models.artists.ArtistSimplified;
 import spotify.models.audio.AudioAnalysis;
 import spotify.models.audio.AudioFeatures;
@@ -23,6 +22,7 @@ import spotify.models.episodes.EpisodeFull;
 import spotify.models.episodes.EpisodeFullCollection;
 import spotify.models.episodes.EpisodeSimplified;
 import spotify.models.generic.Image;
+import spotify.models.paging.CursorBasedPaging;
 import spotify.models.paging.Paging;
 import spotify.models.players.DeviceCollection;
 import spotify.models.players.PlayingContext;
@@ -219,7 +219,7 @@ public class SpotifyApi {
         followApi.followPlaylist(playlistId, setPlaylistPublic);
     }
 
-    public ArtistFullCursorBasedPaging getFollowedArtists(EntityType entityType, Map<String, String> options) {
+    public CursorBasedPaging<ArtistFull> getFollowedArtists(EntityType entityType, Map<String, String> options) {
         logger.info("Requesting current user's followed artists");
         return followApi.getFollowedArtists(entityType, options);
     }

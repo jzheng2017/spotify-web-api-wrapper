@@ -1,7 +1,8 @@
 package spotify.api.interfaces;
 
 import spotify.api.enums.EntityType;
-import spotify.models.artists.ArtistFullCursorBasedPaging;
+import spotify.models.artists.ArtistFull;
+import spotify.models.paging.CursorBasedPaging;
 
 import java.util.List;
 import java.util.Map;
@@ -15,7 +16,7 @@ public interface FollowApi {
 
     void followPlaylist(String playlistId, boolean setPlaylistPublic);
 
-    ArtistFullCursorBasedPaging getFollowedArtists(EntityType entityType, Map<String, String> options);
+    CursorBasedPaging<ArtistFull> getFollowedArtists(EntityType entityType, Map<String, String> options);
 
     void unfollowEntities(EntityType entityType, List<String> listOfEntityIds);
 
