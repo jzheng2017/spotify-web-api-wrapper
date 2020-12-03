@@ -1,6 +1,7 @@
 package spotify.api.interfaces;
 
 import spotify.models.paging.CursorBasedPaging;
+import spotify.models.players.CurrentlyPlayingObject;
 import spotify.models.players.DeviceCollection;
 import spotify.models.players.PlayHistory;
 import spotify.models.players.PlayingContext;
@@ -13,4 +14,6 @@ public interface PlayerApi {
     PlayingContext getCurrentPlayingContext(Map<String, String> options);
 
     CursorBasedPaging<PlayHistory> getRecentlyPlayedTracks(Map<String, String> options);
+
+    CurrentlyPlayingObject getCurrentlyPlayedObject(Map<String, String> options);
 }

@@ -9,6 +9,7 @@ import spotify.api.interfaces.PlayerApi;
 import spotify.exceptions.HttpRequestFailedException;
 import spotify.factories.RetrofitHttpServiceFactory;
 import spotify.models.paging.CursorBasedPaging;
+import spotify.models.players.CurrentlyPlayingObject;
 import spotify.models.players.DeviceCollection;
 import spotify.models.players.PlayHistory;
 import spotify.models.players.PlayingContext;
@@ -95,6 +96,29 @@ public class PlayerApiRetrofit implements PlayerApi {
             return response.body();
         } catch (IOException ex) {
             logger.error("HTTP request to fetch recently played tracks has failed.");
+            throw new HttpRequestFailedException(ex.getMessage());
+        }
+    }
+
+    @Override
+    public CurrentlyPlayingObject getCurrentlyPlayedObject(Map<String, String> options) {
+        options = ValidatorUtil.optionsValueCheck(options);
+
+        logger.trace("Constructing HTTP call to fetch current user's currently played object.");
+        Call<CurrentlyPlayingObject> httpCall = playerService.getCurrentlyPlayingObject("Bearer " + this.accessToken, options);
+
+        try {
+            logger.info("Executing HTTP call to fetch current user's currently played object.");
+            logger.debug(String.format("Fetching currently played object with following values: %s.", options));
+            LoggingUtil.logHttpCall(logger, httpCall);
+            Response<CurrentlyPlayingObject> response = httpCall.execute();
+
+            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response, HttpStatusCode.OK);
+
+            logger.info("Currently played object has been successfully fetched.");
+            return response.body();
+        } catch (IOException ex) {
+            logger.error("HTTP request to fetch currently played object has failed.");
             throw new HttpRequestFailedException(ex.getMessage());
         }
     }
