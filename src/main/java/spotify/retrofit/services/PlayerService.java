@@ -28,4 +28,7 @@ public interface PlayerService {
 
     @POST("me/player/next")
     Call<Void> skipToNextTrack(@Header("Authorization") String accessToken, @QueryMap Map<String, String> option);
+
+    @POST("me/player/previous")
+    Call<Void> skipToPreviousTrack(@Header("Authorization") String accessToken, @QueryMap Map<String, String> options);
 }
