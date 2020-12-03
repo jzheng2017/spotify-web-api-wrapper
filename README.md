@@ -152,17 +152,17 @@ This is the most recent coverage in the repository. The marked endpoints may not
 - [x] Personalization
 - - [x] Get User's Top Artists and Tracks
 - [ ] Player
-- - [ ] Get the Current User's Recently Played Tracks
+- - [x] Get the Current User's Recently Played Tracks
 - - [x] Get Information About The User's Current Playback
 - - [x] Get a User's Available Devices
-- - [ ] Get the User's Currently Playing Track
-- - [ ] Skip User's Playback To Next Track
-- - [ ] Skip User's Playback To Previous Track
-- - [ ] Add an item to the end of the user's current playback queue.
-- - [ ] Pause a User's Playback
+- - [x] Get the User's Currently Playing Track
+- - [x] Skip User's Playback To Next Track
+- - [x] Skip User's Playback To Previous Track
+- - [x] Add an item to the end of the user's current playback queue.
+- - [x] Pause a User's Playback
 - - [ ] Start/Resume a User's Playback
-- - [ ] Set Repeat Mode On User's Playback
-- - [ ] Seek To Position In Currently Playing Track
+- - [x] Set Repeat Mode On User's Playback
+- - [x] Seek To Position In Currently Playing Track
 - - [ ] Toggle Shuffle For User's Playback
 - - [ ]	Transfer a User's Playback
 - - [ ] Set Volume For User's Playback
