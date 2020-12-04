@@ -55,4 +55,9 @@ public interface PlayerService {
     @Headers({"Content-Type: application/json"})
     @PUT("me/player/play")
     Call<Void> changePlaybackState(@Header("Authorization") String accessToken, @Body ChangePlaybackStateRequestBody requestBody);
+
+    @PUT("me/player/shuffle")
+    Call<Void> shufflePlayback(@Header("Authorization") String accessToken,
+                               @Query("state") boolean shuffle,
+                               @QueryMap Map<String, String> options);
 }
