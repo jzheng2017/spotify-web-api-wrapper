@@ -151,7 +151,7 @@ This is the most recent coverage in the repository. The marked endpoints may not
 - - [x] Save Tracks for Current User
 - [x] Personalization
 - - [x] Get User's Top Artists and Tracks
-- [ ] Player
+- [x] Player
 - - [x] Get the Current User's Recently Played Tracks
 - - [x] Get Information About The User's Current Playback
 - - [x] Get a User's Available Devices
@@ -160,11 +160,11 @@ This is the most recent coverage in the repository. The marked endpoints may not
 - - [x] Skip User's Playback To Previous Track
 - - [x] Add an item to the end of the user's current playback queue.
 - - [x] Pause a User's Playback
-- - [ ] Start/Resume a User's Playback
+- - [x] Start/Resume a User's Playback
 - - [x] Set Repeat Mode On User's Playback
 - - [x] Seek To Position In Currently Playing Track
-- - [ ] Toggle Shuffle For User's Playback
-- - [ ]	Transfer a User's Playback
+- - [x] Toggle Shuffle For User's Playback
+- - [x]	Transfer a User's Playback
 - - [x] Set Volume For User's Playback
 - [x] Playlists
 - - [x] Remove Items from a Playlist
