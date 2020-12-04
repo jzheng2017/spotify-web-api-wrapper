@@ -29,6 +29,7 @@ import spotify.models.players.CurrentlyPlayingObject;
 import spotify.models.players.DeviceCollection;
 import spotify.models.players.PlayHistory;
 import spotify.models.players.PlayingContext;
+import spotify.models.players.requests.ChangePlaybackStateRequestBody;
 import spotify.models.playlists.*;
 import spotify.models.playlists.requests.CreateUpdatePlaylistRequestBody;
 import spotify.models.playlists.requests.DeleteItemsPlaylistRequestBody;
@@ -422,6 +423,11 @@ public class SpotifyApi {
     public void setVolumePlayback(int volumePercent, Map<String, String> options) {
         logger.info("Requesting to set the volume of the playback");
         playerApi.setVolumePlayback(volumePercent, options);
+    }
+
+    public void changePlaybackState(ChangePlaybackStateRequestBody requestBody) {
+        logger.info("Requesting to change the state of the playback");
+        playerApi.changePlaybackState(requestBody);
     }
 
     private void setup(final String accessToken) {

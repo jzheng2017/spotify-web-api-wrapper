@@ -14,6 +14,7 @@ import spotify.models.players.CurrentlyPlayingObject;
 import spotify.models.players.DeviceCollection;
 import spotify.models.players.PlayHistory;
 import spotify.models.players.PlayingContext;
+import spotify.models.players.requests.ChangePlaybackStateRequestBody;
 import spotify.retrofit.services.PlayerService;
 import spotify.utils.LoggingUtil;
 import spotify.utils.ResponseChecker;
@@ -280,6 +281,26 @@ public class PlayerApiRetrofit implements PlayerApi {
             logger.info("Request to set the volume of the playback has been completed.");
         } catch (IOException ex) {
             logger.error("HTTP request to set the volume of the playback has failed.");
+            throw new HttpRequestFailedException(ex.getMessage());
+        }
+    }
+
+    @Override
+    public void changePlaybackState(ChangePlaybackStateRequestBody requestBody) {
+        logger.trace("Constructing HTTP call to change the state of the playback.");
+        Call<Void> httpCall = playerService.changePlaybackState("Bearer " + this.accessToken, requestBody);
+
+        try {
+            logger.info("Executing HTTP call to change the state of the playback.");
+            logger.debug(String.format("Changing the state of the playback with following values: %s.", requestBody));
+            LoggingUtil.logHttpCall(logger, httpCall);
+            Response<Void> response = httpCall.execute();
+
+            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response, HttpStatusCode.NO_CONTENT);
+
+            logger.info("Request to change the state of the playback has been completed.");
+        } catch (IOException ex) {
+            logger.error("HTTP request to change the state of the playback has failed.");
             throw new HttpRequestFailedException(ex.getMessage());
         }
     }
