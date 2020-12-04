@@ -9,6 +9,7 @@ import spotify.models.players.DeviceCollection;
 import spotify.models.players.PlayHistory;
 import spotify.models.players.PlayingContext;
 import spotify.models.players.requests.ChangePlaybackStateRequestBody;
+import spotify.models.players.requests.TransferPlaybackRequestBody;
 
 import java.util.Map;
 
@@ -60,4 +61,7 @@ public interface PlayerService {
     Call<Void> shufflePlayback(@Header("Authorization") String accessToken,
                                @Query("state") boolean shuffle,
                                @QueryMap Map<String, String> options);
+
+    @PUT("me/player")
+    Call<Void> transferPlayback(@Header("Authorization") String accessToken, @Body TransferPlaybackRequestBody requestBody);
 }
