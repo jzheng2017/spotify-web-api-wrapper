@@ -8,6 +8,7 @@ import spotify.models.players.CurrentlyPlayingObject;
 import spotify.models.players.DeviceCollection;
 import spotify.models.players.PlayHistory;
 import spotify.models.players.PlayingContext;
+import spotify.models.players.requests.ChangePlaybackStateRequestBody;
 
 import java.util.Map;
 
@@ -50,4 +51,8 @@ public interface PlayerService {
     Call<Void> setVolumePlayback(@Header("Authorization") String accessToken,
                                  @Query("volume_percent") int volumePercent,
                                  @QueryMap Map<String, String> options);
+
+    @Headers({"Content-Type: application/json"})
+    @PUT("me/player/play")
+    Call<Void> changePlaybackState(@Header("Authorization") String accessToken, @Body ChangePlaybackStateRequestBody requestBody);
 }
