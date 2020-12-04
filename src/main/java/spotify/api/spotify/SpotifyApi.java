@@ -30,6 +30,7 @@ import spotify.models.players.DeviceCollection;
 import spotify.models.players.PlayHistory;
 import spotify.models.players.PlayingContext;
 import spotify.models.players.requests.ChangePlaybackStateRequestBody;
+import spotify.models.players.requests.TransferPlaybackRequestBody;
 import spotify.models.playlists.*;
 import spotify.models.playlists.requests.CreateUpdatePlaylistRequestBody;
 import spotify.models.playlists.requests.DeleteItemsPlaylistRequestBody;
@@ -433,6 +434,11 @@ public class SpotifyApi {
     public void shufflePlayback(boolean shuffle, Map<String, String> options) {
         logger.info("Requesting to toggle the shuffle of the playback");
         playerApi.shufflePlayback(shuffle, options);
+    }
+
+    public void transferPlayback(TransferPlaybackRequestBody requestBody) {
+        logger.info("Requesting to transfer playback to devices");
+        playerApi.transferPlayback(requestBody);
     }
 
     private void setup(final String accessToken) {

@@ -15,6 +15,7 @@ import spotify.models.players.DeviceCollection;
 import spotify.models.players.PlayHistory;
 import spotify.models.players.PlayingContext;
 import spotify.models.players.requests.ChangePlaybackStateRequestBody;
+import spotify.models.players.requests.TransferPlaybackRequestBody;
 import spotify.retrofit.services.PlayerService;
 import spotify.utils.LoggingUtil;
 import spotify.utils.ResponseChecker;
@@ -323,6 +324,32 @@ public class PlayerApiRetrofit implements PlayerApi {
             logger.info("Request to toggle shuffle of the playback has been completed.");
         } catch (IOException ex) {
             logger.error("HTTP request to toggle shuffle of the playback has failed.");
+            throw new HttpRequestFailedException(ex.getMessage());
+        }
+    }
+
+    @Override
+    public void transferPlayback(TransferPlaybackRequestBody requestBody) {
+        if (requestBody == null || requestBody.getDeviceIds() == null || requestBody.getDeviceIds().isEmpty()) {
+            final String errorMessage = "The request body has not been constructed correctly!";
+            logger.error(errorMessage);
+            throw new IllegalArgumentException(errorMessage);
+        }
+
+        logger.trace("Constructing HTTP call to transfer playback to devices.");
+        Call<Void> httpCall = playerService.transferPlayback("Bearer " + this.accessToken, requestBody);
+
+        try {
+            logger.info("Executing HTTP call to transfer playback to devices.");
+            logger.debug(String.format("Transferring playback to the following devices: %s", requestBody.getDeviceIds()));
+            LoggingUtil.logHttpCall(logger, httpCall);
+            Response<Void> response = httpCall.execute();
+
+            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response, HttpStatusCode.NO_CONTENT);
+
+            logger.info("Request to transfer playback has been completed.");
+        } catch (IOException ex) {
+            logger.error("HTTP request to transfer playback has failed.");
             throw new HttpRequestFailedException(ex.getMessage());
         }
     }

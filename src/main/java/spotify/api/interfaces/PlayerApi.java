@@ -7,6 +7,7 @@ import spotify.models.players.DeviceCollection;
 import spotify.models.players.PlayHistory;
 import spotify.models.players.PlayingContext;
 import spotify.models.players.requests.ChangePlaybackStateRequestBody;
+import spotify.models.players.requests.TransferPlaybackRequestBody;
 
 import java.util.Map;
 
@@ -36,4 +37,6 @@ public interface PlayerApi {
     void changePlaybackState(ChangePlaybackStateRequestBody requestBody);
 
     void shufflePlayback(boolean shuffle, Map<String, String> options);
+
+    void transferPlayback(TransferPlaybackRequestBody requestBody);
 }
