@@ -34,4 +34,6 @@ public interface PlayerApi {
     void setVolumePlayback(int volumePercent, Map<String, String> options);
 
     void changePlaybackState(ChangePlaybackStateRequestBody requestBody);
+
+    void shufflePlayback(boolean shuffle, Map<String, String> options);
 }

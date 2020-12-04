@@ -304,4 +304,26 @@ public class PlayerApiRetrofit implements PlayerApi {
             throw new HttpRequestFailedException(ex.getMessage());
         }
     }
+
+    @Override
+    public void shufflePlayback(boolean shuffle, Map<String, String> options) {
+        options = ValidatorUtil.optionsValueCheck(options);
+
+        logger.trace("Constructing HTTP call to toggle shuffle of the playback.");
+        Call<Void> httpCall = playerService.shufflePlayback("Bearer " + this.accessToken, shuffle, options);
+
+        try {
+            logger.info("Executing HTTP call to toggle shuffle of the playback.");
+            logger.debug(String.format("Toggling shuffle %s of the playback with following values: %s.", shuffle ? "on" : "off", options));
+            LoggingUtil.logHttpCall(logger, httpCall);
+            Response<Void> response = httpCall.execute();
+
+            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response, HttpStatusCode.NO_CONTENT);
+
+            logger.info("Request to toggle shuffle of the playback has been completed.");
+        } catch (IOException ex) {
+            logger.error("HTTP request to toggle shuffle of the playback has failed.");
+            throw new HttpRequestFailedException(ex.getMessage());
+        }
+    }
 }

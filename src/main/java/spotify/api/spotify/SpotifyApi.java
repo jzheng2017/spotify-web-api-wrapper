@@ -430,6 +430,11 @@ public class SpotifyApi {
         playerApi.changePlaybackState(requestBody);
     }
 
+    public void shufflePlayback(boolean shuffle, Map<String, String> options) {
+        logger.info("Requesting to toggle the shuffle of the playback");
+        playerApi.shufflePlayback(shuffle, options);
+    }
+
     private void setup(final String accessToken) {
         logger.trace("Constructing Retrofit APIs");
         this.trackApi = new TrackApiRetrofit(accessToken);
