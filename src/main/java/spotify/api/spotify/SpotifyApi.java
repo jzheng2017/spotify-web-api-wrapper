@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import spotify.api.enums.AlbumType;
 import spotify.api.enums.EntityType;
+import spotify.api.enums.QueryType;
 import spotify.api.enums.RepeatType;
 import spotify.api.impl.*;
 import spotify.api.interfaces.*;
@@ -36,6 +37,7 @@ import spotify.models.playlists.requests.CreateUpdatePlaylistRequestBody;
 import spotify.models.playlists.requests.DeleteItemsPlaylistRequestBody;
 import spotify.models.playlists.requests.ReorderPlaylistItemsRequestBody;
 import spotify.models.recommendations.RecommendationCollection;
+import spotify.models.search.SearchQueryResult;
 import spotify.models.shows.SavedShowSimplified;
 import spotify.models.shows.ShowFull;
 import spotify.models.shows.ShowSimplifiedCollection;
@@ -63,6 +65,7 @@ public class SpotifyApi {
     private PlaylistApi playlistApi;
     private PersonalizationApi personalizationApi;
     private PlayerApi playerApi;
+    private SearchApi searchApi;
 
     public SpotifyApi(final String accessToken) {
         this.setup(accessToken);
@@ -441,6 +444,11 @@ public class SpotifyApi {
         playerApi.transferPlayback(requestBody);
     }
 
+    public SearchQueryResult searchItem(String query, List<QueryType> listOfQueryTypes, Map<String, String> options) {
+        logger.info("Requesting to perform a query");
+        return searchApi.searchItem(query, listOfQueryTypes, options);
+    }
+
     private void setup(final String accessToken) {
         logger.trace("Constructing Retrofit APIs");
         this.trackApi = new TrackApiRetrofit(accessToken);
@@ -455,5 +463,6 @@ public class SpotifyApi {
         this.playlistApi = new PlaylistApiRetrofit(accessToken);
         this.personalizationApi = new PersonalizationApiRetrofit(accessToken);
         this.playerApi = new PlayerApiRetrofit(accessToken);
+        this.searchApi = new SearchApiRetrofit(accessToken);
     }
 }
