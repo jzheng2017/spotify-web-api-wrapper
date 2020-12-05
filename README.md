@@ -3,6 +3,11 @@
 # Spotify Web API Wrapper 
 Spotify API wrapper for Java
 
+## Guides
+Use the following guides provided by Spotify to use this library:
+- [Authorization Guide](https://developer.spotify.com/documentation/general/guides/authorization-guide/)
+- [Web API](https://developer.spotify.com/documentation/web-api/reference/)
+
 ## Example usages
 ### Client Credentials Flow
 The Client Credentials flow is used in server-to-server authentication. Only endpoints that do not access user information can be accessed. 
@@ -52,12 +57,54 @@ AuthorizationCodeFlowTokenResponse token = authorizationRequestToken
                         "AUTHORIZATION CODE",
                         "REDIRECT URI");
 ```
+
+### Authorization Code Flow with Proof Key for Code Exchange (PKCE)
+The authorization code flow with PKCE is the best option for mobile and desktop applications where it is unsafe to store your client secret. It provides your app with an access token that can be refreshed. For further information about this flow, see [IETF RFC-7636](https://tools.ietf.org/html/rfc7636).
+
+The first step to get an access and refresh token through the Authorization PKCE Code Flow is to build an url.
+```java
+AuthorizationCodeFlowPKCE pkce = new AuthorizationCodeFlowPKCE.Builder()
+     .setClientId("CLIENT ID")
+     .setRedirectUri("REDIRECT URI")
+     .setResponseType("code")
+     .setScopes(Arrays.asList(
+              AuthorizationScope.APP_REMOTE_CONTROL,
+              AuthorizationScope.PLAYLIST_MODIFY_PRIVATE))
+     .setCodeChallengeMethod("S256")
+     .setCodeChallenge("CODE CHALLENGE")
+     .setState("STATE")
+     .build();
+```
+
+The above code will result in the following url.
+```
+https://accounts.spotify.com/authorize?client_id=CLIENT ID&response_type=code&redirect_uri=REDIRECT URI&scope=app-remote-control playlist-modify-private&state=STATE&code_challenge_method=S256&code_challenge=CODE CHALLENGE
+```
+By visiting the url it will display a prompt to authorize access within the given scopes. Authorizing access will redirect the user to the given redirect uri. An authorization code will also be returned, it can be found as a query parameter in the redirect uri. Use this authorization code for the second step. 
+
+For the second step the following values need to be provided:
+- Client ID
+- Authorization Code (the code that got returned when redirected from spotify)
+- Redirect Uri (the redirect uri that was given in the first step)
+- Code verifier (the one that was generated at the first step)
+
+```java
+AuthorizationPKCERequestToken a = new AuthorizationPKCERequestToken();
+final String accessToken = a.getAccessAndRefreshToken(
+        "CLIENT ID",
+        "CODE",
+        "REDIRECT URI",
+        "CODE VERIFIER")
+        .getAccessToken();
+```
+### Using access token
 The `AuthorizationCodeFlowTokenResponse` contains the access and refresh token. The access and refresh token can be used to access api endpoints.
 ```java
 SpotifyApi spotifyApi = new SpotifyApi("ACCESS TOKEN", "REFRESH TOKEN");
 AlbumFull albumFull = spotifyApi.getAlbum("ALBUM ID");
 ```
 
+### Refreshing access token
 When the access token has expired it can be refreshed using `AuthorizationRefreshToken`
 ```java
 AuthorizationCodeFlowTokenResponse token = authorizationRefreshToken
@@ -179,8 +226,8 @@ This is the most recent coverage in the repository. The marked endpoints may not
 - - [x] Reorder a Playlist's Items
 - - [x] Replace a Playlist's Items
 - - [x] Change a Playlist's Details
-- [ ] Search
-- - [ ] Search for an item
+- [x] Search
+- - [x] Search for an item
 - [x] Tracks
 - - [x] Get a Track
 - - [x] Get Several Tracks
