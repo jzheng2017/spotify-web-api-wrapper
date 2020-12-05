@@ -76,4 +76,8 @@ public class RetrofitHttpServiceFactory {
 
         return httpClient.create(PlayerService.class);
     }
+
+    public static SearchService getSearchService() {
+        return getRetrofitHttpService(SearchService.class, API_BASE_URL_HTTPS_WITH_VERSION);
+    }
 }
