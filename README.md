@@ -3,6 +3,11 @@
 # Spotify Web API Wrapper 
 Spotify API wrapper for Java
 
+## Guides
+Use the following guides provided by Spotify to use this library:
+- [Authorization Guide](https://developer.spotify.com/documentation/general/guides/authorization-guide/)
+- [Web API](https://developer.spotify.com/documentation/web-api/reference/)
+
 ## Example usages
 ### Client Credentials Flow
 The Client Credentials flow is used in server-to-server authentication. Only endpoints that do not access user information can be accessed. 
@@ -53,7 +58,7 @@ AuthorizationCodeFlowTokenResponse token = authorizationRequestToken
                         "REDIRECT URI");
 ```
 
-## Authorization Code Flow with Proof Key for Code Exchange (PKCE)
+### Authorization Code Flow with Proof Key for Code Exchange (PKCE)
 The authorization code flow with PKCE is the best option for mobile and desktop applications where it is unsafe to store your client secret. It provides your app with an access token that can be refreshed. For further information about this flow, see [IETF RFC-7636](https://tools.ietf.org/html/rfc7636).
 
 The first step to get an access and refresh token through the Authorization PKCE Code Flow is to build an url.
@@ -92,14 +97,14 @@ final String accessToken = a.getAccessAndRefreshToken(
         "CODE VERIFIER")
         .getAccessToken();
 ```
-## Using access token
+### Using access token
 The `AuthorizationCodeFlowTokenResponse` contains the access and refresh token. The access and refresh token can be used to access api endpoints.
 ```java
 SpotifyApi spotifyApi = new SpotifyApi("ACCESS TOKEN", "REFRESH TOKEN");
 AlbumFull albumFull = spotifyApi.getAlbum("ALBUM ID");
 ```
 
-## Refreshing access token
+### Refreshing access token
 When the access token has expired it can be refreshed using `AuthorizationRefreshToken`
 ```java
 AuthorizationCodeFlowTokenResponse token = authorizationRefreshToken
