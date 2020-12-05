@@ -4,16 +4,11 @@ import okhttp3.Credentials;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import retrofit2.Call;
-import retrofit2.Response;
 import spotify.api.enums.GrantType;
-import spotify.exceptions.HttpRequestFailedException;
-import spotify.exceptions.SpotifyAuthorizationFailedException;
 import spotify.factories.RetrofitHttpServiceFactory;
 import spotify.models.authorization.AuthorizationCodeFlowTokenResponse;
 import spotify.retrofit.services.AuthorizationCodeFlowService;
-import spotify.utils.LoggingUtil;
-
-import java.io.IOException;
+import spotify.utils.HttpUtil;
 
 /**
  * This class takes care of the second step in the Authorization Code Flow.
@@ -52,21 +47,6 @@ public class AuthorizationRequestToken {
                         redirectUri,
                         GrantType.AUTHORIZATION_CODE);
 
-        try {
-            logger.info("Executing HTTP call to fetch an access and refresh token.");
-            LoggingUtil.logHttpCall(logger, httpCall);
-            final Response<AuthorizationCodeFlowTokenResponse> response = httpCall.execute();
-
-            if (response.body() == null) {
-                logger.error("Spotify has returned empty response body. This may mean the given credentials are invalid.");
-                throw new SpotifyAuthorizationFailedException("Retrieving an access token and refresh token with the given credentials has failed!");
-            }
-
-            logger.info("Access and refresh token have been successfully fetched.");
-            return response.body();
-        } catch (IOException e) {
-            logger.error("HTTP request to fetch an access and refresh token has failed.");
-            throw new HttpRequestFailedException(e.getMessage());
-        }
+        return HttpUtil.executeAuthorizationHttpCall(httpCall, logger);
     }
 }
