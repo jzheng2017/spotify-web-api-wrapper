@@ -19,6 +19,14 @@ public interface AuthorizationCodeFlowService {
 
     @POST("api/token")
     @FormUrlEncoded
+    Call<AuthorizationCodeFlowTokenResponse> getAccessAndRefreshTokenPKCE(@Field("client_id") String clientId,
+                                                                          @Field("grant_type") GrantType grantType,
+                                                                          @Field("code") String code,
+                                                                          @Field("redirect_uri") String redirectUri,
+                                                                          @Field("code_verifier") String codeVerifier);
+
+    @POST("api/token")
+    @FormUrlEncoded
     Call<AuthorizationCodeFlowTokenResponse> refreshAccessToken(@Header("Authorization") String basicAuth,
                                                                 @Field("refresh_token") String refreshToken,
                                                                 @Field("grant_type") GrantType grantType);
