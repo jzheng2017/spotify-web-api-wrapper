@@ -23,11 +23,11 @@ import java.io.IOException;
  *
  * @author Jiankai Zheng
  */
-public class AuthorizationRequestTokens {
-    private final Logger logger = LoggerFactory.getLogger(AuthorizationRequestTokens.class);
+public class AuthorizationRequestToken {
+    private final Logger logger = LoggerFactory.getLogger(AuthorizationRequestToken.class);
     private final AuthorizationCodeFlowService authorizationCodeFlowService;
 
-    public AuthorizationRequestTokens() {
+    public AuthorizationRequestToken() {
         this.authorizationCodeFlowService = RetrofitHttpServiceFactory.getAuthorizationCodeFlowService();
     }
 

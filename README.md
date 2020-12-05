@@ -26,7 +26,7 @@ AuthorizationCodeFlow authorizationCodeFlow = new AuthorizationCodeFlow.Builder(
         .setClientId("CLIENT ID")
         .setRedirectUri("https://www.example.com/callback/")
         .setResponseType("code")
-        .setScope(Arrays.asList(
+        .setScopes(Arrays.asList(
                  AuthorizationScope.APP_REMOTE_CONTROL,
                  AuthorizationScope.PLAYLIST_MODIFY_PRIVATE))
          .build();
@@ -44,8 +44,8 @@ For the second step the following values need to be provided:
 - Redirect Uri (the redirect uri that was given in the first step)
 
 ```java
-AuthorizationRequestTokens authorizationRequestTokens = new AuthorizationRequestTokens();
-AuthorizationCodeFlowTokenResponse token = authorizationRequestTokens
+AuthorizationRequestToken authorizationRequestToken = new AuthorizationRequestToken();
+AuthorizationCodeFlowTokenResponse token = authorizationRequestToken
                 .getAccessAndRefreshToken(
                         "CLIENT ID",
                         "CLIENT SECRET",

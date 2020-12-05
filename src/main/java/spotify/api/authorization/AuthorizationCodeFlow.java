@@ -87,7 +87,7 @@ public class AuthorizationCodeFlow {
             return this;
         }
 
-        public Builder setScope(List<AuthorizationScope> scopes) {
+        public Builder setScopes(List<AuthorizationScope> scopes) {
             this.scopes = scopes;
 
             return this;
