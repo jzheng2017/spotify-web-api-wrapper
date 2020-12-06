@@ -148,6 +148,11 @@ Latest official release:
   <version>1.5.1</version>
 </dependency>
 ```
+### Gradle
+Latest official release:
+```gradle
+compile group: 'nl.jiankai', name: 'spotify-web-api-wrapper', version: '1.5.0'
+```
 
 ## License
 See the [LICENSE](https://github.com/jzheng2017/spotify-web-api-wrapper/blob/main/LICENSE) file for the license rights and limitations (GNU GPLv3).
