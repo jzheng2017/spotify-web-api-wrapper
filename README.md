@@ -145,7 +145,7 @@ Latest official release:
 <dependency>
   <groupId>nl.jiankai</groupId>
   <artifactId>spotify-web-api-wrapper</artifactId>
-  <version>1.5.0</version>
+  <version>1.5.1</version>
 </dependency>
 ```
 
