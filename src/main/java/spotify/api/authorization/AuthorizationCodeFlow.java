@@ -115,7 +115,7 @@ public class AuthorizationCodeFlow {
             authorizationCodeFlow.showDialog = this.showDialog;
 
             logger.trace("AuthorizationCodeFlow successfully constructed.");
-            logger.debug(authorizationCodeFlow.toString());
+            logger.debug(String.valueOf(authorizationCodeFlow));
             return authorizationCodeFlow;
         }
     }

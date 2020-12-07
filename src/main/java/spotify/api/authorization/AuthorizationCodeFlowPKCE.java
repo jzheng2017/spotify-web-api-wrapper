@@ -138,7 +138,7 @@ public class AuthorizationCodeFlowPKCE {
             authorizationCodeFlowPKCE.codeChallenge = this.codeChallenge;
 
             logger.trace("AuthorizationCodeFlowPKCE successfully constructed.");
-            logger.debug(authorizationCodeFlowPKCE.toString());
+            logger.debug(String.valueOf(authorizationCodeFlowPKCE));
             return authorizationCodeFlowPKCE;
         }
     }
