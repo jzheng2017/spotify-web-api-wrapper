@@ -151,7 +151,7 @@ Latest official release:
 ### Gradle
 Latest official release:
 ```gradle
-compile group: 'nl.jiankai', name: 'spotify-web-api-wrapper', version: '1.5.1'
+implementation 'nl.jiankai:spotify-web-api-wrapper:1.5.1'
 ```
 
 ## License
