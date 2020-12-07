@@ -35,7 +35,7 @@ public class AuthorizationRequestToken {
      * @param redirectUri  the redirect uri supplied when requesting the authorization code
      * @return an object containing values like the access and refresh token
      */
-    public AuthorizationCodeFlowTokenResponse getAccessAndRefreshToken(String clientId, String clientSecret, String code, String redirectUri) {
+    public AuthorizationCodeFlowTokenResponse getAuthorizationCodeToken(String clientId, String clientSecret, String code, String redirectUri) {
         logger.trace("Encoding client id and secret to base 64.");
         final String base64EncodedBasicAuth = Credentials.basic(clientId, clientSecret);
 

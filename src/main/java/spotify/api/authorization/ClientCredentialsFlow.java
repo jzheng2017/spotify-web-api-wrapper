@@ -43,7 +43,7 @@ public class ClientCredentialsFlow {
      * @param clientSecret secret of the client
      * @return an object containing the access token
      */
-    public ClientCredentialsFlowTokenResponse getAccessToken(String clientId, String clientSecret) {
+    public ClientCredentialsFlowTokenResponse getClientCredentialToken(String clientId, String clientSecret) {
         logger.trace("Encoding client id and secret to base 64.");
         final String base64EncodedBasicAuth = Credentials.basic(clientId, clientSecret);
 

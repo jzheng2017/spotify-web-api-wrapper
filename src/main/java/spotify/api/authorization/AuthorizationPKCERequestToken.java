@@ -25,7 +25,7 @@ public class AuthorizationPKCERequestToken {
      * @param redirectUri the redirect uri supplied when requesting the authorization code
      * @return an object containing values like the access and refresh token
      */
-    public AuthorizationCodeFlowTokenResponse getAccessAndRefreshToken(String clientId, String code, String redirectUri, String codeVerifier) {
+    public AuthorizationCodeFlowTokenResponse getAuthorizationCodeToken(String clientId, String code, String redirectUri, String codeVerifier) {
         logger.trace("Constructing HTTP call to fetch an access and refresh token.");
         final Call<AuthorizationCodeFlowTokenResponse> httpCall = authorizationCodeFlowService
                 .getAccessAndRefreshTokenPKCE(
