@@ -13,7 +13,7 @@ Use the following guides provided by Spotify to use this library:
 The Client Credentials flow is used in server-to-server authentication. Only endpoints that do not access user information can be accessed. 
 ```java
 ClientCredentialsFlow clientCredentialsFlow = new ClientCredentialsFlow();
-String accessToken = clientCredentialsFlow.getAccessToken(
+String accessToken = clientCredentialsFlow.getClientCredentialToken(
         "CLIENT ID",
         "CLIENT SECRET")
         .getAccessToken();
@@ -51,7 +51,7 @@ For the second step the following values need to be provided:
 ```java
 AuthorizationRequestToken authorizationRequestToken = new AuthorizationRequestToken();
 AuthorizationCodeFlowTokenResponse token = authorizationRequestToken
-                .getAccessAndRefreshToken(
+                .getAuthorizationCodeToken(
                         "CLIENT ID",
                         "CLIENT SECRET",
                         "AUTHORIZATION CODE",
@@ -89,8 +89,8 @@ For the second step the following values need to be provided:
 - Code verifier (the one that was generated at the first step)
 
 ```java
-AuthorizationPKCERequestToken a = new AuthorizationPKCERequestToken();
-final String accessToken = a.getAccessAndRefreshToken(
+AuthorizationPKCERequestToken auth = new AuthorizationPKCERequestToken();
+final String accessToken = auth.getAuthorizationCodeToken(
         "CLIENT ID",
         "CODE",
         "REDIRECT URI",
