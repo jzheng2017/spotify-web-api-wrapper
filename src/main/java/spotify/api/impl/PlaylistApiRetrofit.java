@@ -46,7 +46,7 @@ public class PlaylistApiRetrofit implements PlaylistApi {
 
         try {
             logger.info("Executing HTTP call to fetch current user's playlists.");
-            logger.debug(String.format("Fetching playlists with following parameter values: %s.", options));
+            logger.debug("Fetching playlists with following parameter values: {}.", options);
             LoggingUtil.logHttpCall(logger, httpCall);
             Response<Paging<PlaylistSimplified>> response = httpCall.execute();
 
@@ -69,7 +69,7 @@ public class PlaylistApiRetrofit implements PlaylistApi {
 
         try {
             logger.info("Executing HTTP call to fetch a user's playlists.");
-            logger.debug(String.format("Fetching playlists from user %s with the following parameter values: %s.", userId, options));
+            logger.debug("Fetching playlists from user {} with the following parameter values: {}.", userId, options);
             LoggingUtil.logHttpCall(logger, httpCall);
             Response<Paging<PlaylistSimplified>> response = httpCall.execute();
 
@@ -90,7 +90,7 @@ public class PlaylistApiRetrofit implements PlaylistApi {
 
         try {
             logger.info("Executing HTTP call to fetch a playlist cover images.");
-            logger.debug(String.format("Fetching playlist cover images with the playlist id: %s.", playlistId));
+            logger.debug("Fetching playlist cover images with the playlist id: {}.", playlistId);
             LoggingUtil.logHttpCall(logger, httpCall);
             Response<List<Image>> response = httpCall.execute();
 
@@ -113,7 +113,7 @@ public class PlaylistApiRetrofit implements PlaylistApi {
 
         try {
             logger.info("Executing HTTP call to fetch a playlist.");
-            logger.debug(String.format("Fetching playlist with the playlist id: %s, with the following parameter values: %s.", playlistId, options));
+            logger.debug("Fetching playlist with the playlist id: {}, with the following parameter values: {}.", playlistId, options);
             LoggingUtil.logHttpCall(logger, httpCall);
             Response<PlaylistFull> response = httpCall.execute();
 
@@ -136,7 +136,7 @@ public class PlaylistApiRetrofit implements PlaylistApi {
 
         try {
             logger.info("Executing HTTP call to fetch tracks of a playlist.");
-            logger.debug(String.format("Fetching tracks of a playlist with the playlist id: %s, with the following parameter values: %s.", playlistId, options));
+            logger.debug("Fetching tracks of a playlist with the playlist id: {}, with the following parameter values: {}.", playlistId, options);
             LoggingUtil.logHttpCall(logger, httpCall);
             Response<Paging<PlaylistTrack>> response = httpCall.execute();
 
@@ -159,7 +159,7 @@ public class PlaylistApiRetrofit implements PlaylistApi {
 
         try {
             logger.info("Executing HTTP call to add items to a playlist.");
-            logger.debug(String.format("Adding the following items to the playlist: %s from position %s.", playlistId, startPositionToInsert));
+            logger.debug("Adding the following items to the playlist: {} from position {}.", playlistId, startPositionToInsert);
             LoggingUtil.logHttpCall(logger, httpCall);
             Response<Void> response = httpCall.execute();
 
@@ -185,12 +185,12 @@ public class PlaylistApiRetrofit implements PlaylistApi {
 
         try {
             logger.info("Executing HTTP call to create a playlist.");
-            logger.debug(String.format(
-                    "Creating a playlist with the name: %s and description: %s. The playlist is %s and %s.",
+            logger.debug(
+                    "Creating a playlist with the name: {} and description: {}. The playlist is {} and {}.",
                     requestBody.getName(),
                     requestBody.getDescription(),
                     requestBody.isPublic() ? "public" : "private",
-                    requestBody.isCollaborative() ? "collaborative" : "not collaborative"));
+                    requestBody.isCollaborative() ? "collaborative" : "not collaborative");
             LoggingUtil.logHttpCall(logger, httpCall);
             Response<Void> response = httpCall.execute();
 
@@ -216,13 +216,13 @@ public class PlaylistApiRetrofit implements PlaylistApi {
 
         try {
             logger.info("Executing HTTP call to update a playlist.");
-            logger.debug(String.format(
-                    "Updating playlist %s with the name: %s and description: %s. The playlist is %s and %s.",
+            logger.debug(
+                    "Updating playlist {} with the name: {} and description: {}. The playlist is {} and {}.",
                     playlistId,
                     requestBody.getName(),
                     requestBody.getDescription(),
                     requestBody.isPublic() ? "public" : "private",
-                    requestBody.isCollaborative() ? "collaborative" : "not collaborative"));
+                    requestBody.isCollaborative() ? "collaborative" : "not collaborative");
             LoggingUtil.logHttpCall(logger, httpCall);
             Response<Void> response = httpCall.execute();
 
@@ -244,10 +244,10 @@ public class PlaylistApiRetrofit implements PlaylistApi {
 
         try {
             logger.info("Executing HTTP call to reorder items of a playlist.");
-            logger.debug(String.format(
-                    "Reordering items of playlist %s with snapshot id %s from start position %s with range of %s length and insert it in position %s ",
+            logger.debug(
+                    "Reordering items of playlist {} with snapshot id {} from start position {} with range of {} length and insert it in position {} ",
                     playlistId, requestBody.getSnapshotId(), requestBody.getRangeStart(), requestBody.getRangeLength(), requestBody.getInsertBefore()
-            ));
+            );
             LoggingUtil.logHttpCall(logger, httpCall);
             Response<Snapshot> response = httpCall.execute();
 
@@ -274,7 +274,7 @@ public class PlaylistApiRetrofit implements PlaylistApi {
 
         try {
             logger.info("Executing HTTP call to replace items of a playlist.");
-            logger.debug(String.format("Replacing items of playlist %s with the following items: %s", playlistId, listOfItemUris));
+            logger.debug("Replacing items of playlist {} with the following items: {}", playlistId, listOfItemUris);
             LoggingUtil.logHttpCall(logger, httpCall);
             Response<Void> response = httpCall.execute();
 
@@ -304,8 +304,8 @@ public class PlaylistApiRetrofit implements PlaylistApi {
 
         try {
             logger.info("Executing HTTP call to upload a cover image to a playlist.");
-            logger.debug(String.format("Uploading cover image to playlist %s", playlistId));
-            logger.debug(String.format("Base64 encoded jpeg image data: %s", base64EncodedJpegImage));
+            logger.debug("Uploading cover image to playlist {}", playlistId);
+            logger.debug("Base64 encoded jpeg image data: {}", base64EncodedJpegImage);
             LoggingUtil.logHttpCall(logger, httpCall);
             Response<Void> response = httpCall.execute();
 
@@ -336,8 +336,8 @@ public class PlaylistApiRetrofit implements PlaylistApi {
 
         try {
             logger.info("Executing HTTP call to remove items from a playlist.");
-            logger.debug(String.format("Removing items from playlist %s with snapshot id %s", playlistId, snapshotId));
-            logger.debug(String.format("Removing the following items %s", items));
+            logger.debug("Removing items from playlist {} with snapshot id {}", playlistId, snapshotId);
+            logger.debug("Removing the following items {}", items);
             LoggingUtil.logHttpCall(logger, httpCall);
             Response<Snapshot> response = httpCall.execute();
 

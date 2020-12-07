@@ -26,7 +26,7 @@ class GsonFactory {
         GsonBuilder gsonBuilder = new GsonBuilder();
         gsonBuilder.setFieldNamingPolicy(fieldNamingPolicy);
 
-        logger.trace(String.format("Constructing Gson object with the FieldNamingPolicy %s", fieldNamingPolicy));
+        logger.trace("Constructing Gson object with the FieldNamingPolicy {}", fieldNamingPolicy);
         return gsonBuilder.create();
     }
 
@@ -38,8 +38,8 @@ class GsonFactory {
         gsonBuilder.setFieldNamingPolicy(fieldNamingPolicy);
         gsonBuilder.registerTypeAdapter(baseClass, jsonDeserializer);
 
-        logger.trace(String.format("Constructing Gson object with the FieldNamingPolicy %s", fieldNamingPolicy));
-        logger.trace(String.format("Constructing Gson object with custom type adapter for base type %s", baseClass));
+        logger.trace("Constructing Gson object with the FieldNamingPolicy {}", fieldNamingPolicy);
+        logger.trace("Constructing Gson object with custom type adapter for base type {}", baseClass);
         return gsonBuilder.create();
     }
 

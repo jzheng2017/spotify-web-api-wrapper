@@ -6,6 +6,6 @@ import retrofit2.Call;
 public class LoggingUtil {
 
     public static <T> void logHttpCall(final Logger logger, final Call<T> httpCall) {
-        logger.debug(String.format("%s / %s", httpCall.request().method(), httpCall.request().url().toString()));
+        logger.debug("{} / {}", httpCall.request().method(), httpCall.request().url().toString());
     }
 }

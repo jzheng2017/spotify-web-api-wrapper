@@ -42,7 +42,7 @@ public class BrowseApiRetrofit implements BrowseApi {
 
         try {
             logger.info("Executing HTTP call to fetch category.");
-            logger.debug(String.format("Fetching category %s with following values: %s.", categoryId, options));
+            logger.debug("Fetching category {} with following values: {}.", categoryId, options);
             LoggingUtil.logHttpCall(logger, httpCall);
             Response<CategoryFull> response = httpCall.execute();
 
@@ -65,7 +65,7 @@ public class BrowseApiRetrofit implements BrowseApi {
 
         try {
             logger.info("Executing HTTP call to fetch category playlists.");
-            logger.debug(String.format("Fetching category %s playlists with following values: %s.", categoryId, options));
+            logger.debug("Fetching category {} playlists with following values: {}.", categoryId, options);
             LoggingUtil.logHttpCall(logger, httpCall);
             Response<PlaylistSimplifiedPaging> response = httpCall.execute();
 
@@ -88,7 +88,7 @@ public class BrowseApiRetrofit implements BrowseApi {
 
         try {
             logger.info("Executing HTTP call to fetch categories.");
-            logger.debug(String.format("Fetching categories with following values: %s.", options));
+            logger.debug("Fetching categories with following values: {}.", options);
             LoggingUtil.logHttpCall(logger, httpCall);
             Response<CategoryFullPaging> response = httpCall.execute();
 
@@ -111,7 +111,7 @@ public class BrowseApiRetrofit implements BrowseApi {
 
         try {
             logger.info("Executing HTTP call to fetch featured playlists.");
-            logger.debug(String.format("Fetching featured playlists with following values: %s", options));
+            logger.debug("Fetching featured playlists with following values: {}", options);
             LoggingUtil.logHttpCall(logger, httpCall);
             Response<FeaturedPlaylistCollection> response = httpCall.execute();
 
@@ -134,7 +134,7 @@ public class BrowseApiRetrofit implements BrowseApi {
 
         try {
             logger.info("Executing HTTP call to fetch new releases.");
-            logger.debug(String.format("Fetching new releases with following values: %s", options));
+            logger.debug("Fetching new releases with following values: {}", options);
             LoggingUtil.logHttpCall(logger, httpCall);
             Response<AlbumSimplifiedPaging> response = httpCall.execute();
 
@@ -159,7 +159,7 @@ public class BrowseApiRetrofit implements BrowseApi {
 
         try {
             logger.info("Executing HTTP call to fetch recommendations.");
-            logger.debug(String.format("Fetching recommendations with following values: %s", options));
+            logger.debug("Fetching recommendations with following values: {}", options);
             LoggingUtil.logHttpCall(logger, httpCall);
             Response<RecommendationCollection> response = httpCall.execute();
 

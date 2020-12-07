@@ -38,7 +38,7 @@ public class PersonalizationApiRetrofit implements PersonalizationApi {
 
         try {
             logger.info("Executing HTTP call to fetch top artists.");
-            logger.debug(String.format("Fetching top artists with following values: %s.", options));
+            logger.debug("Fetching top artists with following values: {}.", options);
             LoggingUtil.logHttpCall(logger, httpCall);
             Response<Paging<ArtistFull>> response = httpCall.execute();
 
@@ -61,7 +61,7 @@ public class PersonalizationApiRetrofit implements PersonalizationApi {
 
         try {
             logger.info("Executing HTTP call to fetch top tracks.");
-            logger.debug(String.format("Fetching top tracks with following values: %s.", options));
+            logger.debug("Fetching top tracks with following values: {}.", options);
             LoggingUtil.logHttpCall(logger, httpCall);
             Response<Paging<TrackFull>> response = httpCall.execute();
 

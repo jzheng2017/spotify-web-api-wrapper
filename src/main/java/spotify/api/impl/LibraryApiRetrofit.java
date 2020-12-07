@@ -40,7 +40,7 @@ public class LibraryApiRetrofit implements LibraryApi {
 
         try {
             logger.info("Executing HTTP call to check saved albums.");
-            logger.debug(String.format("Checking albums with following album ids: %s.", albumIds));
+            logger.debug("Checking albums with following album ids: {}.", albumIds);
             LoggingUtil.logHttpCall(logger, httpCall);
             Response<List<Boolean>> response = httpCall.execute();
 
@@ -63,7 +63,7 @@ public class LibraryApiRetrofit implements LibraryApi {
 
         try {
             logger.info("Executing HTTP call to check saved shows.");
-            logger.debug(String.format("Checking shows with following show ids: %s.", showIds));
+            logger.debug("Checking shows with following show ids: {}.", showIds);
             LoggingUtil.logHttpCall(logger, httpCall);
             Response<List<Boolean>> response = httpCall.execute();
 
@@ -86,7 +86,7 @@ public class LibraryApiRetrofit implements LibraryApi {
 
         try {
             logger.info("Executing HTTP call to check saved tracks.");
-            logger.debug(String.format("Checking tracks with following track ids: %s.", trackIds));
+            logger.debug("Checking tracks with following track ids: {}.", trackIds);
             LoggingUtil.logHttpCall(logger, httpCall);
             Response<List<Boolean>> response = httpCall.execute();
 
@@ -109,7 +109,7 @@ public class LibraryApiRetrofit implements LibraryApi {
 
         try {
             logger.info("Executing HTTP call to fetch current user saved albums");
-            logger.debug(String.format("Fetching current user saved albums with the following values: %s.", options));
+            logger.debug("Fetching current user saved albums with the following values: {}.", options);
             LoggingUtil.logHttpCall(logger, httpCall);
             Response<Paging<SavedAlbumFull>> response = httpCall.execute();
 
@@ -132,7 +132,7 @@ public class LibraryApiRetrofit implements LibraryApi {
 
         try {
             logger.info("Executing HTTP call to fetch current user saved shows");
-            logger.debug(String.format("Fetching current user saved shows with the following values: %s.", options));
+            logger.debug("Fetching current user saved shows with the following values: {}.", options);
             LoggingUtil.logHttpCall(logger, httpCall);
             Response<Paging<SavedShowSimplified>> response = httpCall.execute();
 
@@ -155,7 +155,7 @@ public class LibraryApiRetrofit implements LibraryApi {
 
         try {
             logger.info("Executing HTTP call to fetch current user saved tracks");
-            logger.debug(String.format("Fetching current user saved tracks with the following values: %s.", options));
+            logger.debug("Fetching current user saved tracks with the following values: {}.", options);
             LoggingUtil.logHttpCall(logger, httpCall);
             Response<Paging<SavedTrackFull>> response = httpCall.execute();
 
@@ -179,7 +179,7 @@ public class LibraryApiRetrofit implements LibraryApi {
 
         try {
             logger.info("Executing HTTP call to save the given albums.");
-            logger.debug(String.format("Saving albums with following album ids: %s.", albumIds));
+            logger.debug("Saving albums with following album ids: {}.", albumIds);
             LoggingUtil.logHttpCall(logger, httpCall);
             Response<Void> response = httpCall.execute();
 
@@ -201,7 +201,7 @@ public class LibraryApiRetrofit implements LibraryApi {
 
         try {
             logger.info("Executing HTTP call to save the given shows.");
-            logger.debug(String.format("Saving shows with following show ids: %s.", showIds));
+            logger.debug("Saving shows with following show ids: {}.", showIds);
             LoggingUtil.logHttpCall(logger, httpCall);
             Response<Void> response = httpCall.execute();
 
@@ -223,7 +223,7 @@ public class LibraryApiRetrofit implements LibraryApi {
 
         try {
             logger.info("Executing HTTP call to save the given tracks.");
-            logger.debug(String.format("Saving tracks with following track ids: %s.", trackIds));
+            logger.debug("Saving tracks with following track ids: {}.", trackIds);
             LoggingUtil.logHttpCall(logger, httpCall);
             Response<Void> response = httpCall.execute();
 
@@ -245,7 +245,7 @@ public class LibraryApiRetrofit implements LibraryApi {
 
         try {
             logger.info("Executing HTTP call to delete the saved albums.");
-            logger.debug(String.format("Deleting saved albums with following album ids: %s.", albumIds));
+            logger.debug("Deleting saved albums with following album ids: {}.", albumIds);
             LoggingUtil.logHttpCall(logger, httpCall);
             Response<Void> response = httpCall.execute();
 
@@ -269,7 +269,7 @@ public class LibraryApiRetrofit implements LibraryApi {
 
         try {
             logger.info("Executing HTTP call to delete the saved shows.");
-            logger.debug(String.format("Deleting saved shows with following show ids: %s and parameter values: %s.", showIds, options));
+            logger.debug("Deleting saved shows with following show ids: {} and parameter values: {}.", showIds, options);
             LoggingUtil.logHttpCall(logger, httpCall);
             Response<Void> response = httpCall.execute();
 
@@ -291,7 +291,7 @@ public class LibraryApiRetrofit implements LibraryApi {
 
         try {
             logger.info("Executing HTTP call to delete the saved tracks.");
-            logger.debug(String.format("Deleting saved tracks with following track ids: %s.", trackIds));
+            logger.debug("Deleting saved tracks with following track ids: {}.", trackIds);
             LoggingUtil.logHttpCall(logger, httpCall);
             Response<Void> response = httpCall.execute();
 

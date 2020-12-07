@@ -41,7 +41,7 @@ public class FollowApiRetrofit implements FollowApi {
 
         try {
             logger.info("Executing HTTP call to check if user follows the provided entities.");
-            logger.debug(String.format("Fetching %s following list with following entity ids: %s.", entityType, entityIds));
+            logger.debug("Fetching {} following list with following entity ids: {}.", entityType, entityIds);
             LoggingUtil.logHttpCall(logger, httpCall);
             Response<List<Boolean>> response = httpCall.execute();
 
@@ -64,7 +64,7 @@ public class FollowApiRetrofit implements FollowApi {
 
         try {
             logger.info("Executing HTTP call to check if users are following the playlist.");
-            logger.debug(String.format("Fetching %s playlist following list with following user ids: %s.", playlistId, userIds));
+            logger.debug("Fetching {} playlist following list with following user ids: {}.", playlistId, userIds);
             LoggingUtil.logHttpCall(logger, httpCall);
             Response<List<Boolean>> response = httpCall.execute();
 
@@ -87,7 +87,7 @@ public class FollowApiRetrofit implements FollowApi {
 
         try {
             logger.info("Executing HTTP call to follow entities.");
-            logger.debug(String.format("Following entities with following entity ids: %s.", entityIds));
+            logger.debug("Following entities with following entity ids: {}.", entityIds);
             LoggingUtil.logHttpCall(logger, httpCall);
             Response<Void> response = httpCall.execute();
 
@@ -107,7 +107,7 @@ public class FollowApiRetrofit implements FollowApi {
 
         try {
             logger.info("Executing HTTP call to follow playlist.");
-            logger.debug(String.format("Following playlist %s and set it to %s", playlistId, setPlaylistPublic ? "public" : "private"));
+            logger.debug("Following playlist {} and set it to {}", playlistId, setPlaylistPublic ? "public" : "private");
             LoggingUtil.logHttpCall(logger, httpCall);
             Response<Void> response = httpCall.execute();
 
@@ -127,7 +127,7 @@ public class FollowApiRetrofit implements FollowApi {
 
         try {
             logger.info("Executing HTTP call to fetch followed artists of the current user.");
-            logger.debug(String.format("Fetching current user's followed artists with the following values: %s", options));
+            logger.debug("Fetching current user's followed artists with the following values: {}", options);
             LoggingUtil.logHttpCall(logger, httpCall);
             Response<ArtistFullCursorBasedPagingWrapper> response = httpCall.execute();
 
@@ -157,7 +157,7 @@ public class FollowApiRetrofit implements FollowApi {
 
         try {
             logger.info("Executing HTTP call to unfollow entities.");
-            logger.debug(String.format("Unfollowing entities with following entity ids: %s.", entityIds));
+            logger.debug("Unfollowing entities with following entity ids: {}.", entityIds);
             LoggingUtil.logHttpCall(logger, httpCall);
             Response<Void> response = httpCall.execute();
 
@@ -177,7 +177,7 @@ public class FollowApiRetrofit implements FollowApi {
 
         try {
             logger.info("Executing HTTP call to unfollow playlist.");
-            logger.debug(String.format("Unfollowing playlist %s ", playlistId));
+            logger.debug("Unfollowing playlist {} ", playlistId);
             LoggingUtil.logHttpCall(logger, httpCall);
             Response<Void> response = httpCall.execute();
 

@@ -71,7 +71,7 @@ public class ArtistApiRetrofit implements ArtistApi {
 
         try {
             logger.info("Executing HTTP call to fetch albums of artist.");
-            logger.debug(String.format("Fetching artist %s albums with following values: %s.", artistId, options));
+            logger.debug("Fetching artist {} albums with following values: {}.", artistId, options);
             LoggingUtil.logHttpCall(logger, httpCall);
             Response<Paging<ArtistSimplified>> response = httpCall.execute();
 
@@ -94,7 +94,7 @@ public class ArtistApiRetrofit implements ArtistApi {
 
         try {
             logger.info("Executing HTTP call to fetch an artist top tracks.");
-            logger.debug(String.format("Fetching artist %s top tracks with following values: %s.", artistId, options));
+            logger.debug("Fetching artist {} top tracks with following values: {}.", artistId, options);
             LoggingUtil.logHttpCall(logger, httpCall);
             Response<TrackFullCollection> response = httpCall.execute();
 

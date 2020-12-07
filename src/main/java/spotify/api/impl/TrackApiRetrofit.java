@@ -41,7 +41,7 @@ public class TrackApiRetrofit implements TrackApi {
 
         try {
             logger.info("Executing HTTP call to fetch a track.");
-            logger.debug(String.format("Fetching track %s with following values: %s.", trackId, options));
+            logger.debug("Fetching track {} with following values: {}.", trackId, options);
             LoggingUtil.logHttpCall(logger, httpCall);
             Response<TrackFull> response = httpCall.execute();
 
@@ -67,7 +67,7 @@ public class TrackApiRetrofit implements TrackApi {
 
         try {
             logger.info("Executing HTTP call to fetch multiple tracks.");
-            logger.debug(String.format("Fetching following tracks: %s with following values: %s.", trackIds, options));
+            logger.debug("Fetching following tracks: {} with following values: {}.", trackIds, options);
             LoggingUtil.logHttpCall(logger, httpCall);
             Response<TrackFullCollection> response = httpCall.execute();
 
@@ -88,7 +88,7 @@ public class TrackApiRetrofit implements TrackApi {
 
         try {
             logger.info("Executing HTTP call to fetch multiple track audio features.");
-            logger.debug(String.format("Fetching track %s audio features.", trackId));
+            logger.debug("Fetching track {} audio features.", trackId);
             LoggingUtil.logHttpCall(logger, httpCall);
             Response<AudioFeatures> response = httpCall.execute();
 
@@ -113,7 +113,7 @@ public class TrackApiRetrofit implements TrackApi {
 
         try {
             logger.info("Executing HTTP call to fetch track audio features.");
-            logger.debug(String.format("Fetching following tracks: %s audio features.", trackIds));
+            logger.debug("Fetching following tracks: {} audio features.", trackIds);
             LoggingUtil.logHttpCall(logger, httpCall);
             Response<AudioFeaturesCollection> response = httpCall.execute();
 
@@ -133,7 +133,7 @@ public class TrackApiRetrofit implements TrackApi {
         Call<AudioAnalysis> httpCall = trackService.getTrackAudioAnalysis("Bearer " + this.accessToken, trackId);
 
         try {
-            logger.info(String.format("Executing HTTP call to fetch audio analysis for track %s.", trackId));
+            logger.info("Executing HTTP call to fetch audio analysis for track {}.", trackId);
             LoggingUtil.logHttpCall(logger, httpCall);
             Response<AudioAnalysis> response = httpCall.execute();
 

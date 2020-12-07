@@ -43,7 +43,7 @@ public class SearchApiRetrofit implements SearchApi {
 
         try {
             logger.info("Executing HTTP call to to perform a query.");
-            logger.debug(String.format("Performing the following query: %s on the following types: %s, with following values: %s.", query, queryTypes, options));
+            logger.debug("Performing the following query: {} on the following types: {}, with following values: {}.", query, queryTypes, options);
             LoggingUtil.logHttpCall(logger, httpCall);
             Response<SearchQueryResult> response = httpCall.execute();
 

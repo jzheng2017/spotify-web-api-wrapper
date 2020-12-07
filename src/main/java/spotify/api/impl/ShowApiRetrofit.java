@@ -40,7 +40,7 @@ public class ShowApiRetrofit implements ShowApi {
 
         try {
             logger.info("Executing HTTP call to fetch show.");
-            logger.debug(String.format("Fetching show %s with following values: %s.", showId, options));
+            logger.debug("Fetching show {} with following values: {}.", showId, options);
             LoggingUtil.logHttpCall(logger, httpCall);
             Response<ShowFull> response = httpCall.execute();
 
@@ -63,7 +63,7 @@ public class ShowApiRetrofit implements ShowApi {
 
         try {
             logger.info("Executing HTTP call to fetch show episodes.");
-            logger.debug(String.format("Fetching show %s episodes with following values: %s.", showId, options));
+            logger.debug("Fetching show {} episodes with following values: {}.", showId, options);
             LoggingUtil.logHttpCall(logger, httpCall);
             Response<Paging<EpisodeSimplified>> response = httpCall.execute();
 
@@ -87,7 +87,7 @@ public class ShowApiRetrofit implements ShowApi {
 
         try {
             logger.info("Executing HTTP call to fetch multiple shows.");
-            logger.debug(String.format("Fetching following shows: %s with following values: %s.", showIds, options));
+            logger.debug("Fetching following shows: {} with following values: {}.", showIds, options);
             LoggingUtil.logHttpCall(logger, httpCall);
             Response<ShowSimplifiedCollection> response = httpCall.execute();
 

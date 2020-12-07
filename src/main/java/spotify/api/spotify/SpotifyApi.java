@@ -78,7 +78,7 @@ public class SpotifyApi {
 
 
     public TrackFull getTrack(String trackId, Map<String, String> options) {
-        logger.info(String.format("Requesting a track with id %s.", trackId));
+        logger.info("Requesting a track with id {}.", trackId);
         return trackApi.getTrack(trackId, options);
     }
 
@@ -88,7 +88,7 @@ public class SpotifyApi {
     }
 
     public AudioFeatures getTrackAudioFeatures(String trackId) {
-        logger.info(String.format("Requesting track audio features with id %s.", trackId));
+        logger.info("Requesting track audio features with id {}.", trackId);
         return trackApi.getTrackAudioFeatures(trackId);
     }
 
@@ -98,12 +98,12 @@ public class SpotifyApi {
     }
 
     public AudioAnalysis getTrackAudioAnalysis(String trackId) {
-        logger.info(String.format("Requesting audio analysis of track id %s", trackId));
+        logger.info("Requesting audio analysis of track id {}", trackId);
         return trackApi.getTrackAudioAnalysis(trackId);
     }
 
     public AlbumFull getAlbum(String albumId, Map<String, String> options) {
-        logger.info(String.format("Requesting an album with id %s.", albumId));
+        logger.info("Requesting an album with id {}.", albumId);
         return albumApi.getAlbum(albumId, options);
     }
 
@@ -113,7 +113,7 @@ public class SpotifyApi {
     }
 
     public Paging<TrackSimplified> getAlbumTracks(String albumId, Map<String, String> options) {
-        logger.info(String.format("Requesting tracks of album with id %s", albumId));
+        logger.info("Requesting tracks of album with id {}", albumId);
         return albumApi.getAlbumTracks(albumId, options);
     }
 

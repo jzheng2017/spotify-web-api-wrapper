@@ -66,7 +66,7 @@ public class PlayerApiRetrofit implements PlayerApi {
 
         try {
             logger.info("Executing HTTP call to fetch current playing context.");
-            logger.debug(String.format("Fetching current playing context with following values: %s.", options));
+            logger.debug("Fetching current playing context with following values: {}.", options);
             LoggingUtil.logHttpCall(logger, httpCall);
             Response<PlayingContext> response = httpCall.execute();
 
@@ -89,7 +89,7 @@ public class PlayerApiRetrofit implements PlayerApi {
 
         try {
             logger.info("Executing HTTP call to fetch current user's recently played tracks.");
-            logger.debug(String.format("Fetching recently played tracks with following values: %s.", options));
+            logger.debug("Fetching recently played tracks with following values: {}.", options);
             LoggingUtil.logHttpCall(logger, httpCall);
             Response<CursorBasedPaging<PlayHistory>> response = httpCall.execute();
 
@@ -112,7 +112,7 @@ public class PlayerApiRetrofit implements PlayerApi {
 
         try {
             logger.info("Executing HTTP call to fetch current user's currently played object.");
-            logger.debug(String.format("Fetching currently played object with following values: %s.", options));
+            logger.debug("Fetching currently played object with following values: {}.", options);
             LoggingUtil.logHttpCall(logger, httpCall);
             Response<CurrentlyPlayingObject> response = httpCall.execute();
 
@@ -135,7 +135,7 @@ public class PlayerApiRetrofit implements PlayerApi {
 
         try {
             logger.info("Executing HTTP call to add item to the queue.");
-            logger.debug(String.format("Adding item to the queue with following values: %s.", options));
+            logger.debug("Adding item to the queue with following values: {}.", options);
             LoggingUtil.logHttpCall(logger, httpCall);
             Response<Void> response = httpCall.execute();
 
@@ -157,7 +157,7 @@ public class PlayerApiRetrofit implements PlayerApi {
 
         try {
             logger.info("Executing HTTP call to skip to the next track.");
-            logger.debug(String.format("Skipping to the next track with following values: %s.", options));
+            logger.debug("Skipping to the next track with following values: {}.", options);
             LoggingUtil.logHttpCall(logger, httpCall);
             Response<Void> response = httpCall.execute();
 
@@ -179,7 +179,7 @@ public class PlayerApiRetrofit implements PlayerApi {
 
         try {
             logger.info("Executing HTTP call to skip to the previous track.");
-            logger.debug(String.format("Skipping to the previous track with following values: %s.", options));
+            logger.debug("Skipping to the previous track with following values: {}.", options);
             LoggingUtil.logHttpCall(logger, httpCall);
             Response<Void> response = httpCall.execute();
 
@@ -201,7 +201,7 @@ public class PlayerApiRetrofit implements PlayerApi {
 
         try {
             logger.info("Executing HTTP call to pause user's playback.");
-            logger.debug(String.format("Pausing playback with following values: %s.", options));
+            logger.debug("Pausing playback with following values: {}.", options);
             LoggingUtil.logHttpCall(logger, httpCall);
             Response<Void> response = httpCall.execute();
 
@@ -229,7 +229,7 @@ public class PlayerApiRetrofit implements PlayerApi {
 
         try {
             logger.info("Executing HTTP call to jump to a position in the current track.");
-            logger.debug(String.format("Jumping to position with following values: %s.", options));
+            logger.debug("Jumping to position with following values: {}.", options);
             LoggingUtil.logHttpCall(logger, httpCall);
             Response<Void> response = httpCall.execute();
 
@@ -251,7 +251,7 @@ public class PlayerApiRetrofit implements PlayerApi {
 
         try {
             logger.info("Executing HTTP call to set the repeat mode of the playback.");
-            logger.debug(String.format("Setting the repeat mode of the playback with following values: %s.", options));
+            logger.debug("Setting the repeat mode of the playback with following values: {}.", options);
             LoggingUtil.logHttpCall(logger, httpCall);
             Response<Void> response = httpCall.execute();
 
@@ -273,7 +273,7 @@ public class PlayerApiRetrofit implements PlayerApi {
 
         try {
             logger.info("Executing HTTP call to set the volume of the playback.");
-            logger.debug(String.format("Setting the volume of the playback with following values: %s.", options));
+            logger.debug("Setting the volume of the playback with following values: {}.", options);
             LoggingUtil.logHttpCall(logger, httpCall);
             Response<Void> response = httpCall.execute();
 
@@ -293,7 +293,7 @@ public class PlayerApiRetrofit implements PlayerApi {
 
         try {
             logger.info("Executing HTTP call to change the state of the playback.");
-            logger.debug(String.format("Changing the state of the playback with following values: %s.", requestBody));
+            logger.debug("Changing the state of the playback with following values: {}.", requestBody);
             LoggingUtil.logHttpCall(logger, httpCall);
             Response<Void> response = httpCall.execute();
 
@@ -315,7 +315,7 @@ public class PlayerApiRetrofit implements PlayerApi {
 
         try {
             logger.info("Executing HTTP call to toggle shuffle of the playback.");
-            logger.debug(String.format("Toggling shuffle %s of the playback with following values: %s.", shuffle ? "on" : "off", options));
+            logger.debug("Toggling shuffle {} of the playback with following values: {}.", shuffle ? "on" : "off", options);
             LoggingUtil.logHttpCall(logger, httpCall);
             Response<Void> response = httpCall.execute();
 
@@ -341,7 +341,7 @@ public class PlayerApiRetrofit implements PlayerApi {
 
         try {
             logger.info("Executing HTTP call to transfer playback to devices.");
-            logger.debug(String.format("Transferring playback to the following devices: %s", requestBody.getDeviceIds()));
+            logger.debug("Transferring playback to the following devices: {}", requestBody.getDeviceIds());
             LoggingUtil.logHttpCall(logger, httpCall);
             Response<Void> response = httpCall.execute();
 

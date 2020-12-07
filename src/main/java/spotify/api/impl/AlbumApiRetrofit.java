@@ -40,7 +40,7 @@ public class AlbumApiRetrofit implements AlbumApi {
 
         try {
             logger.info("Executing HTTP call to fetch an album.");
-            logger.debug(String.format("Fetching album %s with following values: %s.", albumId, options));
+            logger.debug("Fetching album {} with following values: {}.", albumId, options);
             LoggingUtil.logHttpCall(logger, httpCall);
             Response<AlbumFull> response = httpCall.execute();
 
@@ -60,14 +60,14 @@ public class AlbumApiRetrofit implements AlbumApi {
         options = ValidatorUtil.optionsValueCheck(options);
 
         String albumIds = String.join(",", listOfAlbumIds);
-        logger.debug(String.format("Mapped list of album ids to String: %s", albumIds));
+        logger.debug("Mapped list of album ids to String: {}", albumIds);
 
         logger.trace("Constructing HTTP call to fetch albums.");
         Call<AlbumFullCollection> httpCall = albumService.getAlbums("Bearer " + this.accessToken, albumIds, options);
 
         try {
             logger.info("Executing HTTP call to fetch albums.");
-            logger.debug(String.format("Fetching following albums: %s with following values: %s.", albumIds, options));
+            logger.debug("Fetching following albums: {} with following values: {}.", albumIds, options);
             LoggingUtil.logHttpCall(logger, httpCall);
             Response<AlbumFullCollection> response = httpCall.execute();
 
@@ -90,7 +90,7 @@ public class AlbumApiRetrofit implements AlbumApi {
 
         try {
             logger.info("Executing HTTP call to fetch album tracks.");
-            logger.debug(String.format("Fetching album %s tracks with following values: %s.", albumId, options));
+            logger.debug("Fetching album {} tracks with following values: {}.", albumId, options);
             LoggingUtil.logHttpCall(logger, httpCall);
             Response<Paging<TrackSimplified>> response = httpCall.execute();
 
@@ -103,6 +103,7 @@ public class AlbumApiRetrofit implements AlbumApi {
             throw new HttpRequestFailedException(ex.getMessage());
         }
     }
+
     private void validateAlbumListSizeAndThrowIfExceeded(List<String> listOfAlbumIds, int maximumAmountOfAlbumIdsAllowed) {
         final int listSize = listOfAlbumIds.size();
 

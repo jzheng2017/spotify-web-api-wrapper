@@ -22,13 +22,11 @@ public class ResponseChecker {
         final int actualHttpStatusCode = response.code();
 
         if (actualHttpStatusCode != expectedStatusCode) {
-            final String errorMessage = String.format("HTTP request has not returned the expected status code. " +
+            logger.warn("HTTP request has not returned the expected status code. " +
                             "This may mean that the request has not been handled correctly. " +
-                            "Expected status code: %s. Actual status code: %s.",
+                            "Expected status code: {}. Actual status code: {}.",
                     expectedStatusCode,
-                    actualHttpStatusCode);
-
-            logger.warn(errorMessage); // it should throw an exception but spotify returns inconsistent http status codes
+                    actualHttpStatusCode); // it should throw an exception but spotify returns inconsistent http status codes
         }
     }
 
@@ -55,10 +53,9 @@ public class ResponseChecker {
 
         if (hasFailed) {
             logger.error(
-                    String.format(
-                            "HTTP request to Spotify's server has not been fulfilled correctly. Spotify has returned status code %d with the message: \"%s\".",
-                            statusCode,
-                            message)
+                    "HTTP request to Spotify's server has not been fulfilled correctly. Spotify has returned status code {} with the message: \"{}\".",
+                    statusCode,
+                    message
             );
             throw new SpotifyActionFailedException(message);
         }

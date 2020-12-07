@@ -51,7 +51,7 @@ public class UserApiRetrofit implements UserApi {
         Call<User> httpCall = userService.getUser("Bearer " + this.accessToken, userId);
 
         try {
-            logger.info(String.format("Executing HTTP call to fetch user with id %s.", userId));
+            logger.info("Executing HTTP call to fetch user with id {}.", userId);
             LoggingUtil.logHttpCall(logger, httpCall);
             Response<User> response = httpCall.execute();
 

@@ -9,7 +9,7 @@ class RetrofitClientFactory {
     private final static Logger logger = LoggerFactory.getLogger(RetrofitClientFactory.class);
 
     static Retrofit getRetrofitClient(String baseUrl) {
-        logger.trace(String.format("Building Retrofit HTTP client with base url %s.", baseUrl));
+        logger.trace("Building Retrofit HTTP client with base url {}.", baseUrl);
         return new Retrofit.Builder()
                 .baseUrl(baseUrl)
                 .addConverterFactory(GsonConverterFactory
@@ -19,7 +19,7 @@ class RetrofitClientFactory {
     }
 
     static Retrofit getRetrofitClientWithAbstractPlayableObjectDeserializer(final String baseUrl) {
-        logger.trace(String.format("Building Retrofit HTTP client with base url %s.", baseUrl));
+        logger.trace("Building Retrofit HTTP client with base url {}.", baseUrl);
         return new Retrofit.Builder()
                 .baseUrl(baseUrl)
                 .addConverterFactory(GsonConverterFactory

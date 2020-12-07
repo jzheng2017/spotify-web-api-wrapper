@@ -47,7 +47,7 @@ public class AuthorizationCodeFlow {
                 "&show_dialog=" + showDialog;
 
         logger.trace("Constructing url for authorization code flow");
-        logger.debug(String.format("Constructed url: %s.", constructedUrl));
+        logger.debug("Constructed url: {}.", constructedUrl);
         return constructedUrl;
     }
 

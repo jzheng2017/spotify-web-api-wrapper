@@ -38,7 +38,7 @@ public class EpisodeApiRetrofit implements EpisodeApi {
 
         try {
             logger.info("Executing HTTP call to fetch episode.");
-            logger.debug(String.format("Fetching episodes %s with following values: %s.", episodeId, options));
+            logger.debug("Fetching episodes {} with following values: {}.", episodeId, options);
             LoggingUtil.logHttpCall(logger, httpCall);
             Response<EpisodeFull> response = httpCall.execute();
 
@@ -64,7 +64,7 @@ public class EpisodeApiRetrofit implements EpisodeApi {
 
         try {
             logger.info("Executing HTTP call to fetch multiple episodes.");
-            logger.debug(String.format("Fetching following episodes: %s with following values: %s.", episodeIds, options));
+            logger.debug("Fetching following episodes: {} with following values: {}.", episodeIds, options);
             LoggingUtil.logHttpCall(logger, httpCall);
             Response<EpisodeFullCollection> response = httpCall.execute();
 

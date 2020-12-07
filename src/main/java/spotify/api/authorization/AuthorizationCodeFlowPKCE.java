@@ -49,7 +49,7 @@ public class AuthorizationCodeFlowPKCE {
                 "&code_challenge=" + codeChallenge;
 
         logger.trace("Constructing url for authorization PKCE code flow");
-        logger.debug(String.format("Constructed url: %s.", constructedUrl));
+        logger.debug("Constructed url: {}.", constructedUrl);
         return constructedUrl;
     }
 
