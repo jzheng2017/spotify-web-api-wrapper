@@ -10,13 +10,6 @@ public class RetrofitHttpServiceFactory {
     private static final String API_BASE_URL_HTTPS_WITH_VERSION = ApiUrl.API_URL_HTTPS + ApiUrl.VERSION;
     private static final Logger logger = LoggerFactory.getLogger(RetrofitHttpServiceFactory.class);
 
-    private static <T> T getRetrofitHttpService(final Class<T> serviceClassToBeCreatedFor, final String baseUrl) {
-        logger.trace("Requesting Retrofit HTTP client for {}", serviceClassToBeCreatedFor);
-        Retrofit httpClient = RetrofitClientFactory.getRetrofitClient(baseUrl);
-
-        return httpClient.create(serviceClassToBeCreatedFor);
-    }
-
     public static AlbumService getAlbumService() {
         return getRetrofitHttpService(AlbumService.class, API_BASE_URL_HTTPS_WITH_VERSION);
     }
@@ -79,5 +72,12 @@ public class RetrofitHttpServiceFactory {
 
     public static SearchService getSearchService() {
         return getRetrofitHttpService(SearchService.class, API_BASE_URL_HTTPS_WITH_VERSION);
+    }
+
+    private static <T> T getRetrofitHttpService(final Class<T> serviceClassToBeCreatedFor, final String baseUrl) {
+        logger.trace("Requesting Retrofit HTTP client for {}", serviceClassToBeCreatedFor);
+        Retrofit httpClient = RetrofitClientFactory.getRetrofitClient(baseUrl);
+
+        return httpClient.create(serviceClassToBeCreatedFor);
     }
 }
