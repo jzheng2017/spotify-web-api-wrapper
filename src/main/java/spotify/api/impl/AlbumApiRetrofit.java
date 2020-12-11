@@ -31,6 +31,11 @@ public class AlbumApiRetrofit implements AlbumApi {
         this.albumService = RetrofitHttpServiceFactory.getAlbumService();
     }
 
+    public AlbumApiRetrofit(String accessToken, AlbumService albumService) {
+        this.accessToken = accessToken;
+        this.albumService = albumService;
+    }
+
     @Override
     public AlbumFull getAlbum(String albumId, Map<String, String> options) {
         options = ValidatorUtil.optionsValueCheck(options);
