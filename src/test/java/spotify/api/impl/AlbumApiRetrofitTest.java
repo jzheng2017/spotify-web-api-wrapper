@@ -20,7 +20,6 @@ import spotify.retrofit.services.AlbumService;
 
 import java.io.IOException;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -65,7 +64,7 @@ public class AlbumApiRetrofitTest extends AbstractApiRetrofitTest {
     void getAlbumExecutesHttpCall() throws IOException {
         when(mockedAlbumFullCall.execute()).thenReturn(Response.success(new AlbumFull()));
 
-        sut.getAlbum(fakeAlbumId, new HashMap<>());
+        sut.getAlbum(fakeAlbumId, fakeOptionalParameters);
         verify(mockedAlbumFullCall).execute();
     }
 
@@ -79,28 +78,28 @@ public class AlbumApiRetrofitTest extends AbstractApiRetrofitTest {
                         )
                 );
 
-        Assertions.assertThrows(SpotifyActionFailedException.class, () -> sut.getAlbum(fakeAlbumId, new HashMap<>()));
+        Assertions.assertThrows(SpotifyActionFailedException.class, () -> sut.getAlbum(fakeAlbumId, fakeOptionalParameters));
     }
 
     @Test
     void getAlbumThrowsHttpRequestFailedWhenHttpFails() throws IOException {
         when(mockedAlbumFullCall.execute()).thenThrow(IOException.class);
 
-        Assertions.assertThrows(HttpRequestFailedException.class, () -> sut.getAlbum(fakeAlbumId, new HashMap<>()));
+        Assertions.assertThrows(HttpRequestFailedException.class, () -> sut.getAlbum(fakeAlbumId, fakeOptionalParameters));
     }
 
     @Test
     void getAlbumReturnsAlbumFullWhenSuccessful() throws IOException {
         when(mockedAlbumFullCall.execute()).thenReturn(Response.success(new AlbumFull()));
 
-        Assertions.assertNotNull(sut.getAlbum(fakeAlbumId, new HashMap<>()));
+        Assertions.assertNotNull(sut.getAlbum(fakeAlbumId, fakeOptionalParameters));
     }
 
     @Test
     void getAlbumsExecutesHttpCall() throws IOException {
         when(mockedAlbumFullCollectionCall.execute()).thenReturn(Response.success(new AlbumFullCollection()));
 
-        sut.getAlbums(listOfFakeAlbumIds, new HashMap<>());
+        sut.getAlbums(listOfFakeAlbumIds, fakeOptionalParameters);
         verify(mockedAlbumFullCollectionCall).execute();
     }
 
@@ -114,33 +113,33 @@ public class AlbumApiRetrofitTest extends AbstractApiRetrofitTest {
                         )
                 );
 
-        Assertions.assertThrows(SpotifyActionFailedException.class, () -> sut.getAlbums(listOfFakeAlbumIds, new HashMap<>()));
+        Assertions.assertThrows(SpotifyActionFailedException.class, () -> sut.getAlbums(listOfFakeAlbumIds, fakeOptionalParameters));
     }
 
     @Test
     void getAlbumsThrowsHttpRequestFailedWhenHttpFails() throws IOException {
         when(mockedAlbumFullCollectionCall.execute()).thenThrow(IOException.class);
 
-        Assertions.assertThrows(HttpRequestFailedException.class, () -> sut.getAlbums(listOfFakeAlbumIds, new HashMap<>()));
+        Assertions.assertThrows(HttpRequestFailedException.class, () -> sut.getAlbums(listOfFakeAlbumIds, fakeOptionalParameters));
     }
 
     @Test
     void getAlbumsReturnsAlbumFullCollectionWhenSuccessful() throws IOException {
         when(mockedAlbumFullCollectionCall.execute()).thenReturn(Response.success(new AlbumFullCollection()));
 
-        Assertions.assertNotNull(sut.getAlbums(listOfFakeAlbumIds, new HashMap<>()));
+        Assertions.assertNotNull(sut.getAlbums(listOfFakeAlbumIds, fakeOptionalParameters));
     }
 
     @Test
     void getAlbumsThrowsIllegalArgumentExceptionWhenListExceedsMaximumAllowedSize() {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> sut.getAlbums(albumListWithExceededSize, new HashMap<>()));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> sut.getAlbums(albumListWithExceededSize, fakeOptionalParameters));
     }
 
     @Test
     void getAlbumTracksExecutesHttpCall() throws IOException {
         when(mockedPagingTrackSimplifiedCall.execute()).thenReturn(Response.success(new Paging<>()));
 
-        sut.getAlbumTracks(fakeAlbumId, new HashMap<>());
+        sut.getAlbumTracks(fakeAlbumId, fakeOptionalParameters);
         verify(mockedPagingTrackSimplifiedCall).execute();
     }
 
@@ -154,20 +153,20 @@ public class AlbumApiRetrofitTest extends AbstractApiRetrofitTest {
                         )
                 );
 
-        Assertions.assertThrows(SpotifyActionFailedException.class, () -> sut.getAlbumTracks(fakeAlbumId, new HashMap<>()));
+        Assertions.assertThrows(SpotifyActionFailedException.class, () -> sut.getAlbumTracks(fakeAlbumId, fakeOptionalParameters));
     }
 
     @Test
     void getAlbumTracksThrowsHttpRequestFailedWhenHttpFails() throws IOException {
         when(mockedPagingTrackSimplifiedCall.execute()).thenThrow(IOException.class);
 
-        Assertions.assertThrows(HttpRequestFailedException.class, () -> sut.getAlbumTracks(fakeAlbumId, new HashMap<>()));
+        Assertions.assertThrows(HttpRequestFailedException.class, () -> sut.getAlbumTracks(fakeAlbumId, fakeOptionalParameters));
     }
 
     @Test
     void getAlbumTracksReturnsPagingTrackSimplifiedWhenSuccessful() throws IOException {
         when(mockedPagingTrackSimplifiedCall.execute()).thenReturn(Response.success(new Paging<>()));
 
-        Assertions.assertNotNull(sut.getAlbumTracks(fakeAlbumId, new HashMap<>()));
+        Assertions.assertNotNull(sut.getAlbumTracks(fakeAlbumId, fakeOptionalParameters));
     }
 }
