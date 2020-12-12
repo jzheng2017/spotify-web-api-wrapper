@@ -26,9 +26,14 @@ public class ShowApiRetrofit implements ShowApi {
     private final String accessToken;
     private final ShowService showService;
 
-    public ShowApiRetrofit(String accessToken) {
+    public ShowApiRetrofit(final String accessToken) {
         this.accessToken = accessToken;
         this.showService = RetrofitHttpServiceFactory.getShowService();
+    }
+
+    public ShowApiRetrofit(final String accessToken, final ShowService showService) {
+        this.accessToken = accessToken;
+        this.showService = showService;
     }
 
     @Override

@@ -32,6 +32,11 @@ public class FollowApiRetrofit implements FollowApi {
         this.followService = RetrofitHttpServiceFactory.getFollowService();
     }
 
+    public FollowApiRetrofit(final String accessToken, final FollowService followService) {
+        this.accessToken = accessToken;
+        this.followService = followService;
+    }
+
     @Override
     public List<Boolean> isFollowing(EntityType entityType, List<String> listOfEntityIds) {
         String entityIds = String.join(",", listOfEntityIds);

@@ -29,9 +29,14 @@ public class ArtistApiRetrofit implements ArtistApi {
     private final String accessToken;
     private final ArtistService artistService;
 
-    public ArtistApiRetrofit(String accessToken) {
+    public ArtistApiRetrofit(final String accessToken) {
         this.accessToken = accessToken;
         this.artistService = RetrofitHttpServiceFactory.getArtistService();
+    }
+
+    public ArtistApiRetrofit(final String accessToken, final ArtistService artistService) {
+        this.accessToken = accessToken;
+        this.artistService = artistService;
     }
 
     @Override

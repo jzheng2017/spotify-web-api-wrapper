@@ -31,6 +31,11 @@ public class LibraryApiRetrofit implements LibraryApi {
         this.libraryService = RetrofitHttpServiceFactory.getLibraryService();
     }
 
+    public LibraryApiRetrofit(final String accessToken, final LibraryService libraryService) {
+        this.accessToken = accessToken;
+        this.libraryService = libraryService;
+    }
+
     @Override
     public List<Boolean> hasSavedAlbums(List<String> listOfAlbumIds) {
         String albumIds = String.join(",", listOfAlbumIds);

@@ -29,6 +29,11 @@ public class PersonalizationApiRetrofit implements PersonalizationApi {
         this.personalizationService = RetrofitHttpServiceFactory.getPersonalizationService();
     }
 
+    public PersonalizationApiRetrofit(final String accessToken, final PersonalizationService personalizationService) {
+        this.accessToken = accessToken;
+        this.personalizationService = personalizationService;
+    }
+
     @Override
     public Paging<ArtistFull> getTopArtists(Map<String, String> options) {
         options = ValidatorUtil.optionsValueCheck(options);

@@ -25,6 +25,11 @@ public class UserApiRetrofit implements UserApi {
         this.userService = RetrofitHttpServiceFactory.getUserService();
     }
 
+    public UserApiRetrofit(final String accessToken, final UserService userService) {
+        this.accessToken = accessToken;
+        this.userService = userService;
+    }
+
     @Override
     public User getCurrentUser() {
         logger.trace("Constructing HTTP call to fetch current user.");

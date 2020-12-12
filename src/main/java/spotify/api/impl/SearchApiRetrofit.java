@@ -30,6 +30,11 @@ public class SearchApiRetrofit implements SearchApi {
         this.searchService = RetrofitHttpServiceFactory.getSearchService();
     }
 
+    public SearchApiRetrofit(final String accessToken, final SearchService searchService) {
+        this.accessToken = accessToken;
+        this.searchService = searchService;
+    }
+
     @Override
     public SearchQueryResult searchItem(String query, List<QueryType> listOfQueryTypes, Map<String, String> options) {
         options = ValidatorUtil.optionsValueCheck(options);

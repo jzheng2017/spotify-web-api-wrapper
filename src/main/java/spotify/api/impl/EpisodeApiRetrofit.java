@@ -24,9 +24,14 @@ public class EpisodeApiRetrofit implements EpisodeApi {
     private final String accessToken;
     private final EpisodeService episodeService;
 
-    public EpisodeApiRetrofit(String accessToken) {
+    public EpisodeApiRetrofit(final String accessToken) {
         this.accessToken = accessToken;
         this.episodeService = RetrofitHttpServiceFactory.getEpisodeService();
+    }
+
+    public EpisodeApiRetrofit(final String accessToken, final EpisodeService episodeService) {
+        this.accessToken = accessToken;
+        this.episodeService = episodeService;
     }
 
     @Override

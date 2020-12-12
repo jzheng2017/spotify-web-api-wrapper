@@ -37,6 +37,11 @@ public class PlaylistApiRetrofit implements PlaylistApi {
         playlistService = RetrofitHttpServiceFactory.getPlaylistService();
     }
 
+    public PlaylistApiRetrofit(final String accessToken, final PlaylistService playlistService) {
+        this.accessToken = accessToken;
+        this.playlistService = playlistService;
+    }
+
     @Override
     public Paging<PlaylistSimplified> getPlaylists(Map<String, String> options) {
         options = ValidatorUtil.optionsValueCheck(options);

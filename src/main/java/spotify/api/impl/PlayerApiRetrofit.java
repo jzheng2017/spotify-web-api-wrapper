@@ -37,6 +37,14 @@ public class PlayerApiRetrofit implements PlayerApi {
                 " https://github.com/jzheng2017/spotify-web-api-wrapper");
     }
 
+    public PlayerApiRetrofit(final String accessToken, final PlayerService playerService) {
+        this.accessToken = accessToken;
+        this.playerService = playerService;
+        logger.warn("The /player endpoints are in beta. Spotify API changes may break any of these functions." +
+                "\nIf there are any issues please report them on GitHub." +
+                " https://github.com/jzheng2017/spotify-web-api-wrapper");
+    }
+
     @Override
     public DeviceCollection getAvailableDevices() {
         logger.trace("Constructing HTTP call to fetch current user's available devices.");
