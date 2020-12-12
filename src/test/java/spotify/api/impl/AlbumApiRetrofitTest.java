@@ -41,8 +41,6 @@ public class AlbumApiRetrofitTest extends AbstractApiRetrofitTest {
     @Mock
     private List<String> albumListWithExceededSize;
 
-    private final String fakeAccessToken = "69";
-    private final String fakeUrl = "https://jiankai.nl";
     private final String fakeAlbumId = "420";
     private final List<String> listOfFakeAlbumIds = Collections.singletonList(fakeAlbumId);
 
