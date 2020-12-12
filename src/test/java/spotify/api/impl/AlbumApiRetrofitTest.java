@@ -125,7 +125,7 @@ public class AlbumApiRetrofitTest extends AbstractApiRetrofitTest {
     }
 
     @Test
-    void getAlbumsReturnsAlbumFullWhenSuccessful() throws IOException {
+    void getAlbumsReturnsAlbumFullCollectionWhenSuccessful() throws IOException {
         when(mockedAlbumFullCollectionCall.execute()).thenReturn(Response.success(new AlbumFullCollection()));
 
         Assertions.assertNotNull(sut.getAlbums(listOfFakeAlbumIds, new HashMap<>()));
@@ -165,7 +165,7 @@ public class AlbumApiRetrofitTest extends AbstractApiRetrofitTest {
     }
 
     @Test
-    void getAlbumTracksReturnsAlbumFullWhenSuccessful() throws IOException {
+    void getAlbumTracksReturnsPagingTrackSimplifiedWhenSuccessful() throws IOException {
         when(mockedPagingTrackSimplifiedCall.execute()).thenReturn(Response.success(new Paging<>()));
 
         Assertions.assertNotNull(sut.getAlbumTracks(fakeAlbumId, new HashMap<>()));
