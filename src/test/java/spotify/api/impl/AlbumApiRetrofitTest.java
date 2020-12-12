@@ -6,7 +6,6 @@ import okhttp3.ResponseBody;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import retrofit2.Call;
@@ -30,11 +29,6 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 public class AlbumApiRetrofitTest extends AbstractApiRetrofitTest {
-    private final String fakeAccessToken = "69";
-    private final String fakeUrl = "https://jiankai.nl";
-    private final String fakeAlbumId = "420";
-    private final List<String> listOfFakeAlbumIds = Collections.singletonList(fakeAlbumId);
-    @InjectMocks
     private AlbumApiRetrofit sut;
     @Mock
     private AlbumService mockedAlbumService;
@@ -46,6 +40,11 @@ public class AlbumApiRetrofitTest extends AbstractApiRetrofitTest {
     private Call<Paging<TrackSimplified>> mockedPagingTrackSimplifiedCall;
     @Mock
     private List<String> albumListWithExceededSize;
+
+    private final String fakeAccessToken = "69";
+    private final String fakeUrl = "https://jiankai.nl";
+    private final String fakeAlbumId = "420";
+    private final List<String> listOfFakeAlbumIds = Collections.singletonList(fakeAlbumId);
 
     @BeforeEach
     void setup() {
