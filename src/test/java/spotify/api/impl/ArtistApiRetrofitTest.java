@@ -21,9 +21,8 @@ import spotify.models.tracks.TrackFullCollection;
 import spotify.retrofit.services.ArtistService;
 
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -33,6 +32,13 @@ public class ArtistApiRetrofitTest extends AbstractApiRetrofitTest {
     private final List<String> listOfFakeArtistIds = Collections.singletonList(fakeArtistId);
     private final String fakeArtistIds = String.join(",", listOfFakeArtistIds);
     private final List<AlbumType> listOfFakeAlbumType = Arrays.asList(AlbumType.ALBUM, AlbumType.SINGLE);
+    private final Map<String, String> fakeOptionalParameterWithAlbumTypes = new HashMap<>() {
+        {
+            put("include_groups", listOfFakeAlbumType.stream()
+                    .map(String::valueOf)
+                    .collect(Collectors.joining(",")));
+        }
+    };
     private ArtistApiRetrofit sut;
     @Mock
     private ArtistService mockedArtistService;
@@ -99,6 +105,16 @@ public class ArtistApiRetrofitTest extends AbstractApiRetrofitTest {
     }
 
     @Test
+    void getArtistAlbumsUsesCorrectValuesToCreateHttpCall() throws IOException {
+        when(mockedArtistService.getArtistAlbums(fakeAccessTokenWithBearer, fakeArtistId, fakeOptionalParameterWithAlbumTypes)).thenReturn(mockedPagingArtistSimplifiedCall);
+        when(mockedPagingArtistSimplifiedCall.execute()).thenReturn(Response.success(new Paging<>()));
+
+        sut.getArtistAlbums(fakeArtistId, listOfFakeAlbumType, null);
+
+        verify(mockedArtistService).getArtistAlbums(fakeAccessTokenWithBearer, fakeArtistId, fakeOptionalParameterWithAlbumTypes);
+    }
+
+    @Test
     void getArtistAlbumsExecutesHttpCall() throws IOException {
         when(mockedPagingArtistSimplifiedCall.execute()).thenReturn(Response.success(new Paging<>()));
 
@@ -132,6 +148,16 @@ public class ArtistApiRetrofitTest extends AbstractApiRetrofitTest {
 
         Assertions.assertNotNull(sut.getArtistAlbums(fakeArtistId, listOfFakeAlbumType, fakeOptionalParameters));
     }
+
+    @Test
+    void getArtistTopTracksUsesCorrectValuesToCreateHttpCall() throws IOException {
+        when(mockedTrackFullCollectionCall.execute()).thenReturn(Response.success(new TrackFullCollection()));
+
+        sut.getArtistTopTracks(fakeArtistId, null);
+
+        verify(mockedArtistService).getArtistTopTracks(fakeAccessTokenWithBearer, fakeArtistId, fakeOptionalParameters);
+    }
+
 
     @Test
     void getArtistTopTracksExecutesHttpCall() throws IOException {

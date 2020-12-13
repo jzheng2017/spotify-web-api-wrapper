@@ -22,6 +22,7 @@ import spotify.retrofit.services.BrowseService;
 
 import java.io.IOException;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -36,6 +37,13 @@ public class BrowseApiRetrofitTest extends AbstractApiRetrofitTest {
     private final String fakeSeedArtists = String.join(",", listOfFakeSeedArtists);
     private final String fakeSeedGenres = String.join(",", listOfFakeSeedGenres);
     private final String fakeSeedTracks = String.join(",", listOfFakeSeedTracks);
+    private final Map<String, String> fakeOptionalParametersWithSeeds = new HashMap<>() {
+        {
+            put("seed_artists", fakeSeedArtists);
+            put("seed_genres", fakeSeedGenres);
+            put("seed_tracks", fakeSeedTracks);
+        }
+    };
     private BrowseApiRetrofit sut;
     @Mock
     private BrowseService mockedBrowseService;
@@ -76,6 +84,15 @@ public class BrowseApiRetrofitTest extends AbstractApiRetrofitTest {
     }
 
     @Test
+    void getCategoryUsesCorrectValuesToCreateHttpCall() throws IOException {
+        when(mockedCategoryFullCall.execute()).thenReturn(Response.success(new CategoryFull()));
+
+        sut.getCategory(fakeCategoryId, null);
+
+        verify(mockedBrowseService).getCategory(fakeAccessTokenWithBearer, fakeCategoryId, fakeOptionalParameters);
+    }
+
+    @Test
     void getCategoryExecutesHttpCall() throws IOException {
         when(mockedCategoryFullCall.execute()).thenReturn(Response.success(new CategoryFull()));
 
@@ -108,6 +125,15 @@ public class BrowseApiRetrofitTest extends AbstractApiRetrofitTest {
         when(mockedCategoryFullCall.execute()).thenReturn(Response.success(new CategoryFull()));
 
         Assertions.assertNotNull(sut.getCategory(fakeCategoryId, fakeOptionalParameters));
+    }
+
+    @Test
+    void getCategoriesUsesCorrectValuesToCreateHttpCall() throws IOException {
+        when(mockedCategoryFullPagingCall.execute()).thenReturn(Response.success(new CategoryFullPaging()));
+
+        sut.getCategories(null);
+
+        verify(mockedBrowseService).getCategories(fakeAccessTokenWithBearer, fakeOptionalParameters);
     }
 
     @Test
@@ -146,6 +172,15 @@ public class BrowseApiRetrofitTest extends AbstractApiRetrofitTest {
     }
 
     @Test
+    void getCategoryPlaylistsUsesCorrectValuesToCreateHttpCall() throws IOException {
+        when(mockedPlaylistSimplifiedPagingCall.execute()).thenReturn(Response.success(new PlaylistSimplifiedPaging()));
+
+        sut.getCategoryPlaylists(fakeCategoryId, null);
+
+        verify(mockedBrowseService).getCategoryPlaylists(fakeAccessTokenWithBearer, fakeCategoryId, fakeOptionalParameters);
+    }
+
+    @Test
     void getCategoryPlaylistsExecutesHttpCall() throws IOException {
         when(mockedPlaylistSimplifiedPagingCall.execute()).thenReturn(Response.success(new PlaylistSimplifiedPaging()));
 
@@ -178,6 +213,15 @@ public class BrowseApiRetrofitTest extends AbstractApiRetrofitTest {
         when(mockedPlaylistSimplifiedPagingCall.execute()).thenReturn(Response.success(new PlaylistSimplifiedPaging()));
 
         Assertions.assertNotNull(sut.getCategoryPlaylists(fakeCategoryId, fakeOptionalParameters));
+    }
+
+    @Test
+    void getFeaturedPlaylistsUsesCorrectValuesToCreateHttpCall() throws IOException {
+        when(mockedFeaturedPlaylistCollectionCall.execute()).thenReturn(Response.success(new FeaturedPlaylistCollection()));
+
+        sut.getFeaturedPlaylists(null);
+
+        verify(mockedBrowseService).getFeaturedPlaylists(fakeAccessTokenWithBearer, fakeOptionalParameters);
     }
 
     @Test
@@ -216,6 +260,15 @@ public class BrowseApiRetrofitTest extends AbstractApiRetrofitTest {
     }
 
     @Test
+    void getNewReleasesUsesCorrectValuesToCreateHttpCall() throws IOException {
+        when(mockedAlbumSimplifiedPagingCall.execute()).thenReturn(Response.success(new AlbumSimplifiedPaging()));
+
+        sut.getNewReleases(null);
+
+        verify(mockedBrowseService).getNewReleases(fakeAccessTokenWithBearer, fakeOptionalParameters);
+    }
+
+    @Test
     void getNewReleasesExecutesHttpCall() throws IOException {
         when(mockedAlbumSimplifiedPagingCall.execute()).thenReturn(Response.success(new AlbumSimplifiedPaging()));
 
@@ -248,6 +301,16 @@ public class BrowseApiRetrofitTest extends AbstractApiRetrofitTest {
         when(mockedAlbumSimplifiedPagingCall.execute()).thenReturn(Response.success(new AlbumSimplifiedPaging()));
 
         Assertions.assertNotNull(sut.getNewReleases(fakeOptionalParameters));
+    }
+
+    @Test
+    void getRecommendationsUsesCorrectValuesToCreateHttpCall() throws IOException {
+        when(mockedBrowseService.getRecommendations(fakeAccessTokenWithBearer, fakeOptionalParametersWithSeeds)).thenReturn(mockedRecommendationCollectionCall);
+        when(mockedRecommendationCollectionCall.execute()).thenReturn(Response.success(new RecommendationCollection()));
+
+        sut.getRecommendations(listOfFakeSeedArtists, listOfFakeSeedGenres, listOfFakeSeedTracks, null);
+
+        verify(mockedBrowseService).getRecommendations(fakeAccessTokenWithBearer, fakeOptionalParametersWithSeeds);
     }
 
     @Test

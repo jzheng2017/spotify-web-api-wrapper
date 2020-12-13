@@ -42,6 +42,7 @@ public class AlbumApiRetrofitTest extends AbstractApiRetrofitTest {
 
     private final String fakeAlbumId = "420";
     private final List<String> listOfFakeAlbumIds = Collections.singletonList(fakeAlbumId);
+    private final String fakeAlbumIds = String.join(",", listOfFakeAlbumIds);
 
     @BeforeEach
     void setup() {
@@ -58,6 +59,15 @@ public class AlbumApiRetrofitTest extends AbstractApiRetrofitTest {
         when(mockedPagingTrackSimplifiedCall.request()).thenReturn(new Request.Builder().url(fakeUrl).build());
 
         when(albumListWithExceededSize.size()).thenReturn(21);
+    }
+
+    @Test
+    void getAlbumUsesCorrectValuesToCreateHttpCall() throws IOException {
+        when(mockedAlbumFullCall.execute()).thenReturn(Response.success(new AlbumFull()));
+
+        sut.getAlbum(fakeAlbumId, null);
+
+        verify(mockedAlbumService).getAlbum(fakeAccessTokenWithBearer, fakeAlbumId, fakeOptionalParameters);
     }
 
     @Test
@@ -93,6 +103,15 @@ public class AlbumApiRetrofitTest extends AbstractApiRetrofitTest {
         when(mockedAlbumFullCall.execute()).thenReturn(Response.success(new AlbumFull()));
 
         Assertions.assertNotNull(sut.getAlbum(fakeAlbumId, fakeOptionalParameters));
+    }
+
+    @Test
+    void getAlbumsUsesCorrectValuesToCreateHttpCall() throws IOException {
+        when(mockedAlbumFullCollectionCall.execute()).thenReturn(Response.success(new AlbumFullCollection()));
+
+        sut.getAlbums(listOfFakeAlbumIds, null);
+
+        verify(mockedAlbumService).getAlbums(fakeAccessTokenWithBearer, fakeAlbumIds, fakeOptionalParameters);
     }
 
     @Test
@@ -133,6 +152,15 @@ public class AlbumApiRetrofitTest extends AbstractApiRetrofitTest {
     @Test
     void getAlbumsThrowsIllegalArgumentExceptionWhenListExceedsMaximumAllowedSize() {
         Assertions.assertThrows(IllegalArgumentException.class, () -> sut.getAlbums(albumListWithExceededSize, fakeOptionalParameters));
+    }
+
+    @Test
+    void getAlbumTracksUsesCorrectValuesToCreateHttpCall() throws IOException {
+        when(mockedPagingTrackSimplifiedCall.execute()).thenReturn(Response.success(new Paging<>()));
+
+        sut.getAlbumTracks(fakeAlbumId, null);
+
+        verify(mockedAlbumService).getAlbumTracks(fakeAccessTokenWithBearer, fakeAlbumId, fakeOptionalParameters);
     }
 
     @Test
