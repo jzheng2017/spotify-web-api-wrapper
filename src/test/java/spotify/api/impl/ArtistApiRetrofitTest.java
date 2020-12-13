@@ -70,6 +70,15 @@ public class ArtistApiRetrofitTest extends AbstractApiRetrofitTest {
     }
 
     @Test
+    void getArtistUsesCorrectValuesToCreateHttpCall() throws IOException {
+        when(mockedArtistFullCall.execute()).thenReturn(Response.success(new ArtistFull()));
+
+        sut.getArtist(fakeArtistId);
+
+        verify(mockedArtistService).getArtist(fakeAccessTokenWithBearer, fakeArtistId);
+    }
+
+    @Test
     void getArtistExecutesHttpCall() throws IOException {
         when(mockedArtistFullCall.execute()).thenReturn(Response.success(new ArtistFull()));
 
@@ -195,6 +204,15 @@ public class ArtistApiRetrofitTest extends AbstractApiRetrofitTest {
     }
 
     @Test
+    void getRelatedArtistsUsesCorrectValuesToCreateHttpCall() throws IOException {
+        when(mockedArtistFullCollectionCall.execute()).thenReturn(Response.success(new ArtistFullCollection()));
+
+        sut.getRelatedArtists(fakeArtistId);
+
+        verify(mockedArtistService).getRelatedArtists(fakeAccessTokenWithBearer, fakeArtistId);
+    }
+
+    @Test
     void getRelatedArtistsExecutesHttpCall() throws IOException {
         when(mockedArtistFullCollectionCall.execute()).thenReturn(Response.success(new ArtistFullCollection()));
 
@@ -227,6 +245,15 @@ public class ArtistApiRetrofitTest extends AbstractApiRetrofitTest {
         when(mockedArtistFullCollectionCall.execute()).thenReturn(Response.success(new ArtistFullCollection()));
 
         Assertions.assertNotNull(sut.getRelatedArtists(fakeArtistId));
+    }
+
+    @Test
+    void getArtistsUsesCorrectValuesToCreateHttpCall() throws IOException {
+        when(mockedArtistFullCollectionCall.execute()).thenReturn(Response.success(new ArtistFullCollection()));
+
+        sut.getArtists(listOfFakeArtistIds);
+
+        verify(mockedArtistService).getArtists(fakeAccessTokenWithBearer, fakeArtistIds);
     }
 
     @Test
