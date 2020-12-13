@@ -49,7 +49,7 @@ public class PersonalizationApiRetrofitTest extends AbstractApiRetrofitTest {
     void getTopArtistsUsesCorrectValuesToCreateHttpCall() throws IOException {
         when(mockedPagingArtistFullCall.execute()).thenReturn(Response.success(new Paging<>()));
 
-        sut.getTopArtists(fakeOptionalParameters);
+        sut.getTopArtists(null);
 
         verify(mockedPersonalizationService).getTopArtists(fakeAccessTokenWithBearer, fakeOptionalParameters);
     }
@@ -94,7 +94,7 @@ public class PersonalizationApiRetrofitTest extends AbstractApiRetrofitTest {
     void getTopTracksUsesCorrectValuesToCreateHttpCall() throws IOException {
         when(mockedPagingTrackFullCall.execute()).thenReturn(Response.success(new Paging<>()));
 
-        sut.getTopTracks(fakeOptionalParameters);
+        sut.getTopTracks(null);
 
         verify(mockedPersonalizationService).getTopTracks(fakeAccessTokenWithBearer, fakeOptionalParameters);
     }

@@ -246,7 +246,7 @@ public class FollowApiRetrofitTest extends AbstractApiRetrofitTest {
     void getFollowedArtistsUsesCorrectValuesToCreateHttpCall() throws IOException {
         when(mockedArtistFulLCursorBasedPagingWrapperCall.execute()).thenReturn(Response.success(new ArtistFullCursorBasedPagingWrapper()));
 
-        sut.getFollowedArtists(fakeEntityType, fakeOptionalParameters);
+        sut.getFollowedArtists(fakeEntityType, null);
 
         verify(mockedFollowService).getFollowedArtists(fakeAccessTokenWithBearer, fakeEntityType, fakeOptionalParameters);
     }
