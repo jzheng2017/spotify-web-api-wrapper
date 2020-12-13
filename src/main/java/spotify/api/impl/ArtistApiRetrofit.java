@@ -135,7 +135,6 @@ public class ArtistApiRetrofit implements ArtistApi {
 
     @Override
     public ArtistFullCollection getArtists(List<String> listOfArtistIds) {
-
         String artistIdsWithCommaDelimiter = String.join(",", listOfArtistIds);
 
         logger.trace("Constructing HTTP call to fetch multiple artists.");
