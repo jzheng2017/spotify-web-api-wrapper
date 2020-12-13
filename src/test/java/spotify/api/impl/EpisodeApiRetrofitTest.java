@@ -17,7 +17,7 @@ import spotify.models.episodes.EpisodeFullCollection;
 import spotify.retrofit.services.EpisodeService;
 
 import java.io.IOException;
-import java.util.Collections;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.mockito.Mockito.verify;
@@ -25,7 +25,7 @@ import static org.mockito.Mockito.when;
 
 public class EpisodeApiRetrofitTest extends AbstractApiRetrofitTest {
     private final String fakeEpisodeId = "69";
-    private final List<String> listOfFakeEpisodeIds = Collections.singletonList(fakeEpisodeId);
+    private final List<String> listOfFakeEpisodeIds = Arrays.asList(fakeEpisodeId, "420");
     private final String fakeEpisodeIds = String.join(",", listOfFakeEpisodeIds);
     private EpisodeApiRetrofit sut;
     @Mock

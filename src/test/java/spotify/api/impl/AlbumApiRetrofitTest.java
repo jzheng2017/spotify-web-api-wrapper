@@ -19,7 +19,7 @@ import spotify.models.tracks.TrackSimplified;
 import spotify.retrofit.services.AlbumService;
 
 import java.io.IOException;
-import java.util.Collections;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -41,7 +41,7 @@ public class AlbumApiRetrofitTest extends AbstractApiRetrofitTest {
     private List<String> albumListWithExceededSize;
 
     private final String fakeAlbumId = "420";
-    private final List<String> listOfFakeAlbumIds = Collections.singletonList(fakeAlbumId);
+    private final List<String> listOfFakeAlbumIds = Arrays.asList(fakeAlbumId, "69");
     private final String fakeAlbumIds = String.join(",", listOfFakeAlbumIds);
 
     @BeforeEach

@@ -21,7 +21,10 @@ import spotify.models.tracks.TrackFullCollection;
 import spotify.retrofit.services.ArtistService;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import static org.mockito.Mockito.verify;
@@ -29,7 +32,7 @@ import static org.mockito.Mockito.when;
 
 public class ArtistApiRetrofitTest extends AbstractApiRetrofitTest {
     private final String fakeArtistId = "420";
-    private final List<String> listOfFakeArtistIds = Collections.singletonList(fakeArtistId);
+    private final List<String> listOfFakeArtistIds = Arrays.asList(fakeArtistId, "69");
     private final String fakeArtistIds = String.join(",", listOfFakeArtistIds);
     private final List<AlbumType> listOfFakeAlbumType = Arrays.asList(AlbumType.ALBUM, AlbumType.SINGLE);
     private final Map<String, String> fakeOptionalParameterWithAlbumTypes = new HashMap<>() {

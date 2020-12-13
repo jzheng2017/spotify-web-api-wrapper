@@ -21,7 +21,7 @@ import spotify.models.recommendations.RecommendationCollection;
 import spotify.retrofit.services.BrowseService;
 
 import java.io.IOException;
-import java.util.Collections;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,9 +31,9 @@ import static org.mockito.Mockito.when;
 
 public class BrowseApiRetrofitTest extends AbstractApiRetrofitTest {
     private final String fakeCategoryId = "69";
-    private final List<String> listOfFakeSeedArtists = Collections.singletonList("jiankai");
-    private final List<String> listOfFakeSeedGenres = Collections.singletonList("kpop");
-    private final List<String> listOfFakeSeedTracks = Collections.singletonList("bts");
+    private final List<String> listOfFakeSeedArtists = Arrays.asList("jiankai", "zheng");
+    private final List<String> listOfFakeSeedGenres = Arrays.asList("kpop", "krnb");
+    private final List<String> listOfFakeSeedTracks = Arrays.asList("bts", "blackpink");
     private final String fakeSeedArtists = String.join(",", listOfFakeSeedArtists);
     private final String fakeSeedGenres = String.join(",", listOfFakeSeedGenres);
     private final String fakeSeedTracks = String.join(",", listOfFakeSeedTracks);
