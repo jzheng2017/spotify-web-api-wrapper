@@ -24,7 +24,7 @@ import java.util.List;
 import java.util.Map;
 
 public class BrowseApiRetrofit implements BrowseApi {
-    private final Logger logger = LoggerFactory.getLogger(UserApiRetrofit.class);
+    private final Logger logger = LoggerFactory.getLogger(BrowseApiRetrofit.class);
     private final String accessToken;
     private final BrowseService browseService;
 

@@ -23,7 +23,7 @@ import java.util.List;
 import java.util.Map;
 
 public class FollowApiRetrofit implements FollowApi {
-    private final Logger logger = LoggerFactory.getLogger(EpisodeApiRetrofit.class);
+    private final Logger logger = LoggerFactory.getLogger(FollowApiRetrofit.class);
     private final String accessToken;
     private final FollowService followService;
 
