@@ -281,6 +281,13 @@ public class FollowApiRetrofitTest extends AbstractApiRetrofitTest {
     }
 
     @Test
+    void getFollowedArtistsThrowsSpotifyActionFailedExceptionWhenResponseBodyIsNull() throws IOException {
+        when(mockedArtistFulLCursorBasedPagingWrapperCall.execute()).thenReturn(Response.success(null));
+
+        Assertions.assertThrows(SpotifyActionFailedException.class, () -> sut.getFollowedArtists(fakeEntityType, fakeOptionalParameters));
+    }
+
+    @Test
     void getFollowedArtistsReturnsCursorBasedPagingWhenSuccessful() throws IOException {
         final ArtistFullCursorBasedPagingWrapper fakeBody = new ArtistFullCursorBasedPagingWrapper();
         fakeBody.setArtists(new CursorBasedPaging<>());
