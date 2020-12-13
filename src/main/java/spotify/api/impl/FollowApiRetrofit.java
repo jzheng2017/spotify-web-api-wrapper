@@ -17,6 +17,7 @@ import spotify.models.playlists.requests.FollowPlaylistRequestBody;
 import spotify.retrofit.services.FollowService;
 import spotify.utils.LoggingUtil;
 import spotify.utils.ResponseChecker;
+import spotify.utils.ValidatorUtil;
 
 import java.io.IOException;
 import java.util.List;
@@ -127,6 +128,8 @@ public class FollowApiRetrofit implements FollowApi {
 
     @Override
     public CursorBasedPaging<ArtistFull> getFollowedArtists(EntityType entityType, Map<String, String> options) {
+        options = ValidatorUtil.optionsValueCheck(options);
+
         logger.trace("Constructing HTTP call to fetch followed artists of the current user.");
         Call<ArtistFullCursorBasedPagingWrapper> httpCall = followService.getFollowedArtists("Bearer " + this.accessToken, entityType, options);
 
