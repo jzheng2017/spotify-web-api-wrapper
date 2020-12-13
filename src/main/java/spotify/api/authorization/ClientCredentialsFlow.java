@@ -34,6 +34,10 @@ public class ClientCredentialsFlow {
         this.clientCredentialsFlowService = RetrofitHttpServiceFactory.getClientCredentialsFlowService();
     }
 
+    public ClientCredentialsFlow(ClientCredentialsFlowService clientCredentialsFlowService) {
+        this.clientCredentialsFlowService = clientCredentialsFlowService;
+    }
+
     /**
      * Handles the Client Credentials Flow. This results in an access token.
      * <p>

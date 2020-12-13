@@ -17,6 +17,10 @@ public class AuthorizationPKCERequestToken {
         this.authorizationCodeFlowService = RetrofitHttpServiceFactory.getAuthorizationCodeFlowService();
     }
 
+    public AuthorizationPKCERequestToken(AuthorizationCodeFlowService authorizationCodeFlowService) {
+        this.authorizationCodeFlowService = authorizationCodeFlowService;
+    }
+
     /**
      * Makes an http call to retrieve the access and refresh tokens.
      *

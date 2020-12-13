@@ -30,6 +30,10 @@ public class AuthorizationRefreshToken {
         this.authorizationCodeFlowService = RetrofitHttpServiceFactory.getAuthorizationCodeFlowService();
     }
 
+    public AuthorizationRefreshToken(AuthorizationCodeFlowService authorizationCodeFlowService) {
+        this.authorizationCodeFlowService = authorizationCodeFlowService;
+    }
+
     /**
      * Makes a request to the Spotify API to refresh the access token.
      *

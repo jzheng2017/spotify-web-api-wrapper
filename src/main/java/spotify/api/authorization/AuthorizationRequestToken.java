@@ -26,6 +26,10 @@ public class AuthorizationRequestToken {
         this.authorizationCodeFlowService = RetrofitHttpServiceFactory.getAuthorizationCodeFlowService();
     }
 
+    public AuthorizationRequestToken(AuthorizationCodeFlowService authorizationCodeFlowService) {
+        this.authorizationCodeFlowService = authorizationCodeFlowService;
+    }
+
     /**
      * Makes an http call to retrieve the access and refresh tokens.
      *
