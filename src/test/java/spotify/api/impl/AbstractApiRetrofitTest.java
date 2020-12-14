@@ -16,7 +16,7 @@ abstract class AbstractApiRetrofitTest {
 
     protected final String getJson(final String fileName) {
         try {
-            return Files.readString(Path.of("src/test/fixtures/responses/" + fileName));
+            return Files.readString(Path.of("src/test/resources/fixtures/responses/" + fileName));
         } catch (IOException e) {
             return "Contents could not be read";
         }
