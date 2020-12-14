@@ -33,8 +33,7 @@ public class PlaylistApiRetrofit implements PlaylistApi {
 
 
     public PlaylistApiRetrofit(final String accessToken) {
-        this.accessToken = accessToken;
-        playlistService = RetrofitHttpServiceFactory.getPlaylistService();
+        this(accessToken, RetrofitHttpServiceFactory.getPlaylistService());
     }
 
     public PlaylistApiRetrofit(final String accessToken, final PlaylistService playlistService) {

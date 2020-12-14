@@ -25,8 +25,7 @@ public class PersonalizationApiRetrofit implements PersonalizationApi {
     private final PersonalizationService personalizationService;
 
     public PersonalizationApiRetrofit(final String accessToken) {
-        this.accessToken = accessToken;
-        this.personalizationService = RetrofitHttpServiceFactory.getPersonalizationService();
+        this(accessToken, RetrofitHttpServiceFactory.getPersonalizationService());
     }
 
     public PersonalizationApiRetrofit(final String accessToken, final PersonalizationService personalizationService) {

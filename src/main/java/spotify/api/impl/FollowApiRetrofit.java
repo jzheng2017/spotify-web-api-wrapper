@@ -29,8 +29,7 @@ public class FollowApiRetrofit implements FollowApi {
     private final FollowService followService;
 
     public FollowApiRetrofit(final String accessToken) {
-        this.accessToken = accessToken;
-        this.followService = RetrofitHttpServiceFactory.getFollowService();
+        this(accessToken, RetrofitHttpServiceFactory.getFollowService());
     }
 
     public FollowApiRetrofit(final String accessToken, final FollowService followService) {

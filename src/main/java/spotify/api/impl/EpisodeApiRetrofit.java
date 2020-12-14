@@ -25,8 +25,7 @@ public class EpisodeApiRetrofit implements EpisodeApi {
     private final EpisodeService episodeService;
 
     public EpisodeApiRetrofit(final String accessToken) {
-        this.accessToken = accessToken;
-        this.episodeService = RetrofitHttpServiceFactory.getEpisodeService();
+        this(accessToken, RetrofitHttpServiceFactory.getEpisodeService());
     }
 
     public EpisodeApiRetrofit(final String accessToken, final EpisodeService episodeService) {

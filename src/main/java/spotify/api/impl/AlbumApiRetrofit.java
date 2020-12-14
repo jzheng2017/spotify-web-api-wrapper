@@ -27,8 +27,7 @@ public class AlbumApiRetrofit implements AlbumApi {
     private final AlbumService albumService;
 
     public AlbumApiRetrofit(final String accessToken) {
-        this.accessToken = accessToken;
-        this.albumService = RetrofitHttpServiceFactory.getAlbumService();
+        this(accessToken, RetrofitHttpServiceFactory.getAlbumService());
     }
 
     public AlbumApiRetrofit(final String accessToken, final AlbumService albumService) {

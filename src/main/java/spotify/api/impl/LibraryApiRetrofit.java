@@ -27,8 +27,7 @@ public class LibraryApiRetrofit implements LibraryApi {
     private final LibraryService libraryService;
 
     public LibraryApiRetrofit(final String accessToken) {
-        this.accessToken = accessToken;
-        this.libraryService = RetrofitHttpServiceFactory.getLibraryService();
+        this(accessToken, RetrofitHttpServiceFactory.getLibraryService());
     }
 
     public LibraryApiRetrofit(final String accessToken, final LibraryService libraryService) {

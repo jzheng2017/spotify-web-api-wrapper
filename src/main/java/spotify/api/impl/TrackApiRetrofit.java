@@ -28,8 +28,8 @@ public class TrackApiRetrofit implements TrackApi {
     private final TrackService trackService;
 
     public TrackApiRetrofit(final String accessToken) {
-        this.accessToken = accessToken;
-        this.trackService = RetrofitHttpServiceFactory.getTrackService();
+        this(accessToken, RetrofitHttpServiceFactory.getTrackService());
+
     }
 
     public TrackApiRetrofit(final String accessToken, final TrackService trackService) {

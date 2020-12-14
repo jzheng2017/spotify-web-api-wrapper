@@ -26,8 +26,7 @@ public class SearchApiRetrofit implements SearchApi {
     private final SearchService searchService;
 
     public SearchApiRetrofit(final String accessToken) {
-        this.accessToken = accessToken;
-        this.searchService = RetrofitHttpServiceFactory.getSearchService();
+        this(accessToken, RetrofitHttpServiceFactory.getSearchService());
     }
 
     public SearchApiRetrofit(final String accessToken, final SearchService searchService) {

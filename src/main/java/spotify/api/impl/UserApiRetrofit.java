@@ -20,9 +20,8 @@ public class UserApiRetrofit implements UserApi {
     private final String accessToken;
     private UserService userService;
 
-    public UserApiRetrofit(String accessToken) {
-        this.accessToken = accessToken;
-        this.userService = RetrofitHttpServiceFactory.getUserService();
+    public UserApiRetrofit(final String accessToken) {
+        this(accessToken, RetrofitHttpServiceFactory.getUserService());
     }
 
     public UserApiRetrofit(final String accessToken, final UserService userService) {

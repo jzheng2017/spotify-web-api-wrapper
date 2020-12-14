@@ -29,8 +29,7 @@ public class BrowseApiRetrofit implements BrowseApi {
     private final BrowseService browseService;
 
     public BrowseApiRetrofit(final String accessToken) {
-        this.accessToken = accessToken;
-        this.browseService = RetrofitHttpServiceFactory.getBrowseService();
+        this(accessToken, RetrofitHttpServiceFactory.getBrowseService());
     }
 
     public BrowseApiRetrofit(final String accessToken, final BrowseService browseService) {
