@@ -87,7 +87,7 @@ public class SearchApiRetrofitTest extends AbstractApiRetrofitTest {
     }
 
     @Test
-    void searchItemReturnsArtistFullPagingWhenSuccessful() throws IOException {
+    void searchItemReturnsSearchQueryResultWhenSuccessful() throws IOException {
         when(mockedSearchQueryResultCall.execute()).thenReturn(Response.success(new SearchQueryResult()));
 
         Assertions.assertNotNull(sut.searchItem(fakeQuery, listOfFakeQueryTypes, fakeOptionalParameters));

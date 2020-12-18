@@ -47,7 +47,7 @@ public class FollowApiRetrofitTest extends AbstractApiRetrofitTest {
     @Mock
     private Call<Void> mockedVoidCall;
     @Mock
-    private Call<ArtistFullCursorBasedPagingWrapper> mockedArtistFulLCursorBasedPagingWrapperCall;
+    private Call<ArtistFullCursorBasedPagingWrapper> mockedArtistFullCursorBasedPagingWrapperCall;
 
     @BeforeEach
     void setup() {
@@ -59,13 +59,13 @@ public class FollowApiRetrofitTest extends AbstractApiRetrofitTest {
         when(mockedFollowService.isFollowingPlaylist(fakeAccessTokenWithBearer, fakePlaylistId, fakeUserIds)).thenReturn(mockedListOfBooleanCall);
         when(mockedFollowService.followEntities(fakeAccessTokenWithBearer, fakeEntityType, fakeEntityIds)).thenReturn(mockedVoidCall);
         when(mockedFollowService.followPlaylist(anyString(), anyString(), any())).thenReturn(mockedVoidCall);
-        when(mockedFollowService.getFollowedArtists(fakeAccessTokenWithBearer, fakeEntityType, fakeOptionalParameters)).thenReturn(mockedArtistFulLCursorBasedPagingWrapperCall);
+        when(mockedFollowService.getFollowedArtists(fakeAccessTokenWithBearer, fakeEntityType, fakeOptionalParameters)).thenReturn(mockedArtistFullCursorBasedPagingWrapperCall);
         when(mockedFollowService.unfollowEntities(fakeAccessTokenWithBearer, fakeEntityType, fakeEntityIds)).thenReturn(mockedVoidCall);
         when(mockedFollowService.unfollowPlaylist(fakeAccessTokenWithBearer, fakePlaylistId)).thenReturn(mockedVoidCall);
 
         when(mockedListOfBooleanCall.request()).thenReturn(new Request.Builder().url(fakeUrl).build());
         when(mockedVoidCall.request()).thenReturn(new Request.Builder().url(fakeUrl).build());
-        when(mockedArtistFulLCursorBasedPagingWrapperCall.request()).thenReturn(new Request.Builder().url(fakeUrl).build());
+        when(mockedArtistFullCursorBasedPagingWrapperCall.request()).thenReturn(new Request.Builder().url(fakeUrl).build());
     }
 
     @Test
@@ -244,7 +244,7 @@ public class FollowApiRetrofitTest extends AbstractApiRetrofitTest {
 
     @Test
     void getFollowedArtistsUsesCorrectValuesToCreateHttpCall() throws IOException {
-        when(mockedArtistFulLCursorBasedPagingWrapperCall.execute()).thenReturn(Response.success(new ArtistFullCursorBasedPagingWrapper()));
+        when(mockedArtistFullCursorBasedPagingWrapperCall.execute()).thenReturn(Response.success(new ArtistFullCursorBasedPagingWrapper()));
 
         sut.getFollowedArtists(fakeEntityType, null);
 
@@ -253,16 +253,16 @@ public class FollowApiRetrofitTest extends AbstractApiRetrofitTest {
 
     @Test
     void getFollowedArtistsExecutesHttpCall() throws IOException {
-        when(mockedArtistFulLCursorBasedPagingWrapperCall.execute()).thenReturn(Response.success(new ArtistFullCursorBasedPagingWrapper()));
+        when(mockedArtistFullCursorBasedPagingWrapperCall.execute()).thenReturn(Response.success(new ArtistFullCursorBasedPagingWrapper()));
 
         sut.getFollowedArtists(fakeEntityType, fakeOptionalParameters);
 
-        verify(mockedArtistFulLCursorBasedPagingWrapperCall).execute();
+        verify(mockedArtistFullCursorBasedPagingWrapperCall).execute();
     }
 
     @Test
     void getFollowedArtistsThrowsSpotifyActionFailedExceptionWhenError() throws IOException {
-        when(mockedArtistFulLCursorBasedPagingWrapperCall.execute())
+        when(mockedArtistFullCursorBasedPagingWrapperCall.execute())
                 .thenReturn(
                         Response.error(
                                 400,
@@ -275,14 +275,14 @@ public class FollowApiRetrofitTest extends AbstractApiRetrofitTest {
 
     @Test
     void getFollowedArtistsThrowsHttpRequestFailedWhenHttpFails() throws IOException {
-        when(mockedArtistFulLCursorBasedPagingWrapperCall.execute()).thenThrow(IOException.class);
+        when(mockedArtistFullCursorBasedPagingWrapperCall.execute()).thenThrow(IOException.class);
 
         Assertions.assertThrows(HttpRequestFailedException.class, () -> sut.getFollowedArtists(fakeEntityType, fakeOptionalParameters));
     }
 
     @Test
     void getFollowedArtistsThrowsSpotifyActionFailedExceptionWhenResponseBodyIsNull() throws IOException {
-        when(mockedArtistFulLCursorBasedPagingWrapperCall.execute()).thenReturn(Response.success(null));
+        when(mockedArtistFullCursorBasedPagingWrapperCall.execute()).thenReturn(Response.success(null));
 
         Assertions.assertThrows(SpotifyActionFailedException.class, () -> sut.getFollowedArtists(fakeEntityType, fakeOptionalParameters));
     }
@@ -292,7 +292,7 @@ public class FollowApiRetrofitTest extends AbstractApiRetrofitTest {
         final ArtistFullCursorBasedPagingWrapper fakeBody = new ArtistFullCursorBasedPagingWrapper();
         fakeBody.setArtists(new CursorBasedPaging<>());
 
-        when(mockedArtistFulLCursorBasedPagingWrapperCall.execute()).thenReturn(Response.success(fakeBody));
+        when(mockedArtistFullCursorBasedPagingWrapperCall.execute()).thenReturn(Response.success(fakeBody));
 
         Assertions.assertNotNull(sut.getFollowedArtists(fakeEntityType, fakeOptionalParameters));
     }

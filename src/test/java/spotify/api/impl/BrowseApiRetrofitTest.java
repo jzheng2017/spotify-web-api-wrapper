@@ -359,7 +359,7 @@ public class BrowseApiRetrofitTest extends AbstractApiRetrofitTest {
     }
 
     @Test
-    void getRecommendationsReturnsAlbumSimplifiedPagingWhenSuccessful() throws IOException {
+    void getRecommendationsReturnsRecommendationCollectionWhenSuccessful() throws IOException {
         when(mockedRecommendationCollectionCall.execute()).thenReturn(Response.success(new RecommendationCollection()));
 
         Assertions.assertNotNull(sut.getRecommendations(listOfFakeSeedArtists, listOfFakeSeedGenres, listOfFakeSeedTracks, mockedOptionalParametersWithSeeds));

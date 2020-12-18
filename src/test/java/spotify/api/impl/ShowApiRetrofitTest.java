@@ -138,7 +138,7 @@ public class ShowApiRetrofitTest extends AbstractApiRetrofitTest {
     }
 
     @Test
-    void getShowEpisodesReturnsShowFullWhenSuccessful() throws IOException {
+    void getShowEpisodesReturnsEpisodeSimplifiedPagingWhenSuccessful() throws IOException {
         when(mockedPagingEpisodeSimplifiedCall.execute()).thenReturn(Response.success(new Paging<>()));
 
         Assertions.assertNotNull(sut.getShowEpisodes(fakeShowId, fakeOptionalParameters));

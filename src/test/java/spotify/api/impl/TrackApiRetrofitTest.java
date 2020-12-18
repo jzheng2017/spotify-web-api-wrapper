@@ -293,7 +293,7 @@ public class TrackApiRetrofitTest extends AbstractApiRetrofitTest {
     }
 
     @Test
-    void getTrackAudioAnalysisReturnsAudioFeaturesWhenSuccessful() throws IOException {
+    void getTrackAudioAnalysisReturnsAudioAnalysisWhenSuccessful() throws IOException {
         when(mockedAudioAnalysisCall.execute()).thenReturn(Response.success(new AudioAnalysis()));
 
         Assertions.assertNotNull(sut.getTrackAudioAnalysis(fakeTrackId));
