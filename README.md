@@ -8,6 +8,9 @@ Use the following guides provided by Spotify to use this library:
 - [Authorization Guide](https://developer.spotify.com/documentation/general/guides/authorization-guide/)
 - [Web API](https://developer.spotify.com/documentation/web-api/reference/)
 
+## Support
+If you need any help or have any questions there is a [Discord](https://discord.gg/EZrK9wSNBs) channel.
+
 ## Example usages
 ### Client Credentials Flow
 The Client Credentials flow is used in server-to-server authentication. Only endpoints that do not access user information can be accessed. 
