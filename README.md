@@ -3,6 +3,16 @@
 # Spotify Web API Wrapper 
 Spotify API wrapper for Java
 
+## Table of Contents
+  * [Guides](#guides)
+  * [Support](#support)
+  * [Example usages](#example-usages)
+  * [Error Handling](#error-handling)
+  * [Why use this library?](#why-use-this-library)
+  * [Installation](#installation)
+  * [License](#license)
+  * [Spotify endpoint coverage](#spotify-endpoint-coverage)
+
 ## Guides
 Use the following guides provided by Spotify to use this library:
 - [Authorization Guide](https://developer.spotify.com/documentation/general/guides/authorization-guide/)
