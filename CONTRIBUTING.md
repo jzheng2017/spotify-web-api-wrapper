@@ -31,6 +31,8 @@ PRs to our libraries are always welcome and can be a quick way to get your fix o
 - Add unit or integration tests for fixed or changed functionality (if a test suite already exists).
 - Address a single concern in the least number of changed lines as possible.
 - Be accompanied by a complete Pull Request template (loaded automatically when a PR is created).
+- Update the README.md with details of changes to the interface.
+- Increase the version numbers in any examples files and the README.md to the new version that this Pull Request would represent. The versioning scheme we use is [SemVer](https://semver.org/).
 
 For changes that address core functionality or would require breaking changes (e.g. a major release), it's best to open an Issue to discuss your proposal first. 
 This is not required but can save time creating and reviewing changes.
