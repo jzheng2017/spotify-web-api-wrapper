@@ -12,9 +12,10 @@ import java.util.stream.Collectors;
  * This class constructs the URL needed for the first step in the Authorization Code Flow PKCE.
  * Executing this step should result in a code that can be used to retrieve an access and refresh token.
  * <p>
- * For more information see: @see <a href="https://developer.spotify.com/documentation/general/guides/authorization-guide/#authorization-code-flow">Authorization Code Flow</a>
+ * For more information see: @see <a href="https://developer.spotify.com/documentation/general/guides/authorization-guide/#authorization-code-flow-with-proof-key-for-code-exchange-pkce">Authorization Code Flow (PKCE)</a>
  *
- * @author Jiankai Zheng
+ * @author Jiankai Zheng (jk.zheng@hotmail.com)
+ * @since 1.5.0
  */
 public class AuthorizationCodeFlowPKCE {
     private final Logger logger = LoggerFactory.getLogger(AuthorizationCodeFlowPKCE.class);
@@ -67,7 +68,7 @@ public class AuthorizationCodeFlowPKCE {
     }
 
     /**
-     * Builder for constructing an AuthorizationCodeFlowPKCE object.
+     * Builder for constructing an {@link AuthorizationCodeFlowPKCE} object.
      */
     public static class Builder {
         private final Logger logger = LoggerFactory.getLogger(AuthorizationCodeFlowPKCE.Builder.class);
@@ -122,7 +123,7 @@ public class AuthorizationCodeFlowPKCE {
         }
 
         /**
-         * Build authorization PKCE code flow.
+         * Build {@link AuthorizationCodeFlowPKCE}.
          *
          * @return the authorization PKCE code flow
          */

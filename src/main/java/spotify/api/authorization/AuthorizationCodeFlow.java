@@ -15,6 +15,7 @@ import java.util.stream.Collectors;
  * For more information see: @see <a href="https://developer.spotify.com/documentation/general/guides/authorization-guide/#authorization-code-flow">Authorization Code Flow</a>
  *
  * @author Jiankai Zheng
+ * @since 1.0.0
  */
 public class AuthorizationCodeFlow {
     private final Logger logger = LoggerFactory.getLogger(AuthorizationCodeFlow.class);
@@ -52,7 +53,7 @@ public class AuthorizationCodeFlow {
     }
 
     /**
-     * Builder for constructing an AuthorizationCodeFlow object.
+     * Builder for constructing an {@link AuthorizationCodeFlow} object.
      */
     public static class Builder {
         private final Logger logger = LoggerFactory.getLogger(Builder.class);
@@ -100,7 +101,7 @@ public class AuthorizationCodeFlow {
         }
 
         /**
-         * Build authorization code flow.
+         * Build {@link AuthorizationCodeFlow} object.
          *
          * @return the authorization code flow
          */

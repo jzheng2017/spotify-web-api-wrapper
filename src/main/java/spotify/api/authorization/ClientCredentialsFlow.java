@@ -25,6 +25,7 @@ import java.io.IOException;
  *
  * @author Jiankai Zheng
  * @see AuthorizationCodeFlow
+ * @since 1.0.0
  */
 public class ClientCredentialsFlow {
     private final Logger logger = LoggerFactory.getLogger(ClientCredentialsFlow.class);

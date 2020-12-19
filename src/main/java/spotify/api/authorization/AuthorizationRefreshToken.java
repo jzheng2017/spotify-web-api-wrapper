@@ -20,7 +20,8 @@ import java.io.IOException;
  * <p>
  * For more information see: @see <a href="https://developer.spotify.com/documentation/general/guides/authorization-guide/#authorization-code-flow">Authorization Code Flow</a>
  *
- * @author Jiankai Zheng
+ * @author Jiankai Zheng (jk.zheng@hotmail.com)
+ * @since 1.0.0
  */
 public class AuthorizationRefreshToken {
     private final Logger logger = LoggerFactory.getLogger(AuthorizationRefreshToken.class);
