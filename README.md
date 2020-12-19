@@ -4,14 +4,15 @@
 Spotify API wrapper for Java
 
 ## Table of Contents
-  * [Guides](#guides)
-  * [Support](#support)
-  * [Example usages](#example-usages)
-  * [Error Handling](#error-handling)
-  * [Why use this library?](#why-use-this-library)
-  * [Installation](#installation)
-  * [License](#license)
-  * [Spotify endpoint coverage](#spotify-endpoint-coverage)
+- [Guides](#guides)
+- [Support](#support)
+- [Example usages](#example-usages)
+- [Error Handling](#error-handling)
+- [Why use this library?](#why-use-this-library)
+- [Installation](#installation)
+- [Contributing](#contributing)
+- [License](#license)
+- [Spotify endpoint coverage](#spotify-endpoint-coverage)
 
 ## Guides
 Use the following guides provided by Spotify to use this library:
@@ -166,6 +167,9 @@ Latest official release:
 ```gradle
 implementation 'nl.jiankai:spotify-web-api-wrapper:1.5.4'
 ```
+
+## Contributing
+Do you want to contribute to this library? Well, you're in the right place! We'd love your help. Please refer to our [contribution guideline](https://github.com/jzheng2017/spotify-web-api-wrapper/blob/main/CONTRIBUTING.md).
 
 ## License
 See the [LICENSE](https://github.com/jzheng2017/spotify-web-api-wrapper/blob/main/LICENSE) file for the license rights and limitations (GNU GPLv3).
