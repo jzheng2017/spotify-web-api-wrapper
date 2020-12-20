@@ -159,13 +159,13 @@ Latest official release:
 <dependency>
   <groupId>nl.jiankai</groupId>
     <artifactId>spotify-web-api-wrapper</artifactId>
-    <version>1.5.4</version>
+    <version>1.5.5</version>
 </dependency>
 ```
 ### Gradle
 Latest official release:
 ```gradle
-implementation 'nl.jiankai:spotify-web-api-wrapper:1.5.4'
+implementation 'nl.jiankai:spotify-web-api-wrapper:1.5.5'
 ```
 
 ## Contributing
