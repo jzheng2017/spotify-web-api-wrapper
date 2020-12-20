@@ -358,9 +358,9 @@ public class SpotifyApi {
         playlistApi.uploadCoverImageToPlaylist(playlistId, base64EncodedJpegImage);
     }
 
-    public Snapshot deleteItemsFromPlaylist(String playlistId, String snapshotId, DeleteItemsPlaylistRequestBody items) {
+    public Snapshot deleteItemsFromPlaylist(String playlistId, DeleteItemsPlaylistRequestBody items) {
         logger.info("Requesting to remove items from a playlist");
-        return playlistApi.deleteItemsFromPlaylist(playlistId, snapshotId, items);
+        return playlistApi.deleteItemsFromPlaylist(playlistId, items);
     }
 
     public Paging<ArtistFull> getTopArtists(Map<String, String> options) {

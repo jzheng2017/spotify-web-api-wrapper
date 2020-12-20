@@ -36,5 +36,5 @@ public interface PlaylistApi {
 
     void uploadCoverImageToPlaylist(String playlistId, String base64EncodedJpegImage);
 
-    Snapshot deleteItemsFromPlaylist(String playlistId, String snapshotId, DeleteItemsPlaylistRequestBody items);
+    Snapshot deleteItemsFromPlaylist(String playlistId, DeleteItemsPlaylistRequestBody items);
 }

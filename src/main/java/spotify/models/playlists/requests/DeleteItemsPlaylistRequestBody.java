@@ -5,10 +5,12 @@ import spotify.models.playlists.PlaylistItem;
 import java.util.List;
 
 public class DeleteItemsPlaylistRequestBody {
-    List<PlaylistItem> tracks;
+    private List<PlaylistItem> tracks;
+    private String snapshotId;
 
-    public DeleteItemsPlaylistRequestBody(List<PlaylistItem> tracks) {
+    public DeleteItemsPlaylistRequestBody(List<PlaylistItem> tracks, String snapshotId) {
         this.tracks = tracks;
+        this.snapshotId = snapshotId;
     }
 
     public List<PlaylistItem> getTracks() {
@@ -17,5 +19,13 @@ public class DeleteItemsPlaylistRequestBody {
 
     public void setTracks(List<PlaylistItem> tracks) {
         this.tracks = tracks;
+    }
+
+    public String getSnapshotId() {
+        return snapshotId;
+    }
+
+    public void setSnapshotId(String snapshotId) {
+        this.snapshotId = snapshotId;
     }
 }

@@ -323,16 +323,16 @@ public class PlaylistApiRetrofit implements PlaylistApi {
     }
 
     @Override
-    public Snapshot deleteItemsFromPlaylist(String playlistId, String snapshotId, DeleteItemsPlaylistRequestBody items) {
+    public Snapshot deleteItemsFromPlaylist(String playlistId, DeleteItemsPlaylistRequestBody items) {
         if (playlistId == null || playlistId.isEmpty()) {
             final String errorMessage = "Playlist id is empty!";
             logger.error(errorMessage);
             throw new IllegalArgumentException(errorMessage);
         }
 
-        if (snapshotId != null && snapshotId.isEmpty()) {
+        if (items.getSnapshotId() != null && items.getSnapshotId().isEmpty()) {
             logger.warn("An empty snapshot id was passed in. The snapshot id has now been set to NULL.");
-            snapshotId = null;
+            items.setSnapshotId(null);
         }
 
         logger.trace("Constructing HTTP call to remove items from a playlist.");
@@ -340,7 +340,7 @@ public class PlaylistApiRetrofit implements PlaylistApi {
 
         try {
             logger.info("Executing HTTP call to remove items from a playlist.");
-            logger.debug("Removing items from playlist {} with snapshot id {}", playlistId, snapshotId);
+            logger.debug("Removing items from playlist {} with snapshot id {}", playlistId, items.getSnapshotId());
             logger.debug("Removing the following items {}", items);
             LoggingUtil.logHttpCall(logger, httpCall);
             Response<Snapshot> response = httpCall.execute();
