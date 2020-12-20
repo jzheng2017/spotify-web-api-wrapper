@@ -58,7 +58,6 @@ public class PlayerApiRetrofitTest extends AbstractApiRetrofitTest {
         sut = new PlayerApiRetrofit(fakeAccessToken, mockedPlayerService);
 
         transferPlaybackRequestBody = new TransferPlaybackRequestBody();
-        ;
 
         when(mockedPlayerService.getAvailableDevices(fakeAccessTokenWithBearer)).thenReturn(mockedDeviceCollectionCall);
         when(mockedPlayerService.getCurrentPlayingContext(fakeAccessTokenWithBearer, fakeOptionalParameters)).thenReturn(mockedPlayingContextCall);
