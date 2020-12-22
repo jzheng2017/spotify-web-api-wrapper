@@ -23,7 +23,7 @@ import java.io.IOException;
  * <p>
  * Authorization Code Flow is recommended to access private information, such as user information.
  *
- * @author Jiankai Zheng
+ * @author Jiankai Zheng (jk.zheng@hotmail.com)
  * @see AuthorizationCodeFlow
  * @since 1.0.0
  */

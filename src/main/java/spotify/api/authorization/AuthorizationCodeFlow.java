@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
  * <p>
  * For more information see: <a href="https://developer.spotify.com/documentation/general/guides/authorization-guide/#authorization-code-flow">Authorization Code Flow</a>
  *
- * @author Jiankai Zheng
+ * @author Jiankai Zheng (jk.zheng@hotmail.com)
  * @since 1.0.0
  */
 public class AuthorizationCodeFlow {
