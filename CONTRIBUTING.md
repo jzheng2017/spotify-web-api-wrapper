@@ -39,7 +39,7 @@ PRs to our libraries are always welcome and can be a quick way to get your fix o
 - Only fix/add the functionality in question **OR** address wide-spread whitespace/style issues, not both.
 - Add unit or integration tests for fixed or changed functionality (if a test suite already exists).
 - Address a single concern in the least number of changed lines as possible.
-- Be accompanied by a complete Pull Request template (loaded automatically when a PR is created).
+- Be accompanied by a complete [Pull Request template](https://github.com/jzheng2017/spotify-web-api-wrapper/blob/main/.github/PULL_REQUEST_TEMPLATE/pull_request_template.md) (loaded automatically when a PR is created).
 - Update the README.md with details of changes to the interface.
 - Increase the version numbers in any examples files and the README.md to the new version that this Pull Request would represent. The versioning scheme we use is [SemVer](https://semver.org/).
 
