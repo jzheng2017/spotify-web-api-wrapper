@@ -29,6 +29,16 @@ public interface ArtistApi {
      */
     ArtistFull getArtist(String artistId);
 
+    /**
+     * Get information about the albums of a single artist.
+     * <p>
+     * More information about how to use this see: <a href="https://developer.spotify.com/documentation/web-api/reference/artists/get-artists-albums/">reference documentation</a>
+     *
+     * @param artistId         the Spotify ID of the artist (ex: 3Nrfpe0tUJi4K4DXYWgMUX)
+     * @param listOfAlbumTypes a list of the types of albums to return (ex: single, compilation, etc)
+     * @param options          the optional parameters
+     * @return A paging object containing the albums of the requested artist in simplified form
+     */
     Paging<AlbumSimplified> getArtistAlbums(String artistId, List<AlbumType> listOfAlbumTypes, Map<String, String> options);
 
     /**
