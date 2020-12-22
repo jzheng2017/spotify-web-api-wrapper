@@ -13,9 +13,9 @@ import retrofit2.Response;
 import spotify.api.enums.AlbumType;
 import spotify.exceptions.HttpRequestFailedException;
 import spotify.exceptions.SpotifyActionFailedException;
+import spotify.models.albums.AlbumSimplified;
 import spotify.models.artists.ArtistFull;
 import spotify.models.artists.ArtistFullCollection;
-import spotify.models.artists.ArtistSimplified;
 import spotify.models.paging.Paging;
 import spotify.models.tracks.TrackFullCollection;
 import spotify.retrofit.services.ArtistService;
@@ -50,7 +50,7 @@ public class ArtistApiRetrofitTest extends AbstractApiRetrofitTest {
     @Mock
     private Call<ArtistFullCollection> mockedArtistFullCollectionCall;
     @Mock
-    private Call<Paging<ArtistSimplified>> mockedPagingArtistSimplifiedCall;
+    private Call<Paging<AlbumSimplified>> mockedPagingAlbumSimplifiedCall;
     @Mock
     private Call<TrackFullCollection> mockedTrackFullCollectionCall;
 
@@ -61,14 +61,14 @@ public class ArtistApiRetrofitTest extends AbstractApiRetrofitTest {
         sut = new ArtistApiRetrofit(fakeAccessToken, mockedArtistService);
 
         when(mockedArtistService.getArtist(fakeAccessTokenWithBearer, fakeArtistId)).thenReturn(mockedArtistFullCall);
-        when(mockedArtistService.getArtistAlbums(fakeAccessTokenWithBearer, fakeArtistId, fakeOptionalParameters)).thenReturn(mockedPagingArtistSimplifiedCall);
+        when(mockedArtistService.getArtistAlbums(fakeAccessTokenWithBearer, fakeArtistId, fakeOptionalParameters)).thenReturn(mockedPagingAlbumSimplifiedCall);
         when(mockedArtistService.getArtistTopTracks(fakeAccessTokenWithBearer, fakeArtistId, fakeOptionalParameters)).thenReturn(mockedTrackFullCollectionCall);
         when(mockedArtistService.getRelatedArtists(fakeAccessTokenWithBearer, fakeArtistId)).thenReturn(mockedArtistFullCollectionCall);
         when(mockedArtistService.getArtists(fakeAccessTokenWithBearer, fakeArtistIds)).thenReturn(mockedArtistFullCollectionCall);
 
         when(mockedArtistFullCall.request()).thenReturn(new Request.Builder().url(fakeUrl).build());
         when(mockedArtistFullCollectionCall.request()).thenReturn(new Request.Builder().url(fakeUrl).build());
-        when(mockedPagingArtistSimplifiedCall.request()).thenReturn(new Request.Builder().url(fakeUrl).build());
+        when(mockedPagingAlbumSimplifiedCall.request()).thenReturn(new Request.Builder().url(fakeUrl).build());
         when(mockedTrackFullCollectionCall.request()).thenReturn(new Request.Builder().url(fakeUrl).build());
     }
 
@@ -118,8 +118,8 @@ public class ArtistApiRetrofitTest extends AbstractApiRetrofitTest {
 
     @Test
     void getArtistAlbumsUsesCorrectValuesToCreateHttpCall() throws IOException {
-        when(mockedArtistService.getArtistAlbums(fakeAccessTokenWithBearer, fakeArtistId, fakeOptionalParameterWithAlbumTypes)).thenReturn(mockedPagingArtistSimplifiedCall);
-        when(mockedPagingArtistSimplifiedCall.execute()).thenReturn(Response.success(new Paging<>()));
+        when(mockedArtistService.getArtistAlbums(fakeAccessTokenWithBearer, fakeArtistId, fakeOptionalParameterWithAlbumTypes)).thenReturn(mockedPagingAlbumSimplifiedCall);
+        when(mockedPagingAlbumSimplifiedCall.execute()).thenReturn(Response.success(new Paging<>()));
 
         sut.getArtistAlbums(fakeArtistId, listOfFakeAlbumType, null);
 
@@ -128,15 +128,15 @@ public class ArtistApiRetrofitTest extends AbstractApiRetrofitTest {
 
     @Test
     void getArtistAlbumsExecutesHttpCall() throws IOException {
-        when(mockedPagingArtistSimplifiedCall.execute()).thenReturn(Response.success(new Paging<>()));
+        when(mockedPagingAlbumSimplifiedCall.execute()).thenReturn(Response.success(new Paging<>()));
 
         sut.getArtistAlbums(fakeArtistId, listOfFakeAlbumType, fakeOptionalParameters);
-        verify(mockedPagingArtistSimplifiedCall).execute();
+        verify(mockedPagingAlbumSimplifiedCall).execute();
     }
 
     @Test
     void getArtistAlbumsThrowsSpotifyActionFailedExceptionWhenError() throws IOException {
-        when(mockedPagingArtistSimplifiedCall.execute())
+        when(mockedPagingAlbumSimplifiedCall.execute())
                 .thenReturn(
                         Response.error(
                                 400,
@@ -149,14 +149,14 @@ public class ArtistApiRetrofitTest extends AbstractApiRetrofitTest {
 
     @Test
     void getArtistAlbumsThrowsHttpRequestFailedWhenHttpFails() throws IOException {
-        when(mockedPagingArtistSimplifiedCall.execute()).thenThrow(IOException.class);
+        when(mockedPagingAlbumSimplifiedCall.execute()).thenThrow(IOException.class);
 
         Assertions.assertThrows(HttpRequestFailedException.class, () -> sut.getArtistAlbums(fakeArtistId, listOfFakeAlbumType, fakeOptionalParameters));
     }
 
     @Test
-    void getArtistAlbumsReturnsPagingArtistSimplifiedWhenSuccessful() throws IOException {
-        when(mockedPagingArtistSimplifiedCall.execute()).thenReturn(Response.success(new Paging<>()));
+    void getArtistAlbumsReturnsPagingAlbumSimplifiedWhenSuccessful() throws IOException {
+        when(mockedPagingAlbumSimplifiedCall.execute()).thenReturn(Response.success(new Paging<>()));
 
         Assertions.assertNotNull(sut.getArtistAlbums(fakeArtistId, listOfFakeAlbumType, fakeOptionalParameters));
     }

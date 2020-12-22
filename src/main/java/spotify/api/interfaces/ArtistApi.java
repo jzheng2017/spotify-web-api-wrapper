@@ -1,9 +1,9 @@
 package spotify.api.interfaces;
 
 import spotify.api.enums.AlbumType;
+import spotify.models.albums.AlbumSimplified;
 import spotify.models.artists.ArtistFull;
 import spotify.models.artists.ArtistFullCollection;
-import spotify.models.artists.ArtistSimplified;
 import spotify.models.paging.Paging;
 import spotify.models.tracks.TrackFullCollection;
 
@@ -29,17 +29,7 @@ public interface ArtistApi {
      */
     ArtistFull getArtist(String artistId);
 
-    /**
-     * Get information about the albums of a single artist.
-     * <p>
-     * More information about how to use this see: <a href="https://developer.spotify.com/documentation/web-api/reference/artists/get-artists-albums/">reference documentation</a>
-     *
-     * @param artistId         the Spotify ID of the artist (ex: 3Nrfpe0tUJi4K4DXYWgMUX)
-     * @param listOfAlbumTypes a list of the types of albums to return (ex: single, compilation, etc)
-     * @param options          the optional parameters
-     * @return A paging object containing the albums of the requested artist in simplified form
-     */
-    Paging<ArtistSimplified> getArtistAlbums(String artistId, List<AlbumType> listOfAlbumTypes, Map<String, String> options);
+    Paging<AlbumSimplified> getArtistAlbums(String artistId, List<AlbumType> listOfAlbumTypes, Map<String, String> options);
 
     /**
      * Get information about the top tracks of an artist.
