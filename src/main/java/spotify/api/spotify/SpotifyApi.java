@@ -8,13 +8,9 @@ import spotify.api.enums.QueryType;
 import spotify.api.enums.RepeatType;
 import spotify.api.impl.*;
 import spotify.api.interfaces.*;
-import spotify.models.albums.AlbumFull;
-import spotify.models.albums.AlbumFullCollection;
-import spotify.models.albums.AlbumSimplifiedPaging;
-import spotify.models.albums.SavedAlbumFull;
+import spotify.models.albums.*;
 import spotify.models.artists.ArtistFull;
 import spotify.models.artists.ArtistFullCollection;
-import spotify.models.artists.ArtistSimplified;
 import spotify.models.audio.AudioAnalysis;
 import spotify.models.audio.AudioFeatures;
 import spotify.models.audio.AudioFeaturesCollection;
@@ -157,7 +153,7 @@ public class SpotifyApi {
         return artistApi.getArtist(artistId);
     }
 
-    public Paging<ArtistSimplified> getArtistAlbums(String artistId, List<AlbumType> listOfAlbumTypes, Map<String, String> options) {
+    public Paging<AlbumSimplified> getArtistAlbums(String artistId, List<AlbumType> listOfAlbumTypes, Map<String, String> options) {
         logger.info("Requesting albums of an artist");
         return artistApi.getArtistAlbums(artistId, listOfAlbumTypes, options);
     }

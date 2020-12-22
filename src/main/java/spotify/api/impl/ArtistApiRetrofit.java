@@ -9,9 +9,9 @@ import spotify.api.enums.HttpStatusCode;
 import spotify.api.interfaces.ArtistApi;
 import spotify.exceptions.HttpRequestFailedException;
 import spotify.factories.RetrofitHttpServiceFactory;
+import spotify.models.albums.AlbumSimplified;
 import spotify.models.artists.ArtistFull;
 import spotify.models.artists.ArtistFullCollection;
-import spotify.models.artists.ArtistSimplified;
 import spotify.models.paging.Paging;
 import spotify.models.tracks.TrackFullCollection;
 import spotify.retrofit.services.ArtistService;
@@ -59,7 +59,7 @@ public class ArtistApiRetrofit implements ArtistApi {
     }
 
     @Override
-    public Paging<ArtistSimplified> getArtistAlbums(String artistId, List<AlbumType> listOfAlbumTypes, Map<String, String> options) {
+    public Paging<AlbumSimplified> getArtistAlbums(String artistId, List<AlbumType> listOfAlbumTypes, Map<String, String> options) {
         options = ValidatorUtil.optionsValueCheck(options);
 
         String albumTypesWithCommaDelimiter = listOfAlbumTypes.stream()
@@ -71,13 +71,13 @@ public class ArtistApiRetrofit implements ArtistApi {
         }
 
         logger.trace("Constructing HTTP call to fetch albums of an artist.");
-        Call<Paging<ArtistSimplified>> httpCall = artistService.getArtistAlbums("Bearer " + this.accessToken, artistId, options);
+        Call<Paging<AlbumSimplified>> httpCall = artistService.getArtistAlbums("Bearer " + this.accessToken, artistId, options);
 
         try {
             logger.info("Executing HTTP call to fetch albums of artist.");
             logger.debug("Fetching artist {} albums with following values: {}.", artistId, options);
             LoggingUtil.logHttpCall(logger, httpCall);
-            Response<Paging<ArtistSimplified>> response = httpCall.execute();
+            Response<Paging<AlbumSimplified>> response = httpCall.execute();
 
             ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response, HttpStatusCode.OK);
 

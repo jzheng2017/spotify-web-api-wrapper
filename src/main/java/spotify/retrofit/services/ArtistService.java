@@ -2,9 +2,9 @@ package spotify.retrofit.services;
 
 import retrofit2.Call;
 import retrofit2.http.*;
+import spotify.models.albums.AlbumSimplified;
 import spotify.models.artists.ArtistFull;
 import spotify.models.artists.ArtistFullCollection;
-import spotify.models.artists.ArtistSimplified;
 import spotify.models.paging.Paging;
 import spotify.models.tracks.TrackFullCollection;
 
@@ -15,9 +15,9 @@ public interface ArtistService {
     Call<ArtistFull> getArtist(@Header("Authorization") String accessToken, @Path("id") String artistId);
 
     @GET("artists/{id}/albums")
-    Call<Paging<ArtistSimplified>> getArtistAlbums(@Header("Authorization") String accessToken,
-                                                   @Path("id") String artistId,
-                                                   @QueryMap Map<String, String> options);
+    Call<Paging<AlbumSimplified>> getArtistAlbums(@Header("Authorization") String accessToken,
+                                                  @Path("id") String artistId,
+                                                  @QueryMap Map<String, String> options);
 
     @GET("artists/{id}/top-tracks")
     Call<TrackFullCollection> getArtistTopTracks(@Header("Authorization") String accessToken, @Path("id") String artistId, @QueryMap Map<String, String> options);
