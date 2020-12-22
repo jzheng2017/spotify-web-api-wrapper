@@ -14,7 +14,7 @@ import spotify.utils.HttpUtil;
  * This class takes care of the second step in the Authorization Code Flow.
  * Executing this step should result in an access and refresh token.
  * <p>
- * For more information see: @see <a href="https://developer.spotify.com/documentation/general/guides/authorization-guide/#authorization-code-flow">Authorization Code Flow</a>
+ * For more information see: <a href="https://developer.spotify.com/documentation/general/guides/authorization-guide/#authorization-code-flow">Authorization Code Flow</a>
  *
  * @author Jiankai Zheng (jk.zheng@hotmail.com)
  * @since 1.0.0

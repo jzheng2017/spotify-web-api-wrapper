@@ -18,7 +18,7 @@ import java.io.IOException;
 /**
  * This class is used to refresh the access token.
  * <p>
- * For more information see: @see <a href="https://developer.spotify.com/documentation/general/guides/authorization-guide/#authorization-code-flow">Authorization Code Flow</a>
+ * For more information see: <a href="https://developer.spotify.com/documentation/general/guides/authorization-guide/#authorization-code-flow">Authorization Code Flow</a>
  *
  * @author Jiankai Zheng (jk.zheng@hotmail.com)
  * @since 1.0.0
