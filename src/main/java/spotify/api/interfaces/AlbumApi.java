@@ -25,6 +25,7 @@ public interface AlbumApi {
      * @param albumId the spotify ID of the album (ex: 3rQmTAyMDDZ73rMyhLkn98)
      * @param options the optional parameters
      * @return An album object containing the complete information of the album
+     * @see AlbumFull
      */
     AlbumFull getAlbum(String albumId, Map<String, String> options);
 
@@ -36,6 +37,7 @@ public interface AlbumApi {
      * @param listOfAlbumIds a list of the album ids
      * @param options        the optional parameters
      * @return A collection object containing a list of the albums that was requested
+     * @see AlbumFull
      */
     AlbumFullCollection getAlbums(List<String> listOfAlbumIds, Map<String, String> options);
 
@@ -47,6 +49,7 @@ public interface AlbumApi {
      * @param albumId the spotify ID of the album (ex: 3rQmTAyMDDZ73rMyhLkn98)
      * @param options the optional parameters
      * @return A paging object containing the tracks of the requested album in simplified form
+     * @see TrackSimplified
      */
     Paging<TrackSimplified> getAlbumTracks(String albumId, Map<String, String> options);
 }

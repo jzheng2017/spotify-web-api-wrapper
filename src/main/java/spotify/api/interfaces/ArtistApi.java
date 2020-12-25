@@ -26,6 +26,7 @@ public interface ArtistApi {
      *
      * @param artistId the Spotify ID of the artist (ex: 3Nrfpe0tUJi4K4DXYWgMUX)
      * @return An object containing the complete information of the requested artist
+     * @see ArtistFull
      */
     ArtistFull getArtist(String artistId);
 
@@ -38,6 +39,7 @@ public interface ArtistApi {
      * @param listOfAlbumTypes a list of the types of albums to return (ex: single, compilation, etc)
      * @param options          the optional parameters
      * @return A paging object containing the albums of the requested artist in simplified form
+     * @see AlbumSimplified
      */
     Paging<AlbumSimplified> getArtistAlbums(String artistId, List<AlbumType> listOfAlbumTypes, Map<String, String> options);
 
@@ -49,6 +51,7 @@ public interface ArtistApi {
      * @param artistId the Spotify ID of the artist (ex: 3Nrfpe0tUJi4K4DXYWgMUX)
      * @param options  the optional parameters
      * @return A collection object containing a list of tracks in complete form
+     * @see spotify.models.tracks.TrackFull
      */
     TrackFullCollection getArtistTopTracks(String artistId, Map<String, String> options);
 
@@ -59,6 +62,7 @@ public interface ArtistApi {
      *
      * @param artistId the Spotify ID of the artist (ex: 3Nrfpe0tUJi4K4DXYWgMUX)
      * @return A collection object containing a list of artists in complete form
+     * @see ArtistFull
      */
     ArtistFullCollection getRelatedArtists(String artistId);
 
@@ -69,6 +73,7 @@ public interface ArtistApi {
      *
      * @param listOfArtistIds a list of artist ids
      * @return A collection object containing a list of artists in complete form
+     * @see ArtistFull
      */
     ArtistFullCollection getArtists(List<String> listOfArtistIds);
 }
