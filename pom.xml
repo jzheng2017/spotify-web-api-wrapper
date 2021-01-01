@@ -6,7 +6,7 @@
 
     <groupId>nl.jiankai</groupId>
     <artifactId>spotify-web-api-wrapper</artifactId>
-    <version>1.5.6</version>
+    <version>1.5.7</version>
 
     <name>Spotify Web API Java Wrapper</name>
     <description>A Java Wrapper for Spotify's Web API</description>
@@ -182,8 +182,8 @@
     </dependencies>
 
     <properties>
-        <maven.compiler.target>15</maven.compiler.target>
-        <maven.compiler.source>15</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+        <maven.compiler.source>11</maven.compiler.source>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 </project>
