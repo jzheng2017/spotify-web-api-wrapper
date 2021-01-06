@@ -1,10 +1,7 @@
 package spotify.api.enums;
 
 /**
- * This class constructs the URL needed for the first step in the Authorization Code Flow.
- * Executing this step should result in a code that can be used to retrieve an access and refresh token.
- * <p>
- * For more information see: <a href="https://developer.spotify.com/documentation/general/guides/authorization-guide/#authorization-code-flow">Authorization Code Flow</a>
+ * This class contains and sets the suitable values for the album type.
  *
  * @author Jiankai Zheng (jk.zheng@hotmail.com)
  * @since 1.0.0
