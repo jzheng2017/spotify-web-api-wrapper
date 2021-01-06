@@ -10,14 +10,29 @@ import spotify.api.enums.HttpStatusCode;
 import spotify.exceptions.SpotifyActionFailedException;
 import spotify.models.errors.SpotifyError;
 
+/**
+ * 
+ */
 public class ResponseChecker {
     private final static Logger logger = LoggerFactory.getLogger(ResponseChecker.class);
 
+    /**
+     * 
+     * @param <T>
+     * @param response
+     * @param expectedStatusCode
+     */
     public static <T> void throwIfRequestHasNotBeenFulfilledCorrectly(final Response<T> response, final HttpStatusCode expectedStatusCode) {
         checkHttpStatusCode(response, expectedStatusCode.toInt());
         checkErrorBody(response.errorBody());
     }
 
+    /**
+     * 
+     * @param <T>
+     * @param response
+     * @param expectedStatusCode
+     */
     private static <T> void checkHttpStatusCode(Response<T> response, int expectedStatusCode) {
         final int actualHttpStatusCode = response.code();
 
@@ -30,6 +45,10 @@ public class ResponseChecker {
         }
     }
 
+    /**
+     * 
+     * @param errorBody
+     */
     private static void checkErrorBody(final ResponseBody errorBody) {
         if (errorBody == null) {
             return;

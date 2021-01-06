@@ -23,6 +23,13 @@ public enum AuthorizationScope {
 
     private final String value;
 
+    /**
+     * Set the authorization scope.
+     * <p>
+     * 
+     * 
+     * @param value The scope of authorization.
+     */
     AuthorizationScope(String value) {
         this.value = value;
     }

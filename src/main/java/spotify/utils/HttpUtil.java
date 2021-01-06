@@ -11,6 +11,13 @@ import java.io.IOException;
 
 public class HttpUtil {
 
+    /**
+     * Fetch an access and refresh token.
+     * 
+     * @param httpCall
+     * @param logger
+     * @return
+     */
     public static AuthorizationCodeFlowTokenResponse executeAuthorizationHttpCall(Call<AuthorizationCodeFlowTokenResponse> httpCall, Logger logger) {
         try {
             logger.info("Executing HTTP call to fetch an access and refresh token.");
