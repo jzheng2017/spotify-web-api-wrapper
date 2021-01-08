@@ -1,11 +1,12 @@
 package spotify.api.enums;
 
 /**
- * This class contains and sets the suitable values for the authorization scope. Scopes provide Spotify 
- * users using third-party apps the confidence that only the information they choose to share will be 
- * shared, and nothing more.
+ * This class contains all suitable authorization scopes that the user can authorize for.
+ * Scopes provide Spotify users using third-party apps the confidence that only the information
+ * they choose to share will be shared, and nothing more.
  * <p>
- * For further information see: <a href="https://developer.spotify.com/documentation/general/guides/scopes/">Authorization Scopes</a>
+ * For further information see: <a href="https://developer.spotify.com/documentation/general/guides/scopes/">
+ * Authorization Scopes</a>
  *
  * @author Jiankai Zheng (jk.zheng@hotmail.com)
  * @since 1.0.0
@@ -35,9 +36,9 @@ public enum AuthorizationScope {
     private final String value;
 
     /**
-     * Set the authorization scope.
+     * Constructs an enum value accepting a string argument whose value is the string representation of itself.
      * 
-     * @param value The scope of authorization.
+     * @param value The authorization type to be constructed.
      */
     AuthorizationScope(String value) {
         this.value = value;
