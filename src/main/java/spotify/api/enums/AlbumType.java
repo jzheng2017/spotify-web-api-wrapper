@@ -1,7 +1,7 @@
 package spotify.api.enums;
 
 /**
- * This class contains and sets the suitable values for the album type.
+ * This class contains all suitable album types.
  * <p>
  * For more information, see: <a href="https://developer.spotify.com/documentation/web-api/reference/albums/">
  * Albums</a>.
@@ -18,9 +18,9 @@ public enum AlbumType {
     private final String value;
 
     /**
-     * Set the type of the album: album, single, appears_on, or compilation.
+     * Constructs an enum value accepting a string argument whose value is the string representation of itself.
      * 
-     * @param value The type to set the album to.
+     * @param value The album type to be constructed.
      */
     AlbumType(String value) {
         this.value = value;
