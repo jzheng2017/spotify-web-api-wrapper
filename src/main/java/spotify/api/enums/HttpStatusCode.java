@@ -1,7 +1,7 @@
 package spotify.api.enums;
 
 /**
- * This class contains and sets the HTTP Status codes when using POST and GET HTTP requests.
+ * This class contains all suitable HTTP Status codes when using POST and GET HTTP requests.
  * <p>
  * For further information see: <a href="https://developer.spotify.com/documentation/general/guides/authorization-guide/">Authorization Guide</a>
  * and <a href="https://developer.spotify.com/documentation/web-api/">Web API</a>.
@@ -19,9 +19,9 @@ public enum HttpStatusCode {
     private final int httpStatusCode;
 
      /**
-     * Set the HTTP status code.
+     * Constructs an enum value accepting a string argument whose value is the string representation of itself.
      * 
-     * @param httpStatusCode The http status code.
+     * @param httpStatusCode The http status code to be constructed.
      */
     HttpStatusCode(final int httpStatusCode) {
         this.httpStatusCode = httpStatusCode;
