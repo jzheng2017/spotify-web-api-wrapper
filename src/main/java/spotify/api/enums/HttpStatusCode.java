@@ -1,10 +1,7 @@
 package spotify.api.enums;
 
 /**
- * This class contains all suitable HTTP Status codes when using POST and GET HTTP requests.
- * <p>
- * For further information see: <a href="https://developer.spotify.com/documentation/general/guides/authorization-guide/">Authorization Guide</a>
- * and <a href="https://developer.spotify.com/documentation/web-api/">Web API</a>.
+ * This class contains all suitable HTTP Status codes used within the API.
  *
  * @author Jiankai Zheng (jk.zheng@hotmail.com)
  * @since 1.0.0

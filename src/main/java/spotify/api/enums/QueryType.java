@@ -1,7 +1,7 @@
 package spotify.api.enums;
 
 /**
- * This class contains suitable query types used when searching Spotify.
+ * This class contains suitable query types used for the search query API endpoint.
  * <p>
  * For further information see: <a href="https://developer.spotify.com/documentation/web-api/reference/search/search/">
  * Search</a>.

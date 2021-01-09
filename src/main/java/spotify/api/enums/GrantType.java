@@ -1,7 +1,7 @@
 package spotify.api.enums;
 
 /**
- * This class contains all suitable grant types. This is the type of user authorization being requested.
+ * This class contains all suitable grant types used for authorization.
  * <p>
  * For further information see: <a href="https://developer.spotify.com/documentation/general/guides/authorization-guide/">
  * Authorization Guide</a>
