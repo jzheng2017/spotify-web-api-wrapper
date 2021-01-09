@@ -1,8 +1,7 @@
 package spotify.api.enums;
 
 /**
- * This class contains and sets the repeat type. This is what determines whether a song or context will be
- * repeated.
+ * This class contains all suitable repeat types.
  * <p>
  * For further information see: <a href="https://developer.spotify.com/documentation/web-api/reference/player/set-repeat-mode-on-users-playback/">
  * Set Repeat Mode On User's Playback</a>.
