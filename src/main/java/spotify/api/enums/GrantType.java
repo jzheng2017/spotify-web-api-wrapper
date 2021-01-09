@@ -1,9 +1,10 @@
 package spotify.api.enums;
 
 /**
- * This class contains and sets the grant type. This is the type of user authorization being requested.
+ * This class contains all suitable grant types. This is the type of user authorization being requested.
  * <p>
- * For further information see: <a href="https://developer.spotify.com/documentation/general/guides/authorization-guide/">Authorization Guide</a>
+ * For further information see: <a href="https://developer.spotify.com/documentation/general/guides/authorization-guide/">
+ * Authorization Guide</a>
  *
  * @author Jiankai Zheng (jk.zheng@hotmail.com)
  * @since 1.0.0
@@ -17,9 +18,9 @@ public enum GrantType {
     private final String value;
 
      /**
-     * Set the grant type.
+     * Constructs an enum value accepting a string argument whose value is the string representation of itself.
      * 
-     * @param value The type of grant that is being requested.
+     * @param value The grant type to be constructed.
      */
     GrantType(String value) {
         this.value = value;
