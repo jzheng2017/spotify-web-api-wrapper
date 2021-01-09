@@ -9,14 +9,23 @@ import spotify.models.authorization.AuthorizationCodeFlowTokenResponse;
 
 import java.io.IOException;
 
+/**
+ * This class contains utility functions for use in the Authorization Code Flow.
+ * <p>
+ * For more information see: <a href="https://developer.spotify.com/documentation/general/guides/authorization-guide/#authorization-code-flow">Authorization Code Flow</a>
+ *
+ * @author Jiankai Zheng (jk.zheng@hotmail.com)
+ * @since 1.0.0
+ */
+
 public class HttpUtil {
 
     /**
-     * Fetch an access and refresh token.
+     * Executes an HTTP call to fetch an access and refresh token. If the response returns null
      * 
      * @param httpCall
-     * @param logger
-     * @return
+     * @param logger    the logger object to log the appropriate responses to
+     * @return  an object containing values like the access and refresh token
      */
     public static AuthorizationCodeFlowTokenResponse executeAuthorizationHttpCall(Call<AuthorizationCodeFlowTokenResponse> httpCall, Logger logger) {
         try {
