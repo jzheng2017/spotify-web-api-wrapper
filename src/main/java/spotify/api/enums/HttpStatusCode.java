@@ -4,7 +4,7 @@ package spotify.api.enums;
  * This class contains all suitable HTTP Status codes used within the API.
  *
  * @author Jiankai Zheng (jk.zheng@hotmail.com)
- * @since 1.0.0
+ * @since 1.1.0
  */
 
 public enum HttpStatusCode {
@@ -16,7 +16,8 @@ public enum HttpStatusCode {
     private final int httpStatusCode;
 
      /**
-     * Constructs an enum value accepting a string argument whose value is the string representation of itself.
+     * Constructs an enum value accepting a integer argument whose value is the integer
+     * representation of itself.
      * 
      * @param httpStatusCode The http status code to be constructed.
      */

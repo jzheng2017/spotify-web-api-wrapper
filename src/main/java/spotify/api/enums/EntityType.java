@@ -9,7 +9,7 @@ package spotify.api.enums;
  * Follow</a>.
  *
  * @author Jiankai Zheng (jk.zheng@hotmail.com)
- * @since 1.0.0
+ * @since 1.1.0
  */
 
 public enum EntityType {
