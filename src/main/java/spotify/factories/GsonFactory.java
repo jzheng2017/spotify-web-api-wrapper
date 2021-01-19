@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory;
 import spotify.models.generic.AbstractPlayableObject;
 
 /**
- *
+ * This is a helper class to make generating Gson object easier. 
  */
 class GsonFactory {
     private final static Logger logger = LoggerFactory.getLogger(GsonFactory.class);
