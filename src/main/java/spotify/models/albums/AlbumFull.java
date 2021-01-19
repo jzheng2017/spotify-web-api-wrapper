@@ -10,6 +10,30 @@ import spotify.models.tracks.TrackSimplified;
 
 import java.util.List;
 
+/**
+ * Class AlbumFull
+ * @package spotify.models.albums
+ * @author jzheng2017
+ * @version 1.0.0
+ * Provides the AlbumFull class with the following information:
+ *          list of album types
+ *          list of artists
+ *          list of available markets
+ *          list of copyrights
+ *          list of external IDs
+ *          list of genres
+ *          href link
+ *          id
+ *          list of images
+ *          album
+ *          popularity ranking
+ *          date of release
+ *          precision for date of release
+ *          tracks
+ *          type
+ *          uri
+ */
+
 public class AlbumFull {
     private String albumType;
     private List<ArtistSimplified> artists;
