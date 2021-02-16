@@ -1,5 +1,17 @@
 package spotify.api.enums;
 
+/**
+ * This class contains all suitable authorization scopes that the user can authorize for.
+ * Scopes provide Spotify users using third-party apps the confidence that only the information
+ * they choose to share will be shared, and nothing more.
+ * <p>
+ * For further information see: <a href="https://developer.spotify.com/documentation/general/guides/scopes/">
+ * Authorization Scopes</a>
+ *
+ * @author Jiankai Zheng (jk.zheng@hotmail.com)
+ * @since 1.0.0
+ */
+
 public enum AuthorizationScope {
     UGC_IMAGE_UPLOAD("ugc-image-upload"),
     USER_READ_RECENTLY_PLAYED("user-read-recently-played"),
@@ -23,6 +35,11 @@ public enum AuthorizationScope {
 
     private final String value;
 
+    /**
+     * Constructs an enum value accepting a string argument whose value is the string representation of itself.
+     * 
+     * @param value The authorization type to be constructed.
+     */
     AuthorizationScope(String value) {
         this.value = value;
     }
