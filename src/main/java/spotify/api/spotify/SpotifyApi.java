@@ -178,14 +178,32 @@ public class SpotifyApi {
         return browseApi.getCategory(categoryId, options);
     }
 
+    /**
+     * @deprecated Replaced by {@link #getCategoryPlaylistsPaging(String, Map)} in 1.5.8.
+     */
+    @Deprecated(since = "1.5.8")
     public PlaylistSimplifiedPaging getCategoryPlaylists(String categoryId, Map<String, String> options) {
         logger.info("Requesting category playlists");
         return browseApi.getCategoryPlaylists(categoryId, options);
     }
+    
+    public Paging<PlaylistSimplified> getCategoryPlaylistsPaging(String categoryId, Map<String, String> options) {
+        logger.info("Requesting category playlists");
+        return browseApi.getCategoryPlaylistsPaging(categoryId, options);
+    }
 
+    /**
+     * @deprecated Replaced by {@link #getCategoriesPaging(Map)} in 1.5.8.
+     */
+    @Deprecated(since = "1.5.8")
     public CategoryFullPaging getCategories(Map<String, String> options) {
         logger.info("Requesting categories");
         return browseApi.getCategories(options);
+    }
+    
+    public Paging<CategoryFull> getCategoriesPaging(Map<String, String> options) {
+        logger.info("Requesting categories");
+        return browseApi.getCategoriesPaging(options);
     }
 
     public FeaturedPlaylistCollection getFeaturedPlaylists(Map<String, String> options) {
@@ -193,9 +211,18 @@ public class SpotifyApi {
         return browseApi.getFeaturedPlaylists(options);
     }
 
+    /**
+     * @deprecated Replaced by {@link #getNewReleasesPaging(Map)} in 1.5.8.
+     */
+    @Deprecated(since = "1.5.8")
     public AlbumSimplifiedPaging getNewReleases(Map<String, String> options) {
         logger.info("Requesting new releases");
         return browseApi.getNewReleases(options);
+    }
+    
+    public Paging<AlbumSimplified> getNewReleasesPaging(Map<String, String> options) {
+        logger.info("Requesting new releases");
+        return browseApi.getNewReleasesPaging(options);
     }
 
     public RecommendationCollection getRecommendations(List<String> listOfSeedArtists, List<String> listOfSeedGenres, List<String> listOfSeedTracks, Map<String, String> options) {

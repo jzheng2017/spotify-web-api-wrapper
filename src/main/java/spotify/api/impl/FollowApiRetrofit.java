@@ -7,6 +7,7 @@ import retrofit2.Response;
 import spotify.api.enums.EntityType;
 import spotify.api.enums.HttpStatusCode;
 import spotify.api.interfaces.FollowApi;
+import spotify.exceptions.ExceptionMessages;
 import spotify.exceptions.HttpRequestFailedException;
 import spotify.exceptions.SpotifyActionFailedException;
 import spotify.factories.RetrofitHttpServiceFactory;
@@ -145,7 +146,7 @@ public class FollowApiRetrofit implements FollowApi {
                 return response.body().getArtists();
             }
 
-            final String errorMessage = "Empty response body has been returned. Reason is unknown";
+            final String errorMessage = ExceptionMessages.EMPTY_RESPONSE_BODY;
 
             logger.error(errorMessage);
             throw new SpotifyActionFailedException(errorMessage);

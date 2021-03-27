@@ -6,12 +6,17 @@ import retrofit2.Call;
 import retrofit2.Response;
 import spotify.api.enums.HttpStatusCode;
 import spotify.api.interfaces.BrowseApi;
+import spotify.exceptions.ExceptionMessages;
 import spotify.exceptions.HttpRequestFailedException;
+import spotify.exceptions.SpotifyActionFailedException;
 import spotify.factories.RetrofitHttpServiceFactory;
+import spotify.models.albums.AlbumSimplified;
 import spotify.models.albums.AlbumSimplifiedPaging;
 import spotify.models.categories.CategoryFull;
 import spotify.models.categories.CategoryFullPaging;
+import spotify.models.paging.Paging;
 import spotify.models.playlists.FeaturedPlaylistCollection;
+import spotify.models.playlists.PlaylistSimplified;
 import spotify.models.playlists.PlaylistSimplifiedPaging;
 import spotify.models.recommendations.RecommendationCollection;
 import spotify.retrofit.services.BrowseService;
@@ -60,8 +65,20 @@ public class BrowseApiRetrofit implements BrowseApi {
         }
     }
 
+    /**
+     * @deprecated Replaced by {@link #getCategoryPlaylistsPaging(String, Map)} in version 1.5.8.
+     */
     @Override
+    @Deprecated(since = "1.5.8")
     public PlaylistSimplifiedPaging getCategoryPlaylists(String categoryId, Map<String, String> options) {
+        Paging<PlaylistSimplified> categoryFullPaging = getCategoryPlaylistsPaging(categoryId, options);
+        PlaylistSimplifiedPaging output = new PlaylistSimplifiedPaging();
+        output.setPlaylists(categoryFullPaging);
+        return output;
+    }
+    
+    @Override
+    public Paging<PlaylistSimplified> getCategoryPlaylistsPaging(String categoryId, Map<String, String> options) {
         options = ValidatorUtil.optionsValueCheck(options);
 
         logger.trace("Constructing HTTP call to fetch category playlists.");
@@ -75,16 +92,31 @@ public class BrowseApiRetrofit implements BrowseApi {
 
             ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response, HttpStatusCode.OK);
 
+            if (response.body() == null) {
+                throw new SpotifyActionFailedException(ExceptionMessages.EMPTY_RESPONSE_BODY);
+            }
             logger.info("Category playlists have been successfully fetched.");
-            return response.body();
+            return response.body().getPlaylists();
         } catch (IOException ex) {
             logger.error("HTTP request to fetch category playlists has failed.");
             throw new HttpRequestFailedException(ex.getMessage());
         }
     }
 
+    /**
+     * @deprecated Replaced by {@link #getCategoriesPaging(Map)} in version 1.5.8.
+     */
     @Override
+    @Deprecated(since = "1.5.8")
     public CategoryFullPaging getCategories(Map<String, String> options) {
+        Paging<CategoryFull> categoryFullPaging = getCategoriesPaging(options);
+        CategoryFullPaging output = new CategoryFullPaging();
+        output.setCategories(categoryFullPaging);
+        return output;
+    }
+    
+    @Override
+    public Paging<CategoryFull> getCategoriesPaging(Map<String, String> options) {
         options = ValidatorUtil.optionsValueCheck(options);
 
         logger.trace("Constructing HTTP call to fetch categories.");
@@ -98,8 +130,12 @@ public class BrowseApiRetrofit implements BrowseApi {
 
             ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response, HttpStatusCode.OK);
 
+            if (response.body() == null) {
+                throw new SpotifyActionFailedException(ExceptionMessages.EMPTY_RESPONSE_BODY);
+            }
+            
             logger.info("Categories have been successfully fetched.");
-            return response.body();
+            return response.body().getCategories();
         } catch (IOException ex) {
             logger.error("HTTP request to fetch categories has failed.");
             throw new HttpRequestFailedException(ex.getMessage());
@@ -129,8 +165,19 @@ public class BrowseApiRetrofit implements BrowseApi {
         }
     }
 
+    /**
+     * @deprecated Replaced by {@link #getNewReleasesPaging(Map)} in version 1.5.8.
+     */
     @Override
     public AlbumSimplifiedPaging getNewReleases(Map<String, String> options) {
+        Paging<AlbumSimplified> albumSimplifiedPaging = getNewReleasesPaging(options);
+        AlbumSimplifiedPaging output = new AlbumSimplifiedPaging();
+        output.setAlbums(albumSimplifiedPaging);
+        return output;
+    }
+    
+    @Override
+    public Paging<AlbumSimplified> getNewReleasesPaging(Map<String, String> options) {
         options = ValidatorUtil.optionsValueCheck(options);
 
         logger.trace("Constructing HTTP call to fetch new releases.");
@@ -144,8 +191,12 @@ public class BrowseApiRetrofit implements BrowseApi {
 
             ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response, HttpStatusCode.OK);
 
+            if (response.body() == null) {
+                throw new SpotifyActionFailedException(ExceptionMessages.EMPTY_RESPONSE_BODY);
+            }
+            
             logger.info("New releases have been successfully fetched.");
-            return response.body();
+            return response.body().getAlbums();
         } catch (IOException ex) {
             logger.error("HTTP request to fetch new releases has failed.");
             throw new HttpRequestFailedException(ex.getMessage());
