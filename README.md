@@ -150,7 +150,7 @@ This exception will be thrown when the HTTP request has been successfully handle
 This exception will be thrown when authorization has failed. This may be thrown when for instance the provided credentials are not valid.
 
 ## Why use this library?
-Because this library is very simple and straightforward with a clear and simple interface. You only need to provide a few credential info and you're ready to access the endpoints. All other stuff is already taken care for you. When looking at other similar existing libraries, they have really complicated constructs to access an endpoint, where with this library it can be done with 1 line of code. 
+This library is very simple and straightforward, with a clear and simple interface. You only need to provide a few credentials, and you're ready to access the endpoints. All the other stuff is already taken care of for you. When compared to other similar existing libraries, they have extremely complicated constructs to access an endpoint, whereas this library can do it with just one line of code. 
 
 ## Installation
 ### Maven
