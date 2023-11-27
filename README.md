@@ -172,7 +172,7 @@ implementation 'nl.jiankai:spotify-web-api-wrapper:1.5.7'
 Do you want to contribute to this library? Well, you're in the right place! We'd love your help. Please refer to our [contribution guideline](https://github.com/jzheng2017/spotify-web-api-wrapper/blob/main/CONTRIBUTING.md).
 
 ## License
-See the [LICENSE](https://github.com/jzheng2017/spotify-web-api-wrapper/blob/main/LICENSE) file for the license rights and limitations (GNU GPLv3).
+See the [LICENSE](https://github.com/jzheng2017/spotify-web-api-wrapper/blob/main/LICENSE) file for the license rights and limitations (MIT).
 
 ## Spotify endpoint coverage
 This is the most recent coverage in the repository. The marked endpoints may not be available yet in the most recent official release.
