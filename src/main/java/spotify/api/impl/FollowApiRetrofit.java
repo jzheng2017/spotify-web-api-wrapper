@@ -23,6 +23,8 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
+import static spotify.exceptions.SpotifyActionFailedException.EMPTY_RESPONSE_BODY_UNKNOWN_REASON;
+
 public class FollowApiRetrofit implements FollowApi {
     private final Logger logger = LoggerFactory.getLogger(FollowApiRetrofit.class);
     private final String accessToken;
@@ -145,10 +147,8 @@ public class FollowApiRetrofit implements FollowApi {
                 return response.body().getArtists();
             }
 
-            final String errorMessage = "Empty response body has been returned. Reason is unknown";
-
-            logger.error(errorMessage);
-            throw new SpotifyActionFailedException(errorMessage);
+            logger.error(EMPTY_RESPONSE_BODY_UNKNOWN_REASON);
+            throw new SpotifyActionFailedException(EMPTY_RESPONSE_BODY_UNKNOWN_REASON);
         } catch (IOException ex) {
             logger.error("HTTP request to fetch followed artists has failed.");
             throw new HttpRequestFailedException(ex.getMessage());

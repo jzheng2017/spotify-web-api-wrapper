@@ -12,11 +12,23 @@ import java.util.Map;
 public interface TrackApi {
     TrackFull getTrack(String trackId, Map<String, String> options);
 
+    /**
+     * This method is deprecated because it returns an unnecessary wrapper object. Use {@link #getTracksUnwrapped} instead;
+     */
+    @Deprecated(since = "1.5.8")
     TrackFullCollection getTracks(List<String> listOfTrackIds, Map<String, String> options);
+
+    List<TrackFull> getTracksUnwrapped(List<String> listOfTrackIds, Map<String, String> options);
 
     AudioFeatures getTrackAudioFeatures(String trackId);
 
+    /**
+     * This method is deprecated because it returns an unnecessary wrapper object. Use {@link #getTracksAudioFeaturesUnwrapped} instead;
+     */
+    @Deprecated(since = "1.5.8")
     AudioFeaturesCollection getTracksAudioFeatures(List<String> listOfTrackIds);
+
+    List<AudioFeatures> getTracksAudioFeaturesUnwrapped(List<String> listOfTrackIds);
 
     AudioAnalysis getTrackAudioAnalysis(String trackId);
 }

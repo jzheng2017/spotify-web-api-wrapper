@@ -30,11 +30,23 @@ public interface PlaylistApi {
 
     void updatePlaylist(String playlistId, CreateUpdatePlaylistRequestBody requestBody);
 
+    /**
+     * This method is deprecated because it returns an unnecessary wrapper object. Use {@link #reorderPlaylistItemsUnwrapped} instead;
+     */
+    @Deprecated(since = "1.5.8")
     Snapshot reorderPlaylistItems(String playlistId, ReorderPlaylistItemsRequestBody requestBody);
+
+    String reorderPlaylistItemsUnwrapped(String playlistId, ReorderPlaylistItemsRequestBody requestBody);
 
     void replacePlaylistItems(String playlistId, List<String> listOfItemUris);
 
     void uploadCoverImageToPlaylist(String playlistId, String base64EncodedJpegImage);
 
+    /**
+     * This method is deprecated because it returns an unnecessary wrapper object. Use {@link #deleteItemsFromPlaylistUnwrapped} instead;
+     */
+    @Deprecated(since = "1.5.8")
     Snapshot deleteItemsFromPlaylist(String playlistId, DeleteItemsPlaylistRequestBody items);
+
+    String deleteItemsFromPlaylistUnwrapped(String playlistId, DeleteItemsPlaylistRequestBody items);
 }
