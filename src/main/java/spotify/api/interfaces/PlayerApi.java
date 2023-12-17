@@ -2,17 +2,21 @@ package spotify.api.interfaces;
 
 import spotify.api.enums.RepeatType;
 import spotify.models.paging.CursorBasedPaging;
-import spotify.models.players.CurrentlyPlayingObject;
-import spotify.models.players.DeviceCollection;
-import spotify.models.players.PlayHistory;
-import spotify.models.players.PlayingContext;
+import spotify.models.players.*;
 import spotify.models.players.requests.ChangePlaybackStateRequestBody;
 import spotify.models.players.requests.TransferPlaybackRequestBody;
 
+import java.util.List;
 import java.util.Map;
 
 public interface PlayerApi {
+    /**
+     * This method is deprecated because it returns an unnecessary wrapper object. Use {@link #getAvailableDevicesUnwrapped} instead;
+     */
+    @Deprecated(since = "1.5.8")
     DeviceCollection getAvailableDevices();
+
+    List<Device> getAvailableDevicesUnwrapped();
 
     PlayingContext getCurrentPlayingContext(Map<String, String> options);
 
