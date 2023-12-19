@@ -18,7 +18,6 @@ import spotify.retrofit.services.EpisodeService;
 
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 import static org.mockito.Mockito.verify;
@@ -145,67 +144,5 @@ public class EpisodeApiRetrofitTest extends AbstractApiRetrofitTest {
     @Test
     void getEpisodesThrowsIllegalArgumentExceptionWhenListExceedsMaximumAllowedSize() {
         Assertions.assertThrows(IllegalArgumentException.class, () -> sut.getEpisodes(episodeListWithExceededSize, fakeOptionalParameters));
-    }
-
-    @Test
-    void getEpisodesUnwrappedUsesCorrectValuesToCreateHttpCall() throws IOException {
-        when(mockedEpisodeFullCollectionCall.execute()).thenReturn(Response.success(new EpisodeFullCollection()));
-
-        sut.getEpisodesUnwrapped(listOfFakeEpisodeIds, null);
-
-        verify(mockedEpisodeService).getEpisodes(fakeAccessTokenWithBearer, fakeEpisodeIds, fakeOptionalParameters);
-    }
-
-    @Test
-    void getEpisodesUnwrappedExecutesHttpCall() throws IOException {
-        when(mockedEpisodeFullCollectionCall.execute()).thenReturn(Response.success(new EpisodeFullCollection()));
-
-        sut.getEpisodesUnwrapped(listOfFakeEpisodeIds, fakeOptionalParameters);
-
-        verify(mockedEpisodeFullCollectionCall).execute();
-    }
-
-    @Test
-    void getEpisodesUnwrappedThrowsSpotifyActionFailedExceptionWhenError() throws IOException {
-        when(mockedEpisodeFullCollectionCall.execute())
-                .thenReturn(
-                        Response.error(
-                                400,
-                                ResponseBody.create(MediaType.get("application/json"), getJson("error.json"))
-                        )
-                );
-
-        Assertions.assertThrows(SpotifyActionFailedException.class, () -> sut.getEpisodesUnwrapped(listOfFakeEpisodeIds, fakeOptionalParameters));
-    }
-
-    @Test
-    void getEpisodesUnwrappedThrowsHttpRequestFailedWhenHttpFails() throws IOException {
-        when(mockedEpisodeFullCollectionCall.execute()).thenThrow(IOException.class);
-
-        Assertions.assertThrows(HttpRequestFailedException.class, () -> sut.getEpisodesUnwrapped(listOfFakeEpisodeIds, fakeOptionalParameters));
-    }
-
-    @Test
-    void getEpisodesUnwrappedReturnsEpisodeFullCollectionWhenSuccessful() throws IOException {
-        EpisodeFullCollection episodeFullCollection = new EpisodeFullCollection();
-        episodeFullCollection.setEpisodes(Collections.emptyList());
-        when(mockedEpisodeFullCollectionCall.execute()).thenReturn(Response.success(episodeFullCollection));
-
-        Assertions.assertNotNull(sut.getEpisodesUnwrapped(listOfFakeEpisodeIds, fakeOptionalParameters));
-    }
-
-    @Test
-    void getEpisodesUnwrappedThrowsIllegalArgumentExceptionWhenListExceedsMaximumAllowedSize() {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> sut.getEpisodesUnwrapped(episodeListWithExceededSize, fakeOptionalParameters));
-    }
-
-    @Test
-    void getEpisodesUnwrappedThrowsSpotifyActionFailedExceptionWhenEmptyResponseBody() throws IOException {
-        when(mockedEpisodeFullCollectionCall.execute())
-                .thenReturn(
-                        Response.success(null)
-                );
-
-        Assertions.assertThrows(SpotifyActionFailedException.class, () -> sut.getEpisodesUnwrapped(listOfFakeEpisodeIds, fakeOptionalParameters));
     }
 }

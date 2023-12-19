@@ -8,13 +8,11 @@ import spotify.api.enums.AlbumType;
 import spotify.api.enums.HttpStatusCode;
 import spotify.api.interfaces.ArtistApi;
 import spotify.exceptions.HttpRequestFailedException;
-import spotify.exceptions.SpotifyActionFailedException;
 import spotify.factories.RetrofitHttpServiceFactory;
 import spotify.models.albums.AlbumSimplified;
 import spotify.models.artists.ArtistFull;
 import spotify.models.artists.ArtistFullCollection;
 import spotify.models.paging.Paging;
-import spotify.models.tracks.TrackFull;
 import spotify.models.tracks.TrackFullCollection;
 import spotify.retrofit.services.ArtistService;
 import spotify.utils.LoggingUtil;
@@ -25,8 +23,6 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-
-import static spotify.exceptions.SpotifyActionFailedException.EMPTY_RESPONSE_BODY_UNKNOWN_REASON;
 
 public class ArtistApiRetrofit implements ArtistApi {
     private final Logger logger = LoggerFactory.getLogger(ArtistApiRetrofit.class);
@@ -117,34 +113,6 @@ public class ArtistApiRetrofit implements ArtistApi {
     }
 
     @Override
-    public List<TrackFull> getArtistTopTracksUnwrapped(String artistId, Map<String, String> options) {
-        options = ValidatorUtil.optionsValueCheck(options);
-
-        logger.trace("Constructing HTTP call to fetch an artist top tracks.");
-        Call<TrackFullCollection> httpCall = artistService.getArtistTopTracks("Bearer " + this.accessToken, artistId, options);
-
-        try {
-            logger.info("Executing HTTP call to fetch an artist top tracks.");
-            logger.debug("Fetching artist {} top tracks with following values: {}.", artistId, options);
-            LoggingUtil.logHttpCall(logger, httpCall);
-            Response<TrackFullCollection> response = httpCall.execute();
-
-            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response, HttpStatusCode.OK);
-
-            if(response.body() != null) {
-                logger.info("Artist top tracks have been successfully fetched.");
-                return response.body().getTracks();
-            }
-
-            logger.error(EMPTY_RESPONSE_BODY_UNKNOWN_REASON);
-            throw new SpotifyActionFailedException(EMPTY_RESPONSE_BODY_UNKNOWN_REASON);
-        } catch (IOException e) {
-            logger.error("Fetching artist top tracks has failed.");
-            throw new HttpRequestFailedException(e.getMessage());
-        }
-    }
-
-    @Override
     public ArtistFullCollection getRelatedArtists(String artistId) {
         logger.trace("Constructing HTTP call to fetch a related artists.");
         Call<ArtistFullCollection> httpCall = artistService.getRelatedArtists("Bearer " + this.accessToken, artistId);
@@ -158,31 +126,6 @@ public class ArtistApiRetrofit implements ArtistApi {
 
             logger.info("Related artist has been successfully fetched.");
             return response.body();
-        } catch (IOException e) {
-            logger.error("Fetching related artists has failed.");
-            throw new HttpRequestFailedException(e.getMessage());
-        }
-    }
-
-    @Override
-    public List<ArtistFull> getRelatedArtistsUnwrapped(String artistId) {
-        logger.trace("Constructing HTTP call to fetch a related artists.");
-        Call<ArtistFullCollection> httpCall = artistService.getRelatedArtists("Bearer " + this.accessToken, artistId);
-
-        try {
-            logger.info("Executing HTTP call to fetch related artists.");
-            LoggingUtil.logHttpCall(logger, httpCall);
-            Response<ArtistFullCollection> response = httpCall.execute();
-
-            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response, HttpStatusCode.OK);
-
-            if(response.body() != null) {
-                logger.info("Related artist has been successfully fetched.");
-                return response.body().getArtists();
-            }
-
-            logger.error(EMPTY_RESPONSE_BODY_UNKNOWN_REASON);
-            throw new SpotifyActionFailedException(EMPTY_RESPONSE_BODY_UNKNOWN_REASON);
         } catch (IOException e) {
             logger.error("Fetching related artists has failed.");
             throw new HttpRequestFailedException(e.getMessage());
@@ -205,33 +148,6 @@ public class ArtistApiRetrofit implements ArtistApi {
 
             logger.info("Artists has been successfully fetched.");
             return response.body();
-        } catch (IOException e) {
-            logger.error("Fetching artists has failed.");
-            throw new HttpRequestFailedException(e.getMessage());
-        }
-    }
-
-    @Override
-    public List<ArtistFull> getArtistsUnwrapped(List<String> listOfArtistIds) {
-        String artistIdsWithCommaDelimiter = String.join(",", listOfArtistIds);
-
-        logger.trace("Constructing HTTP call to fetch multiple artists.");
-        Call<ArtistFullCollection> httpCall = artistService.getArtists("Bearer " + this.accessToken, artistIdsWithCommaDelimiter);
-
-        try {
-            logger.info("Executing HTTP call to fetch multiple artists.");
-            LoggingUtil.logHttpCall(logger, httpCall);
-            Response<ArtistFullCollection> response = httpCall.execute();
-
-            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response, HttpStatusCode.OK);
-
-            if(response.body() != null) {
-                logger.info("Artists has been successfully fetched.");
-                return response.body().getArtists();
-            }
-
-            logger.error(EMPTY_RESPONSE_BODY_UNKNOWN_REASON);
-            throw new SpotifyActionFailedException(EMPTY_RESPONSE_BODY_UNKNOWN_REASON);
         } catch (IOException e) {
             logger.error("Fetching artists has failed.");
             throw new HttpRequestFailedException(e.getMessage());

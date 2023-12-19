@@ -21,7 +21,6 @@ import spotify.retrofit.services.TrackService;
 
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 import static org.mockito.Mockito.verify;
@@ -157,63 +156,6 @@ public class TrackApiRetrofitTest extends AbstractApiRetrofitTest {
     }
 
     @Test
-    void getTracksUnwrappedUsesCorrectValuesToCreateHttpCall() throws IOException {
-        when(mockedTrackFullCollection.execute()).thenReturn(Response.success(new TrackFullCollection()));
-
-        sut.getTracksUnwrapped(listOfFakeTrackIds, null);
-
-        verify(mockedTrackService).getTracks(fakeAccessTokenWithBearer, fakeTrackIds, fakeOptionalParameters);
-    }
-
-    @Test
-    void getTracksUnwrappedExecutesHttpCall() throws IOException {
-        when(mockedTrackFullCollection.execute()).thenReturn(Response.success(new TrackFullCollection()));
-
-        sut.getTracksUnwrapped(listOfFakeTrackIds, fakeOptionalParameters);
-
-        verify(mockedTrackFullCollection).execute();
-    }
-
-    @Test
-    void getTracksUnwrappedThrowsSpotifyActionFailedExceptionWhenError() throws IOException {
-        when(mockedTrackFullCollection.execute())
-                .thenReturn(
-                        Response.error(
-                                400,
-                                ResponseBody.create(MediaType.get("application/json"), getJson("error.json"))
-                        )
-                );
-
-        Assertions.assertThrows(SpotifyActionFailedException.class, () -> sut.getTracksUnwrapped(listOfFakeTrackIds, fakeOptionalParameters));
-    }
-
-    @Test
-    void getTracksUnwrappedThrowsHttpRequestFailedWhenHttpFails() throws IOException {
-        when(mockedTrackFullCollection.execute()).thenThrow(IOException.class);
-
-        Assertions.assertThrows(HttpRequestFailedException.class, () -> sut.getTracksUnwrapped(listOfFakeTrackIds, fakeOptionalParameters));
-    }
-
-    @Test
-    void getTracksUnwrappedReturnsTrackFullCollectionWhenSuccessful() throws IOException {
-        TrackFullCollection trackFullCollection = new TrackFullCollection();
-        trackFullCollection.setTracks(Collections.emptyList());
-        when(mockedTrackFullCollection.execute()).thenReturn(Response.success(trackFullCollection));
-
-        Assertions.assertNotNull(sut.getTracksUnwrapped(listOfFakeTrackIds, fakeOptionalParameters));
-    }
-
-    @Test
-    void getTracksUnwrappedThrowsSpotifyActionFailedExceptionWhenEmptyResponseBody() throws IOException {
-        when(mockedTrackFullCollection.execute())
-                .thenReturn(
-                        Response.success(null)
-                );
-
-        Assertions.assertThrows(SpotifyActionFailedException.class, () -> sut.getTracksUnwrapped(listOfFakeTrackIds, fakeOptionalParameters));
-    }
-
-    @Test
     void getTrackAudioFeaturesUsesCorrectValuesToCreateHttpCall() throws IOException {
         when(mockedAudioFeaturesCall.execute()).thenReturn(Response.success(new AudioFeatures()));
 
@@ -310,71 +252,6 @@ public class TrackApiRetrofitTest extends AbstractApiRetrofitTest {
         when(mockedAudioFeaturesCollectionCall.execute()).thenReturn(Response.success(new AudioFeaturesCollection()));
 
         Assertions.assertNotNull(sut.getTracksAudioFeatures(listOfFakeTrackIds));
-    }
-
-    @Test
-    void getTracksAudioFeaturesUnwrappedUsesCorrectValuesToCreateHttpCall() throws IOException {
-        when(mockedAudioFeaturesCollectionCall.execute()).thenReturn(Response.success(new AudioFeaturesCollection()));
-
-        sut.getTracksAudioFeaturesUnwrapped(listOfFakeTrackIds);
-
-        verify(mockedTrackService).getTracksAudioFeatures(fakeAccessTokenWithBearer, fakeTrackIds);
-    }
-
-    @Test
-    void getTracksAudioFeaturesUnwrappedExecutesHttpCall() throws IOException {
-        when(mockedAudioFeaturesCollectionCall.execute()).thenReturn(Response.success(new AudioFeaturesCollection()));
-
-        sut.getTracksAudioFeaturesUnwrapped(listOfFakeTrackIds);
-
-        verify(mockedAudioFeaturesCollectionCall).execute();
-    }
-
-    @Test
-    void getTracksAudioFeaturesUnwrappedThrowsSpotifyActionFailedExceptionWhenError() throws IOException {
-        when(mockedAudioFeaturesCollectionCall.execute())
-                .thenReturn(
-                        Response.error(
-                                400,
-                                ResponseBody.create(MediaType.get("application/json"), getJson("error.json"))
-                        )
-                );
-
-        Assertions.assertThrows(SpotifyActionFailedException.class, () -> sut.getTracksAudioFeaturesUnwrapped(listOfFakeTrackIds));
-    }
-
-    @Test
-    void getTracksAudioFeaturesUnwrappedThrowsHttpRequestFailedWhenHttpFails() throws IOException {
-        when(mockedAudioFeaturesCollectionCall.execute()).thenThrow(IOException.class);
-
-        Assertions.assertThrows(HttpRequestFailedException.class, () -> sut.getTracksAudioFeaturesUnwrapped(listOfFakeTrackIds));
-    }
-
-    @Test
-    void getTracksAudioFeaturesUnwrappedThrowsIllegalArgumentExceptionWhenListExceedMaximumAllowedSize() throws IOException {
-        when(trackListWithExceededSize.size()).thenReturn(101);
-        when(mockedAudioFeaturesCollectionCall.execute()).thenReturn(Response.success(new AudioFeaturesCollection()));
-
-        Assertions.assertThrows(IllegalArgumentException.class, () -> sut.getTracksAudioFeaturesUnwrapped(trackListWithExceededSize));
-    }
-
-    @Test
-    void getTracksAudioFeaturesUnwrappedReturnsAudioFeaturesCollectionWhenSuccessful() throws IOException {
-        AudioFeaturesCollection audioFeaturesCollection = new AudioFeaturesCollection();
-        audioFeaturesCollection.setAudioFeatures(Collections.emptyList());
-        when(mockedAudioFeaturesCollectionCall.execute()).thenReturn(Response.success(audioFeaturesCollection));
-
-        Assertions.assertNotNull(sut.getTracksAudioFeaturesUnwrapped(listOfFakeTrackIds));
-    }
-
-    @Test
-    void getTracksAudioFeaturesUnwrappedThrowsSpotifyActionFailedExceptionWhenEmptyResponseBody() throws IOException {
-        when(mockedAudioFeaturesCollectionCall.execute())
-                .thenReturn(
-                        Response.success(null)
-                );
-
-        Assertions.assertThrows(SpotifyActionFailedException.class, () -> sut.getTracksAudioFeaturesUnwrapped(listOfFakeTrackIds));
     }
 
     @Test

@@ -7,7 +7,6 @@ import retrofit2.Response;
 import spotify.api.enums.HttpStatusCode;
 import spotify.api.interfaces.EpisodeApi;
 import spotify.exceptions.HttpRequestFailedException;
-import spotify.exceptions.SpotifyActionFailedException;
 import spotify.factories.RetrofitHttpServiceFactory;
 import spotify.models.episodes.EpisodeFull;
 import spotify.models.episodes.EpisodeFullCollection;
@@ -19,8 +18,6 @@ import spotify.utils.ValidatorUtil;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
-
-import static spotify.exceptions.SpotifyActionFailedException.EMPTY_RESPONSE_BODY_UNKNOWN_REASON;
 
 public class EpisodeApiRetrofit implements EpisodeApi {
     private final Logger logger = LoggerFactory.getLogger(EpisodeApiRetrofit.class);
@@ -79,37 +76,6 @@ public class EpisodeApiRetrofit implements EpisodeApi {
 
             logger.info("Episodes has been successfully fetched.");
             return response.body();
-        } catch (IOException ex) {
-            logger.error("HTTP request to fetch episodes has failed.");
-            throw new HttpRequestFailedException(ex.getMessage());
-        }
-    }
-
-    @Override
-    public List<EpisodeFull> getEpisodesUnwrapped(List<String> listOfEpisodeIds, Map<String, String> options) {
-        validateEpisodeListSizeAndThrowIfExceeded(listOfEpisodeIds, 50);
-        options = ValidatorUtil.optionsValueCheck(options);
-
-        String episodeIds = String.join(",", listOfEpisodeIds);
-
-        logger.trace("Constructing HTTP call to fetch multiple episodes.");
-        Call<EpisodeFullCollection> httpCall = episodeService.getEpisodes("Bearer " + this.accessToken, episodeIds, options);
-
-        try {
-            logger.info("Executing HTTP call to fetch multiple episodes.");
-            logger.debug("Fetching following episodes: {} with following values: {}.", episodeIds, options);
-            LoggingUtil.logHttpCall(logger, httpCall);
-            Response<EpisodeFullCollection> response = httpCall.execute();
-
-            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response, HttpStatusCode.OK);
-
-            if(response.body() != null) {
-                logger.info("Episodes has been successfully fetched.");
-                return response.body().getEpisodes();
-            }
-
-            logger.error(EMPTY_RESPONSE_BODY_UNKNOWN_REASON);
-            throw new SpotifyActionFailedException(EMPTY_RESPONSE_BODY_UNKNOWN_REASON);
         } catch (IOException ex) {
             logger.error("HTTP request to fetch episodes has failed.");
             throw new HttpRequestFailedException(ex.getMessage());
