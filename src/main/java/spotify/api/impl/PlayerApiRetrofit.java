@@ -8,10 +8,12 @@ import spotify.api.enums.HttpStatusCode;
 import spotify.api.enums.RepeatType;
 import spotify.api.interfaces.PlayerApi;
 import spotify.exceptions.HttpRequestFailedException;
-import spotify.exceptions.SpotifyActionFailedException;
 import spotify.factories.RetrofitHttpServiceFactory;
 import spotify.models.paging.CursorBasedPaging;
-import spotify.models.players.*;
+import spotify.models.players.CurrentlyPlayingObject;
+import spotify.models.players.DeviceCollection;
+import spotify.models.players.PlayHistory;
+import spotify.models.players.PlayingContext;
 import spotify.models.players.requests.ChangePlaybackStateRequestBody;
 import spotify.models.players.requests.TransferPlaybackRequestBody;
 import spotify.retrofit.services.PlayerService;
@@ -20,10 +22,7 @@ import spotify.utils.ResponseChecker;
 import spotify.utils.ValidatorUtil;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.Map;
-
-import static spotify.exceptions.SpotifyActionFailedException.EMPTY_RESPONSE_BODY_UNKNOWN_REASON;
 
 public class PlayerApiRetrofit implements PlayerApi {
     private final Logger logger = LoggerFactory.getLogger(PlayerApiRetrofit.class);
@@ -56,31 +55,6 @@ public class PlayerApiRetrofit implements PlayerApi {
 
             logger.info("Available devices have been successfully fetched.");
             return response.body();
-        } catch (IOException ex) {
-            logger.error("HTTP request to fetch available devices has failed.");
-            throw new HttpRequestFailedException(ex.getMessage());
-        }
-    }
-
-    @Override
-    public List<Device> getAvailableDevicesUnwrapped() {
-        logger.trace("Constructing HTTP call to fetch current user's available devices.");
-        Call<DeviceCollection> httpCall = playerService.getAvailableDevices("Bearer " + this.accessToken);
-
-        try {
-            logger.info("Executing HTTP call to fetch current user's available devices.");
-            LoggingUtil.logHttpCall(logger, httpCall);
-            Response<DeviceCollection> response = httpCall.execute();
-
-            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response, HttpStatusCode.OK);
-
-            if(response.body() != null) {
-                logger.info("Available devices have been successfully fetched.");
-                return response.body().getDevices();
-            }
-
-            logger.error(EMPTY_RESPONSE_BODY_UNKNOWN_REASON);
-            throw new SpotifyActionFailedException(EMPTY_RESPONSE_BODY_UNKNOWN_REASON);
         } catch (IOException ex) {
             logger.error("HTTP request to fetch available devices has failed.");
             throw new HttpRequestFailedException(ex.getMessage());

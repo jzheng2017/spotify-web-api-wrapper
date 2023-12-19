@@ -9,7 +9,6 @@ import retrofit2.Response;
 import spotify.api.enums.HttpStatusCode;
 import spotify.api.interfaces.PlaylistApi;
 import spotify.exceptions.HttpRequestFailedException;
-import spotify.exceptions.SpotifyActionFailedException;
 import spotify.factories.RetrofitHttpServiceFactory;
 import spotify.models.generic.Image;
 import spotify.models.paging.Paging;
@@ -26,8 +25,6 @@ import spotify.utils.ValidatorUtil;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
-
-import static spotify.exceptions.SpotifyActionFailedException.EMPTY_RESPONSE_BODY_UNKNOWN_REASON;
 
 public class PlaylistApiRetrofit implements PlaylistApi {
     private final Logger logger = LoggerFactory.getLogger(PlaylistApiRetrofit.class);
@@ -269,37 +266,6 @@ public class PlaylistApiRetrofit implements PlaylistApi {
     }
 
     @Override
-    public String reorderPlaylistItemsUnwrapped(String playlistId, ReorderPlaylistItemsRequestBody requestBody) {
-        validateParametersReorderFunction(playlistId, requestBody);
-
-        logger.trace("Constructing HTTP call to reorder items of a playlist.");
-        Call<Snapshot> httpCall = playlistService.reorderPlaylistItems("Bearer " + this.accessToken, playlistId, requestBody);
-
-        try {
-            logger.info("Executing HTTP call to reorder items of a playlist.");
-            logger.debug(
-                    "Reordering items of playlist {} with snapshot id {} from start position {} with range of {} length and insert it in position {} ",
-                    playlistId, requestBody.getSnapshotId(), requestBody.getRangeStart(), requestBody.getRangeLength(), requestBody.getInsertBefore()
-            );
-            LoggingUtil.logHttpCall(logger, httpCall);
-            Response<Snapshot> response = httpCall.execute();
-
-            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response, HttpStatusCode.OK);
-
-            if(response.body() != null) {
-                logger.info("Playlist has been successfully reordered.");
-                return response.body().getSnapshotId();
-            }
-
-            logger.error(EMPTY_RESPONSE_BODY_UNKNOWN_REASON);
-            throw new SpotifyActionFailedException(EMPTY_RESPONSE_BODY_UNKNOWN_REASON);
-        } catch (IOException ex) {
-            logger.error("HTTP request to reorder a playlist has failed.");
-            throw new HttpRequestFailedException(ex.getMessage());
-        }
-    }
-
-    @Override
     public void replacePlaylistItems(String playlistId, List<String> listOfItemUris) {
         if (playlistId == null || playlistId.isEmpty()) {
             final String errorMessage = "Playlist id is empty!";
@@ -383,44 +349,6 @@ public class PlaylistApiRetrofit implements PlaylistApi {
 
             logger.info("Items have been successfully removed from the playlist");
             return response.body();
-        } catch (IOException ex) {
-            logger.error("HTTP request to remove items from playlist has failed");
-            throw new HttpRequestFailedException(ex.getMessage());
-        }
-    }
-
-    @Override
-    public String deleteItemsFromPlaylistUnwrapped(String playlistId, DeleteItemsPlaylistRequestBody items) {
-        if (playlistId == null || playlistId.isEmpty()) {
-            final String errorMessage = "Playlist id is empty!";
-            logger.error(errorMessage);
-            throw new IllegalArgumentException(errorMessage);
-        }
-
-        if (items.getSnapshotId() != null && items.getSnapshotId().isEmpty()) {
-            logger.warn("An empty snapshot id was passed in. The snapshot id has now been set to NULL.");
-            items.setSnapshotId(null);
-        }
-
-        logger.trace("Constructing HTTP call to remove items from a playlist.");
-        Call<Snapshot> httpCall = playlistService.deleteItemsFromPlaylist("Bearer " + this.accessToken, playlistId, items);
-
-        try {
-            logger.info("Executing HTTP call to remove items from a playlist.");
-            logger.debug("Removing items from playlist {} with snapshot id {}", playlistId, items.getSnapshotId());
-            logger.debug("Removing the following items {}", items);
-            LoggingUtil.logHttpCall(logger, httpCall);
-            Response<Snapshot> response = httpCall.execute();
-
-            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response, HttpStatusCode.OK);
-
-            if(response.body() != null) {
-                logger.info("Items have been successfully removed from the playlist");
-                return response.body().getSnapshotId();
-            }
-
-            logger.error(EMPTY_RESPONSE_BODY_UNKNOWN_REASON);
-            throw new SpotifyActionFailedException(EMPTY_RESPONSE_BODY_UNKNOWN_REASON);
         } catch (IOException ex) {
             logger.error("HTTP request to remove items from playlist has failed");
             throw new HttpRequestFailedException(ex.getMessage());

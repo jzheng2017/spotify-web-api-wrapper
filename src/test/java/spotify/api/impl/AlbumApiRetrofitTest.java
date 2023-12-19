@@ -20,7 +20,6 @@ import spotify.retrofit.services.AlbumService;
 
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -153,67 +152,6 @@ public class AlbumApiRetrofitTest extends AbstractApiRetrofitTest {
     @Test
     void getAlbumsThrowsIllegalArgumentExceptionWhenListExceedsMaximumAllowedSize() {
         Assertions.assertThrows(IllegalArgumentException.class, () -> sut.getAlbums(albumListWithExceededSize, fakeOptionalParameters));
-    }
-
-    @Test
-    void getAlbumsUnwrappedUsesCorrectValuesToCreateHttpCall() throws IOException {
-        when(mockedAlbumFullCollectionCall.execute()).thenReturn(Response.success(new AlbumFullCollection()));
-
-        sut.getAlbumsUnwrapped(listOfFakeAlbumIds, null);
-
-        verify(mockedAlbumService).getAlbums(fakeAccessTokenWithBearer, fakeAlbumIds, fakeOptionalParameters);
-    }
-
-    @Test
-    void getAlbumsUnwrappedExecutesHttpCall() throws IOException {
-        when(mockedAlbumFullCollectionCall.execute()).thenReturn(Response.success(new AlbumFullCollection()));
-
-        sut.getAlbumsUnwrapped(listOfFakeAlbumIds, fakeOptionalParameters);
-        verify(mockedAlbumFullCollectionCall).execute();
-    }
-
-    @Test
-    void getAlbumsUnwrappedThrowsSpotifyActionFailedExceptionWhenError() throws IOException {
-        when(mockedAlbumFullCollectionCall.execute())
-                .thenReturn(
-                        Response.error(
-                                400,
-                                ResponseBody.create(MediaType.get("application/json"), getJson("error.json"))
-                        )
-                );
-
-        Assertions.assertThrows(SpotifyActionFailedException.class, () -> sut.getAlbumsUnwrapped(listOfFakeAlbumIds, fakeOptionalParameters));
-    }
-
-    @Test
-    void getAlbumsUnwrappedThrowsHttpRequestFailedWhenHttpFails() throws IOException {
-        when(mockedAlbumFullCollectionCall.execute()).thenThrow(IOException.class);
-
-        Assertions.assertThrows(HttpRequestFailedException.class, () -> sut.getAlbumsUnwrapped(listOfFakeAlbumIds, fakeOptionalParameters));
-    }
-
-    @Test
-    void getAlbumsUnwrappedReturnsAlbumFullCollectionWhenSuccessful() throws IOException {
-        AlbumFullCollection albumFullCollection = new AlbumFullCollection();
-        albumFullCollection.setAlbums(Collections.emptyList());
-        when(mockedAlbumFullCollectionCall.execute()).thenReturn(Response.success(albumFullCollection));
-
-        Assertions.assertNotNull(sut.getAlbumsUnwrapped(listOfFakeAlbumIds, fakeOptionalParameters));
-    }
-
-    @Test
-    void getAlbumsUnwrappedThrowsSpotifyActionFailedExceptionWhenEmptyResponseBody() throws IOException {
-        when(mockedAlbumFullCollectionCall.execute())
-                .thenReturn(
-                        Response.success(null)
-                );
-
-        Assertions.assertThrows(SpotifyActionFailedException.class, () -> sut.getAlbumsUnwrapped(listOfFakeAlbumIds, fakeOptionalParameters));
-    }
-
-    @Test
-    void getAlbumsUnwrappedThrowsIllegalArgumentExceptionWhenListExceedsMaximumAllowedSize() {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> sut.getAlbumsUnwrapped(albumListWithExceededSize, fakeOptionalParameters));
     }
 
     @Test

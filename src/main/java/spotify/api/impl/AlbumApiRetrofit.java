@@ -7,7 +7,6 @@ import retrofit2.Response;
 import spotify.api.enums.HttpStatusCode;
 import spotify.api.interfaces.AlbumApi;
 import spotify.exceptions.HttpRequestFailedException;
-import spotify.exceptions.SpotifyActionFailedException;
 import spotify.factories.RetrofitHttpServiceFactory;
 import spotify.models.albums.AlbumFull;
 import spotify.models.albums.AlbumFullCollection;
@@ -21,8 +20,6 @@ import spotify.utils.ValidatorUtil;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
-
-import static spotify.exceptions.SpotifyActionFailedException.EMPTY_RESPONSE_BODY_UNKNOWN_REASON;
 
 public class AlbumApiRetrofit implements AlbumApi {
     private final Logger logger = LoggerFactory.getLogger(AlbumApiRetrofit.class);
@@ -82,38 +79,6 @@ public class AlbumApiRetrofit implements AlbumApi {
 
             logger.info("Albums have been successfully fetched.");
             return response.body();
-        } catch (IOException ex) {
-            logger.error("HTTP request to fetch albums has failed.");
-            throw new HttpRequestFailedException(ex.getMessage());
-        }
-    }
-
-    @Override
-    public List<AlbumFull> getAlbumsUnwrapped(List<String> listOfAlbumIds, Map<String, String> options) {
-        validateAlbumListSizeAndThrowIfExceeded(listOfAlbumIds, 20);
-        options = ValidatorUtil.optionsValueCheck(options);
-
-        String albumIds = String.join(",", listOfAlbumIds);
-        logger.debug("Mapped list of album ids to String: {}", albumIds);
-
-        logger.trace("Constructing HTTP call to fetch albums.");
-        Call<AlbumFullCollection> httpCall = albumService.getAlbums("Bearer " + this.accessToken, albumIds, options);
-
-        try {
-            logger.info("Executing HTTP call to fetch albums.");
-            logger.debug("Fetching following albums: {} with following values: {}.", albumIds, options);
-            LoggingUtil.logHttpCall(logger, httpCall);
-            Response<AlbumFullCollection> response = httpCall.execute();
-
-            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response, HttpStatusCode.OK);
-
-            if(response.body() != null) {
-                logger.info("Albums have been successfully fetched.");
-                return response.body().getAlbums();
-            }
-
-            logger.error(EMPTY_RESPONSE_BODY_UNKNOWN_REASON);
-            throw new SpotifyActionFailedException(EMPTY_RESPONSE_BODY_UNKNOWN_REASON);
         } catch (IOException ex) {
             logger.error("HTTP request to fetch albums has failed.");
             throw new HttpRequestFailedException(ex.getMessage());

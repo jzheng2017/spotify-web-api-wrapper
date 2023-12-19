@@ -7,7 +7,6 @@ import retrofit2.Response;
 import spotify.api.enums.HttpStatusCode;
 import spotify.api.interfaces.TrackApi;
 import spotify.exceptions.HttpRequestFailedException;
-import spotify.exceptions.SpotifyActionFailedException;
 import spotify.factories.RetrofitHttpServiceFactory;
 import spotify.models.audio.AudioAnalysis;
 import spotify.models.audio.AudioFeatures;
@@ -22,8 +21,6 @@ import spotify.utils.ValidatorUtil;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
-
-import static spotify.exceptions.SpotifyActionFailedException.EMPTY_RESPONSE_BODY_UNKNOWN_REASON;
 
 public class TrackApiRetrofit implements TrackApi {
     private final Logger logger = LoggerFactory.getLogger(TrackApiRetrofit.class);
@@ -90,37 +87,6 @@ public class TrackApiRetrofit implements TrackApi {
     }
 
     @Override
-    public List<TrackFull> getTracksUnwrapped(List<String> listOfTrackIds, Map<String, String> options) {
-        validateTrackListSizeAndThrowIfExceeded(listOfTrackIds, 50);
-        options = ValidatorUtil.optionsValueCheck(options);
-
-        String trackIds = String.join(",", listOfTrackIds);
-
-        logger.trace("Constructing HTTP call to fetch multiple tracks.");
-        Call<TrackFullCollection> httpCall = trackService.getTracks("Bearer " + this.accessToken, trackIds, options);
-
-        try {
-            logger.info("Executing HTTP call to fetch multiple tracks.");
-            logger.debug("Fetching following tracks: {} with following values: {}.", trackIds, options);
-            LoggingUtil.logHttpCall(logger, httpCall);
-            Response<TrackFullCollection> response = httpCall.execute();
-
-            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response, HttpStatusCode.OK);
-
-            if(response.body() != null) {
-                logger.info("Tracks have been successfully fetched.");
-                return response.body().getTracks();
-            }
-
-            logger.error(EMPTY_RESPONSE_BODY_UNKNOWN_REASON);
-            throw new SpotifyActionFailedException(EMPTY_RESPONSE_BODY_UNKNOWN_REASON);
-        } catch (IOException e) {
-            logger.error("Fetching tracks has failed.");
-            throw new HttpRequestFailedException(e.getMessage());
-        }
-    }
-
-    @Override
     public AudioFeatures getTrackAudioFeatures(String trackId) {
         logger.trace("Constructing HTTP call to fetch audio features.");
         Call<AudioFeatures> httpCall = trackService.getTrackAudioFeatures("Bearer " + this.accessToken, trackId);
@@ -165,35 +131,6 @@ public class TrackApiRetrofit implements TrackApi {
             throw new HttpRequestFailedException(e.getMessage());
         }
     }
-
-    @Override
-    public List<AudioFeatures> getTracksAudioFeaturesUnwrapped(List<String> listOfTrackIds) {
-        validateTrackListSizeAndThrowIfExceeded(listOfTrackIds, 100);
-
-        String trackIds = String.join(",", listOfTrackIds);
-
-        logger.trace("Constructing HTTP call to fetch audio features.");
-        Call<AudioFeaturesCollection> httpCall = trackService.getTracksAudioFeatures("Bearer " + this.accessToken, trackIds);
-
-        try {
-            logger.info("Executing HTTP call to fetch track audio features.");
-            logger.debug("Fetching following tracks: {} audio features.", trackIds);
-            LoggingUtil.logHttpCall(logger, httpCall);
-            Response<AudioFeaturesCollection> response = httpCall.execute();
-
-            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response, HttpStatusCode.OK);
-
-            if(response.body() != null) {
-                logger.info("Track audio features has been successfully fetched.");
-                return response.body().getAudioFeatures();
-            }
-
-            logger.error(EMPTY_RESPONSE_BODY_UNKNOWN_REASON);
-            throw new SpotifyActionFailedException(EMPTY_RESPONSE_BODY_UNKNOWN_REASON);
-        } catch (IOException e) {
-            logger.error("Fetching track audio features has failed.");
-            throw new HttpRequestFailedException(e.getMessage());
-        }    }
 
     @Override
     public AudioAnalysis getTrackAudioAnalysis(String trackId) {
