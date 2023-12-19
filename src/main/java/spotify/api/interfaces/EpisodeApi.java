@@ -9,5 +9,5 @@ import java.util.Map;
 public interface EpisodeApi {
     EpisodeFull getEpisode(String episodeId, Map<String, String> options);
 
-    EpisodeFullCollection getEpisodes(List<String> listOfEpisodeIds, Map<String, String> options););
+    EpisodeFullCollection getEpisodes(List<String> listOfEpisodeIds, Map<String, String> options);
 }
