@@ -15,6 +15,7 @@ import spotify.exceptions.SpotifyActionFailedException;
 import spotify.models.albums.AlbumSimplifiedPaging;
 import spotify.models.categories.CategoryFull;
 import spotify.models.categories.CategoryFullPaging;
+import spotify.models.paging.Paging;
 import spotify.models.playlists.FeaturedPlaylistCollection;
 import spotify.models.playlists.PlaylistSimplifiedPaging;
 import spotify.models.recommendations.RecommendationCollection;
@@ -172,6 +173,62 @@ public class BrowseApiRetrofitTest extends AbstractApiRetrofitTest {
     }
 
     @Test
+    void getCategoriesUnwrappedUsesCorrectValuesToCreateHttpCall() throws IOException {
+        when(mockedCategoryFullPagingCall.execute()).thenReturn(Response.success(new CategoryFullPaging()));
+
+        sut.getCategoriesUnwrapped(null);
+
+        verify(mockedBrowseService).getCategories(fakeAccessTokenWithBearer, fakeOptionalParameters);
+    }
+
+    @Test
+    void getCategoriesUnwrappedExecutesHttpCall() throws IOException {
+        when(mockedCategoryFullPagingCall.execute()).thenReturn(Response.success(new CategoryFullPaging()));
+
+        sut.getCategoriesUnwrapped(fakeOptionalParameters);
+        verify(mockedCategoryFullPagingCall).execute();
+    }
+
+    @Test
+    void getCategoriesUnwrappedThrowsSpotifyActionFailedExceptionWhenError() throws IOException {
+        when(mockedCategoryFullPagingCall.execute())
+                .thenReturn(
+                        Response.error(
+                                400,
+                                ResponseBody.create(MediaType.get("application/json"), getJson("error.json"))
+                        )
+                );
+
+        Assertions.assertThrows(SpotifyActionFailedException.class, () -> sut.getCategoriesUnwrapped(fakeOptionalParameters));
+    }
+
+    @Test
+    void getCategoriesUnwrappedThrowsHttpRequestFailedWhenHttpFails() throws IOException {
+        when(mockedCategoryFullPagingCall.execute()).thenThrow(IOException.class);
+
+        Assertions.assertThrows(HttpRequestFailedException.class, () -> sut.getCategoriesUnwrapped(fakeOptionalParameters));
+    }
+
+    @Test
+    void getCategoriesUnwrappedReturnsCategoryFullPagingWhenSuccessful() throws IOException {
+        CategoryFullPaging categoryFullPaging = new CategoryFullPaging();
+        categoryFullPaging.setCategories(new Paging<>());
+        when(mockedCategoryFullPagingCall.execute()).thenReturn(Response.success(categoryFullPaging));
+
+        Assertions.assertNotNull(sut.getCategoriesUnwrapped(fakeOptionalParameters));
+    }
+
+    @Test
+    void getCategoriesUnwrappedThrowsSpotifyActionFailedExceptionWhenEmptyResponseBody() throws IOException {
+        when(mockedCategoryFullPagingCall.execute())
+                .thenReturn(
+                        Response.success(null)
+                );
+
+        Assertions.assertThrows(SpotifyActionFailedException.class, () -> sut.getCategoriesUnwrapped(fakeOptionalParameters));
+    }
+
+    @Test
     void getCategoryPlaylistsUsesCorrectValuesToCreateHttpCall() throws IOException {
         when(mockedPlaylistSimplifiedPagingCall.execute()).thenReturn(Response.success(new PlaylistSimplifiedPaging()));
 
@@ -213,6 +270,62 @@ public class BrowseApiRetrofitTest extends AbstractApiRetrofitTest {
         when(mockedPlaylistSimplifiedPagingCall.execute()).thenReturn(Response.success(new PlaylistSimplifiedPaging()));
 
         Assertions.assertNotNull(sut.getCategoryPlaylists(fakeCategoryId, fakeOptionalParameters));
+    }
+
+    @Test
+    void getCategoryPlaylistsUnwrappedUsesCorrectValuesToCreateHttpCall() throws IOException {
+        when(mockedPlaylistSimplifiedPagingCall.execute()).thenReturn(Response.success(new PlaylistSimplifiedPaging()));
+
+        sut.getCategoryPlaylistsUnwrapped(fakeCategoryId, null);
+
+        verify(mockedBrowseService).getCategoryPlaylists(fakeAccessTokenWithBearer, fakeCategoryId, fakeOptionalParameters);
+    }
+
+    @Test
+    void getCategoryPlaylistsUnwrappedExecutesHttpCall() throws IOException {
+        when(mockedPlaylistSimplifiedPagingCall.execute()).thenReturn(Response.success(new PlaylistSimplifiedPaging()));
+
+        sut.getCategoryPlaylistsUnwrapped(fakeCategoryId, fakeOptionalParameters);
+        verify(mockedPlaylistSimplifiedPagingCall).execute();
+    }
+
+    @Test
+    void getCategoryPlaylistsUnwrappedThrowsSpotifyActionFailedExceptionWhenError() throws IOException {
+        when(mockedPlaylistSimplifiedPagingCall.execute())
+                .thenReturn(
+                        Response.error(
+                                400,
+                                ResponseBody.create(MediaType.get("application/json"), getJson("error.json"))
+                        )
+                );
+
+        Assertions.assertThrows(SpotifyActionFailedException.class, () -> sut.getCategoryPlaylistsUnwrapped(fakeCategoryId, fakeOptionalParameters));
+    }
+
+    @Test
+    void getCategoryPlaylistsUnwrappedThrowsHttpRequestFailedWhenHttpFails() throws IOException {
+        when(mockedPlaylistSimplifiedPagingCall.execute()).thenThrow(IOException.class);
+
+        Assertions.assertThrows(HttpRequestFailedException.class, () -> sut.getCategoryPlaylistsUnwrapped(fakeCategoryId, fakeOptionalParameters));
+    }
+
+    @Test
+    void getCategoryPlaylistsUnwrappedReturnsPlaylistSimplifiedPagingWhenSuccessful() throws IOException {
+        PlaylistSimplifiedPaging playlistSimplifiedPaging = new PlaylistSimplifiedPaging();
+        playlistSimplifiedPaging.setPlaylists(new Paging<>());
+        when(mockedPlaylistSimplifiedPagingCall.execute()).thenReturn(Response.success(playlistSimplifiedPaging));
+
+        Assertions.assertNotNull(sut.getCategoryPlaylistsUnwrapped(fakeCategoryId, fakeOptionalParameters));
+    }
+
+    @Test
+    void getCategoryPlaylistsUnwrappedThrowsSpotifyActionFailedExceptionWhenEmptyResponseBody() throws IOException {
+        when(mockedPlaylistSimplifiedPagingCall.execute())
+                .thenReturn(
+                        Response.success(null)
+                );
+
+        Assertions.assertThrows(SpotifyActionFailedException.class, () -> sut.getCategoryPlaylistsUnwrapped(fakeCategoryId, fakeOptionalParameters));
     }
 
     @Test
@@ -301,6 +414,62 @@ public class BrowseApiRetrofitTest extends AbstractApiRetrofitTest {
         when(mockedAlbumSimplifiedPagingCall.execute()).thenReturn(Response.success(new AlbumSimplifiedPaging()));
 
         Assertions.assertNotNull(sut.getNewReleases(fakeOptionalParameters));
+    }
+
+    @Test
+    void getNewReleasesUnwrappedUsesCorrectValuesToCreateHttpCall() throws IOException {
+        when(mockedAlbumSimplifiedPagingCall.execute()).thenReturn(Response.success(new AlbumSimplifiedPaging()));
+
+        sut.getNewReleasesUnwrapped(null);
+
+        verify(mockedBrowseService).getNewReleases(fakeAccessTokenWithBearer, fakeOptionalParameters);
+    }
+
+    @Test
+    void getNewReleasesUnwrappedExecutesHttpCall() throws IOException {
+        when(mockedAlbumSimplifiedPagingCall.execute()).thenReturn(Response.success(new AlbumSimplifiedPaging()));
+
+        sut.getNewReleasesUnwrapped(fakeOptionalParameters);
+        verify(mockedAlbumSimplifiedPagingCall).execute();
+    }
+
+    @Test
+    void getNewReleasesUnwrappedThrowsSpotifyActionFailedExceptionWhenError() throws IOException {
+        when(mockedAlbumSimplifiedPagingCall.execute())
+                .thenReturn(
+                        Response.error(
+                                400,
+                                ResponseBody.create(MediaType.get("application/json"), getJson("error.json"))
+                        )
+                );
+
+        Assertions.assertThrows(SpotifyActionFailedException.class, () -> sut.getNewReleasesUnwrapped(fakeOptionalParameters));
+    }
+
+    @Test
+    void getNewReleasesUnwrappedThrowsHttpRequestFailedWhenHttpFails() throws IOException {
+        when(mockedAlbumSimplifiedPagingCall.execute()).thenThrow(IOException.class);
+
+        Assertions.assertThrows(HttpRequestFailedException.class, () -> sut.getNewReleasesUnwrapped(fakeOptionalParameters));
+    }
+
+    @Test
+    void getNewReleasesUnwrappedReturnsAlbumSimplifiedPagingWhenSuccessful() throws IOException {
+        AlbumSimplifiedPaging albumSimplifiedPaging = new AlbumSimplifiedPaging();
+        albumSimplifiedPaging.setAlbums(new Paging<>());
+        when(mockedAlbumSimplifiedPagingCall.execute()).thenReturn(Response.success(albumSimplifiedPaging));
+
+        Assertions.assertNotNull(sut.getNewReleasesUnwrapped(fakeOptionalParameters));
+    }
+
+    @Test
+    void getNewReleasesUnwrappedThrowsSpotifyActionFailedExceptionWhenEmptyResponseBody() throws IOException {
+        when(mockedAlbumSimplifiedPagingCall.execute())
+                .thenReturn(
+                        Response.success(null)
+                );
+
+        Assertions.assertThrows(SpotifyActionFailedException.class, () -> sut.getNewReleasesUnwrapped(fakeOptionalParameters));
     }
 
     @Test

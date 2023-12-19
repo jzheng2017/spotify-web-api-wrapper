@@ -14,10 +14,7 @@ import spotify.api.enums.RepeatType;
 import spotify.exceptions.HttpRequestFailedException;
 import spotify.exceptions.SpotifyActionFailedException;
 import spotify.models.paging.CursorBasedPaging;
-import spotify.models.players.CurrentlyPlayingObject;
-import spotify.models.players.DeviceCollection;
-import spotify.models.players.PlayHistory;
-import spotify.models.players.PlayingContext;
+import spotify.models.players.*;
 import spotify.models.players.requests.ChangePlaybackStateRequestBody;
 import spotify.models.players.requests.TransferPlaybackRequestBody;
 import spotify.retrofit.services.PlayerService;
@@ -25,6 +22,7 @@ import spotify.retrofit.services.PlayerService;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -124,6 +122,63 @@ public class PlayerApiRetrofitTest extends AbstractApiRetrofitTest {
         when(mockedDeviceCollectionCall.execute()).thenReturn(Response.success(new DeviceCollection()));
 
         Assertions.assertNotNull(sut.getAvailableDevices());
+    }
+
+    @Test
+    void getAvailableDevicesUnwrappedUsesCorrectValuesToCreateHttpCall() throws IOException {
+        when(mockedDeviceCollectionCall.execute()).thenReturn(Response.success(new DeviceCollection()));
+
+        sut.getAvailableDevicesUnwrapped();
+
+        verify(mockedPlayerService).getAvailableDevices(fakeAccessTokenWithBearer);
+    }
+
+    @Test
+    void getAvailableDevicesUnwrappedExecutesHttpCall() throws IOException {
+        when(mockedDeviceCollectionCall.execute()).thenReturn(Response.success(new DeviceCollection()));
+
+        sut.getAvailableDevicesUnwrapped();
+
+        verify(mockedDeviceCollectionCall).execute();
+    }
+
+    @Test
+    void getAvailableDevicesUnwrappedThrowsSpotifyActionFailedExceptionWhenError() throws IOException {
+        when(mockedDeviceCollectionCall.execute())
+                .thenReturn(
+                        Response.error(
+                                400,
+                                ResponseBody.create(MediaType.get("application/json"), getJson("error.json"))
+                        )
+                );
+
+        Assertions.assertThrows(SpotifyActionFailedException.class, () -> sut.getAvailableDevicesUnwrapped());
+    }
+
+    @Test
+    void getAvailableDevicesUnwrappedThrowsHttpRequestFailedWhenHttpFails() throws IOException {
+        when(mockedDeviceCollectionCall.execute()).thenThrow(IOException.class);
+
+        Assertions.assertThrows(HttpRequestFailedException.class, () -> sut.getAvailableDevicesUnwrapped());
+    }
+
+    @Test
+    void getAvailableDevicesUnwrappedReturnsDeviceCollectionWhenSuccessful() throws IOException {
+        DeviceCollection deviceCollection = new DeviceCollection();
+        deviceCollection.setDevices(Collections.emptyList());
+        when(mockedDeviceCollectionCall.execute()).thenReturn(Response.success(deviceCollection));
+
+        Assertions.assertNotNull(sut.getAvailableDevicesUnwrapped());
+    }
+
+    @Test
+    void getAvailableDevicesUnwrappedThrowsSpotifyActionFailedExceptionWhenEmptyResponseBody() throws IOException {
+        when(mockedDeviceCollectionCall.execute())
+                .thenReturn(
+                        Response.success(null)
+                );
+
+        Assertions.assertThrows(SpotifyActionFailedException.class, () -> sut.getAvailableDevicesUnwrapped());
     }
 
     @Test

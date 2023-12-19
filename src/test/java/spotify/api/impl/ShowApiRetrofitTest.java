@@ -20,6 +20,7 @@ import spotify.retrofit.services.ShowService;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import static org.mockito.Mockito.verify;
@@ -188,5 +189,62 @@ public class ShowApiRetrofitTest extends AbstractApiRetrofitTest {
         when(mockedShowSimplifiedCollectionCall.execute()).thenReturn(Response.success(new ShowSimplifiedCollection()));
 
         Assertions.assertNotNull(sut.getShows(listOfFakeShowIds, fakeOptionalParameters));
+    }
+
+    @Test
+    void getShowsUnwrappedUsesCorrectValuesToCreateHttpCall() throws IOException {
+        when(mockedShowSimplifiedCollectionCall.execute()).thenReturn(Response.success(new ShowSimplifiedCollection()));
+
+        sut.getShowsUnwrapped(listOfFakeShowIds, null);
+
+        verify(mockedShowService).getShows(fakeAccessTokenWithBearer, fakeShowIds, fakeOptionalParameters);
+    }
+
+    @Test
+    void getShowsUnwrappedExecutesHttpCall() throws IOException {
+        when(mockedShowSimplifiedCollectionCall.execute()).thenReturn(Response.success(new ShowSimplifiedCollection()));
+
+        sut.getShowsUnwrapped(listOfFakeShowIds, fakeOptionalParameters);
+
+        verify(mockedShowSimplifiedCollectionCall).execute();
+    }
+
+    @Test
+    void getShowsUnwrappedThrowsSpotifyActionFailedExceptionWhenError() throws IOException {
+        when(mockedShowSimplifiedCollectionCall.execute())
+                .thenReturn(
+                        Response.error(
+                                400,
+                                ResponseBody.create(MediaType.get("application/json"), getJson("error.json"))
+                        )
+                );
+
+        Assertions.assertThrows(SpotifyActionFailedException.class, () -> sut.getShowsUnwrapped(listOfFakeShowIds, fakeOptionalParameters));
+    }
+
+    @Test
+    void getShowsUnwrappedThrowsHttpRequestFailedWhenHttpFails() throws IOException {
+        when(mockedShowSimplifiedCollectionCall.execute()).thenThrow(IOException.class);
+
+        Assertions.assertThrows(HttpRequestFailedException.class, () -> sut.getShowsUnwrapped(listOfFakeShowIds, fakeOptionalParameters));
+    }
+
+    @Test
+    void getShowsUnwrappedReturnsShowSimplifiedCollectionWhenSuccessful() throws IOException {
+        ShowSimplifiedCollection showSimplifiedCollection = new ShowSimplifiedCollection();
+        showSimplifiedCollection.setShows(Collections.emptyList());
+        when(mockedShowSimplifiedCollectionCall.execute()).thenReturn(Response.success(showSimplifiedCollection));
+
+        Assertions.assertNotNull(sut.getShowsUnwrapped(listOfFakeShowIds, fakeOptionalParameters));
+    }
+
+    @Test
+    void getShowsUnwrappedThrowsSpotifyActionFailedExceptionWhenEmptyResponseBody() throws IOException {
+        when(mockedShowSimplifiedCollectionCall.execute())
+                .thenReturn(
+                        Response.success(null)
+                );
+
+        Assertions.assertThrows(SpotifyActionFailedException.class, () -> sut.getShowsUnwrapped(listOfFakeShowIds, fakeOptionalParameters));
     }
 }

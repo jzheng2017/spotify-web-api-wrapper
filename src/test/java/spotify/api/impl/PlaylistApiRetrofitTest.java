@@ -550,6 +550,78 @@ public class PlaylistApiRetrofitTest extends AbstractApiRetrofitTest {
     }
 
     @Test
+    void reorderPlaylistItemsUnwrappedUsesCorrectValuesToCreateHttpCall() throws IOException {
+        when(mockedSnapshotCall.execute()).thenReturn(Response.success(new Snapshot()));
+
+        sut.reorderPlaylistItemsUnwrapped(fakePlaylistId, mockedReorderPlaylistItemsRequestBody);
+
+        verify(mockedPlaylistService).reorderPlaylistItems(fakeAccessTokenWithBearer, fakePlaylistId, mockedReorderPlaylistItemsRequestBody);
+    }
+
+    @Test
+    void reorderPlaylistItemsUnwrappedExecutesHttpCall() throws IOException {
+        when(mockedSnapshotCall.execute()).thenReturn(Response.success(new Snapshot()));
+
+        sut.reorderPlaylistItemsUnwrapped(fakePlaylistId, mockedReorderPlaylistItemsRequestBody);
+
+        verify(mockedSnapshotCall).execute();
+    }
+
+    @Test
+    void reorderPlaylistItemsUnwrappedThrowsSpotifyActionFailedExceptionWhenError() throws IOException {
+        when(mockedSnapshotCall.execute())
+                .thenReturn(
+                        Response.error(
+                                400,
+                                ResponseBody.create(MediaType.get("application/json"), getJson("error.json"))
+                        )
+                );
+
+        Assertions.assertThrows(SpotifyActionFailedException.class, () -> sut.reorderPlaylistItemsUnwrapped(fakePlaylistId, mockedReorderPlaylistItemsRequestBody));
+    }
+
+    @Test
+    void reorderPlaylistItemsUnwrappedThrowsHttpRequestFailedWhenHttpFails() throws IOException {
+        when(mockedSnapshotCall.execute()).thenThrow(IOException.class);
+
+        Assertions.assertThrows(HttpRequestFailedException.class, () -> sut.reorderPlaylistItemsUnwrapped(fakePlaylistId, mockedReorderPlaylistItemsRequestBody));
+    }
+
+    @Test
+    void reorderPlaylistItemsUnwrappedThrowsIllegalArgumentExceptionWhenPlaylistIdIsNull() throws IOException {
+        when(mockedSnapshotCall.execute()).thenThrow(IOException.class);
+
+        Assertions.assertThrows(IllegalArgumentException.class, () -> sut.reorderPlaylistItemsUnwrapped(null, mockedReorderPlaylistItemsRequestBody));
+    }
+
+    @Test
+    void reorderPlaylistItemsUnwrappedThrowsIllegalArgumentExceptionWhenPlaylistIdEmpty() throws IOException {
+        when(mockedSnapshotCall.execute()).thenThrow(IOException.class);
+
+        Assertions.assertThrows(IllegalArgumentException.class, () -> sut.reorderPlaylistItemsUnwrapped("", mockedReorderPlaylistItemsRequestBody));
+    }
+
+    @Test
+    void reorderPlaylistItemsUnwrappedSetsSnapshotIdToNullWhenSnapshotIsEmpty() throws IOException {
+        when(mockedSnapshotCall.execute()).thenReturn(Response.success(new Snapshot()));
+        when(mockedReorderPlaylistItemsRequestBody.getSnapshotId()).thenReturn("");
+
+        sut.reorderPlaylistItemsUnwrapped("69", mockedReorderPlaylistItemsRequestBody);
+
+        verify(mockedReorderPlaylistItemsRequestBody).setSnapshotId(null);
+    }
+
+    @Test
+    void reorderPlaylistItemsUnwrappedThrowsSpotifyActionFailedExceptionWhenEmptyResponseBody() throws IOException {
+        when(mockedSnapshotCall.execute())
+                .thenReturn(
+                        Response.success(null)
+                );
+
+        Assertions.assertThrows(SpotifyActionFailedException.class, () -> sut.reorderPlaylistItemsUnwrapped(fakePlaylistId, mockedReorderPlaylistItemsRequestBody));
+    }
+
+    @Test
     void replacePlaylistItemsUsesCorrectValuesToCreateHttpCall() throws IOException {
         ArgumentCaptor<ReplacePlaylistItemsRequestBody> requestBodyArgumentCaptor = ArgumentCaptor.forClass(ReplacePlaylistItemsRequestBody.class);
 
@@ -740,5 +812,77 @@ public class PlaylistApiRetrofitTest extends AbstractApiRetrofitTest {
         sut.deleteItemsFromPlaylist(fakePlaylistId, mockedDeleteItemsPlaylistRequestBody);
 
         verify(mockedDeleteItemsPlaylistRequestBody).setSnapshotId(null);
+    }
+
+    @Test
+    void deleteItemsFromPlaylistUnwrappedUsesCorrectValuesToCreateHttpCall() throws IOException {
+        when(mockedSnapshotCall.execute()).thenReturn(Response.success(new Snapshot()));
+
+        sut.deleteItemsFromPlaylistUnwrapped(fakePlaylistId, mockedDeleteItemsPlaylistRequestBody);
+
+        verify(mockedPlaylistService).deleteItemsFromPlaylist(fakeAccessTokenWithBearer, fakePlaylistId, mockedDeleteItemsPlaylistRequestBody);
+    }
+
+    @Test
+    void deleteItemsFromPlaylistUnwrappedExecutesHttpCall() throws IOException {
+        when(mockedSnapshotCall.execute()).thenReturn(Response.success(new Snapshot()));
+
+        sut.deleteItemsFromPlaylistUnwrapped(fakePlaylistId, mockedDeleteItemsPlaylistRequestBody);
+
+        verify(mockedSnapshotCall).execute();
+    }
+
+    @Test
+    void deleteItemsFromPlaylistUnwrappedThrowsSpotifyActionFailedExceptionWhenError() throws IOException {
+        when(mockedSnapshotCall.execute())
+                .thenReturn(
+                        Response.error(
+                                400,
+                                ResponseBody.create(MediaType.get("application/json"), getJson("error.json"))
+                        )
+                );
+
+        Assertions.assertThrows(SpotifyActionFailedException.class, () -> sut.deleteItemsFromPlaylistUnwrapped(fakePlaylistId, mockedDeleteItemsPlaylistRequestBody));
+    }
+
+    @Test
+    void deleteItemsFromPlaylistUnwrappedThrowsHttpRequestFailedWhenHttpFails() throws IOException {
+        when(mockedSnapshotCall.execute()).thenThrow(IOException.class);
+
+        Assertions.assertThrows(HttpRequestFailedException.class, () -> sut.deleteItemsFromPlaylistUnwrapped(fakePlaylistId, mockedDeleteItemsPlaylistRequestBody));
+    }
+
+    @Test
+    void deleteItemsFromPlaylistUnwrappedThrowsIllegalArgumentExceptionWhenPlaylistIdIsNull() throws IOException {
+        when(mockedSnapshotCall.execute()).thenReturn(Response.success(null));
+
+        Assertions.assertThrows(IllegalArgumentException.class, () -> sut.deleteItemsFromPlaylistUnwrapped(null, mockedDeleteItemsPlaylistRequestBody));
+    }
+
+    @Test
+    void deleteItemsFromPlaylistUnwrappedThrowsIllegalArgumentExceptionWhenPlaylistIdEmpty() throws IOException {
+        when(mockedSnapshotCall.execute()).thenReturn(Response.success(null));
+
+        Assertions.assertThrows(IllegalArgumentException.class, () -> sut.deleteItemsFromPlaylistUnwrapped("", mockedDeleteItemsPlaylistRequestBody));
+    }
+
+    @Test
+    void deleteItemsFromPlaylistUnwrappedSetsSnapshotIdToNullWhenSnapshotIdIsEmpty() throws IOException {
+        when(mockedDeleteItemsPlaylistRequestBody.getSnapshotId()).thenReturn("");
+        when(mockedSnapshotCall.execute()).thenReturn(Response.success(new Snapshot()));
+
+        sut.deleteItemsFromPlaylistUnwrapped(fakePlaylistId, mockedDeleteItemsPlaylistRequestBody);
+
+        verify(mockedDeleteItemsPlaylistRequestBody).setSnapshotId(null);
+    }
+
+    @Test
+    void deleteItemsFromPlaylistUnwrappedThrowsSpotifyActionFailedExceptionWhenEmptyResponseBody() throws IOException {
+        when(mockedSnapshotCall.execute())
+                .thenReturn(
+                        Response.success(null)
+                );
+
+        Assertions.assertThrows(SpotifyActionFailedException.class, () -> sut.deleteItemsFromPlaylistUnwrapped(fakePlaylistId, mockedDeleteItemsPlaylistRequestBody));
     }
 }

@@ -22,6 +22,7 @@ import spotify.retrofit.services.ArtistService;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -207,6 +208,63 @@ public class ArtistApiRetrofitTest extends AbstractApiRetrofitTest {
     }
 
     @Test
+    void getArtistTopTracksUnwrappedUsesCorrectValuesToCreateHttpCall() throws IOException {
+        when(mockedTrackFullCollectionCall.execute()).thenReturn(Response.success(new TrackFullCollection()));
+
+        sut.getArtistTopTracksUnwrapped(fakeArtistId, null);
+
+        verify(mockedArtistService).getArtistTopTracks(fakeAccessTokenWithBearer, fakeArtistId, fakeOptionalParameters);
+    }
+
+
+    @Test
+    void getArtistTopTracksUnwrappedExecutesHttpCall() throws IOException {
+        when(mockedTrackFullCollectionCall.execute()).thenReturn(Response.success(new TrackFullCollection()));
+
+        sut.getArtistTopTracksUnwrapped(fakeArtistId, fakeOptionalParameters);
+        verify(mockedTrackFullCollectionCall).execute();
+    }
+
+    @Test
+    void getArtistTopTracksUnwrappedThrowsSpotifyActionFailedExceptionWhenError() throws IOException {
+        when(mockedTrackFullCollectionCall.execute())
+                .thenReturn(
+                        Response.error(
+                                400,
+                                ResponseBody.create(MediaType.get("application/json"), getJson("error.json"))
+                        )
+                );
+
+        Assertions.assertThrows(SpotifyActionFailedException.class, () -> sut.getArtistTopTracksUnwrapped(fakeArtistId, fakeOptionalParameters));
+    }
+
+    @Test
+    void getArtistTopTracksUnwrappedThrowsHttpRequestFailedWhenHttpFails() throws IOException {
+        when(mockedTrackFullCollectionCall.execute()).thenThrow(IOException.class);
+
+        Assertions.assertThrows(HttpRequestFailedException.class, () -> sut.getArtistTopTracksUnwrapped(fakeArtistId, fakeOptionalParameters));
+    }
+
+    @Test
+    void getArtistTopTracksUnwrappedReturnsTrackFullCollectionWhenSuccessful() throws IOException {
+        TrackFullCollection trackFullCollection = new TrackFullCollection();
+        trackFullCollection.setTracks(Collections.emptyList());
+        when(mockedTrackFullCollectionCall.execute()).thenReturn(Response.success(trackFullCollection));
+
+        Assertions.assertNotNull(sut.getArtistTopTracksUnwrapped(fakeArtistId, fakeOptionalParameters));
+    }
+
+    @Test
+    void getArtistTopTracksUnwrappedThrowsSpotifyActionFailedExceptionWhenEmptyResponseBody() throws IOException {
+        when(mockedTrackFullCollectionCall.execute())
+                .thenReturn(
+                        Response.success(null)
+                );
+
+        Assertions.assertThrows(SpotifyActionFailedException.class, () -> sut.getArtistTopTracksUnwrapped(fakeArtistId, fakeOptionalParameters));
+    }
+
+    @Test
     void getRelatedArtistsUsesCorrectValuesToCreateHttpCall() throws IOException {
         when(mockedArtistFullCollectionCall.execute()).thenReturn(Response.success(new ArtistFullCollection()));
 
@@ -251,6 +309,62 @@ public class ArtistApiRetrofitTest extends AbstractApiRetrofitTest {
     }
 
     @Test
+    void getRelatedArtistsUnwrappedUsesCorrectValuesToCreateHttpCall() throws IOException {
+        when(mockedArtistFullCollectionCall.execute()).thenReturn(Response.success(new ArtistFullCollection()));
+
+        sut.getRelatedArtistsUnwrapped(fakeArtistId);
+
+        verify(mockedArtistService).getRelatedArtists(fakeAccessTokenWithBearer, fakeArtistId);
+    }
+
+    @Test
+    void getRelatedArtistsUnwrappedExecutesHttpCall() throws IOException {
+        when(mockedArtistFullCollectionCall.execute()).thenReturn(Response.success(new ArtistFullCollection()));
+
+        sut.getRelatedArtistsUnwrapped(fakeArtistId);
+        verify(mockedArtistFullCollectionCall).execute();
+    }
+
+    @Test
+    void getRelatedArtistsUnwrappedThrowsSpotifyActionFailedExceptionWhenError() throws IOException {
+        when(mockedArtistFullCollectionCall.execute())
+                .thenReturn(
+                        Response.error(
+                                400,
+                                ResponseBody.create(MediaType.get("application/json"), getJson("error.json"))
+                        )
+                );
+
+        Assertions.assertThrows(SpotifyActionFailedException.class, () -> sut.getRelatedArtistsUnwrapped(fakeArtistId));
+    }
+
+    @Test
+    void getRelatedArtistsUnwrappedThrowsHttpRequestFailedWhenHttpFails() throws IOException {
+        when(mockedArtistFullCollectionCall.execute()).thenThrow(IOException.class);
+
+        Assertions.assertThrows(HttpRequestFailedException.class, () -> sut.getRelatedArtistsUnwrapped(fakeArtistId));
+    }
+
+    @Test
+    void getRelatedArtistsUnwrappedReturnsArtistFullCollectionWhenSuccessful() throws IOException {
+        ArtistFullCollection artistFullCollection = new ArtistFullCollection();
+        artistFullCollection.setArtists(Collections.emptyList());
+        when(mockedArtistFullCollectionCall.execute()).thenReturn(Response.success(artistFullCollection));
+
+        Assertions.assertNotNull(sut.getRelatedArtistsUnwrapped(fakeArtistId));
+    }
+
+    @Test
+    void getRelatedArtistsUnwrappedThrowsSpotifyActionFailedExceptionWhenEmptyResponseBody() throws IOException {
+        when(mockedArtistFullCollectionCall.execute())
+                .thenReturn(
+                        Response.success(null)
+                );
+
+        Assertions.assertThrows(SpotifyActionFailedException.class, () -> sut.getRelatedArtistsUnwrapped(fakeArtistId));
+    }
+
+    @Test
     void getArtistsUsesCorrectValuesToCreateHttpCall() throws IOException {
         when(mockedArtistFullCollectionCall.execute()).thenReturn(Response.success(new ArtistFullCollection()));
 
@@ -292,5 +406,61 @@ public class ArtistApiRetrofitTest extends AbstractApiRetrofitTest {
         when(mockedArtistFullCollectionCall.execute()).thenReturn(Response.success(new ArtistFullCollection()));
 
         Assertions.assertNotNull(sut.getArtists(listOfFakeArtistIds));
+    }
+
+    @Test
+    void getArtistsUnwrappedUsesCorrectValuesToCreateHttpCall() throws IOException {
+        when(mockedArtistFullCollectionCall.execute()).thenReturn(Response.success(new ArtistFullCollection()));
+
+        sut.getArtistsUnwrapped(listOfFakeArtistIds);
+
+        verify(mockedArtistService).getArtists(fakeAccessTokenWithBearer, fakeArtistIds);
+    }
+
+    @Test
+    void getArtistsUnwrappedExecutesHttpCall() throws IOException {
+        when(mockedArtistFullCollectionCall.execute()).thenReturn(Response.success(new ArtistFullCollection()));
+
+        sut.getArtistsUnwrapped(listOfFakeArtistIds);
+        verify(mockedArtistFullCollectionCall).execute();
+    }
+
+    @Test
+    void getArtistsUnwrappedThrowsSpotifyActionFailedExceptionWhenError() throws IOException {
+        when(mockedArtistFullCollectionCall.execute())
+                .thenReturn(
+                        Response.error(
+                                400,
+                                ResponseBody.create(MediaType.get("application/json"), getJson("error.json"))
+                        )
+                );
+
+        Assertions.assertThrows(SpotifyActionFailedException.class, () -> sut.getArtistsUnwrapped(listOfFakeArtistIds));
+    }
+
+    @Test
+    void getArtistsUnwrappedThrowsHttpRequestFailedWhenHttpFails() throws IOException {
+        when(mockedArtistFullCollectionCall.execute()).thenThrow(IOException.class);
+
+        Assertions.assertThrows(HttpRequestFailedException.class, () -> sut.getArtistsUnwrapped(listOfFakeArtistIds));
+    }
+
+    @Test
+    void getArtistsUnwrappedReturnsArtistFullCollectionWhenSuccessful() throws IOException {
+        ArtistFullCollection artistFullCollection = new ArtistFullCollection();
+        artistFullCollection.setArtists(Collections.emptyList());
+        when(mockedArtistFullCollectionCall.execute()).thenReturn(Response.success(artistFullCollection));
+
+        Assertions.assertNotNull(sut.getArtistsUnwrapped(listOfFakeArtistIds));
+    }
+
+    @Test
+    void getArtistsUnwrappedThrowsSpotifyActionFailedExceptionWhenEmptyResponseBody() throws IOException {
+        when(mockedArtistFullCollectionCall.execute())
+                .thenReturn(
+                        Response.success(null)
+                );
+
+        Assertions.assertThrows(SpotifyActionFailedException.class, () -> sut.getArtistsUnwrapped(listOfFakeArtistIds));
     }
 }
