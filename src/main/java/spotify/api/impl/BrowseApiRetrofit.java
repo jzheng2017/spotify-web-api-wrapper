@@ -91,30 +91,15 @@ public class BrowseApiRetrofit implements BrowseApi {
 
     @Override
     public Paging<PlaylistSimplified> getCategoryPlaylistsUnwrapped(String categoryId, Map<String, String> options) {
-        options = ValidatorUtil.optionsValueCheck(options);
+        PlaylistSimplifiedPaging responseBody = getCategoryPlaylists(categoryId, options);
 
-        logger.trace("Constructing HTTP call to fetch category playlists.");
-        Call<PlaylistSimplifiedPaging> httpCall = browseService.getCategoryPlaylists("Bearer " + this.accessToken, categoryId, options);
-
-        try {
-            logger.info("Executing HTTP call to fetch category playlists.");
-            logger.debug("Fetching category {} playlists with following values: {}.", categoryId, options);
-            LoggingUtil.logHttpCall(logger, httpCall);
-            Response<PlaylistSimplifiedPaging> response = httpCall.execute();
-
-            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response, HttpStatusCode.OK);
-
-            if(response.body() != null) {
-                logger.info("Category playlists have been successfully fetched.");
-                return response.body().getPlaylists();
-            }
-
+        if (responseBody == null) {
             logger.error(EMPTY_RESPONSE_BODY_UNKNOWN_REASON);
             throw new SpotifyActionFailedException(EMPTY_RESPONSE_BODY_UNKNOWN_REASON);
-        } catch (IOException ex) {
-            logger.error("HTTP request to fetch category playlists has failed.");
-            throw new HttpRequestFailedException(ex.getMessage());
         }
+
+        logger.info("Category playlists have been successfully fetched.");
+        return responseBody.getPlaylists();
     }
 
     @Override
@@ -142,30 +127,15 @@ public class BrowseApiRetrofit implements BrowseApi {
 
     @Override
     public Paging<CategoryFull> getCategoriesUnwrapped(Map<String, String> options) {
-        options = ValidatorUtil.optionsValueCheck(options);
+        CategoryFullPaging responseBody = getCategories(options);
 
-        logger.trace("Constructing HTTP call to fetch categories.");
-        Call<CategoryFullPaging> httpCall = browseService.getCategories("Bearer " + this.accessToken, options);
-
-        try {
-            logger.info("Executing HTTP call to fetch categories.");
-            logger.debug("Fetching categories with following values: {}.", options);
-            LoggingUtil.logHttpCall(logger, httpCall);
-            Response<CategoryFullPaging> response = httpCall.execute();
-
-            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response, HttpStatusCode.OK);
-
-            if(response.body() != null) {
-                logger.info("Categories have been successfully fetched.");
-                return response.body().getCategories();
-            }
-
+        if (responseBody == null) {
             logger.error(EMPTY_RESPONSE_BODY_UNKNOWN_REASON);
             throw new SpotifyActionFailedException(EMPTY_RESPONSE_BODY_UNKNOWN_REASON);
-        } catch (IOException ex) {
-            logger.error("HTTP request to fetch categories has failed.");
-            throw new HttpRequestFailedException(ex.getMessage());
         }
+
+        logger.info("Categories have been successfully fetched.");
+        return responseBody.getCategories();
     }
 
     @Override
@@ -216,30 +186,15 @@ public class BrowseApiRetrofit implements BrowseApi {
 
     @Override
     public Paging<AlbumSimplified> getNewReleasesUnwrapped(Map<String, String> options) {
-        options = ValidatorUtil.optionsValueCheck(options);
+        AlbumSimplifiedPaging responseBody = getNewReleases(options);
 
-        logger.trace("Constructing HTTP call to fetch new releases.");
-        Call<AlbumSimplifiedPaging> httpCall = browseService.getNewReleases("Bearer " + this.accessToken, options);
-
-        try {
-            logger.info("Executing HTTP call to fetch new releases.");
-            logger.debug("Fetching new releases with following values: {}", options);
-            LoggingUtil.logHttpCall(logger, httpCall);
-            Response<AlbumSimplifiedPaging> response = httpCall.execute();
-
-            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response, HttpStatusCode.OK);
-
-            if(response.body() != null) {
-                logger.info("New releases have been successfully fetched.");
-                return response.body().getAlbums();
-            }
-
+        if(responseBody == null) {
             logger.error(EMPTY_RESPONSE_BODY_UNKNOWN_REASON);
             throw new SpotifyActionFailedException(EMPTY_RESPONSE_BODY_UNKNOWN_REASON);
-        } catch (IOException ex) {
-            logger.error("HTTP request to fetch new releases has failed.");
-            throw new HttpRequestFailedException(ex.getMessage());
         }
+
+        logger.info("New releases have been successfully fetched.");
+        return responseBody.getAlbums();
     }
 
     @Override
