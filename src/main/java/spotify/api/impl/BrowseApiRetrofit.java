@@ -90,7 +90,7 @@ public class BrowseApiRetrofit implements BrowseApi {
     }
 
     @Override
-    public Paging<PlaylistSimplified> getCategoryPlaylistsUnwrapped(String categoryId, Map<String, String> options) {
+    public Paging<PlaylistSimplified> getCategoryPlaylistsPaging(String categoryId, Map<String, String> options) {
         PlaylistSimplifiedPaging responseBody = getCategoryPlaylists(categoryId, options);
 
         if (responseBody == null) {
@@ -126,7 +126,7 @@ public class BrowseApiRetrofit implements BrowseApi {
     }
 
     @Override
-    public Paging<CategoryFull> getCategoriesUnwrapped(Map<String, String> options) {
+    public Paging<CategoryFull> getCategoriesPaging(Map<String, String> options) {
         CategoryFullPaging responseBody = getCategories(options);
 
         if (responseBody == null) {
@@ -185,7 +185,7 @@ public class BrowseApiRetrofit implements BrowseApi {
     }
 
     @Override
-    public Paging<AlbumSimplified> getNewReleasesUnwrapped(Map<String, String> options) {
+    public Paging<AlbumSimplified> getNewReleasesPaging(Map<String, String> options) {
         AlbumSimplifiedPaging responseBody = getNewReleases(options);
 
         if(responseBody == null) {

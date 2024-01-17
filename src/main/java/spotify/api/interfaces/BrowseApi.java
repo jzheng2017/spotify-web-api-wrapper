@@ -17,30 +17,30 @@ public interface BrowseApi {
     CategoryFull getCategory(String categoryId, Map<String, String> options);
 
     /**
-     * This method is deprecated because it returns an unnecessary wrapper object. Use {@link #getCategoryPlaylistsUnwrapped} instead;
+     * This method is deprecated because it returns an unnecessary wrapper object. Use {@link #getCategoryPlaylistsPaging} instead;
      */
     @Deprecated(since = "1.5.8")
     PlaylistSimplifiedPaging getCategoryPlaylists(String categoryId, Map<String, String> options);
 
-    Paging<PlaylistSimplified> getCategoryPlaylistsUnwrapped(String categoryId, Map<String, String> options);
+    Paging<PlaylistSimplified> getCategoryPlaylistsPaging(String categoryId, Map<String, String> options);
 
     /**
-     * This method is deprecated because it returns an unnecessary wrapper object. Use {@link #getCategoriesUnwrapped} instead;
+     * This method is deprecated because it returns an unnecessary wrapper object. Use {@link #getCategoriesPaging} instead;
      */
     @Deprecated(since = "1.5.8")
     CategoryFullPaging getCategories(Map<String, String> options);
 
-    Paging<CategoryFull> getCategoriesUnwrapped(Map<String, String> options);
+    Paging<CategoryFull> getCategoriesPaging(Map<String, String> options);
 
     FeaturedPlaylistCollection getFeaturedPlaylists(Map<String, String> options);
 
     /**
-     * This method is deprecated because it returns an unnecessary wrapper object. Use {@link #getNewReleasesUnwrapped} instead;
+     * This method is deprecated because it returns an unnecessary wrapper object. Use {@link #getNewReleasesPaging} instead;
      */
     @Deprecated(since = "1.5.8")
     AlbumSimplifiedPaging getNewReleases(Map<String, String> options);
 
-    Paging<AlbumSimplified> getNewReleasesUnwrapped(Map<String, String> options);
+    Paging<AlbumSimplified> getNewReleasesPaging(Map<String, String> options);
 
     RecommendationCollection getRecommendations(List<String> listOfSeedArtists, List<String> listOfSeedGenres, List<String> listOfSeedTracks, Map<String, String> options);
 }
