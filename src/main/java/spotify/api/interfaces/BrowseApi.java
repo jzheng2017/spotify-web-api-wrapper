@@ -17,7 +17,7 @@ public interface BrowseApi {
     CategoryFull getCategory(String categoryId, Map<String, String> options);
 
     /**
-     * This method is deprecated because it returns an unnecessary wrapper object. Use {@link #getCategoryPlaylistsPaging} instead;
+     * This method is deprecated because it returns an unnecessary wrapper object. Use {@link #getCategoryPlaylistsPaging} instead.
      */
     @Deprecated(since = "2.0.0")
     PlaylistSimplifiedPaging getCategoryPlaylists(String categoryId, Map<String, String> options);
@@ -25,7 +25,7 @@ public interface BrowseApi {
     Paging<PlaylistSimplified> getCategoryPlaylistsPaging(String categoryId, Map<String, String> options);
 
     /**
-     * This method is deprecated because it returns an unnecessary wrapper object. Use {@link #getCategoriesPaging} instead;
+     * This method is deprecated because it returns an unnecessary wrapper object. Use {@link #getCategoriesPaging} instead.
      */
     @Deprecated(since = "2.0.0")
     CategoryFullPaging getCategories(Map<String, String> options);
@@ -35,7 +35,7 @@ public interface BrowseApi {
     FeaturedPlaylistCollection getFeaturedPlaylists(Map<String, String> options);
 
     /**
-     * This method is deprecated because it returns an unnecessary wrapper object. Use {@link #getNewReleasesPaging} instead;
+     * This method is deprecated because it returns an unnecessary wrapper object. Use {@link #getNewReleasesPaging} instead.
      */
     @Deprecated(since = "2.0.0")
     AlbumSimplifiedPaging getNewReleases(Map<String, String> options);
