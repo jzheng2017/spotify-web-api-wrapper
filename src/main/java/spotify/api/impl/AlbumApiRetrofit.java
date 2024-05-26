@@ -1,7 +1,12 @@
 package spotify.api.impl;
 
+import java.io.IOException;
+import java.util.List;
+import java.util.Map;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import retrofit2.Call;
 import retrofit2.Response;
 import spotify.api.enums.HttpStatusCode;
@@ -17,23 +22,46 @@ import spotify.utils.LoggingUtil;
 import spotify.utils.ResponseChecker;
 import spotify.utils.ValidatorUtil;
 
-import java.io.IOException;
-import java.util.List;
-import java.util.Map;
+/**
+ * Implementation of the {@link AlbumApi} interface using Retrofit to interact with the Spotify API.
+ * This class provides methods to fetch album details, multiple albums, and album tracks from Spotify.
+ */
 
 public class AlbumApiRetrofit implements AlbumApi {
     private final Logger logger = LoggerFactory.getLogger(AlbumApiRetrofit.class);
     private final String accessToken;
     private final AlbumService albumService;
 
+    /**
+     * constructs an instance of {@link AlbumApiRetrofit} with the specified access token.
+     *
+     * @param accessToken the access token to be used for authorization
+     */
+
     public AlbumApiRetrofit(final String accessToken) {
         this(accessToken, RetrofitHttpServiceFactory.getAlbumService());
     }
+
+    /**
+     * constructs an instance of {@link AlbumApiRetrofit} with the specified access token and album service.
+     *
+     * @param accessToken the access token to be used for authorization
+     * @param albumService the album service to be used for making HTTP calls
+     */
 
     public AlbumApiRetrofit(final String accessToken, final AlbumService albumService) {
         this.accessToken = accessToken;
         this.albumService = albumService;
     }
+
+    /**
+     * fetches the details of a single album from Spotify.
+     *
+     * @param albumId the ID of the album to fetch
+     * @param options additional options for the request
+     * @return the full details of the album
+     * @throws HttpRequestFailedException if the HTTP request fails
+     */
 
     @Override
     public AlbumFull getAlbum(String albumId, Map<String, String> options) {
@@ -57,6 +85,15 @@ public class AlbumApiRetrofit implements AlbumApi {
             throw new HttpRequestFailedException(e.getMessage());
         }
     }
+
+    /**
+     * fetches the details of multiple albums from Spotify.
+     *
+     * @param listOfAlbumIds the list of album IDs to fetch
+     * @param options additional options for the request
+     * @return the full details of the albums
+     * @throws HttpRequestFailedException if the HTTP request fails
+     */
 
     @Override
     public AlbumFullCollection getAlbums(List<String> listOfAlbumIds, Map<String, String> options) {
@@ -85,6 +122,15 @@ public class AlbumApiRetrofit implements AlbumApi {
         }
     }
 
+    /**
+     * fetches the tracks of a specific album from Spotify.
+     *
+     * @param albumId the ID of the album whose tracks are to be fetched
+     * @param options additional options for the request
+     * @return a paging object containing the album's tracks
+     * @throws HttpRequestFailedException if the HTTP request fails
+     */
+
     @Override
     public Paging<TrackSimplified> getAlbumTracks(String albumId, Map<String, String> options) {
         options = ValidatorUtil.optionsValueCheck(options);
@@ -107,6 +153,14 @@ public class AlbumApiRetrofit implements AlbumApi {
             throw new HttpRequestFailedException(ex.getMessage());
         }
     }
+
+    /**
+     * Validates the size of the album list and throws an exception if the size exceeds the maximum allowed limit.
+     *
+     * @param listOfAlbumIds the list of album IDs to validate
+     * @param maximumAmountOfAlbumIdsAllowed the maximum allowed number of album IDs
+     * @throws IllegalArgumentException if the list size exceeds the maximum allowed limit
+     */
 
     private void validateAlbumListSizeAndThrowIfExceeded(List<String> listOfAlbumIds, int maximumAmountOfAlbumIdsAllowed) {
         final int listSize = listOfAlbumIds.size();
