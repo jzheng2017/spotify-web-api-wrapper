@@ -33,7 +33,7 @@ public class AlbumApiRetrofit implements AlbumApi {
     private final AlbumService albumService;
 
     /**
-     * Constructs an instance of {@link AlbumApiRetrofit} with the specified access token.
+     * constructs an instance of {@link AlbumApiRetrofit} with the specified access token.
      *
      * @param accessToken the access token to be used for authorization
      */
@@ -43,7 +43,7 @@ public class AlbumApiRetrofit implements AlbumApi {
     }
 
     /**
-     * Constructs an instance of {@link AlbumApiRetrofit} with the specified access token and album service.
+     * constructs an instance of {@link AlbumApiRetrofit} with the specified access token and album service.
      *
      * @param accessToken the access token to be used for authorization
      * @param albumService the album service to be used for making HTTP calls
@@ -55,7 +55,7 @@ public class AlbumApiRetrofit implements AlbumApi {
     }
 
     /**
-     * Fetches the details of a single album from Spotify.
+     * fetches the details of a single album from Spotify.
      *
      * @param albumId the ID of the album to fetch
      * @param options additional options for the request
@@ -87,7 +87,7 @@ public class AlbumApiRetrofit implements AlbumApi {
     }
 
     /**
-     * Fetches the details of multiple albums from Spotify.
+     * fetches the details of multiple albums from Spotify.
      *
      * @param listOfAlbumIds the list of album IDs to fetch
      * @param options additional options for the request
@@ -123,7 +123,7 @@ public class AlbumApiRetrofit implements AlbumApi {
     }
 
     /**
-     * Fetches the tracks of a specific album from Spotify.
+     * fetches the tracks of a specific album from Spotify.
      *
      * @param albumId the ID of the album whose tracks are to be fetched
      * @param options additional options for the request
@@ -155,7 +155,7 @@ public class AlbumApiRetrofit implements AlbumApi {
     }
 
     /**
-     * validates the size of the album list and throws an exception if the size exceeds the maximum allowed limit.
+     * Validates the size of the album list and throws an exception if the size exceeds the maximum allowed limit.
      *
      * @param listOfAlbumIds the list of album IDs to validate
      * @param maximumAmountOfAlbumIdsAllowed the maximum allowed number of album IDs
