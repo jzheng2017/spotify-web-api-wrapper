@@ -155,7 +155,7 @@ public class AlbumApiRetrofit implements AlbumApi {
     }
 
     /**
-     * Validates the size of the album list and throws an exception if the size exceeds the maximum allowed limit.
+     * validates the size of the album list and throws an exception if the size exceeds the maximum allowed limit.
      *
      * @param listOfAlbumIds the list of album IDs to validate
      * @param maximumAmountOfAlbumIdsAllowed the maximum allowed number of album IDs
