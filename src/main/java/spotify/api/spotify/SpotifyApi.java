@@ -20,6 +20,7 @@ import spotify.models.episodes.EpisodeFull;
 import spotify.models.episodes.EpisodeFullCollection;
 import spotify.models.episodes.EpisodeSimplified;
 import spotify.models.generic.Image;
+import spotify.models.markets.MarketFull;
 import spotify.models.paging.CursorBasedPaging;
 import spotify.models.paging.Paging;
 import spotify.models.players.CurrentlyPlayingObject;
@@ -62,6 +63,7 @@ public class SpotifyApi {
     private PersonalizationApi personalizationApi;
     private PlayerApi playerApi;
     private SearchApi searchApi;
+    private MarketApi marketApi;
 
     public SpotifyApi(final String accessToken) {
         this.setup(accessToken);
@@ -71,7 +73,6 @@ public class SpotifyApi {
         this.trackApi = trackApi;
         this.albumApi = albumApi;
     }
-
 
     public TrackFull getTrack(String trackId, Map<String, String> options) {
         logger.info("Requesting a track with id {}.", trackId);
@@ -101,6 +102,11 @@ public class SpotifyApi {
     public AlbumFull getAlbum(String albumId, Map<String, String> options) {
         logger.info("Requesting an album with id {}.", albumId);
         return albumApi.getAlbum(albumId, options);
+    }
+
+    public MarketFull getMarket() {
+        logger.info("Requesting all available markets");
+        return marketApi.getMarkets();
     }
 
     public AlbumFullCollection getAlbums(List<String> listOfAlbumIds, Map<String, String> options) {
@@ -460,5 +466,6 @@ public class SpotifyApi {
         this.personalizationApi = new PersonalizationApiRetrofit(accessToken);
         this.playerApi = new PlayerApiRetrofit(accessToken);
         this.searchApi = new SearchApiRetrofit(accessToken);
+        this.marketApi = new MarketApiRetrofit(accessToken);
     }
 }
