@@ -80,4 +80,8 @@ public class RetrofitHttpServiceFactory {
 
         return httpClient.create(serviceClassToBeCreatedFor);
     }
+
+    public static MarketService getMarketService() {
+        return getRetrofitHttpService(MarketService.class, API_BASE_URL_HTTPS_WITH_VERSION);
+    }
 }
