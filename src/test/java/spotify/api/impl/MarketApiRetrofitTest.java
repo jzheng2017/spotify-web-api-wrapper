@@ -21,7 +21,6 @@ import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-
 public class MarketApiRetrofitTest extends AbstractApiRetrofitTest {
     private MarketApiRetrofit sut;
     @Mock
