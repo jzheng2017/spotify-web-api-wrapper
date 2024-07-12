@@ -105,7 +105,7 @@ public class SpotifyApi {
     }
 
     public MarketFull getMarket() {
-        logger.info("Requesting all available markets");
+        logger.info("Requesting all available markets.");
         return marketApi.getMarkets();
     }
 

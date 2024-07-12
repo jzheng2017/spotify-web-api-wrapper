@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import retrofit2.Call;
 import retrofit2.Response;
 import spotify.api.enums.HttpStatusCode;
@@ -18,11 +17,9 @@ import spotify.utils.ResponseChecker;
 
 
 public class MarketApiRetrofit implements MarketApi {
-
     private final Logger logger = LoggerFactory.getLogger(MarketApiRetrofit.class);
     private final String accessToken;
     private final MarketService marketService;
-
 
     public MarketApiRetrofit(final String accessToken) {
         this(accessToken, RetrofitHttpServiceFactory.getMarketService());
@@ -33,15 +30,13 @@ public class MarketApiRetrofit implements MarketApi {
         this.marketService = marketService;
     }
 
-
     @Override
     public MarketFull getMarkets(){
         logger.trace("Constructing HTTP call to fetch markets.");
         Call<MarketFull> httpCall = marketService.getMarkets("Bearer " + this.accessToken);
 
         try {
-
-            logger.info("Executing HTTP call to fetch markets");
+            logger.info("Executing HTTP call to fetch markets.");
             logger.debug("Fetching markets....");
             LoggingUtil.logHttpCall(logger, httpCall);
             Response<MarketFull> response = httpCall.execute();
