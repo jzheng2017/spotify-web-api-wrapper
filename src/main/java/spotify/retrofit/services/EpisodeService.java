@@ -4,6 +4,7 @@ import retrofit2.Call;
 import retrofit2.http.*;
 import spotify.models.episodes.EpisodeFull;
 import spotify.models.episodes.EpisodeFullCollection;
+import spotify.models.episodes.SavedEpisodeFull;
 
 import java.util.Map;
 
@@ -13,4 +14,5 @@ public interface EpisodeService {
 
     @GET("episodes")
     Call<EpisodeFullCollection> getEpisodes(@Header("Authorization") String accessToken, @Query("ids") String episodeIds, @QueryMap Map<String, String> options);
+
 }

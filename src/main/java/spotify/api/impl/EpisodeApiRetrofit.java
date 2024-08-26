@@ -10,6 +10,8 @@ import spotify.exceptions.HttpRequestFailedException;
 import spotify.factories.RetrofitHttpServiceFactory;
 import spotify.models.episodes.EpisodeFull;
 import spotify.models.episodes.EpisodeFullCollection;
+import spotify.models.episodes.SavedEpisodeFull;
+import spotify.models.paging.Paging;
 import spotify.retrofit.services.EpisodeService;
 import spotify.utils.LoggingUtil;
 import spotify.utils.ResponseChecker;

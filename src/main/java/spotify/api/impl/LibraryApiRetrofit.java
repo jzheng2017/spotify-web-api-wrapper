@@ -9,6 +9,7 @@ import spotify.api.interfaces.LibraryApi;
 import spotify.exceptions.HttpRequestFailedException;
 import spotify.factories.RetrofitHttpServiceFactory;
 import spotify.models.albums.SavedAlbumFull;
+import spotify.models.episodes.SavedEpisodeFull;
 import spotify.models.paging.Paging;
 import spotify.models.shows.SavedShowSimplified;
 import spotify.models.tracks.SavedTrackFull;
@@ -108,12 +109,12 @@ public class LibraryApiRetrofit implements LibraryApi {
     public Paging<SavedAlbumFull> getSavedAlbums(Map<String, String> options) {
         options = ValidatorUtil.optionsValueCheck(options);
 
-        logger.trace("Constructing HTTP call fetch current user saved albums");
+        logger.trace("Constructing HTTP call to fetch current user's saved albums");
         Call<Paging<SavedAlbumFull>> httpCall = libraryService.getSavedAlbums("Bearer " + this.accessToken, options);
 
         try {
-            logger.info("Executing HTTP call to fetch current user saved albums");
-            logger.debug("Fetching current user saved albums with the following values: {}.", options);
+            logger.info("Executing HTTP call to fetch current user's saved albums");
+            logger.debug("Fetching current user's saved albums with the following values: {}.", options);
             LoggingUtil.logHttpCall(logger, httpCall);
             Response<Paging<SavedAlbumFull>> response = httpCall.execute();
 
@@ -125,6 +126,30 @@ public class LibraryApiRetrofit implements LibraryApi {
             logger.error("HTTP request to fetch saved albums has failed.");
             throw new HttpRequestFailedException(ex.getMessage());
         }
+    }
+
+    @Override
+    public Paging<SavedEpisodeFull> getSavedEpisodes(Map<String, String> options) {
+        options = ValidatorUtil.optionsValueCheck(options);
+
+        logger.trace("Constructing HTTP call to fetch current user's saved episodes");
+        Call<Paging<SavedEpisodeFull>> httpCall = libraryService.getSavedEpisodes("Bearer " + this.accessToken, options);
+
+        try {
+            logger.info("Executing HTTP call to fetch current user saved albums");
+            logger.debug("Fetching current user's saved episodes with the following values: {}.", options);
+            LoggingUtil.logHttpCall(logger, httpCall);
+            Response<Paging<SavedEpisodeFull>> response = httpCall.execute();
+
+            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response, HttpStatusCode.OK);
+
+            logger.info("Saved episodes have been successfully fetched");
+            return response.body();
+        } catch (IOException ex) {
+            logger.error("HTTP request to fetch saved episodes has failed.");
+            throw new HttpRequestFailedException(ex.getMessage());
+        }
+
     }
 
     @Override
@@ -154,11 +179,11 @@ public class LibraryApiRetrofit implements LibraryApi {
     public Paging<SavedTrackFull> getSavedTracks(Map<String, String> options) {
         options = ValidatorUtil.optionsValueCheck(options);
 
-        logger.trace("Constructing HTTP call fetch current user saved tracks");
+        logger.trace("Constructing HTTP call fetch current user's saved tracks");
         Call<Paging<SavedTrackFull>> httpCall = libraryService.getSavedTracks("Bearer " + this.accessToken, options);
 
         try {
-            logger.info("Executing HTTP call to fetch current user saved tracks");
+            logger.info("Executing HTTP call to fetch current user's saved tracks");
             logger.debug("Fetching current user saved tracks with the following values: {}.", options);
             LoggingUtil.logHttpCall(logger, httpCall);
             Response<Paging<SavedTrackFull>> response = httpCall.execute();
@@ -307,4 +332,5 @@ public class LibraryApiRetrofit implements LibraryApi {
             throw new HttpRequestFailedException(ex.getMessage());
         }
     }
+
 }
