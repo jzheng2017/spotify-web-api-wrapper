@@ -19,6 +19,7 @@ import spotify.models.categories.CategoryFullPaging;
 import spotify.models.episodes.EpisodeFull;
 import spotify.models.episodes.EpisodeFullCollection;
 import spotify.models.episodes.EpisodeSimplified;
+import spotify.models.episodes.SavedEpisodeFull;
 import spotify.models.generic.Image;
 import spotify.models.markets.MarketFull;
 import spotify.models.paging.CursorBasedPaging;
@@ -262,6 +263,11 @@ public class SpotifyApi {
     public Paging<SavedAlbumFull> getSavedAlbums(Map<String, String> options) {
         logger.info("Requesting to fetch current user's saved albums");
         return libraryApi.getSavedAlbums(options);
+    }
+
+    public Paging<SavedEpisodeFull> getSavedEpisodes(Map<String, String> options) {
+        logger.info("Requesting to fetch current user's saved episodes");
+        return libraryApi.getSavedEpisodes(options);
     }
 
     public Paging<SavedShowSimplified> getSavedShows(Map<String, String> options) {

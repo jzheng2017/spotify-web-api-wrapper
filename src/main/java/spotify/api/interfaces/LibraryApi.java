@@ -1,6 +1,7 @@
 package spotify.api.interfaces;
 
 import spotify.models.albums.SavedAlbumFull;
+import spotify.models.episodes.SavedEpisodeFull;
 import spotify.models.paging.Paging;
 import spotify.models.shows.SavedShowSimplified;
 import spotify.models.tracks.SavedTrackFull;
@@ -32,4 +33,6 @@ public interface LibraryApi {
     void deleteShows(List<String> listOfShowIds, Map<String, String> options);
 
     void deleteTracks(List<String> listOfTrackIds);
+
+    Paging<SavedEpisodeFull> getSavedEpisodes(Map<String, String> options);
 }
