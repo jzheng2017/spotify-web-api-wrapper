@@ -1,0 +1,201 @@
+@options
+@argfile
+-classpath
+'C:/Users/Siddu Raj/.m2/repository/com/squareup/retrofit2/retrofit/2.9.0/retrofit-2.9.0.jar;C:/Users/Siddu Raj/.m2/repository/com/squareup/okhttp3/okhttp/3.14.9/okhttp-3.14.9.jar;C:/Users/Siddu Raj/.m2/repository/com/squareup/okio/okio/1.17.2/okio-1.17.2.jar;C:/Users/Siddu Raj/.m2/repository/com/squareup/retrofit2/converter-gson/2.9.0/converter-gson-2.9.0.jar;C:/Users/Siddu Raj/.m2/repository/com/google/code/gson/gson/2.8.5/gson-2.8.5.jar;C:/Users/Siddu Raj/.m2/repository/org/slf4j/slf4j-log4j12/2.0.0-alpha2/slf4j-log4j12-2.0.0-alpha2.jar;C:/Users/Siddu Raj/.m2/repository/org/slf4j/slf4j-api/2.0.0-alpha2/slf4j-api-2.0.0-alpha2.jar;C:/Users/Siddu Raj/.m2/repository/log4j/log4j/1.2.17/log4j-1.2.17.jar'
+-encoding
+'UTF-8'
+-protected
+-source
+'11'
+-sourcepath
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java;C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/target/generated-sources/annotations'
+-author
+-bottom
+'Copyright &#169; 2024. All rights reserved.'
+-charset
+'UTF-8'
+-d
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/target/apidocs'
+-docencoding
+'UTF-8'
+-doctitle
+'Spotify Web API Java Wrapper 1.5.7 API'
+-linkoffline
+'https://docs.oracle.com/en/java/javase/11/docs/api' 'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/target/javadoc-bundle-options'
+-use
+-version
+-windowtitle
+'Spotify Web API Java Wrapper 1.5.7 API'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/api/authorization/AuthorizationCodeFlow.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/api/authorization/AuthorizationCodeFlowPKCE.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/api/authorization/AuthorizationPKCERequestToken.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/api/authorization/AuthorizationRefreshToken.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/api/authorization/AuthorizationRequestToken.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/api/authorization/ClientCredentialsFlow.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/api/enums/AlbumType.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/api/enums/AuthorizationScope.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/api/enums/EntityType.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/api/enums/GrantType.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/api/enums/HttpStatusCode.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/api/enums/QueryType.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/api/enums/RepeatType.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/api/impl/AlbumApiRetrofit.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/api/impl/ArtistApiRetrofit.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/api/impl/BrowseApiRetrofit.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/api/impl/EpisodeApiRetrofit.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/api/impl/FollowApiRetrofit.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/api/impl/LibraryApiRetrofit.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/api/impl/PersonalizationApiRetrofit.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/api/impl/PlayerApiRetrofit.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/api/impl/PlaylistApiRetrofit.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/api/impl/SearchApiRetrofit.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/api/impl/ShowApiRetrofit.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/api/impl/TrackApiRetrofit.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/api/impl/UserApiRetrofit.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/api/interfaces/AlbumApi.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/api/interfaces/ArtistApi.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/api/interfaces/BrowseApi.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/api/interfaces/EpisodeApi.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/api/interfaces/FollowApi.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/api/interfaces/LibraryApi.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/api/interfaces/PersonalizationApi.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/api/interfaces/PlayerApi.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/api/interfaces/PlaylistApi.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/api/interfaces/SearchApi.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/api/interfaces/ShowApi.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/api/interfaces/TrackApi.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/api/interfaces/UserApi.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/api/spotify/SpotifyApi.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/config/ApiUrl.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/exceptions/HttpRequestFailedException.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/exceptions/SpotifyActionFailedException.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/exceptions/SpotifyAuthorizationFailedException.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/factories/AbstractPlayableObjectDeserializer.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/factories/GsonFactory.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/factories/RetrofitClientFactory.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/factories/RetrofitHttpServiceFactory.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/models/albums/AlbumFull.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/models/albums/AlbumFullCollection.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/models/albums/AlbumSimplified.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/models/albums/AlbumSimplifiedPaging.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/models/albums/SavedAlbumFull.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/models/artists/ArtistFull.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/models/artists/ArtistFullCollection.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/models/artists/ArtistFullCursorBasedPagingWrapper.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/models/artists/ArtistSimplified.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/models/artists/Follower.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/models/audio/AudioAnalysis.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/models/audio/AudioFeatures.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/models/audio/AudioFeaturesCollection.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/models/audio/Section.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/models/audio/Segment.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/models/audio/TimeInterval.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/models/authorization/AuthorizationCodeFlowTokenResponse.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/models/authorization/ClientCredentialsFlowTokenResponse.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/models/categories/CategoryFull.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/models/categories/CategoryFullPaging.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/models/episodes/EpisodeFull.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/models/episodes/EpisodeFullCollection.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/models/episodes/EpisodeSimplified.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/models/episodes/ResumePointObject.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/models/errors/ErrorInfo.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/models/errors/SpotifyError.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/models/generic/AbstractPlayableObject.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/models/generic/Copyright.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/models/generic/Cursor.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/models/generic/ExternalId.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/models/generic/ExternalUrl.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/models/generic/Image.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/models/paging/CursorBasedPaging.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/models/paging/Paging.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/models/players/Action.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/models/players/Context.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/models/players/CurrentlyPlayingObject.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/models/players/Device.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/models/players/DeviceCollection.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/models/players/Disallow.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/models/players/Offset.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/models/players/PlayHistory.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/models/players/PlayingContext.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/models/players/requests/ChangePlaybackStateRequestBody.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/models/players/requests/TransferPlaybackRequestBody.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/models/playlists/FeaturedPlaylistCollection.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/models/playlists/PlaylistFull.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/models/playlists/PlaylistItem.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/models/playlists/PlaylistSimplified.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/models/playlists/PlaylistSimplifiedPaging.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/models/playlists/PlaylistTrack.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/models/playlists/requests/AddItemPlaylistRequestBody.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/models/playlists/requests/CreateUpdatePlaylistRequestBody.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/models/playlists/requests/DeleteItemsPlaylistRequestBody.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/models/playlists/requests/FollowPlaylistRequestBody.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/models/playlists/requests/ReorderPlaylistItemsRequestBody.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/models/playlists/requests/ReplacePlaylistItemsRequestBody.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/models/playlists/Snapshot.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/models/playlists/TrackHref.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/models/recommendations/RecommendationCollection.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/models/recommendations/RecommendationSeed.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/models/search/SearchQueryResult.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/models/shows/SavedShowSimplified.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/models/shows/ShowFull.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/models/shows/ShowSimplified.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/models/shows/ShowSimplifiedCollection.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/models/tracks/Restriction.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/models/tracks/SavedTrackFull.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/models/tracks/TrackFull.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/models/tracks/TrackFullCollection.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/models/tracks/TrackLink.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/models/tracks/TrackSimplified.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/models/users/ExplicitContentSettings.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/models/users/User.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/retrofit/services/AlbumService.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/retrofit/services/ArtistService.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/retrofit/services/AuthorizationCodeFlowService.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/retrofit/services/BrowseService.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/retrofit/services/ClientCredentialsFlowService.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/retrofit/services/EpisodeService.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/retrofit/services/FollowService.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/retrofit/services/LibraryService.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/retrofit/services/PersonalizationService.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/retrofit/services/PlayerService.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/retrofit/services/PlaylistService.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/retrofit/services/SearchService.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/retrofit/services/ShowService.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/retrofit/services/TrackService.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/retrofit/services/UserService.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/utils/HttpUtil.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/utils/LoggingUtil.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/utils/ResponseChecker.java'
+'C:/Users/Siddu Raj/git_projects/spotify-web-api-wrapper/src/main/java/spotify/utils/ValidatorUtil.java'
+C:\Users\Siddu Raj\.m2\repository\com\squareup\retrofit2\retrofit\2.9.0\retrofit-2.9.0.jar = 1716693513207
+C:\Users\Siddu Raj\.m2\repository\com\squareup\okhttp3\okhttp\3.14.9\okhttp-3.14.9.jar = 1716693513729
+C:\Users\Siddu Raj\.m2\repository\com\squareup\okio\okio\1.17.2\okio-1.17.2.jar = 1716693513349
+C:\Users\Siddu Raj\.m2\repository\com\squareup\retrofit2\converter-gson\2.9.0\converter-gson-2.9.0.jar = 1716693513317
+C:\Users\Siddu Raj\.m2\repository\com\google\code\gson\gson\2.8.5\gson-2.8.5.jar = 1673361004232
+C:\Users\Siddu Raj\.m2\repository\org\slf4j\slf4j-log4j12\2.0.0-alpha2\slf4j-log4j12-2.0.0-alpha2.jar = 1716693513978
+C:\Users\Siddu Raj\.m2\repository\org\slf4j\slf4j-api\2.0.0-alpha2\slf4j-api-2.0.0-alpha2.jar = 1716693514223
+C:\Users\Siddu Raj\.m2\repository\log4j\log4j\1.2.17\log4j-1.2.17.jar = 1673361004427
+C:\Users\Siddu Raj\git_projects\spotify-web-api-wrapper\src\main\java = 1716693049760
+C:\Users\Siddu Raj\git_projects\spotify-web-api-wrapper\target\generated-sources\annotations = 1716693520772
+C:\Users\Siddu Raj\git_projects\spotify-web-api-wrapper\target\apidocs\allclasses-index.html = 1716693567495
+C:\Users\Siddu Raj\git_projects\spotify-web-api-wrapper\target\apidocs\allpackages-index.html = 1716693567501
+C:\Users\Siddu Raj\git_projects\spotify-web-api-wrapper\target\apidocs\constant-values.html = 1716693565445
+C:\Users\Siddu Raj\git_projects\spotify-web-api-wrapper\target\apidocs\copy.svg = 1716693567764
+C:\Users\Siddu Raj\git_projects\spotify-web-api-wrapper\target\apidocs\element-list = 1716693564953
+C:\Users\Siddu Raj\git_projects\spotify-web-api-wrapper\target\apidocs\help-doc.html = 1716693567743
+C:\Users\Siddu Raj\git_projects\spotify-web-api-wrapper\target\apidocs\index-all.html = 1716693567687
+C:\Users\Siddu Raj\git_projects\spotify-web-api-wrapper\target\apidocs\index.html = 1716693567206
+C:\Users\Siddu Raj\git_projects\spotify-web-api-wrapper\target\apidocs\jquery-ui.overrides.css = 1716693567805
+C:\Users\Siddu Raj\git_projects\spotify-web-api-wrapper\target\apidocs\member-search-index.js = 1716693567517
+C:\Users\Siddu Raj\git_projects\spotify-web-api-wrapper\target\apidocs\module-search-index.js = 1716693567501
+C:\Users\Siddu Raj\git_projects\spotify-web-api-wrapper\target\apidocs\overview-summary.html = 1716693567701
+C:\Users\Siddu Raj\git_projects\spotify-web-api-wrapper\target\apidocs\overview-tree.html = 1716693567199
+C:\Users\Siddu Raj\git_projects\spotify-web-api-wrapper\target\apidocs\package-search-index.js = 1716693567501
+C:\Users\Siddu Raj\git_projects\spotify-web-api-wrapper\target\apidocs\script.js = 1716693567751
+C:\Users\Siddu Raj\git_projects\spotify-web-api-wrapper\target\apidocs\search-page.js = 1716693567770
+C:\Users\Siddu Raj\git_projects\spotify-web-api-wrapper\target\apidocs\search.html = 1716693567696
+C:\Users\Siddu Raj\git_projects\spotify-web-api-wrapper\target\apidocs\search.js = 1716693567770
+C:\Users\Siddu Raj\git_projects\spotify-web-api-wrapper\target\apidocs\serialized-form.html = 1716693565481
+C:\Users\Siddu Raj\git_projects\spotify-web-api-wrapper\target\apidocs\stylesheet.css = 1716693567751
+C:\Users\Siddu Raj\git_projects\spotify-web-api-wrapper\target\apidocs\tag-search-index.js = 1716693567525
+C:\Users\Siddu Raj\git_projects\spotify-web-api-wrapper\target\apidocs\type-search-index.js = 1716693567509
