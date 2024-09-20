@@ -3,6 +3,7 @@ package spotify.retrofit.services;
 import retrofit2.Call;
 import retrofit2.http.*;
 import spotify.models.albums.SavedAlbumFull;
+import spotify.models.episodes.SavedEpisodeFull;
 import spotify.models.paging.Paging;
 import spotify.models.shows.SavedShowSimplified;
 import spotify.models.tracks.SavedTrackFull;
@@ -22,6 +23,9 @@ public interface LibraryService {
 
     @GET("me/albums")
     Call<Paging<SavedAlbumFull>> getSavedAlbums(@Header("Authorization") String accessToken, @QueryMap Map<String, String> options);
+
+    @GET("me/episodes")
+    Call<Paging<SavedEpisodeFull>> getSavedEpisodes(@Header("Authorization") String accessToken, @QueryMap Map<String, String> options);
 
     @GET("me/shows")
     Call<Paging<SavedShowSimplified>> getSavedShows(@Header("Authorization") String accessToken, @QueryMap Map<String, String> options);

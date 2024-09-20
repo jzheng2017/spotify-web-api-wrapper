@@ -215,9 +215,12 @@ This is the most recent coverage in the repository. The marked endpoints may not
 - - [x] Get Current User's Saved Albums
 - - [x] Get User's Saved Shows
 - - [x] Get Current User's Saved Tracks
+- - [x] Get Current User's Saved Episodes
 - - [x] Save Albums for Current User
 - - [x] Save Shows for Current User
 - - [x] Save Tracks for Current User
+- [x] Markets
+- - [x] Get Available Markets
 - [x] Personalization
 - - [x] Get User's Top Artists and Tracks
 - [x] Player

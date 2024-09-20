@@ -13,6 +13,7 @@ import retrofit2.Response;
 import spotify.exceptions.HttpRequestFailedException;
 import spotify.exceptions.SpotifyActionFailedException;
 import spotify.models.albums.SavedAlbumFull;
+import spotify.models.episodes.SavedEpisodeFull;
 import spotify.models.paging.Paging;
 import spotify.models.shows.SavedShowSimplified;
 import spotify.models.tracks.SavedTrackFull;
@@ -45,6 +46,8 @@ public class LibraryApiRetrofitTest extends AbstractApiRetrofitTest {
     @Mock
     private Call<Paging<SavedTrackFull>> mockedSavedTrackFullPagingCall;
     @Mock
+    private Call<Paging<SavedEpisodeFull>> mockedSavedEpisodeFullPagingCall;
+    @Mock
     private Call<Void> mockedVoidCall;
 
     @BeforeEach
@@ -57,6 +60,7 @@ public class LibraryApiRetrofitTest extends AbstractApiRetrofitTest {
         when(mockedLibraryService.hasSavedShows(fakeAccessTokenWithBearer, fakeShowIds)).thenReturn(mockedListOfBooleanCall);
         when(mockedLibraryService.hasSavedTracks(fakeAccessTokenWithBearer, fakeTrackIds)).thenReturn(mockedListOfBooleanCall);
         when(mockedLibraryService.getSavedAlbums(fakeAccessTokenWithBearer, fakeOptionalParameters)).thenReturn(mockedSavedAlbumFullPagingCall);
+        when(mockedLibraryService.getSavedEpisodes(fakeAccessTokenWithBearer, fakeOptionalParameters)).thenReturn(mockedSavedEpisodeFullPagingCall);
         when(mockedLibraryService.getSavedShows(fakeAccessTokenWithBearer, fakeOptionalParameters)).thenReturn(mockedSavedAShowSimplifiedPagingCall);
         when(mockedLibraryService.getSavedTracks(fakeAccessTokenWithBearer, fakeOptionalParameters)).thenReturn(mockedSavedTrackFullPagingCall);
         when(mockedLibraryService.saveAlbums(fakeAccessTokenWithBearer, fakeAlbumIds)).thenReturn(mockedVoidCall);
@@ -69,6 +73,7 @@ public class LibraryApiRetrofitTest extends AbstractApiRetrofitTest {
         when(mockedVoidCall.request()).thenReturn(new Request.Builder().url(fakeUrl).build());
         when(mockedListOfBooleanCall.request()).thenReturn(new Request.Builder().url(fakeUrl).build());
         when(mockedSavedAlbumFullPagingCall.request()).thenReturn(new Request.Builder().url(fakeUrl).build());
+        when(mockedSavedEpisodeFullPagingCall.request()).thenReturn(new Request.Builder().url(fakeUrl).build());
         when(mockedSavedAShowSimplifiedPagingCall.request()).thenReturn(new Request.Builder().url(fakeUrl).build());
         when(mockedSavedTrackFullPagingCall.request()).thenReturn(new Request.Builder().url(fakeUrl).build());
     }
@@ -218,12 +223,30 @@ public class LibraryApiRetrofitTest extends AbstractApiRetrofitTest {
     }
 
     @Test
+    void getSavedEpisodesUsesCorrectValuesToCreateHttpCall() throws IOException {
+        when(mockedSavedEpisodeFullPagingCall.execute()).thenReturn(Response.success(new Paging<>()));
+
+        sut.getSavedEpisodes(fakeOptionalParameters);
+
+        verify(mockedLibraryService).getSavedEpisodes(fakeAccessTokenWithBearer, fakeOptionalParameters);
+    }
+
+    @Test
     void getSavedAlbumsExecutesHttpCall() throws IOException {
         when(mockedSavedAlbumFullPagingCall.execute()).thenReturn(Response.success(new Paging<>()));
 
         sut.getSavedAlbums(fakeOptionalParameters);
 
         verify(mockedSavedAlbumFullPagingCall).execute();
+    }
+
+    @Test
+    void getSavedEpisodesExecutesHttpCall() throws IOException {
+        when(mockedSavedEpisodeFullPagingCall.execute()).thenReturn(Response.success(new Paging<>()));
+
+        sut.getSavedEpisodes(fakeOptionalParameters);
+
+        verify(mockedSavedEpisodeFullPagingCall).execute();
     }
 
     @Test
@@ -240,6 +263,19 @@ public class LibraryApiRetrofitTest extends AbstractApiRetrofitTest {
     }
 
     @Test
+    void getSavedEpisodesThrowsSpotifyActionFailedExceptionWhenError() throws IOException {
+        when(mockedSavedEpisodeFullPagingCall.execute())
+                .thenReturn(
+                        Response.error(
+                                400,
+                                ResponseBody.create(MediaType.get("application/json"), getJson("error.json"))
+                        )
+                );
+
+        Assertions.assertThrows(SpotifyActionFailedException.class, () -> sut.getSavedEpisodes(fakeOptionalParameters));
+    }
+
+    @Test
     void getSavedAlbumsThrowsHttpRequestFailedWhenHttpFails() throws IOException {
         when(mockedSavedAlbumFullPagingCall.execute()).thenThrow(IOException.class);
 
@@ -247,10 +283,24 @@ public class LibraryApiRetrofitTest extends AbstractApiRetrofitTest {
     }
 
     @Test
+    void getSavedEpisodesThrowsHttpRequestFailedWhenHttpFails() throws IOException {
+        when(mockedSavedEpisodeFullPagingCall.execute()).thenThrow(IOException.class);
+
+        Assertions.assertThrows(HttpRequestFailedException.class, () -> sut.getSavedEpisodes(fakeOptionalParameters));
+    }
+
+    @Test
     void getSavedAlbumsReturnsSavedAlbumFullPagingWhenSuccessful() throws IOException {
         when(mockedSavedAlbumFullPagingCall.execute()).thenReturn(Response.success(new Paging<>()));
 
         Assertions.assertNotNull(sut.getSavedAlbums(fakeOptionalParameters));
+    }
+
+    @Test
+    void getSavedEpisodesReturnsSavedEpisodeFullPagingWhenSuccessful() throws IOException {
+        when(mockedSavedEpisodeFullPagingCall.execute()).thenReturn(Response.success(new Paging<>()));
+
+        Assertions.assertNotNull(sut.getSavedEpisodes(fakeOptionalParameters));
     }
 
     @Test

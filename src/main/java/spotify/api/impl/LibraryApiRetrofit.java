@@ -9,6 +9,7 @@ import spotify.api.interfaces.LibraryApi;
 import spotify.exceptions.HttpRequestFailedException;
 import spotify.factories.RetrofitHttpServiceFactory;
 import spotify.models.albums.SavedAlbumFull;
+import spotify.models.episodes.SavedEpisodeFull;
 import spotify.models.paging.Paging;
 import spotify.models.shows.SavedShowSimplified;
 import spotify.models.tracks.SavedTrackFull;
@@ -123,6 +124,29 @@ public class LibraryApiRetrofit implements LibraryApi {
             return response.body();
         } catch (IOException ex) {
             logger.error("HTTP request to fetch saved albums has failed.");
+            throw new HttpRequestFailedException(ex.getMessage());
+        }
+    }
+
+    @Override
+    public Paging<SavedEpisodeFull> getSavedEpisodes(Map<String, String> options) {
+        options = ValidatorUtil.optionsValueCheck(options);
+
+        logger.trace("Constructing HTTP call to fetch current user's saved episodes");
+        Call<Paging<SavedEpisodeFull>> httpCall = libraryService.getSavedEpisodes("Bearer " + this.accessToken, options);
+
+        try {
+            logger.info("Executing HTTP call to fetch current user's saved episodes");
+            logger.debug("Fetching current user's saved episodes with the following values: {}.", options);
+            LoggingUtil.logHttpCall(logger, httpCall);
+            Response<Paging<SavedEpisodeFull>> response = httpCall.execute();
+
+            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response, HttpStatusCode.OK);
+
+            logger.info("Saved episodes have been successfully fetched");
+            return response.body();
+        } catch (IOException ex) {
+            logger.error("HTTP request to fetch saved episodes has failed.");
             throw new HttpRequestFailedException(ex.getMessage());
         }
     }
