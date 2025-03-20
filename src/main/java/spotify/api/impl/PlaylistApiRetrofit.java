@@ -178,8 +178,14 @@ public class PlaylistApiRetrofit implements PlaylistApi {
 
     @Override
     public void createPlaylist(String userId, CreateUpdatePlaylistRequestBody requestBody) {
-        if (userId == null || requestBody.getName() == null || userId.isEmpty() || requestBody.getName().isEmpty()) {
-            final String errorMessage = "Required parameters are empty!";
+        if (userId == null || userId.isEmpty()) {
+            final String errorMessage = "userId can not be empty!";
+            logger.error(errorMessage);
+            throw new IllegalArgumentException(errorMessage);
+        }
+
+        if (requestBody.getName() == null || requestBody.getName().isEmpty()) {
+            final String errorMessage = "requestBody can not be empty!";
             logger.error(errorMessage);
             throw new IllegalArgumentException(errorMessage);
         }
@@ -293,8 +299,14 @@ public class PlaylistApiRetrofit implements PlaylistApi {
 
     @Override
     public void uploadCoverImageToPlaylist(String playlistId, String base64EncodedJpegImage) {
-        if (playlistId == null || base64EncodedJpegImage == null || playlistId.isEmpty() || base64EncodedJpegImage.isEmpty()) {
-            final String errorMessage = "Required parameters are empty!";
+        if (playlistId == null || playlistId.isEmpty()) {
+            final String errorMessage = "playlistId can not be empty!";
+            logger.error(errorMessage);
+            throw new IllegalArgumentException(errorMessage);
+        }
+
+        if (base64EncodedJpegImage == null || base64EncodedJpegImage.isEmpty()) {
+            final String errorMessage = "Image can not be empty!";
             logger.error(errorMessage);
             throw new IllegalArgumentException(errorMessage);
         }
