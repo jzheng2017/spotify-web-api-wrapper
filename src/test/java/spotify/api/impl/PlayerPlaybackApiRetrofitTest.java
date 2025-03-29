@@ -15,12 +15,9 @@ import spotify.exceptions.HttpRequestFailedException;
 import spotify.exceptions.SpotifyActionFailedException;
 import spotify.models.paging.CursorBasedPaging;
 import spotify.models.players.CurrentlyPlayingObject;
-import spotify.models.players.DeviceCollection;
 import spotify.models.players.PlayHistory;
-import spotify.models.players.PlayingContext;
 import spotify.models.players.requests.ChangePlaybackStateRequestBody;
 import spotify.models.players.requests.TransferPlaybackRequestBody;
-import spotify.retrofit.services.PlayerService;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -29,19 +26,14 @@ import java.util.Arrays;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-public class PlayerApiRetrofitTest extends AbstractApiRetrofitTest {
+public class PlayerPlaybackApiRetrofitTest extends AbstractPlayerApiRetrofitTest {
+   
     private final String fakeUri = "https://jiankai.nl";
     private final int fakeMsPosition = 69;
     private final int fakeVolumePercent = 420;
     private final boolean fakeShuffle = false;
     private final RepeatType fakeRepeatMode = RepeatType.CONTEXT;
-    private PlayerApiRetrofit sut;
-    @Mock
-    private PlayerService mockedPlayerService;
-    @Mock
-    private Call<DeviceCollection> mockedDeviceCollectionCall;
-    @Mock
-    private Call<PlayingContext> mockedPlayingContextCall;
+
     @Mock
     private Call<CursorBasedPaging<PlayHistory>> mockedCursorBasedPagingPlayHistoryCall;
     @Mock
@@ -59,8 +51,6 @@ public class PlayerApiRetrofitTest extends AbstractApiRetrofitTest {
 
         transferPlaybackRequestBody = new TransferPlaybackRequestBody();
 
-        when(mockedPlayerService.getAvailableDevices(fakeAccessTokenWithBearer)).thenReturn(mockedDeviceCollectionCall);
-        when(mockedPlayerService.getCurrentPlayingContext(fakeAccessTokenWithBearer, fakeOptionalParameters)).thenReturn(mockedPlayingContextCall);
         when(mockedPlayerService.getRecentlyPlayedTracks(fakeAccessTokenWithBearer, fakeOptionalParameters)).thenReturn(mockedCursorBasedPagingPlayHistoryCall);
         when(mockedPlayerService.getCurrentlyPlayingObject(fakeAccessTokenWithBearer, fakeOptionalParameters)).thenReturn(mockedCurrentlyPlayedObjectCall);
         when(mockedPlayerService.addItemToQueue(fakeAccessTokenWithBearer, fakeUri, fakeOptionalParameters)).thenReturn(mockedVoidCall);
@@ -74,102 +64,13 @@ public class PlayerApiRetrofitTest extends AbstractApiRetrofitTest {
         when(mockedPlayerService.shufflePlayback(fakeAccessTokenWithBearer, fakeShuffle, fakeOptionalParameters)).thenReturn(mockedVoidCall);
         when(mockedPlayerService.transferPlayback(fakeAccessTokenWithBearer, transferPlaybackRequestBody)).thenReturn(mockedVoidCall);
 
-        when(mockedDeviceCollectionCall.request()).thenReturn(new Request.Builder().url(fakeUrl).build());
-        when(mockedPlayingContextCall.request()).thenReturn(new Request.Builder().url(fakeUrl).build());
+       
         when(mockedCursorBasedPagingPlayHistoryCall.request()).thenReturn(new Request.Builder().url(fakeUrl).build());
         when(mockedCurrentlyPlayedObjectCall.request()).thenReturn(new Request.Builder().url(fakeUrl).build());
         when(mockedVoidCall.request()).thenReturn(new Request.Builder().url(fakeUrl).build());
     }
 
-    @Test
-    void getAvailableDevicesUsesCorrectValuesToCreateHttpCall() throws IOException {
-        when(mockedDeviceCollectionCall.execute()).thenReturn(Response.success(new DeviceCollection()));
-
-        sut.getAvailableDevices();
-
-        verify(mockedPlayerService).getAvailableDevices(fakeAccessTokenWithBearer);
-    }
-
-    @Test
-    void getAvailableDevicesExecutesHttpCall() throws IOException {
-        when(mockedDeviceCollectionCall.execute()).thenReturn(Response.success(new DeviceCollection()));
-
-        sut.getAvailableDevices();
-
-        verify(mockedDeviceCollectionCall).execute();
-    }
-
-    @Test
-    void getAvailableDevicesThrowsSpotifyActionFailedExceptionWhenError() throws IOException {
-        when(mockedDeviceCollectionCall.execute())
-                .thenReturn(
-                        Response.error(
-                                400,
-                                ResponseBody.create(MediaType.get("application/json"), getJson("error.json"))
-                        )
-                );
-
-        Assertions.assertThrows(SpotifyActionFailedException.class, () -> sut.getAvailableDevices());
-    }
-
-    @Test
-    void getAvailableDevicesThrowsHttpRequestFailedWhenHttpFails() throws IOException {
-        when(mockedDeviceCollectionCall.execute()).thenThrow(IOException.class);
-
-        Assertions.assertThrows(HttpRequestFailedException.class, () -> sut.getAvailableDevices());
-    }
-
-    @Test
-    void getAvailableDevicesReturnsDeviceCollectionWhenSuccessful() throws IOException {
-        when(mockedDeviceCollectionCall.execute()).thenReturn(Response.success(new DeviceCollection()));
-
-        Assertions.assertNotNull(sut.getAvailableDevices());
-    }
-
-    @Test
-    void getCurrentPlayingContextUsesCorrectValuesToCreateHttpCall() throws IOException {
-        when(mockedPlayingContextCall.execute()).thenReturn(Response.success(new PlayingContext()));
-
-        sut.getCurrentPlayingContext(null);
-
-        verify(mockedPlayerService).getCurrentPlayingContext(fakeAccessTokenWithBearer, fakeOptionalParameters);
-    }
-
-    @Test
-    void getCurrentPlayingContextExecutesHttpCall() throws IOException {
-        when(mockedPlayingContextCall.execute()).thenReturn(Response.success(new PlayingContext()));
-
-        sut.getCurrentPlayingContext(fakeOptionalParameters);
-
-        verify(mockedPlayingContextCall).execute();
-    }
-
-    @Test
-    void getCurrentPlayingContextThrowsSpotifyActionFailedExceptionWhenError() throws IOException {
-        when(mockedPlayingContextCall.execute())
-                .thenReturn(
-                        Response.error(
-                                400,
-                                ResponseBody.create(MediaType.get("application/json"), getJson("error.json"))
-                        )
-                );
-
-        Assertions.assertThrows(SpotifyActionFailedException.class, () -> sut.getCurrentPlayingContext(fakeOptionalParameters));
-    }
-
-    @Test
-    void getCurrentPlayingContextThrowsHttpRequestFailedWhenHttpFails() throws IOException {
-        when(mockedPlayingContextCall.execute()).thenThrow(IOException.class);
-
-        Assertions.assertThrows(HttpRequestFailedException.class, () -> sut.getCurrentPlayingContext(fakeOptionalParameters));
-    }
-
-    @Test
-    void getCurrentPlayingContextReturnsPlayingContextWhenSuccessful() throws IOException {
-        when(mockedPlayingContextCall.execute()).thenReturn(Response.success(new PlayingContext()));
-
-        Assertions.assertNotNull(sut.getCurrentPlayingContext(fakeOptionalParameters));
-    }
+  
 
     @Test
     void getRecentlyPlayedTracksContextUsesCorrectValuesToCreateHttpCall() throws IOException {

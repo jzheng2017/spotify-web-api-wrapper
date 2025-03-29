@@ -23,6 +23,7 @@ public class EpisodeApiRetrofit implements EpisodeApi {
     private final Logger logger = LoggerFactory.getLogger(EpisodeApiRetrofit.class);
     private final String accessToken;
     private final EpisodeService episodeService;
+    private final int MAX_EPISODE_IDS_ALLOWED = 50;
 
     public EpisodeApiRetrofit(final String accessToken) {
         this(accessToken, RetrofitHttpServiceFactory.getEpisodeService());
@@ -58,7 +59,7 @@ public class EpisodeApiRetrofit implements EpisodeApi {
 
     @Override
     public EpisodeFullCollection getEpisodes(List<String> listOfEpisodeIds, Map<String, String> options) {
-        validateEpisodeListSizeAndThrowIfExceeded(listOfEpisodeIds, 50);
+        validateEpisodeListSizeAndThrowIfExceeded(listOfEpisodeIds, MAX_EPISODE_IDS_ALLOWED);
         options = ValidatorUtil.optionsValueCheck(options);
 
         String episodeIds = String.join(",", listOfEpisodeIds);
@@ -82,14 +83,14 @@ public class EpisodeApiRetrofit implements EpisodeApi {
         }
     }
 
-    private void validateEpisodeListSizeAndThrowIfExceeded(List<String> listOfEpisodeIds, int maximumAmountOfEpisodeIdsAllowed) {
+    private void validateEpisodeListSizeAndThrowIfExceeded(List<String> listOfEpisodeIds, int maxEpisodeIds) {
         final int listSize = listOfEpisodeIds.size();
 
-        if (listSize > maximumAmountOfEpisodeIdsAllowed) {
+        if (listSize > maxEpisodeIds) {
             logger.error("The list of episode ids has exceeded the maximum allowed amount!");
             throw new IllegalArgumentException(String.format(
                     "The maximum amount of episode ids allowed is %d! You have %d.",
-                    maximumAmountOfEpisodeIdsAllowed,
+                    maxEpisodeIds,
                     listSize));
         }
     }
