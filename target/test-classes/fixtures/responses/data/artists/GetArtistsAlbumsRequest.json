@@ -1,0 +1,118 @@
+{
+  "href": "https://api.spotify.com/v1/artists/1vCWHaC5f2uS3yhpwWbIA6/albums?offset=0&limit=2&include_groups=single&market=ES",
+  "items": [
+    {
+      "album_group": "single",
+      "album_type": "single",
+      "artists": [
+        {
+          "external_urls": {
+            "spotify": "https://open.spotify.com/artist/1vCWHaC5f2uS3yhpwWbIA6"
+          },
+          "href": "https://api.spotify.com/v1/artists/1vCWHaC5f2uS3yhpwWbIA6",
+          "id": "1vCWHaC5f2uS3yhpwWbIA6",
+          "name": "Avicii",
+          "type": "artist",
+          "uri": "spotify:artist:1vCWHaC5f2uS3yhpwWbIA6"
+        },
+        {
+          "external_urls": {
+            "spotify": "https://open.spotify.com/artist/1Cs0zKBU1kc0i8ypK3B9ai"
+          },
+          "href": "https://api.spotify.com/v1/artists/1Cs0zKBU1kc0i8ypK3B9ai",
+          "id": "1Cs0zKBU1kc0i8ypK3B9ai",
+          "name": "David Guetta",
+          "type": "artist",
+          "uri": "spotify:artist:1Cs0zKBU1kc0i8ypK3B9ai"
+        },
+        {
+          "external_urls": {
+            "spotify": "https://open.spotify.com/artist/19HFRWmRCl27kTk6LeqAO8"
+          },
+          "href": "https://api.spotify.com/v1/artists/19HFRWmRCl27kTk6LeqAO8",
+          "id": "19HFRWmRCl27kTk6LeqAO8",
+          "name": "MORTEN",
+          "type": "artist",
+          "uri": "spotify:artist:19HFRWmRCl27kTk6LeqAO8"
+        }
+      ],
+      "external_urls": {
+        "spotify": "https://open.spotify.com/album/37bCTD5iLWMpDcBanNkkXB"
+      },
+      "href": "https://api.spotify.com/v1/albums/37bCTD5iLWMpDcBanNkkXB",
+      "id": "37bCTD5iLWMpDcBanNkkXB",
+      "images": [
+        {
+          "height": 640,
+          "url": "https://i.scdn.co/image/5eeb367a91e7abb76ae6cb15ada77dde636ef740",
+          "width": 640
+        },
+        {
+          "height": 300,
+          "url": "https://i.scdn.co/image/a014dbaab6a1d4ae99ff83d523d4696c307b4009",
+          "width": 300
+        },
+        {
+          "height": 64,
+          "url": "https://i.scdn.co/image/606f0bba8e6949a341c4718dbbdf4acd0595b073",
+          "width": 64
+        }
+      ],
+      "name": "Heaven (David Guetta & MORTEN Remix)",
+      "release_date": "2019-08-23",
+      "release_date_precision": "day",
+      "total_tracks": 2,
+      "type": "album",
+      "uri": "spotify:album:37bCTD5iLWMpDcBanNkkXB"
+    },
+    {
+      "album_group": "single",
+      "album_type": "single",
+      "artists": [
+        {
+          "external_urls": {
+            "spotify": "https://open.spotify.com/artist/1vCWHaC5f2uS3yhpwWbIA6"
+          },
+          "href": "https://api.spotify.com/v1/artists/1vCWHaC5f2uS3yhpwWbIA6",
+          "id": "1vCWHaC5f2uS3yhpwWbIA6",
+          "name": "Avicii",
+          "type": "artist",
+          "uri": "spotify:artist:1vCWHaC5f2uS3yhpwWbIA6"
+        }
+      ],
+      "external_urls": {
+        "spotify": "https://open.spotify.com/album/7CvAfGvq4RlIwEbT9o8Iav"
+      },
+      "href": "https://api.spotify.com/v1/albums/7CvAfGvq4RlIwEbT9o8Iav",
+      "id": "7CvAfGvq4RlIwEbT9o8Iav",
+      "images": [
+        {
+          "height": 640,
+          "url": "https://i.scdn.co/image/fc52325821e3626ab74ee873aa5add2f61f73fd6",
+          "width": 640
+        },
+        {
+          "height": 300,
+          "url": "https://i.scdn.co/image/cbb2827b08a0c7b20b97075bb959c0ed58fb5bbd",
+          "width": 300
+        },
+        {
+          "height": 64,
+          "url": "https://i.scdn.co/image/f40615b03aa4d64b71ffddb83e4cb0e762a80774",
+          "width": 64
+        }
+      ],
+      "name": "Tough Love (Tiësto Remix)",
+      "release_date": "2019-06-14",
+      "release_date_precision": "day",
+      "total_tracks": 2,
+      "type": "album",
+      "uri": "spotify:album:7CvAfGvq4RlIwEbT9o8Iav"
+    }
+  ],
+  "limit": 2,
+  "next": "https://api.spotify.com/v1/artists/1vCWHaC5f2uS3yhpwWbIA6/albums?offset=2&limit=2&include_groups=single&market=ES",
+  "offset": 0,
+  "previous": null,
+  "total": 64
+}
