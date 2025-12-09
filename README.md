@@ -265,3 +265,19 @@ This is the most recent coverage in the repository. The marked endpoints may not
 - - [x] Get a User's Profile
 
 
+# 🐳 Docker Setup Guide
+
+This project supports Docker, allowing the Java application to run in a containerized environment.
+
+---
+
+## 📦 1. Build the Docker Image
+docker build -t spotify-web-api-wrapper .
+
+## 🚀 2. Run the Docker Container
+docker run -it --rm -p 8080:8080 spotify-web-api-wrapper
+
+## 🐳 3. Optional: Using Docker Compose
+docker compose up --build
+## 🐳 4.Stop the application:
+docker compose down
