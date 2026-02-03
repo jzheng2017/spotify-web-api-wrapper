@@ -9,8 +9,20 @@ import spotify.models.authorization.AuthorizationCodeFlowTokenResponse;
 
 import java.io.IOException;
 
+/**
+ * Utility class for executing HTTP requests related to Spotify API operations.
+ */
 public class HttpUtil {
 
+    /**
+     * Executes an HTTP call to retrieve access and refresh tokens using the Authorization Code Flow.
+     *
+     * @param httpCall the Retrofit call to execute for fetching tokens
+     * @param logger the logger instance to use for logging request information
+     * @return the response containing the access token and refresh token
+     * @throws SpotifyAuthorizationFailedException if the response body is empty, indicating invalid credentials
+     * @throws HttpRequestFailedException if the HTTP request fails due to an IO error
+     */
     public static AuthorizationCodeFlowTokenResponse executeAuthorizationHttpCall(Call<AuthorizationCodeFlowTokenResponse> httpCall, Logger logger) {
         try {
             logger.info("Executing HTTP call to fetch an access and refresh token.");
@@ -30,3 +42,4 @@ public class HttpUtil {
         }
     }
 }
+
