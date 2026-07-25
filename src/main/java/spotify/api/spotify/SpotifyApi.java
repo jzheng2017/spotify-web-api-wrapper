@@ -15,7 +15,6 @@ import spotify.models.audio.AudioAnalysis;
 import spotify.models.audio.AudioFeatures;
 import spotify.models.audio.AudioFeaturesCollection;
 import spotify.models.categories.CategoryFull;
-import spotify.models.categories.CategoryFullPaging;
 import spotify.models.episodes.EpisodeFull;
 import spotify.models.episodes.EpisodeFullCollection;
 import spotify.models.episodes.EpisodeSimplified;
@@ -184,14 +183,12 @@ public class SpotifyApi {
         return browseApi.getCategory(categoryId, options);
     }
 
-    public PlaylistSimplifiedPaging getCategoryPlaylists(String categoryId, Map<String, String> options) {
-        logger.info("Requesting category playlists");
-        return browseApi.getCategoryPlaylists(categoryId, options);
+    public Paging<PlaylistSimplified> getCategoryPlaylists(String categoryId, Map<String, String> options) {
+    return browseApi.getCategoryPlaylists(categoryId, options);
     }
 
-    public CategoryFullPaging getCategories(Map<String, String> options) {
-        logger.info("Requesting categories");
-        return browseApi.getCategories(options);
+    public Paging<CategoryFull> getCategories( Map<String, String> options){
+    return browseApi.getCategories(options);
     }
 
     public FeaturedPlaylistCollection getFeaturedPlaylists(Map<String, String> options) {
@@ -199,9 +196,8 @@ public class SpotifyApi {
         return browseApi.getFeaturedPlaylists(options);
     }
 
-    public AlbumSimplifiedPaging getNewReleases(Map<String, String> options) {
-        logger.info("Requesting new releases");
-        return browseApi.getNewReleases(options);
+    public Paging<AlbumSimplified> getNewReleases(Map<String, String> options){
+    return browseApi.getNewReleases(options);
     }
 
     public RecommendationCollection getRecommendations(List<String> listOfSeedArtists, List<String> listOfSeedGenres, List<String> listOfSeedTracks, Map<String, String> options) {

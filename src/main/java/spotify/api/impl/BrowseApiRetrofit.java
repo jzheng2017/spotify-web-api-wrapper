@@ -8,11 +8,11 @@ import spotify.api.enums.HttpStatusCode;
 import spotify.api.interfaces.BrowseApi;
 import spotify.exceptions.HttpRequestFailedException;
 import spotify.factories.RetrofitHttpServiceFactory;
-import spotify.models.albums.AlbumSimplifiedPaging;
+import spotify.models.albums.AlbumSimplified;
+import spotify.models.paging.Paging;
+import spotify.models.playlists.PlaylistSimplified;
 import spotify.models.categories.CategoryFull;
-import spotify.models.categories.CategoryFullPaging;
 import spotify.models.playlists.FeaturedPlaylistCollection;
-import spotify.models.playlists.PlaylistSimplifiedPaging;
 import spotify.models.recommendations.RecommendationCollection;
 import spotify.retrofit.services.BrowseService;
 import spotify.utils.LoggingUtil;
@@ -61,22 +61,25 @@ public class BrowseApiRetrofit implements BrowseApi {
     }
 
     @Override
-    public PlaylistSimplifiedPaging getCategoryPlaylists(String categoryId, Map<String, String> options) {
+    public Paging<PlaylistSimplified> getCategoryPlaylists(String categoryId, Map<String, String> options) {
         options = ValidatorUtil.optionsValueCheck(options);
 
         logger.trace("Constructing HTTP call to fetch category playlists.");
-        Call<PlaylistSimplifiedPaging> httpCall = browseService.getCategoryPlaylists("Bearer " + this.accessToken, categoryId, options);
+        Call<Paging<PlaylistSimplified>> httpCall =
+                browseService.getCategoryPlaylists("Bearer " + this.accessToken, categoryId, options);
 
         try {
             logger.info("Executing HTTP call to fetch category playlists.");
             logger.debug("Fetching category {} playlists with following values: {}.", categoryId, options);
             LoggingUtil.logHttpCall(logger, httpCall);
-            Response<PlaylistSimplifiedPaging> response = httpCall.execute();
+
+            Response<Paging<PlaylistSimplified>> response = httpCall.execute();
 
             ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response, HttpStatusCode.OK);
 
             logger.info("Category playlists have been successfully fetched.");
             return response.body();
+
         } catch (IOException ex) {
             logger.error("HTTP request to fetch category playlists has failed.");
             throw new HttpRequestFailedException(ex.getMessage());
@@ -84,22 +87,27 @@ public class BrowseApiRetrofit implements BrowseApi {
     }
 
     @Override
-    public CategoryFullPaging getCategories(Map<String, String> options) {
+    public Paging<CategoryFull> getCategories(Map<String, String> options) {
         options = ValidatorUtil.optionsValueCheck(options);
-
         logger.trace("Constructing HTTP call to fetch categories.");
-        Call<CategoryFullPaging> httpCall = browseService.getCategories("Bearer " + this.accessToken, options);
-
+        Call<Paging<CategoryFull>> httpCall =
+                browseService.getCategories(
+                        "Bearer " + this.accessToken,
+                        options
+                );
         try {
             logger.info("Executing HTTP call to fetch categories.");
             logger.debug("Fetching categories with following values: {}.", options);
             LoggingUtil.logHttpCall(logger, httpCall);
-            Response<CategoryFullPaging> response = httpCall.execute();
-
-            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response, HttpStatusCode.OK);
-
+            Response<Paging<CategoryFull>> response =
+                    httpCall.execute();
+            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(
+                    response,
+                    HttpStatusCode.OK
+            );
             logger.info("Categories have been successfully fetched.");
             return response.body();
+
         } catch (IOException ex) {
             logger.error("HTTP request to fetch categories has failed.");
             throw new HttpRequestFailedException(ex.getMessage());
@@ -130,20 +138,23 @@ public class BrowseApiRetrofit implements BrowseApi {
     }
 
     @Override
-    public AlbumSimplifiedPaging getNewReleases(Map<String, String> options) {
+    public Paging<AlbumSimplified> getNewReleases(Map<String, String> options) {
         options = ValidatorUtil.optionsValueCheck(options);
-
         logger.trace("Constructing HTTP call to fetch new releases.");
-        Call<AlbumSimplifiedPaging> httpCall = browseService.getNewReleases("Bearer " + this.accessToken, options);
-
+        Call<Paging<AlbumSimplified>> httpCall =
+                browseService.getNewReleases(
+                        "Bearer " + this.accessToken,
+                        options
+                );
         try {
             logger.info("Executing HTTP call to fetch new releases.");
-            logger.debug("Fetching new releases with following values: {}", options);
             LoggingUtil.logHttpCall(logger, httpCall);
-            Response<AlbumSimplifiedPaging> response = httpCall.execute();
-
-            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(response, HttpStatusCode.OK);
-
+            Response<Paging<AlbumSimplified>> response =
+                    httpCall.execute();
+            ResponseChecker.throwIfRequestHasNotBeenFulfilledCorrectly(
+                    response,
+                    HttpStatusCode.OK
+            );
             logger.info("New releases have been successfully fetched.");
             return response.body();
         } catch (IOException ex) {

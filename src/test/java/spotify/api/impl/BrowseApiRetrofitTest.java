@@ -12,11 +12,11 @@ import retrofit2.Call;
 import retrofit2.Response;
 import spotify.exceptions.HttpRequestFailedException;
 import spotify.exceptions.SpotifyActionFailedException;
-import spotify.models.albums.AlbumSimplifiedPaging;
+import spotify.models.albums.AlbumSimplified;
 import spotify.models.categories.CategoryFull;
-import spotify.models.categories.CategoryFullPaging;
+import spotify.models.paging.Paging;
 import spotify.models.playlists.FeaturedPlaylistCollection;
-import spotify.models.playlists.PlaylistSimplifiedPaging;
+import spotify.models.playlists.PlaylistSimplified;
 import spotify.models.recommendations.RecommendationCollection;
 import spotify.retrofit.services.BrowseService;
 
@@ -44,24 +44,32 @@ public class BrowseApiRetrofitTest extends AbstractApiRetrofitTest {
             put("seed_tracks", fakeSeedTracks);
         }
     };
+
     private BrowseApiRetrofit sut;
+
     @Mock
     private BrowseService mockedBrowseService;
+
     @Mock
     private Call<CategoryFull> mockedCategoryFullCall;
+
     @Mock
-    private Call<PlaylistSimplifiedPaging> mockedPlaylistSimplifiedPagingCall;
+    private Call<Paging<PlaylistSimplified>> mockedPlaylistSimplifiedPagingCall;
+
     @Mock
-    private Call<CategoryFullPaging> mockedCategoryFullPagingCall;
+    private Call<Paging<CategoryFull>> mockedCategoryFullPagingCall;
+
     @Mock
     private Call<FeaturedPlaylistCollection> mockedFeaturedPlaylistCollectionCall;
+
     @Mock
-    private Call<AlbumSimplifiedPaging> mockedAlbumSimplifiedPagingCall;
+    private Call<Paging<AlbumSimplified>> mockedAlbumSimplifiedPagingCall;
+
     @Mock
     private Call<RecommendationCollection> mockedRecommendationCollectionCall;
+
     @Mock
     private Map<String, String> mockedOptionalParametersWithSeeds;
-
     @BeforeEach
     void setup() {
         MockitoAnnotations.openMocks(this);
@@ -129,30 +137,35 @@ public class BrowseApiRetrofitTest extends AbstractApiRetrofitTest {
 
     @Test
     void getCategoriesUsesCorrectValuesToCreateHttpCall() throws IOException {
-        when(mockedCategoryFullPagingCall.execute()).thenReturn(Response.success(new CategoryFullPaging()));
+        when(mockedCategoryFullPagingCall.execute())
+                .thenReturn(Response.success(new Paging<CategoryFull>()));
 
         sut.getCategories(null);
 
-        verify(mockedBrowseService).getCategories(fakeAccessTokenWithBearer, fakeOptionalParameters);
+        verify(mockedBrowseService)
+                .getCategories(fakeAccessTokenWithBearer, fakeOptionalParameters);
     }
 
-    @Test
+   @Test
     void getCategoriesExecutesHttpCall() throws IOException {
-        when(mockedCategoryFullPagingCall.execute()).thenReturn(Response.success(new CategoryFullPaging()));
+        when(mockedCategoryFullPagingCall.execute())
+                .thenReturn(Response.success(new Paging<CategoryFull>()));
 
         sut.getCategories(fakeOptionalParameters);
+
         verify(mockedCategoryFullPagingCall).execute();
     }
 
     @Test
     void getCategoriesThrowsSpotifyActionFailedExceptionWhenError() throws IOException {
         when(mockedCategoryFullPagingCall.execute())
-                .thenReturn(
-                        Response.error(
-                                400,
-                                ResponseBody.create(MediaType.get("application/json"), getJson("error.json"))
+                .thenReturn(Response.error(
+                        400,
+                        ResponseBody.create(
+                                MediaType.get("application/json"),
+                                getJson("error.json")
                         )
-                );
+                ));
 
         Assertions.assertThrows(SpotifyActionFailedException.class, () -> sut.getCategories(fakeOptionalParameters));
     }
@@ -165,15 +178,16 @@ public class BrowseApiRetrofitTest extends AbstractApiRetrofitTest {
     }
 
     @Test
-    void getCategoriesReturnsCategoryFullPagingWhenSuccessful() throws IOException {
-        when(mockedCategoryFullPagingCall.execute()).thenReturn(Response.success(new CategoryFullPaging()));
+    void getCategoriesReturnsPagingWhenSuccessful() throws IOException {
+        when(mockedCategoryFullPagingCall.execute())
+                .thenReturn(Response.success(new Paging<CategoryFull>()));
 
         Assertions.assertNotNull(sut.getCategories(fakeOptionalParameters));
     }
 
     @Test
     void getCategoryPlaylistsUsesCorrectValuesToCreateHttpCall() throws IOException {
-        when(mockedPlaylistSimplifiedPagingCall.execute()).thenReturn(Response.success(new PlaylistSimplifiedPaging()));
+        when(mockedPlaylistSimplifiedPagingCall.execute()).thenReturn(Response.success(new Paging<PlaylistSimplified>()));
 
         sut.getCategoryPlaylists(fakeCategoryId, null);
 
@@ -182,9 +196,10 @@ public class BrowseApiRetrofitTest extends AbstractApiRetrofitTest {
 
     @Test
     void getCategoryPlaylistsExecutesHttpCall() throws IOException {
-        when(mockedPlaylistSimplifiedPagingCall.execute()).thenReturn(Response.success(new PlaylistSimplifiedPaging()));
+        when(mockedPlaylistSimplifiedPagingCall.execute()).thenReturn(Response.success(new Paging<PlaylistSimplified>()));
 
         sut.getCategoryPlaylists(fakeCategoryId, fakeOptionalParameters);
+
         verify(mockedPlaylistSimplifiedPagingCall).execute();
     }
 
@@ -208,9 +223,9 @@ public class BrowseApiRetrofitTest extends AbstractApiRetrofitTest {
         Assertions.assertThrows(HttpRequestFailedException.class, () -> sut.getCategoryPlaylists(fakeCategoryId, fakeOptionalParameters));
     }
 
-    @Test
-    void getCategoryPlaylistsReturnsPlaylistSimplifiedPagingWhenSuccessful() throws IOException {
-        when(mockedPlaylistSimplifiedPagingCall.execute()).thenReturn(Response.success(new PlaylistSimplifiedPaging()));
+   @Test
+    void getCategoryPlaylistsReturnsPagingWhenSuccessful() throws IOException {
+        when(mockedPlaylistSimplifiedPagingCall.execute()).thenReturn(Response.success(new Paging<PlaylistSimplified>()));
 
         Assertions.assertNotNull(sut.getCategoryPlaylists(fakeCategoryId, fakeOptionalParameters));
     }
@@ -261,7 +276,7 @@ public class BrowseApiRetrofitTest extends AbstractApiRetrofitTest {
 
     @Test
     void getNewReleasesUsesCorrectValuesToCreateHttpCall() throws IOException {
-        when(mockedAlbumSimplifiedPagingCall.execute()).thenReturn(Response.success(new AlbumSimplifiedPaging()));
+        when(mockedAlbumSimplifiedPagingCall.execute()).thenReturn(Response.success(new Paging<AlbumSimplified>()));
 
         sut.getNewReleases(null);
 
@@ -270,9 +285,7 @@ public class BrowseApiRetrofitTest extends AbstractApiRetrofitTest {
 
     @Test
     void getNewReleasesExecutesHttpCall() throws IOException {
-        when(mockedAlbumSimplifiedPagingCall.execute()).thenReturn(Response.success(new AlbumSimplifiedPaging()));
-
-        sut.getNewReleases(fakeOptionalParameters);
+        when(mockedAlbumSimplifiedPagingCall.execute()).thenReturn(Response.success(new Paging<AlbumSimplified>()));        sut.getNewReleases(fakeOptionalParameters);
         verify(mockedAlbumSimplifiedPagingCall).execute();
     }
 
@@ -297,8 +310,8 @@ public class BrowseApiRetrofitTest extends AbstractApiRetrofitTest {
     }
 
     @Test
-    void getNewReleasesReturnsAlbumSimplifiedPagingWhenSuccessful() throws IOException {
-        when(mockedAlbumSimplifiedPagingCall.execute()).thenReturn(Response.success(new AlbumSimplifiedPaging()));
+    void getNewReleasesReturnsPagingWhenSuccessful() throws IOException {
+        when(mockedAlbumSimplifiedPagingCall.execute()).thenReturn(Response.success(new Paging<AlbumSimplified>()));
 
         Assertions.assertNotNull(sut.getNewReleases(fakeOptionalParameters));
     }
